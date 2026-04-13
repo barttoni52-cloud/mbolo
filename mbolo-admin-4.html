@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a1a2e">
+<title>MBOLO Admin</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#0f0f1a;color:#e0e0e0;min-height:100vh;}
+:root{--g:#009e60;--g2:#00c47a;--g3:rgba(0,158,96,0.12);--y:#fcd116;--y3:rgba(252,209,22,0.12);--b:#3a75c4;--b3:rgba(58,117,196,0.15);--red:#E24B4A;--red3:rgba(226,75,74,0.15);--panel:#1a1a2e;--card:#1f1f35;--bd:rgba(255,255,255,0.08);--text:#e0e0e0;--muted:#888;}
+
+/* LOGIN */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;}
+.login-box{background:#1a1a2e;border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:36px 32px;width:100%;max-width:380px;}
+.login-flag{display:flex;width:36px;height:24px;border-radius:4px;overflow:hidden;margin-right:12px;}
+.login-flag div{flex:1;}
+.login-head{display:flex;align-items:center;margin-bottom:28px;}
+.login-title{font-size:22px;font-weight:800;color:#fff;}
+.login-sub{font-size:12px;color:#888;margin-top:2px;}
+.lbl{font-size:11px;color:#888;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px;display:block;margin-top:14px;}
+.linput{width:100%;padding:12px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);color:#e0e0e0;border-radius:10px;font-size:14px;outline:none;font-family:inherit;}
+.linput:focus{border-color:#009e60;}
+.login-btn{width:100%;padding:13px;background:#009e60;color:#fff;border:none;border-radius:11px;font-size:14px;font-weight:700;cursor:pointer;margin-top:18px;}
+.login-err{background:rgba(226,75,74,0.15);border:1px solid rgba(226,75,74,0.3);color:#E24B4A;border-radius:8px;padding:10px 13px;font-size:12px;margin-top:12px;display:none;}
+.login-back{text-align:center;margin-top:14px;font-size:12px;color:#888;}
+.login-back a{color:#009e60;text-decoration:none;cursor:pointer;}
+
+/* LAYOUT */
+.layout{display:none;min-height:100vh;}
+.layout.on{display:flex;}
+.sidebar{width:240px;background:var(--panel);border-right:1px solid var(--bd);padding:24px 0;display:flex;flex-direction:column;flex-shrink:0;}
+.main{flex:1;padding:28px;overflow-y:auto;}
+
+/* SIDEBAR */
+.brand{padding:0 20px 28px;display:flex;align-items:center;gap:10px;}
+.brand-flag{display:flex;width:32px;height:22px;border-radius:4px;overflow:hidden;}
+.brand-flag div{flex:1;}
+.brand-name{font-size:18px;font-weight:800;color:#fff;}
+.brand-sub{font-size:10px;color:var(--muted);display:block;margin-top:1px;}
+.nav-sec{font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.8px;padding:16px 20px 6px;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 20px;cursor:pointer;border-left:3px solid transparent;color:var(--muted);font-size:13px;font-weight:500;}
+.nav-item:hover{background:rgba(255,255,255,0.04);color:var(--text);}
+.nav-item.on{background:var(--g3);border-left-color:var(--g);color:var(--g2);}
+.nav-ic{font-size:16px;width:20px;text-align:center;}
+.nav-badge{margin-left:auto;background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;display:none;}
+.sidebar-foot{margin-top:auto;padding:20px;border-top:1px solid var(--bd);display:flex;flex-direction:column;gap:8px;}
+.back-btn{width:100%;padding:10px;background:var(--g3);border:1px solid var(--g);color:var(--g2);border-radius:9px;cursor:pointer;font-size:12px;font-weight:700;}
+.logout-btn{width:100%;padding:10px;background:var(--red3);border:1px solid var(--red);color:var(--red);border-radius:9px;cursor:pointer;font-size:12px;font-weight:700;}
+
+/* PAGE */
+.page-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px;}
+.page-title{font-size:22px;font-weight:700;color:#fff;}
+.page-sub{font-size:13px;color:var(--muted);margin-top:3px;}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:28px;}
+.stat-card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px 20px;}
+.stat-lbl{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
+.stat-val{font-size:28px;font-weight:800;color:#fff;}
+.stat-sub{font-size:11px;color:var(--muted);margin-top:4px;}
+.stat-card.green .stat-val{color:var(--g2);}
+.stat-card.yellow .stat-val{color:var(--y);}
+.stat-card.blue .stat-val{color:#6fa3ef;}
+.stat-card.red .stat-val{color:var(--red);}
+
+/* CARD */
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;margin-bottom:20px;}
+.card-hdr{padding:16px 20px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;}
+.card-t{font-size:14px;font-weight:700;color:#fff;}
+.card-body{padding:16px 20px;}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;}
+.tbl th{font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:8px 12px;text-align:left;border-bottom:1px solid var(--bd);}
+.tbl td{padding:12px 12px;border-bottom:1px solid rgba(255,255,255,0.04);font-size:13px;color:var(--text);vertical-align:middle;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:rgba(255,255,255,0.02);}
+.place-nm{font-weight:600;color:#fff;}
+.place-ct{font-size:11px;color:var(--muted);margin-top:1px;}
+
+/* BADGES */
+.badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;display:inline-block;}
+.badge.pending{background:var(--y3);color:#c9a800;border:1px solid rgba(252,209,22,0.3);}
+.badge.approved{background:var(--g3);color:var(--g2);border:1px solid rgba(0,158,96,0.3);}
+.badge.suspended{background:var(--red3);color:var(--red);border:1px solid rgba(226,75,74,0.3);}
+
+/* BUTTONS */
+.btn{padding:7px 13px;border-radius:8px;border:none;cursor:pointer;font-size:12px;font-weight:700;}
+.btn-approve{background:var(--g3);color:var(--g2);border:1px solid var(--g);}
+.btn-approve:hover{background:var(--g);color:#fff;}
+.btn-suspend{background:var(--y3);color:#c9a800;border:1px solid rgba(252,209,22,0.4);}
+.btn-delete{background:var(--red3);color:var(--red);border:1px solid rgba(226,75,74,0.4);}
+.btn-delete:hover{background:var(--red);color:#fff;}
+.btn-restore{background:var(--b3);color:#6fa3ef;border:1px solid rgba(58,117,196,0.4);}
+.btn-primary{background:var(--g);color:#fff;border:none;padding:10px 20px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:700;}
+.btn-secondary{background:rgba(255,255,255,0.07);color:var(--text);border:1px solid var(--bd);padding:10px 20px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;}
+.actions{display:flex;gap:6px;flex-wrap:wrap;}
+
+/* FILTERS */
+.filter-bar{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+.filter-bar input,.filter-bar select{background:rgba(255,255,255,0.06);border:1px solid var(--bd);color:var(--text);border-radius:9px;padding:8px 13px;font-size:12px;outline:none;font-family:inherit;}
+.filter-bar input{flex:1;min-width:180px;}
+.filter-bar input::placeholder{color:var(--muted);}
+
+/* TABS */
+.tabs{display:flex;gap:4px;margin-bottom:20px;background:rgba(255,255,255,0.04);border-radius:10px;padding:4px;}
+.ttab{padding:8px 16px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;color:var(--muted);border:none;background:transparent;}
+.ttab.on{background:var(--g);color:#fff;}
+
+/* FORM */
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
+.fg label{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+.fg input,.fg select,.fg textarea{background:rgba(255,255,255,0.06);border:1px solid var(--bd);color:var(--text);border-radius:9px;padding:10px 13px;font-size:13px;outline:none;font-family:inherit;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--g);}
+.fg textarea{resize:vertical;min-height:80px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+
+/* EMPTY */
+.empty{text-align:center;padding:40px 20px;color:var(--muted);}
+.empty-icon{font-size:40px;margin-bottom:12px;}
+
+/* MODAL */
+.mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:100;align-items:center;justify-content:center;padding:20px;pointer-events:none;visibility:hidden;}
+.mbg.on{display:flex;pointer-events:all;visibility:visible;}
+.mbox{background:var(--card);border:1px solid var(--bd);border-radius:16px;width:100%;max-width:500px;padding:24px;max-height:90vh;overflow-y:auto;}
+.mt{font-size:16px;font-weight:700;color:#fff;margin-bottom:16px;}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;background:#1a1a1a;color:#fff;padding:12px 20px;border-radius:12px;font-size:13px;font-weight:600;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none;visibility:hidden;border:1px solid var(--bd);}
+.toast.show{opacity:1;visibility:visible;}
+
+/* SECTION */
+.section{display:none;}
+.section.on{display:block;}
+
+/* FEATURED PREVIEW */
+.feat-preview{display:flex;gap:12px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;}
+.feat-preview::-webkit-scrollbar{display:none;}
+.fp-card{flex-shrink:0;width:160px;background:rgba(252,209,22,0.08);border:1.5px solid rgba(252,209,22,0.3);border-radius:12px;padding:14px;text-align:center;}
+
+@media(max-width:768px){
+  .layout.on{flex-direction:column;}
+  .sidebar{width:100%;flex-direction:row;padding:12px;overflow-x:auto;}
+  .nav-sec{display:none;}
+  .nav-item{padding:8px 12px;border-left:none;border-bottom:3px solid transparent;}
+  .nav-item.on{border-left:none;border-bottom-color:var(--g);}
+  .main{padding:16px;}
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
+  .form-row{grid-template-columns:1fr;}
+  .sidebar-foot{flex-direction:row;padding:12px;}
+}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-box">
+    <div class="login-head">
+      <div class="login-flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div>
+      <div>
+        <div class="login-title">MBOLO Admin</div>
+        <div class="login-sub">Tableau de bord administrateur</div>
+      </div>
+    </div>
+    <label class="lbl">Identifiant</label>
+    <input class="linput" type="text" id="adm-user" placeholder="Identifiant" onkeydown="if(event.key==='Enter')doAuth()"/>
+    <label class="lbl">Code acces</label>
+    <input class="linput" type="password" id="adm-pass" placeholder="Code acces" onkeydown="if(event.key==='Enter')doAuth()"/>
+    <div class="login-err" id="loginErr">Identifiant ou code incorrect.</div>
+    <button class="login-btn" onclick="doAuth()">Acceder au tableau de bord</button>
+    <div class="login-back"><a href="mbolo.html">← Retour a l'application</a></div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="layout" id="adminLayout">
+
+<div class="sidebar">
+  <div class="brand">
+    <div class="brand-flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div>
+    <div><div class="brand-name">MBOLO</div><span class="brand-sub">Administration</span></div>
+  </div>
+
+  <div class="nav-sec">Principal</div>
+  <div class="nav-item on" onclick="showSec('dashboard')"><span class="nav-ic">📊</span>Tableau de bord</div>
+  <div class="nav-item" onclick="showSec('pending')">
+    <span class="nav-ic">⏳</span>En attente
+    <span class="nav-badge" id="pendingBadge">0</span>
+  </div>
+
+  <div class="nav-sec">Contenu</div>
+  <div class="nav-item" onclick="showSec('featured')"><span class="nav-ic">⭐</span>Mise en avant</div>
+  <div class="nav-item" onclick="showSec('places')"><span class="nav-ic">📍</span>Tous les lieux</div>
+  <div class="nav-item" onclick="showSec('actus')"><span class="nav-ic">📰</span>Actualites</div>
+
+  <div class="nav-sec">Membres</div>
+  <div class="nav-item" onclick="showSec('users')">
+    <span class="nav-ic">👥</span>Membres inscrits
+    <span class="nav-badge" id="usersBadge">0</span>
+  </div>
+
+  <div class="nav-sec">Outils</div>
+  <div class="nav-item" onclick="showSec('stats')"><span class="nav-ic">📈</span>Statistiques</div>
+
+  <div class="sidebar-foot">
+    <button class="back-btn" onclick="window.location.href='mbolo.html'">← App</button>
+    <button class="logout-btn" onclick="doLogout()">Deconnexion</button>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- DASHBOARD -->
+  <div class="section on" id="sec-dashboard">
+    <div class="page-hdr">
+      <div><div class="page-title">Tableau de bord</div><div class="page-sub">Vue d ensemble de MBOLO</div></div>
+      <button class="btn-secondary" onclick="refreshAll()">Actualiser</button>
+    </div>
+    <div class="stats-grid" id="dashStats"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      <div class="card">
+        <div class="card-hdr"><span class="card-t">En attente de validation</span><button class="btn btn-approve" onclick="showSec('pending')">Voir tout</button></div>
+        <div class="card-body" id="dashPending"></div>
+      </div>
+      <div class="card">
+        <div class="card-hdr"><span class="card-t">Derniers lieux approuves</span></div>
+        <div class="card-body" id="dashRecent"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PENDING -->
+  <div class="section" id="sec-pending">
+    <div class="page-hdr"><div><div class="page-title">En attente de validation</div><div class="page-sub">Lieux soumis par les utilisateurs</div></div></div>
+    <div class="card"><div class="card-body" id="pendingList"></div></div>
+  </div>
+
+  <!-- FEATURED -->
+  <div class="section" id="sec-featured">
+    <div class="page-hdr">
+      <div><div class="page-title">Mise en avant</div><div class="page-sub">Max 5 etablissements - apparaissent en tete de l app</div></div>
+    </div>
+    <div class="card" style="margin-bottom:20px;border-color:rgba(252,209,22,0.3)">
+      <div class="card-hdr" style="background:rgba(252,209,22,0.06)">
+        <span class="card-t">Apercu dans l app</span>
+        <span id="featCount" style="font-size:12px;color:#888">0 / 5</span>
+      </div>
+      <div class="card-body"><div class="feat-preview" id="featPreview"></div></div>
+    </div>
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-hdr"><span class="card-t">Actuellement mis en avant</span></div>
+      <div class="card-body" id="featList" style="padding:0"></div>
+    </div>
+    <div class="card">
+      <div class="card-hdr"><span class="card-t">Promouvoir un etablissement</span></div>
+      <div class="card-body">
+        <div class="filter-bar">
+          <input type="text" placeholder="Rechercher..." id="searchFeat" oninput="renderFeatPicker()"/>
+        </div>
+        <div id="featPicker"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALL PLACES -->
+  <div class="section" id="sec-places">
+    <div class="page-hdr">
+      <div><div class="page-title">Tous les etablissements</div><div class="page-sub">Gerer, valider, suspendre ou supprimer</div></div>
+    </div>
+    <div class="tabs">
+      <button class="ttab on" onclick="filterStatus('all',this)">Tous</button>
+      <button class="ttab" onclick="filterStatus('approved',this)">Approuves</button>
+      <button class="ttab" onclick="filterStatus('pending',this)">En attente</button>
+      <button class="ttab" onclick="filterStatus('suspended',this)">Suspendus</button>
+    </div>
+    <div class="filter-bar">
+      <input type="text" placeholder="Rechercher..." id="searchPlaces" oninput="renderPlacesTable()"/>
+      <select id="filterCat" onchange="renderPlacesTable()">
+        <option value="">Toutes categories</option>
+        <option>Restaurant</option><option>Bar</option><option>Hotel</option>
+        <option>Shopping</option><option>Sante</option><option>Loisirs</option>
+      </select>
+    </div>
+    <div class="card">
+      <div class="card-body" style="padding:0">
+        <table class="tbl">
+          <thead><tr><th>Etablissement</th><th>Categorie</th><th>Quartier</th><th>Soumis par</th><th>Statut</th><th>Actions</th></tr></thead>
+          <tbody id="placesTbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTUS -->
+  <div class="section" id="sec-actus">
+    <div class="page-hdr">
+      <div><div class="page-title">Actualites Libreville</div></div>
+      <button class="btn-primary" onclick="showActuForm()">+ Nouvelle actualite</button>
+    </div>
+    <div class="card" id="actuFormCard" style="display:none;margin-bottom:20px">
+      <div class="card-hdr"><span class="card-t" id="actuFormTitle">Nouvelle actualite</span></div>
+      <div class="card-body">
+        <div class="form-row">
+          <div class="fg"><label>Titre *</label><input type="text" id="af-title" placeholder="Titre"/></div>
+          <div class="fg"><label>Tag</label>
+            <select id="af-tag"><option>Evenement</option><option>Infra</option><option>Sortie</option><option>Bar</option><option>Culture</option><option>Sport</option><option>Annonce</option></select>
+          </div>
+        </div>
+        <div class="fg"><label>Contenu *</label><textarea id="af-txt" placeholder="Texte de l actualite..."></textarea></div>
+        <div class="form-row">
+          <div class="fg"><label>Emoji</label><input type="text" id="af-img" placeholder="Ex: 🎵"/></div>
+          <div class="fg"><label>Couleur fond</label>
+            <select id="af-bg">
+              <option value="#E1F5EE">Vert clair</option><option value="#fff8d6">Jaune clair</option>
+              <option value="#e8f0fb">Bleu clair</option><option value="#FAECE7">Orange clair</option>
+              <option value="#EAF3DE">Lime clair</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg"><label>Date</label><input type="text" id="af-date" placeholder="Ex: 15 mars 2025"/></div>
+        <div style="display:flex;gap:10px;margin-top:4px">
+          <button class="btn-primary" onclick="saveActu()">Publier</button>
+          <button class="btn-secondary" onclick="hideActuForm()">Annuler</button>
+        </div>
+      </div>
+    </div>
+    <div id="actuList"></div>
+  </div>
+
+  <!-- USERS -->
+  <div class="section" id="sec-users">
+    <div class="page-hdr">
+      <div><div class="page-title">Membres inscrits</div><div class="page-sub">Coordonnees et activite des membres</div></div>
+      <button class="btn-secondary" onclick="exportUsers()">Exporter CSV</button>
+    </div>
+    <div class="stats-grid" id="usersStats"></div>
+    <div class="card">
+      <div class="card-body" style="padding:0">
+        <table class="tbl">
+          <thead><tr><th>Membre</th><th>Email / Tel</th><th>Inscription</th><th>Lieux</th><th>Avis</th><th>Statut</th></tr></thead>
+          <tbody id="usersTbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="section" id="sec-stats">
+    <div class="page-hdr"><div><div class="page-title">Statistiques</div></div></div>
+    <div id="statsContent"></div>
+  </div>
+
+</div>
+</div>
+
+<!-- CONFIRM MODAL -->
+<div class="mbg" id="confirmModal">
+  <div class="mbox">
+    <div class="mt" id="confirmTitle">Confirmer</div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:20px" id="confirmMsg"></div>
+    <div style="display:flex;gap:10px">
+      <button class="btn-primary" onclick="doConfirm()">Confirmer</button>
+      <button class="btn-secondary" onclick="closeModal('confirmModal')">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── AUTH ──────────────────────────────────────────────────────────────────────
+var ADMINS = {admin:"mbolo2025", superadmin:"gabon2025"};
+
+function doAuth(){
+  var u = document.getElementById("adm-user").value.trim();
+  var p = document.getElementById("adm-pass").value.trim();
+  var err = document.getElementById("loginErr");
+  var btn = document.querySelector(".login-btn");
+  if(btn){btn.textContent="Connexion...";btn.disabled=true;}
+  if(ADMINS[u] && ADMINS[u] === p){
+    localStorage.setItem("mbolo_admin", u);
+    document.getElementById("loginWrap").style.display = "none";
+    document.getElementById("adminLayout").classList.add("on");
+    renderAll();
+    toast("Bienvenue " + u + " !");
+  } else {
+    if(btn){btn.textContent="Acceder au tableau de bord";btn.disabled=false;}
+    err.style.display = "block";
+    document.getElementById("adm-pass").value = "";
+    setTimeout(function(){ err.style.display = "none"; }, 3000);
+  }
+}
+
+function doLogout(){
+  localStorage.removeItem("mbolo_admin");
+  document.getElementById("adminLayout").classList.remove("on");
+  document.getElementById("loginWrap").style.display = "flex";
+  document.getElementById("adm-pass").value = "";
+}
+
+// ── DATA ──────────────────────────────────────────────────────────────────────
+var DEFAULT_PLACES = [
+  {id:1,em:"🍽️",name:"Restaurant Le Dialogue",cat:"Restaurant",quartier:"Plateau",addr:"Bd Triomphal",phone:"+241 01 72 11 22",hours:"Lun-Sam 11h-23h",rating:4.7,reviews:128,open:true,status:"approved",submittedBy:"Admin",submittedAt:"01/01/2025",photos:["🥘","🍷","🌿","🏺"],avis:[{user:"Amina K.",stars:5,txt:"Le meilleur restaurant!"},{user:"Jean-Paul M.",stars:4,txt:"Super cadre."}]},
+  {id:2,em:"🍹",name:"Bar Le Makokou",cat:"Bar",quartier:"Bord de mer",addr:"Quartier Louis",phone:"+241 06 44 55 66",hours:"Mar-Dim 17h-02h",rating:4.5,reviews:204,open:true,status:"approved",submittedBy:"Admin",submittedAt:"01/01/2025",photos:["🍸","🎵","🌴","🥂"],avis:[{user:"Sandra O.",stars:5,txt:"Ambiance folle!"},{user:"Cedric B.",stars:4,txt:"Cocktails delicieux."}]},
+  {id:3,em:"🍹",name:"Saveur des Tropiques",cat:"Bar",quartier:"Libreville",addr:"Avenue Bouet",phone:"+241 01 44 88 99",hours:"Lun-Dim 15h-01h",rating:4.2,reviews:97,open:true,status:"approved",submittedBy:"Admin",submittedAt:"01/01/2025",photos:["🍺","🎤","🌺","🎶"],avis:[{user:"Patrice N.",stars:4,txt:"Bieres locales excellentes!"}]},
+  {id:4,em:"🏨",name:"Hotel Tropicana",cat:"Hotel",quartier:"Corniche",addr:"Corniche de Libreville",phone:"+241 01 44 55 66",hours:"Reception 24h/24",rating:4.2,reviews:87,open:true,status:"approved",submittedBy:"Admin",submittedAt:"01/01/2025",photos:["🏊","🌊","🛏️","🌅"],avis:[{user:"Sophie N.",stars:4,txt:"Tres bel hotel."}]},
+  {id:5,em:"🛍️",name:"Centre Commercial Mbolo",cat:"Shopping",quartier:"Libreville",addr:"Avenue Bouet",phone:"+241 01 23 45 67",hours:"Lun-Dim 09h-21h",rating:3.9,reviews:214,open:true,status:"approved",submittedBy:"Admin",submittedAt:"01/01/2025",photos:["🛍️","👗","👟","🧴"],avis:[{user:"Carole A.",stars:4,txt:"Grand choix."}]},
+  {id:6,em:"🏥",name:"Clinique El-Rapha",cat:"Sante",quartier:"Akanda",addr:"Quartier Akanda",phone:"+241 01 88 99 00",hours:"Lun-Sam 07h30-18h",rating:4.5,reviews:63,open:true,status:"approved",submittedBy:"Admin",submittedAt:"01/01/2025",photos:["🏥","🩺","💊","🧬"],avis:[{user:"Marie-Claire F.",stars:5,txt:"Personnel professionnel."}]},
+  {id:7,em:"🌊",name:"Plage des Cocotiers",cat:"Loisirs",quartier:"Corniche",addr:"Corniche de Libreville",phone:"-",hours:"Ouvert toute la journee",rating:4.4,reviews:305,open:true,status:"approved",submittedBy:"Admin",submittedAt:"01/01/2025",photos:["🌴","🌊","🏄","🌅"],avis:[{user:"Ibrahim D.",stars:5,txt:"La plus belle plage!"}]},
+  {id:8,em:"🍹",name:"Bar Le Panthere",cat:"Bar",quartier:"Plateau",addr:"Quartier Glass",phone:"+241 01 77 66 55",hours:"Mer-Dim 18h-03h",rating:4.6,reviews:156,open:true,status:"approved",submittedBy:"Admin",submittedAt:"01/01/2025",photos:["🍸","🎸","🪩","🌃"],avis:[{user:"Guy-Roger E.",stars:5,txt:"Le meilleur bar du Plateau!"}]},
+  {id:9,em:"🍽️",name:"Chez Jeannot",cat:"Restaurant",quartier:"Louis",addr:"Quartier Louis",phone:"+241 06 11 22 33",hours:"Lun-Sam 12h-22h",rating:4.3,reviews:89,open:true,status:"approved",submittedBy:"Admin",submittedAt:"01/01/2025",photos:["🍗","🥗","🍜","🥘"],avis:[{user:"Regine M.",stars:4,txt:"Cuisine authentique!"}]}
+];
+
+var DEFAULT_ACTUS = [
+  {id:1,img:"🎵",bg:"#E1F5EE",tag:"Evenement",title:"Festival Gabao 2025",txt:"Le Festival Gabao revient avec une programmation exceptionnelle.",date:"15 mars 2025"},
+  {id:2,img:"🏗️",bg:"#fff8d6",tag:"Infra",title:"Nouveau boulevard bord de mer inaugure",txt:"Le nouveau boulevard de la Corniche est officiellement ouvert.",date:"10 mars 2025"},
+  {id:3,img:"🌊",bg:"#e8f0fb",tag:"Sortie",title:"Top 5 spots plage ce week-end",txt:"Profitez du beau temps sur les plus belles plages de Libreville.",date:"8 mars 2025"},
+  {id:4,img:"🍹",bg:"#FAECE7",tag:"Bar",title:"Les bars du Plateau ouvrent tot",txt:"Ce week-end, plusieurs bars du Plateau ouvrent des 15h.",date:"5 mars 2025"},
+  {id:5,img:"🏛️",bg:"#EAF3DE",tag:"Culture",title:"Musee National : nouvelle exposition",txt:"Une nouvelle exposition sur l histoire du Gabon a ouvert ses portes.",date:"1 mars 2025"}
+];
+
+var DEFAULT_USERS = [
+  {id:1,name:"Amina Ngoubili",email:"amina@gmail.com",phone:"+241 06 12 34 56",joinDate:"01/01/2025",places:2,reviews:5,status:"active"},
+  {id:2,name:"Jean-Paul Moussavou",email:"jp@yahoo.fr",phone:"+241 07 22 33 44",joinDate:"05/01/2025",places:0,reviews:3,status:"active"},
+  {id:3,name:"Sandra Obiang",email:"sandra@gmail.com",phone:"+241 06 55 66 77",joinDate:"10/01/2025",places:1,reviews:8,status:"active"}
+];
+
+function loadPlaces(){try{var p=localStorage.getItem("mbolo_places");return p?JSON.parse(p):JSON.parse(JSON.stringify(DEFAULT_PLACES));}catch(e){return JSON.parse(JSON.stringify(DEFAULT_PLACES));}}
+function loadActus(){try{var a=localStorage.getItem("mbolo_actus");return a?JSON.parse(a):JSON.parse(JSON.stringify(DEFAULT_ACTUS));}catch(e){return JSON.parse(JSON.stringify(DEFAULT_ACTUS));}}
+function loadUsers(){try{var u=localStorage.getItem("mbolo_users");return u?JSON.parse(u):JSON.parse(JSON.stringify(DEFAULT_USERS));}catch(e){return JSON.parse(JSON.stringify(DEFAULT_USERS));}}
+function loadFeatured(){try{var f=localStorage.getItem("mbolo_featured");return f?JSON.parse(f):[];}catch(e){return [];}}
+
+function savePlaces(p){localStorage.setItem("mbolo_places",JSON.stringify(p));}
+function saveActus(a){localStorage.setItem("mbolo_actus",JSON.stringify(a));}
+function saveUsers(u){localStorage.setItem("mbolo_users",JSON.stringify(u));}
+function saveFeatured(f){localStorage.setItem("mbolo_featured",JSON.stringify(f));}
+
+var places, actus, users, featured, confirmAction=null, editActuId=null, placesStatusFilter="all";
+
+// ── HELPERS ───────────────────────────────────────────────────────────────────
+function stH(n){var r=Math.round(n);return "★".repeat(r)+"☆".repeat(5-r);}
+
+function toast(msg){
+  var t=document.getElementById("toast");
+  t.textContent=msg;t.classList.add("show");
+  setTimeout(function(){t.classList.remove("show");},2800);
+}
+
+function closeModal(id){document.getElementById(id).classList.remove("on");}
+
+function refreshAll(){
+  places=loadPlaces();actus=loadActus();users=loadUsers();featured=loadFeatured();
+  renderAll();toast("Donnees actualisees");
+}
+
+function renderAll(){
+  places=loadPlaces();actus=loadActus();users=loadUsers();featured=loadFeatured();
+  updateBadges();
+  var active=document.querySelector(".section.on");
+  if(active){
+    var id=active.id.replace("sec-","");
+    var map={dashboard:renderDashboard,pending:renderPending,featured:renderFeatured,places:renderPlacesTable,actus:renderActus,users:renderUsers,stats:renderStats};
+    if(map[id])map[id]();
+  } else {
+    renderDashboard();
+  }
+}
+
+function updateBadges(){
+  var pb=document.getElementById("pendingBadge");
+  var n=places.filter(function(p){return p.status==="pending";}).length;
+  pb.textContent=n;pb.style.display=n>0?"inline":"none";
+  var ub=document.getElementById("usersBadge");
+  var un=users.filter(function(u){return u.status==="active";}).length;
+  ub.textContent=un;ub.style.display=un>0?"inline":"none";
+}
+
+// ── NAV ───────────────────────────────────────────────────────────────────────
+function showSec(id){
+  document.querySelectorAll(".section").forEach(function(s){s.classList.remove("on");});
+  document.querySelectorAll(".nav-item").forEach(function(n){n.classList.remove("on");});
+  document.getElementById("sec-"+id).classList.add("on");
+  var navEl=document.querySelector("[onclick=\"showSec('"+id+"')\"]");
+  if(navEl)navEl.classList.add("on");
+  var map={dashboard:renderDashboard,pending:renderPending,featured:renderFeatured,places:renderPlacesTable,actus:renderActus,users:renderUsers,stats:renderStats};
+  if(map[id])map[id]();
+}
+
+// ── DASHBOARD ─────────────────────────────────────────────────────────────────
+function renderDashboard(){
+  var approved=places.filter(function(p){return p.status==="approved";}).length;
+  var pending=places.filter(function(p){return p.status==="pending";}).length;
+  var suspended=places.filter(function(p){return p.status==="suspended";}).length;
+  var totalAvis=places.reduce(function(s,p){return s+(p.avis||[]).length;},0);
+  document.getElementById("dashStats").innerHTML=
+    '<div class="stat-card green"><div class="stat-lbl">Lieux approuves</div><div class="stat-val">'+approved+'</div><div class="stat-sub">Visibles dans l app</div></div>'
+    +'<div class="stat-card yellow"><div class="stat-lbl">En attente</div><div class="stat-val">'+pending+'</div><div class="stat-sub">Validation requise</div></div>'
+    +'<div class="stat-card blue"><div class="stat-lbl">Total avis</div><div class="stat-val">'+totalAvis+'</div><div class="stat-sub">Publies par les users</div></div>'
+    +'<div class="stat-card red"><div class="stat-lbl">Suspendus</div><div class="stat-val">'+suspended+'</div><div class="stat-sub">Non visibles</div></div>';
+
+  var pendingItems=places.filter(function(p){return p.status==="pending";});
+  var pHtml=pendingItems.length
+    ?pendingItems.slice(0,4).map(function(p){
+      return '<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--bd)">'
+        +'<div><span style="font-size:18px;margin-right:8px">'+p.em+'</span>'
+        +'<span style="font-size:13px;font-weight:600;color:#fff">'+p.name+'</span>'
+        +'<div style="font-size:11px;color:var(--muted);margin-top:2px">'+p.cat+' · Soumis par '+( p.submittedBy||"Anonyme")+'</div></div>'
+        +'<div style="display:flex;gap:6px">'
+        +'<button class="btn btn-approve" onclick="approvePlace('+p.id+')">Approuver</button>'
+        +'<button class="btn btn-delete" onclick="askDelete('+p.id+')">Refuser</button>'
+        +'</div></div>';
+    }).join("")
+    :'<div class="empty"><div class="empty-icon">✅</div><div style="color:var(--text);font-weight:700">Aucun lieu en attente</div></div>';
+  document.getElementById("dashPending").innerHTML=pHtml;
+
+  var recent=places.filter(function(p){return p.status==="approved";}).slice(0,4);
+  document.getElementById("dashRecent").innerHTML=recent.map(function(p){
+    return '<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--bd)">'
+      +'<span style="font-size:20px">'+p.em+'</span>'
+      +'<div style="flex:1"><div style="font-size:13px;font-weight:600;color:#fff">'+p.name+'</div>'
+      +'<div style="font-size:11px;color:var(--muted)">'+p.cat+' · '+p.quartier+'</div></div>'
+      +'<span class="badge approved">Approuve</span></div>';
+  }).join("");
+  updateBadges();
+}
+
+// ── PENDING ───────────────────────────────────────────────────────────────────
+function renderPending(){
+  var pending=places.filter(function(p){return p.status==="pending";});
+  document.getElementById("pendingList").innerHTML=pending.length
+    ?'<table class="tbl"><thead><tr><th>Etablissement</th><th>Categorie</th><th>Quartier</th><th>Soumis par</th><th>Date</th><th>Actions</th></tr></thead><tbody>'
+      +pending.map(function(p){
+        return '<tr><td><div class="place-nm">'+p.em+' '+p.name+'</div><div class="place-ct">'+p.addr+'</div></td>'
+          +'<td>'+p.cat+'</td><td>'+(p.quartier||"-")+'</td>'
+          +'<td>'+(p.submittedBy||"Anonyme")+'</td><td>'+(p.submittedAt||"-")+'</td>'
+          +'<td><div class="actions">'
+          +'<button class="btn btn-approve" onclick="approvePlace('+p.id+')">Approuver</button>'
+          +'<button class="btn btn-delete" onclick="askDelete('+p.id+')">Refuser</button>'
+          +'</div></td></tr>';
+      }).join("")+'</tbody></table>'
+    :'<div class="empty"><div class="empty-icon">🎉</div><div style="color:var(--text);font-weight:700;margin-bottom:6px">Aucun lieu en attente</div></div>';
+}
+
+// ── PLACES ────────────────────────────────────────────────────────────────────
+function filterStatus(f,btn){
+  placesStatusFilter=f;
+  document.querySelectorAll(".ttab").forEach(function(t){t.classList.remove("on");});
+  if(btn)btn.classList.add("on");
+  renderPlacesTable();
+}
+
+function renderPlacesTable(){
+  var q=(document.getElementById("searchPlaces")||{}).value||"";
+  var cat=(document.getElementById("filterCat")||{}).value||"";
+  var filtered=places.filter(function(p){
+    if(placesStatusFilter!=="all"&&p.status!==placesStatusFilter)return false;
+    if(cat&&p.cat!==cat)return false;
+    if(q&&!p.name.toLowerCase().includes(q.toLowerCase())&&!p.addr.toLowerCase().includes(q.toLowerCase()))return false;
+    return true;
+  });
+  var tbody=document.getElementById("placesTbody");
+  if(!tbody)return;
+  tbody.innerHTML=filtered.length
+    ?filtered.map(function(p){
+      return '<tr><td><div class="place-nm">'+p.em+' '+p.name+'</div><div class="place-ct">'+p.addr+'</div></td>'
+        +'<td>'+p.cat+'</td><td>'+(p.quartier||"-")+'</td><td>'+(p.submittedBy||"Admin")+'</td>'
+        +'<td><span class="badge '+p.status+'">'+statusLabel(p.status)+'</span></td>'
+        +'<td><div class="actions">'
+        +(p.status==="pending"?'<button class="btn btn-approve" onclick="approvePlace('+p.id+')">Approuver</button>':"")
+        +(p.status==="approved"?'<button class="btn btn-suspend" onclick="askSuspend('+p.id+')">Suspendre</button>':"")
+        +(p.status==="suspended"?'<button class="btn btn-restore" onclick="restorePlace('+p.id+')">Restaurer</button>':"")
+        +'<button class="btn btn-delete" onclick="askDelete('+p.id+')">Supprimer</button>'
+        +'</div></td></tr>';
+    }).join("")
+    :'<tr><td colspan="6" style="text-align:center;padding:28px;color:var(--muted)">Aucun resultat</td></tr>';
+}
+
+function statusLabel(s){return s==="approved"?"Approuve":s==="pending"?"En attente":"Suspendu";}
+
+function approvePlace(id){
+  places=loadPlaces();
+  var p=places.find(function(x){return x.id===id;});
+  if(!p)return;
+  p.status="approved";savePlaces(places);
+  updateBadges();renderDashboard();
+  if(document.getElementById("sec-pending").classList.contains("on"))renderPending();
+  if(document.getElementById("sec-places").classList.contains("on"))renderPlacesTable();
+  toast(p.name+" approuve !");
+}
+
+function restorePlace(id){
+  places=loadPlaces();
+  var p=places.find(function(x){return x.id===id;});
+  if(!p)return;
+  p.status="approved";savePlaces(places);renderPlacesTable();
+  toast(p.name+" restaure !");
+}
+
+function askSuspend(id){
+  var p=places.find(function(x){return x.id===id;});if(!p)return;
+  confirmAction={type:"suspend",id:id};
+  document.getElementById("confirmTitle").textContent="Suspendre";
+  document.getElementById("confirmMsg").textContent="Suspendre "+p.name+" ? Il ne sera plus visible dans l app.";
+  document.getElementById("confirmModal").classList.add("on");
+}
+
+function askDelete(id){
+  var p=places.find(function(x){return x.id===id;});if(!p)return;
+  confirmAction={type:"delete",id:id};
+  document.getElementById("confirmTitle").textContent="Supprimer";
+  document.getElementById("confirmMsg").textContent="Supprimer definitivement "+p.name+" ?";
+  document.getElementById("confirmModal").classList.add("on");
+}
+
+function doConfirm(){
+  if(!confirmAction)return;
+  places=loadPlaces();
+  if(confirmAction.type==="delete"){
+    var idx=places.findIndex(function(x){return x.id===confirmAction.id;});
+    if(idx>-1){var nm=places[idx].name;places.splice(idx,1);savePlaces(places);toast(nm+" supprime.");}
+  } else if(confirmAction.type==="suspend"){
+    var p=places.find(function(x){return x.id===confirmAction.id;});
+    if(p){p.status="suspended";savePlaces(places);toast(p.name+" suspendu.");}
+  }
+  closeModal("confirmModal");confirmAction=null;
+  updateBadges();
+  if(document.getElementById("sec-pending").classList.contains("on"))renderPending();
+  if(document.getElementById("sec-places").classList.contains("on"))renderPlacesTable();
+  if(document.getElementById("sec-dashboard").classList.contains("on"))renderDashboard();
+}
+
+// ── FEATURED ──────────────────────────────────────────────────────────────────
+function renderFeatured(){
+  featured=loadFeatured();places=loadPlaces();
+  var fps=featured.map(function(id){return places.find(function(p){return p.id===id&&p.status!=="suspended";});}).filter(Boolean);
+  document.getElementById("featCount").textContent=fps.length+" / 5 max";
+
+  document.getElementById("featPreview").innerHTML=fps.length
+    ?fps.map(function(p){
+      return '<div class="fp-card">'
+        +'<div style="font-size:30px;margin-bottom:8px">'+p.em+'</div>'
+        +'<div style="font-size:11px;font-weight:700;color:#fff;margin-bottom:3px">'+p.name+'</div>'
+        +'<div style="font-size:10px;color:#888;margin-bottom:6px">'+p.cat+'</div>'
+        +'<div style="background:rgba(252,209,22,0.2);color:#fcd116;font-size:9px;font-weight:700;padding:3px 8px;border-radius:20px;display:inline-block">Vedette</div>'
+        +'</div>';
+    }).join("")
+    :'<div style="color:#888;font-size:13px;padding:16px">Aucun etablissement mis en avant.</div>';
+
+  document.getElementById("featList").innerHTML=fps.length
+    ?'<table class="tbl"><thead><tr><th>Etablissement</th><th>Categorie</th><th>Note</th><th>Ordre</th><th>Action</th></tr></thead><tbody>'
+      +fps.map(function(p,i){
+        return '<tr>'
+          +'<td><span style="font-size:18px;margin-right:8px">'+p.em+'</span><span style="font-weight:700;color:#fff">'+p.name+'</span></td>'
+          +'<td>'+p.cat+'</td>'
+          +'<td style="color:#F59E0B">'+p.rating+'</td>'
+          +'<td><div style="display:flex;gap:4px">'
+          +(i>0?'<button class="btn" style="padding:4px 8px;background:rgba(255,255,255,0.06);border:1px solid var(--bd);color:var(--text)" onclick="moveFeat('+p.id+',-1)">↑</button>':"")
+          +(i<fps.length-1?'<button class="btn" style="padding:4px 8px;background:rgba(255,255,255,0.06);border:1px solid var(--bd);color:var(--text)" onclick="moveFeat('+p.id+',1)">↓</button>':"")
+          +'</div></td>'
+          +'<td><button class="btn btn-delete" onclick="unFeat('+p.id+')">Retirer</button></td>'
+          +'</tr>';
+      }).join("")+'</tbody></table>'
+    :'<div style="padding:16px;color:#888;font-size:13px">Aucun etablissement promu. Choisissez ci-dessous.</div>';
+
+  renderFeatPicker();
+}
+
+function renderFeatPicker(){
+  featured=loadFeatured();
+  var q=(document.getElementById("searchFeat")||{}).value||"";
+  var list=places.filter(function(p){
+    if(p.status!=="approved")return false;
+    if(q&&!p.name.toLowerCase().includes(q.toLowerCase()))return false;
+    return true;
+  });
+  document.getElementById("featPicker").innerHTML=
+    '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px">'
+    +list.map(function(p){
+      var isFeat=featured.includes(p.id);
+      return '<div style="background:'+(isFeat?"rgba(252,209,22,0.08)":"rgba(255,255,255,0.03)")+';border:1.5px solid '+(isFeat?"rgba(252,209,22,0.4)":"var(--bd)")+';border-radius:11px;padding:14px;display:flex;align-items:center;gap:12px">'
+        +'<div style="font-size:26px">'+p.em+'</div>'
+        +'<div style="flex:1;min-width:0">'
+        +'<div style="font-size:13px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+p.name+'</div>'
+        +'<div style="font-size:11px;color:#888">'+p.cat+' · '+p.quartier+'</div>'
+        +'<div style="font-size:11px;color:#F59E0B">'+stH(p.rating)+' '+p.rating+'</div>'
+        +'</div>'
+        +(isFeat
+          ?'<button class="btn btn-delete" onclick="unFeat('+p.id+')">Retirer</button>'
+          :(featured.length>=5
+            ?'<span style="font-size:10px;color:#888">Max atteint</span>'
+            :'<button class="btn btn-approve" onclick="addFeat('+p.id+')">Promouvoir</button>'))
+        +'</div>';
+    }).join("")+'</div>';
+}
+
+function addFeat(id){
+  featured=loadFeatured();
+  if(featured.includes(id)){toast("Deja en avant.");return;}
+  if(featured.length>=5){toast("Maximum 5 etablissements.");return;}
+  var p=places.find(function(x){return x.id===id;});
+  featured.push(id);saveFeatured(featured);renderFeatured();
+  toast((p?p.name:"Lieu")+" mis en avant !");
+}
+
+function unFeat(id){
+  featured=loadFeatured().filter(function(x){return x!==id;});
+  saveFeatured(featured);renderFeatured();toast("Retire de la mise en avant.");
+}
+
+function moveFeat(id,dir){
+  featured=loadFeatured();
+  var idx=featured.indexOf(id);if(idx===-1)return;
+  var ni=idx+dir;if(ni<0||ni>=featured.length)return;
+  var tmp=featured[idx];featured[idx]=featured[ni];featured[ni]=tmp;
+  saveFeatured(featured);renderFeatured();
+}
+
+// ── ACTUS ─────────────────────────────────────────────────────────────────────
+function renderActus(){
+  actus=loadActus();
+  document.getElementById("actuList").innerHTML=actus.map(function(a){
+    return '<div class="card" style="margin-bottom:14px">'
+      +'<div class="card-hdr">'
+      +'<div style="display:flex;align-items:center;gap:10px">'
+      +'<div style="width:40px;height:40px;border-radius:8px;background:'+a.bg+';display:flex;align-items:center;justify-content:center;font-size:20px">'+a.img+'</div>'
+      +'<div><div style="font-size:14px;font-weight:700;color:#fff">'+a.title+'</div>'
+      +'<div style="font-size:11px;color:var(--muted)">'+a.tag+' · '+a.date+'</div></div>'
+      +'</div>'
+      +'<div style="display:flex;gap:8px">'
+      +'<button class="btn btn-approve" onclick="editActu('+a.id+')">Modifier</button>'
+      +'<button class="btn btn-delete" onclick="deleteActu('+a.id+')">Supprimer</button>'
+      +'</div></div>'
+      +'<div class="card-body" style="font-size:13px;color:var(--muted)">'+a.txt+'</div>'
+      +'</div>';
+  }).join("");
+}
+
+function showActuForm(id){
+  editActuId=id||null;
+  var card=document.getElementById("actuFormCard");
+  card.style.display="block";
+  if(id){
+    actus=loadActus();
+    var a=actus.find(function(x){return x.id===id;});if(!a)return;
+    document.getElementById("actuFormTitle").textContent="Modifier l actualite";
+    document.getElementById("af-title").value=a.title;
+    document.getElementById("af-tag").value=a.tag;
+    document.getElementById("af-txt").value=a.txt;
+    document.getElementById("af-img").value=a.img;
+    document.getElementById("af-bg").value=a.bg;
+    document.getElementById("af-date").value=a.date;
+  } else {
+    document.getElementById("actuFormTitle").textContent="Nouvelle actualite";
+    document.getElementById("af-title").value="";
+    document.getElementById("af-txt").value="";
+    document.getElementById("af-img").value="🗞️";
+    document.getElementById("af-date").value=new Date().toLocaleDateString("fr-FR");
+  }
+  card.scrollIntoView({behavior:"smooth"});
+}
+
+function hideActuForm(){document.getElementById("actuFormCard").style.display="none";editActuId=null;}
+
+function editActu(id){showActuForm(id);}
+
+function saveActu(){
+  var title=document.getElementById("af-title").value.trim();
+  var txt=document.getElementById("af-txt").value.trim();
+  if(!title||!txt){alert("Titre et contenu requis.");return;}
+  actus=loadActus();
+  var d={title:title,txt:txt,tag:document.getElementById("af-tag").value,img:document.getElementById("af-img").value||"🗞️",bg:document.getElementById("af-bg").value,date:document.getElementById("af-date").value||new Date().toLocaleDateString("fr-FR")};
+  if(editActuId){
+    var idx=actus.findIndex(function(x){return x.id===editActuId;});
+    if(idx>-1)actus[idx]=Object.assign(actus[idx],d);
+    toast("Actualite modifiee !");
+  } else {
+    actus.unshift(Object.assign({id:Date.now()},d));
+    toast("Actualite publiee !");
+  }
+  saveActus(actus);hideActuForm();renderActus();
+}
+
+function deleteActu(id){
+  
+  actus=loadActus();
+  var idx=actus.findIndex(function(x){return x.id===id;});
+  if(idx>-1){actus.splice(idx,1);saveActus(actus);renderActus();toast("Actualite supprimee.");}
+}
+
+// ── USERS ─────────────────────────────────────────────────────────────────────
+function renderUsers(){
+  users=loadUsers();
+  var active=users.filter(function(u){return u.status==="active";}).length;
+  var suspended=users.filter(function(u){return u.status==="suspended";}).length;
+  var totalRev=users.reduce(function(s,u){return s+u.reviews;},0);
+  var totalPl=users.reduce(function(s,u){return s+u.places;},0);
+  document.getElementById("usersStats").innerHTML=
+    '<div class="stat-card green"><div class="stat-lbl">Membres actifs</div><div class="stat-val">'+active+'</div></div>'
+    +'<div class="stat-card blue"><div class="stat-lbl">Avis publies</div><div class="stat-val">'+totalRev+'</div></div>'
+    +'<div class="stat-card yellow"><div class="stat-lbl">Lieux ajoutes</div><div class="stat-val">'+totalPl+'</div></div>'
+    +'<div class="stat-card red"><div class="stat-lbl">Suspendus</div><div class="stat-val">'+suspended+'</div></div>';
+  document.getElementById("usersTbody").innerHTML=users.length
+    ?users.map(function(u){
+      return '<tr>'
+        +'<td><div style="display:flex;align-items:center;gap:10px">'
+        +'<div style="width:34px;height:34px;border-radius:50%;background:var(--g3);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--g2)">'+u.name.substring(0,2).toUpperCase()+'</div>'
+        +'<div><div style="font-weight:700;color:#fff;font-size:13px">'+u.name+'</div><div style="font-size:10px;color:var(--muted)">ID #'+u.id+'</div></div></div></td>'
+        +'<td><div style="font-size:13px;color:#6fa3ef">'+u.email+'</div><div style="font-size:11px;color:var(--muted)">📞 '+(u.phone||"Non renseigne")+'</div></td>'
+        +'<td style="font-size:12px;color:var(--muted)">'+u.joinDate+'</td>'
+        +'<td style="text-align:center;font-weight:700;color:#fff">'+u.places+'</td>'
+        +'<td style="text-align:center;font-weight:700;color:#fff">'+u.reviews+'</td>'
+        +'<td><div style="display:flex;gap:6px;align-items:center">'
+        +'<span class="badge '+(u.status==="active"?"approved":"suspended")+'">'+(u.status==="active"?"Actif":"Suspendu")+'</span>'
+        +(u.status==="active"?'<button class="btn btn-suspend" onclick="suspendUser('+u.id+')" style="font-size:10px;padding:4px 8px">Suspendre</button>'
+          :'<button class="btn btn-restore" onclick="restoreUser('+u.id+')" style="font-size:10px;padding:4px 8px">Restaurer</button>')
+        +'</div></td></tr>';
+    }).join("")
+    :'<tr><td colspan="6" style="text-align:center;padding:28px;color:var(--muted)">Aucun membre inscrit</td></tr>';
+  document.getElementById("usersBadge").textContent=active;
+}
+
+function suspendUser(id){
+  users=loadUsers();
+  var u=users.find(function(x){return x.id===id;});if(!u)return;
+  
+  u.status="suspended";saveUsers(users);renderUsers();
+  toast("Compte de "+u.name+" suspendu.");
+}
+
+function restoreUser(id){
+  users=loadUsers();
+  var u=users.find(function(x){return x.id===id;});if(!u)return;
+  u.status="active";saveUsers(users);renderUsers();
+  toast("Compte de "+u.name+" restaure !");
+}
+
+function exportUsers(){
+  users=loadUsers();
+  var rows=["Nom,Email,Telephone,Inscription,Lieux,Avis,Statut"];
+  users.forEach(function(u){rows.push('"'+u.name+'","'+u.email+'","'+(u.phone||"")+'","'+u.joinDate+'",'+u.places+','+u.reviews+',"'+u.status+'"');});
+  var blob=new Blob([rows.join("\n")],{type:"text/csv"});
+  var a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="mbolo_membres.csv";
+  a.click();
+  toast("Export CSV telecharge !");
+}
+
+// ── STATS ─────────────────────────────────────────────────────────────────────
+function renderStats(){
+  places=loadPlaces();actus=loadActus();users=loadUsers();
+  var catCounts={};
+  places.filter(function(p){return p.status==="approved";}).forEach(function(p){catCounts[p.cat]=(catCounts[p.cat]||0)+1;});
+  var total=places.filter(function(p){return p.status==="approved";}).length||1;
+  var bars=Object.entries(catCounts).map(function(e){
+    return '<div style="margin-bottom:14px">'
+      +'<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px">'
+      +'<span style="color:#fff;font-weight:600">'+e[0]+'</span><span style="color:var(--muted)">'+e[1]+' lieux</span></div>'
+      +'<div style="background:rgba(255,255,255,0.08);border-radius:4px;height:6px">'
+      +'<div style="background:var(--g);height:6px;border-radius:4px;width:'+Math.round(e[1]/total*100)+'%"></div>'
+      +'</div></div>';
+  }).join("");
+  var summary=[
+    ["📍","Total etablissements",places.length],
+    ["✅","Approuves",places.filter(function(p){return p.status==="approved";}).length],
+    ["⏳","En attente",places.filter(function(p){return p.status==="pending";}).length],
+    ["⏸","Suspendus",places.filter(function(p){return p.status==="suspended";}).length],
+    ["💬","Total avis",places.reduce(function(s,p){return s+(p.avis||[]).length;},0)],
+    ["📰","Actualites",actus.length],
+    ["👥","Membres",users.length]
+  ].map(function(r){
+    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:rgba(255,255,255,0.04);border-radius:8px;margin-bottom:6px">'
+      +'<div style="font-size:13px;color:var(--text)">'+r[0]+' '+r[1]+'</div>'
+      +'<div style="font-size:16px;font-weight:800;color:#fff">'+r[2]+'</div></div>';
+  }).join("");
+  document.getElementById("statsContent").innerHTML=
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">'
+    +'<div class="card"><div class="card-hdr"><span class="card-t">Repartition par categorie</span></div><div class="card-body">'+bars+'</div></div>'
+    +'<div class="card"><div class="card-hdr"><span class="card-t">Recapitulatif</span></div><div class="card-body">'+summary+'</div></div>'
+    +'</div>';
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+if(localStorage.getItem("mbolo_admin")){
+  document.getElementById("loginWrap").style.display="none";
+  document.getElementById("adminLayout").classList.add("on");
+  renderAll();
+}
+</script>
+</body>
+</html>
