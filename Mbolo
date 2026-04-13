@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#009e60">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="MBOLO">
+<title>MBOLO — Guide de Libreville</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f0f0f0;display:flex;justify-content:center;min-height:100vh;}
+:root{--g:#009e60;--g2:#007a4a;--g3:#e6f7ef;--y:#fcd116;--y2:#c9a800;--y3:#fffbdd;--b:#3a75c4;--b2:#0C447C;--b3:#e8f0fb;--text:#1a1a1a;--muted:#666;--bg:#fff;--bg2:#f5f5f5;--bd:#e0e0e0;--red:#E24B4A;}
+.app{width:100%;max-width:430px;background:var(--bg);min-height:100vh;display:flex;flex-direction:column;position:relative;}
+.screen{display:none;flex-direction:column;flex:1;min-height:100vh;}
+.screen.on{display:flex;}
+.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+
+/* SPLASH */
+.splash{background:var(--g);flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 28px;min-height:100vh;}
+.flag{display:flex;width:60px;height:40px;border-radius:8px;overflow:hidden;margin-bottom:20px;border:2px solid rgba(255,255,255,0.3);}
+.flag div{flex:1;}
+.logo-big{font-size:56px;font-weight:800;color:#fff;letter-spacing:-2px;margin-bottom:4px;}
+.logo-sub{font-size:12px;color:rgba(255,255,255,0.7);letter-spacing:3px;text-transform:uppercase;margin-bottom:40px;}
+.sdots{display:flex;gap:6px;margin-bottom:40px;}
+.sdot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.3);}
+.sdot.y{background:var(--y);}
+.btn-y{width:100%;padding:16px;background:var(--y);color:#7a5c00;font-size:15px;font-weight:700;border:none;border-radius:14px;cursor:pointer;margin-bottom:10px;}
+.btn-wh{width:100%;padding:15px;background:rgba(255,255,255,0.15);color:#fff;font-size:14px;font-weight:500;border:1.5px solid rgba(255,255,255,0.35);border-radius:14px;cursor:pointer;margin-bottom:10px;}
+.btn-ghost{width:100%;padding:12px;background:transparent;color:rgba(255,255,255,0.65);font-size:13px;border:none;cursor:pointer;}
+.splash-foot{margin-top:24px;font-size:10px;color:rgba(255,255,255,0.4);}
+.admin-link{display:block;text-align:center;padding:10px;font-size:11px;color:rgba(255,255,255,0.35);cursor:pointer;}
+
+/* AUTH */
+.stripe{display:flex;height:5px;}
+.stripe div:nth-child(1){flex:1;background:#009e60;}
+.stripe div:nth-child(2){flex:1;background:#fcd116;}
+.stripe div:nth-child(3){flex:1;background:#3a75c4;}
+.auth-top{background:var(--g);padding:28px 20px 36px;}
+.auth-back{background:rgba(255,255,255,0.2);border:none;color:#fff;border-radius:8px;padding:7px 14px;font-size:12px;cursor:pointer;margin-bottom:16px;display:inline-block;}
+.auth-h{font-size:24px;font-weight:700;color:#fff;}
+.auth-s{font-size:12px;color:rgba(255,255,255,0.7);margin-top:4px;}
+.auth-body{padding:24px 20px;flex:1;overflow-y:auto;}
+.fg{margin-bottom:16px;}
+.fg label{font-size:11px;color:var(--muted);display:block;margin-bottom:5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;}
+.fg input,.fg select,.fg textarea{width:100%;padding:12px 14px;border:1.5px solid var(--bd);border-radius:11px;font-size:14px;background:var(--bg2);color:var(--text);outline:none;font-family:inherit;}
+.btn-main{width:100%;padding:14px;background:var(--g);color:#fff;font-size:15px;font-weight:700;border:none;border-radius:12px;cursor:pointer;margin-top:8px;}
+.btn-main.yellow{background:var(--y);color:#7a5c00;}
+.alink{text-align:center;margin-top:14px;font-size:13px;color:var(--muted);}
+.alink span{color:var(--g);cursor:pointer;font-weight:600;}
+.divider{display:flex;align-items:center;gap:10px;margin:18px 0;color:var(--muted);font-size:12px;}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--bd);}
+.motif{display:flex;justify-content:center;gap:5px;padding:14px 0;}
+.mb{width:5px;height:22px;border-radius:3px;}
+
+/* HEADER */
+.hdr{background:var(--g);padding:16px 16px 52px;position:relative;overflow:hidden;}
+.hdr-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.hdr-logo{color:#fff;font-size:22px;font-weight:800;letter-spacing:-0.5px;}
+.hdr-flag{display:flex;height:20px;width:30px;border-radius:3px;overflow:hidden;}
+.hdr-flag div{flex:1;}
+.hdr-loc{font-size:11px;color:rgba(255,255,255,0.75);margin-bottom:12px;}
+.uchip{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);border-radius:20px;padding:5px 12px 5px 5px;margin-bottom:14px;}
+.av-sm{width:24px;height:24px;border-radius:50%;background:var(--y);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#7a5c00;}
+.uchip span{font-size:11px;color:#fff;}
+.sbox{background:#fff;border-radius:12px;display:flex;align-items:center;gap:8px;padding:10px 14px;position:relative;z-index:2;}
+.sbox input{border:none;outline:none;flex:1;font-size:13px;color:var(--text);background:transparent;}
+.sbox input::placeholder{color:#bbb;}
+.flt-btn{background:var(--g3);border:none;color:var(--g2);border-radius:8px;padding:6px 11px;cursor:pointer;font-size:12px;font-weight:700;}
+
+/* CATS */
+.cats{display:flex;gap:8px;overflow-x:auto;padding:14px 14px 0;scrollbar-width:none;}
+.cats::-webkit-scrollbar{display:none;}
+.cat{flex-shrink:0;padding:8px 13px;border-radius:20px;font-size:12px;cursor:pointer;border:1.5px solid var(--bd);background:var(--bg);color:var(--muted);display:flex;align-items:center;gap:5px;font-weight:500;}
+.cat.on{background:var(--y);color:#7a5c00;border-color:var(--y);}
+
+/* FEATURED */
+.fstrip{display:flex;gap:10px;overflow-x:auto;padding:0 14px;scrollbar-width:none;}
+.fstrip::-webkit-scrollbar{display:none;}
+.fc{flex-shrink:0;width:150px;border-radius:13px;overflow:hidden;border:2px solid var(--y);background:var(--bg);cursor:pointer;position:relative;}
+.fc-badge{position:absolute;top:7px;right:7px;background:var(--y);color:#7a5c00;font-size:9px;font-weight:800;padding:2px 6px;border-radius:20px;}
+.fc-em{height:68px;display:flex;align-items:center;justify-content:center;font-size:30px;background:var(--y3);}
+.fc-body{padding:9px;}
+.fc-name{font-size:11px;font-weight:700;color:var(--text);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.fc-cat{font-size:10px;color:var(--muted);}
+.fc-stars{font-size:10px;color:#F59E0B;margin-top:2px;}
+
+/* NEWS */
+.sh{display:flex;justify-content:space-between;align-items:center;padding:16px 14px 8px;}
+.sh-t{font-size:14px;font-weight:700;color:var(--text);}
+.see-all{font-size:12px;color:var(--g);cursor:pointer;background:none;border:none;font-weight:600;}
+.nstrip{display:flex;gap:10px;overflow-x:auto;padding:0 14px;scrollbar-width:none;}
+.nstrip::-webkit-scrollbar{display:none;}
+.nc{flex-shrink:0;width:180px;border-radius:12px;overflow:hidden;border:1.5px solid var(--bd);background:var(--bg);cursor:pointer;}
+.nc-img{height:76px;display:flex;align-items:center;justify-content:center;font-size:28px;}
+.nc-b{padding:9px;}
+.nc-tag{font-size:9px;font-weight:700;color:#085041;background:#9FE1CB;padding:2px 6px;border-radius:20px;display:inline-block;margin-bottom:4px;text-transform:uppercase;}
+.nc-t{font-size:11px;font-weight:600;color:var(--text);line-height:1.4;}
+
+/* PLACE CARDS */
+.plist{padding:0 14px;display:flex;flex-direction:column;gap:10px;}
+.pc{background:var(--bg);border:1.5px solid var(--bd);border-radius:14px;overflow:hidden;cursor:pointer;display:flex;}
+.pc-th{width:76px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:28px;background:var(--bg2);}
+.pc-inf{padding:11px;flex:1;}
+.pc-nm{font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px;}
+.pc-ct{font-size:10px;color:var(--muted);margin-bottom:5px;}
+.pc-mt{display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+.stars{color:#F59E0B;font-size:11px;}
+.sct{font-size:10px;color:var(--muted);}
+.badge{font-size:9px;padding:2px 7px;border-radius:20px;font-weight:700;}
+.badge.open{background:#EAF3DE;color:#3B6D11;}
+.badge.bar{background:var(--b3);color:var(--b2);}
+.badge.pending{background:#fff3cd;color:#856404;}
+.pc-addr{font-size:10px;color:var(--muted);margin-top:3px;}
+
+/* TABBAR */
+.tabbar{border-top:1.5px solid var(--bd);display:flex;background:var(--bg);}
+.tab{flex:1;padding:10px 0 6px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;border:none;background:none;}
+.ti{font-size:20px;}
+.tl{font-size:9px;color:var(--muted);font-weight:500;}
+.tab.on .tl{color:var(--g);font-weight:700;}
+
+/* DETAIL */
+.det-top{background:var(--g);padding:16px 16px 18px;}
+.det-back{background:rgba(255,255,255,0.2);border:none;color:#fff;border-radius:8px;padding:7px 14px;font-size:12px;cursor:pointer;margin-bottom:10px;font-weight:600;}
+.det-sc{flex:1;overflow-y:auto;}
+.det-em{font-size:52px;text-align:center;padding:20px;background:var(--bg2);border-radius:14px;margin:0 14px 14px;}
+.det-nm{font-size:20px;font-weight:700;color:var(--text);padding:0 14px 3px;}
+.det-ct{font-size:13px;color:var(--muted);padding:0 14px 10px;}
+.det-st{font-size:18px;color:#F59E0B;padding:0 14px 2px;}
+.det-rc{font-size:12px;color:var(--muted);padding:0 14px 14px;}
+.infor{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);padding:4px 14px;}
+.act-row{display:flex;gap:8px;padding:12px 14px;}
+.act-b{flex:1;padding:10px;border:1.5px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--text);font-size:12px;cursor:pointer;text-align:center;font-weight:600;}
+.act-b.green{background:var(--g);color:#fff;border-color:var(--g);}
+.act-b.yellow{background:var(--y);color:#7a5c00;border-color:var(--y);}
+.phg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 14px 4px;}
+.phi{aspect-ratio:1;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:32px;background:var(--bg2);}
+.rv{border-top:1px solid var(--bd);padding:12px 14px;}
+.rv-u{font-size:12px;font-weight:700;color:var(--text);margin-bottom:2px;}
+.rv-s{font-size:11px;color:#F59E0B;margin-bottom:4px;}
+.rv-t{font-size:12px;color:var(--muted);line-height:1.5;}
+
+/* BAR */
+.bar-hero{background:var(--b);padding:22px 16px 44px;}
+.bar-t{font-size:22px;font-weight:700;color:#fff;margin-bottom:4px;}
+.bar-s{font-size:13px;color:rgba(255,255,255,0.7);}
+.bar-bdg{display:inline-block;background:var(--y);color:#7a5c00;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;margin-top:8px;}
+.bcats{display:flex;gap:8px;overflow-x:auto;padding:12px 14px 0;scrollbar-width:none;}
+.bcats::-webkit-scrollbar{display:none;}
+.bcat{flex-shrink:0;padding:7px 13px;border-radius:20px;font-size:11px;cursor:pointer;border:1.5px solid var(--bd);background:var(--bg);color:var(--muted);font-weight:500;}
+.bcat.on{background:var(--b);color:#fff;border-color:var(--b);}
+
+/* ACTU */
+.ac-card{border:1.5px solid var(--bd);border-radius:14px;overflow:hidden;cursor:pointer;margin-bottom:10px;}
+.ac-img{height:110px;display:flex;align-items:center;justify-content:center;font-size:40px;}
+.ac-body{padding:14px;}
+.ac-tag{font-size:9px;font-weight:700;text-transform:uppercase;color:#085041;background:#9FE1CB;padding:2px 7px;border-radius:20px;display:inline-block;margin-bottom:6px;}
+.ac-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:5px;line-height:1.4;}
+.ac-txt{font-size:12px;color:var(--muted);line-height:1.6;}
+.ac-date{font-size:10px;color:var(--muted);margin-top:6px;}
+
+/* ADD */
+.add-top{background:var(--g);padding:22px 16px 28px;}
+.add-t{font-size:20px;font-weight:700;color:#fff;margin-bottom:4px;}
+.add-s{font-size:12px;color:rgba(255,255,255,0.7);}
+.add-body{padding:16px;flex:1;overflow-y:auto;}
+.sp-w{display:flex;gap:6px;margin:4px 0;}
+.sp{font-size:24px;cursor:pointer;color:#ddd;}
+.sp.on{color:#F59E0B;}
+.ph-btn{width:100%;padding:26px;border:1.5px dashed var(--bd);border-radius:10px;background:var(--bg2);color:var(--muted);cursor:pointer;font-size:13px;}
+
+/* PROFILE */
+.prof-top{background:var(--g);padding:30px 16px 48px;text-align:center;}
+.av-lg{width:72px;height:72px;border-radius:50%;background:var(--y);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:24px;font-weight:800;color:#7a5c00;border:3px solid #fff;}
+.prof-nm{font-size:18px;font-weight:700;color:#fff;}
+.prof-si{font-size:11px;color:rgba(255,255,255,0.7);margin-top:4px;}
+.prof-body{padding:14px;}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;}
+.stat{text-align:center;background:var(--bg2);border-radius:10px;padding:13px;}
+.stat-n{font-size:20px;font-weight:800;color:var(--text);}
+.stat-l{font-size:9px;color:var(--muted);margin-top:2px;}
+.pmenu{display:flex;flex-direction:column;gap:8px;}
+.pmi{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;background:var(--bg2);border-radius:10px;cursor:pointer;}
+.pmi-l{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text);font-weight:500;}
+.logout{width:100%;padding:13px;background:none;border:1.5px solid var(--red);color:var(--red);border-radius:12px;font-size:14px;cursor:pointer;margin-top:8px;font-weight:600;}
+.gbanner{background:var(--y3);border:1.5px solid var(--y);border-radius:10px;padding:10px 14px;margin:10px 14px 0;display:flex;align-items:center;gap:10px;}
+.gb-txt{font-size:11px;color:#7a5c00;flex:1;line-height:1.5;}
+.gb-btn{background:var(--g);color:#fff;border:none;border-radius:8px;padding:6px 11px;font-size:10px;cursor:pointer;white-space:nowrap;font-weight:700;}
+
+/* MODALS */
+.mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:100;align-items:flex-end;justify-content:center;pointer-events:none;visibility:hidden;}
+.mbg.on{display:flex;pointer-events:all;visibility:visible;}
+.mbox{background:var(--bg);border-radius:20px 20px 0 0;width:100%;max-width:430px;padding:20px 18px 40px;max-height:88vh;overflow-y:auto;}
+.mhandle{width:38px;height:4px;background:var(--bd);border-radius:2px;margin:0 auto 18px;}
+.mt{font-size:16px;font-weight:700;margin-bottom:16px;color:var(--text);}
+.mcancel{width:100%;padding:12px;background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;margin-top:6px;}
+
+/* TOAST */
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none;visibility:hidden;white-space:nowrap;}
+.toast.show{opacity:1;visibility:visible;}
+</style>
+</head>
+<body>
+<div class="app">
+
+<div class="toast" id="toast"></div>
+
+<!-- SPLASH -->
+<div class="screen on" id="s-splash">
+  <div class="splash">
+    <div class="flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div>
+    <div class="logo-big">MBOLO</div>
+    <div class="logo-sub">Guide de Libreville</div>
+    <div class="sdots"><div class="sdot y"></div><div class="sdot"></div><div class="sdot y"></div><div class="sdot"></div><div class="sdot y"></div></div>
+    <div style="width:100%">
+      <button class="btn-y" onclick="go('s-register')">Créer un compte</button>
+      <button class="btn-wh" onclick="go('s-login')">Se connecter</button>
+      <button class="btn-ghost" onclick="goGuest()">Parcourir sans compte →</button>
+    </div>
+    <div class="splash-foot">🇬🇦 Fait avec fierté pour Libreville</div>
+    <span class="admin-link" onclick="goAdmin()">⚙️ Admin</span>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div class="screen" id="s-login">
+  <div class="stripe"><div></div><div></div><div></div></div>
+  <div class="auth-top">
+    <button class="auth-back" onclick="go('s-splash')">← Retour</button>
+    <div class="auth-h">Connexion</div>
+    <div class="auth-s">Bon retour sur MBOLO 🇬🇦</div>
+  </div>
+  <div class="auth-body">
+    <div class="fg"><label>Email</label><input type="email" id="li-email" placeholder="votre@email.com"/></div>
+    <div class="fg"><label>Mot de passe</label><input type="password" id="li-pwd" placeholder="••••••••"/></div>
+    <button class="btn-main" onclick="doLogin()">Se connecter</button>
+    <div class="divider">ou</div>
+    <div class="alink">Pas de compte ? <span onclick="go('s-register')">Créer un compte</span></div>
+    <div class="alink" style="margin-top:8px"><span onclick="goGuest()">Continuer sans compte →</span></div>
+  </div>
+</div>
+
+<!-- REGISTER -->
+<div class="screen" id="s-register">
+  <div class="stripe"><div></div><div></div><div></div></div>
+  <div class="auth-top">
+    <button class="auth-back" onclick="go('s-splash')">← Retour</button>
+    <div class="auth-h">Créer un compte</div>
+    <div class="auth-s">Rejoignez la communauté MBOLO</div>
+  </div>
+  <div class="auth-body">
+    <div class="fg"><label>Prénom et Nom</label><input type="text" id="rg-name" placeholder="ex: Amina Ngoubili"/></div>
+    <div class="fg"><label>Email</label><input type="email" id="rg-email" placeholder="votre@email.com"/></div>
+    <div class="fg"><label>Téléphone (optionnel)</label><input type="tel" id="rg-phone" placeholder="+241 06 ..."/></div>
+    <div class="fg"><label>Mot de passe</label><input type="password" id="rg-pwd" placeholder="Min. 8 caractères"/></div>
+    <div class="motif">
+      <div class="mb" style="background:#009e60"></div><div class="mb" style="background:#fcd116"></div><div class="mb" style="background:#3a75c4"></div>
+      <div class="mb" style="background:#009e60"></div><div class="mb" style="background:#fcd116"></div><div class="mb" style="background:#3a75c4"></div>
+    </div>
+    <button class="btn-main yellow" onclick="doRegister()">Créer mon compte</button>
+    <div class="alink" style="margin-top:12px">Déjà membre ? <span onclick="go('s-login')">Se connecter</span></div>
+    <div class="alink" style="margin-top:8px"><span onclick="goGuest()">Continuer sans compte →</span></div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="screen" id="s-main">
+  <div class="scroll" id="mainScroll"></div>
+  <div class="tabbar">
+    <button class="tab on" id="tab-home" onclick="switchTab('home')"><span class="ti">🏠</span><span class="tl">Accueil</span></button>
+    <button class="tab" id="tab-bar" onclick="switchTab('bar')"><span class="ti">🍹</span><span class="tl">Bar</span></button>
+    <button class="tab" id="tab-actu" onclick="switchTab('actu')"><span class="ti">📰</span><span class="tl">Actualités</span></button>
+    <button class="tab" id="tab-add" onclick="switchTab('add')"><span class="ti">➕</span><span class="tl">Ajouter</span></button>
+    <button class="tab" id="tab-prof" onclick="switchTab('prof')"><span class="ti">👤</span><span class="tl">Profil</span></button>
+  </div>
+</div>
+
+<!-- DETAIL -->
+<div class="screen" id="s-detail">
+  <div class="det-top"><button class="det-back" onclick="go('s-main')">← Retour</button></div>
+  <div class="det-sc">
+    <div class="det-em" id="d-em"></div>
+    <div class="det-nm" id="d-nm"></div>
+    <div class="det-ct" id="d-ct"></div>
+    <div class="det-st" id="d-st"></div>
+    <div class="det-rc" id="d-rc"></div>
+    <div class="infor"><span>📍</span><span id="d-ad"></span></div>
+    <div class="infor"><span>🕐</span><span id="d-hr"></span></div>
+    <div class="infor"><span>📞</span><span id="d-ph"></span></div>
+    <div class="act-row">
+      <button class="act-b yellow" onclick="openReview()">★ Avis</button>
+      <button class="act-b" onclick="toast('Lien copie !')">↗ Partager</button>
+      <button class="act-b green" onclick="toast('Navigation lancee...')">🗺 Y aller</button>
+    </div>
+    <div style="padding:0 14px;font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px">Photos</div>
+    <div class="phg" id="d-photos"></div>
+    <div style="padding:0 14px;font-size:13px;font-weight:700;color:var(--text);margin:13px 0 0">Avis clients</div>
+    <div id="d-reviews"></div>
+    <div style="height:24px"></div>
+  </div>
+</div>
+
+<!-- MODAL AVIS -->
+<div class="mbg" id="reviewModal">
+  <div class="mbox">
+    <div class="mhandle"></div>
+    <div class="mt">Laisser un avis</div>
+    <div class="fg"><label>Note</label>
+      <div class="sp-w" id="revStars">
+        <span class="sp" onclick="setStar(1)">★</span><span class="sp" onclick="setStar(2)">★</span>
+        <span class="sp" onclick="setStar(3)">★</span><span class="sp" onclick="setStar(4)">★</span>
+        <span class="sp" onclick="setStar(5)">★</span>
+      </div>
+    </div>
+    <div class="fg"><label>Commentaire</label>
+      <textarea id="revTxt" rows="4" placeholder="Partagez votre experience..."></textarea>
+    </div>
+    <button class="btn-main" onclick="submitReview()">Publier mon avis</button>
+    <button class="mcancel" onclick="closeModal('reviewModal')">Annuler</button>
+  </div>
+</div>
+
+<!-- MODAL INSCRIPTION REQUISE -->
+<div class="mbg" id="mustRegModal">
+  <div class="mbox">
+    <div class="mhandle"></div>
+    <div style="text-align:center;padding:16px 0 20px">
+      <div style="font-size:44px;margin-bottom:14px">✍️</div>
+      <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px">Inscription requise</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:22px;line-height:1.6">Pour garantir la qualite des avis, vous devez creer un compte gratuit.</div>
+      <button class="btn-main" onclick="closeModal('mustRegModal');go('s-register')">Creer un compte gratuit</button>
+      <div class="alink" style="margin-top:10px"><span onclick="closeModal('mustRegModal');go('s-login')">J ai deja un compte</span></div>
+    </div>
+    <button class="mcancel" onclick="closeModal('mustRegModal')">Continuer en visiteur</button>
+  </div>
+</div>
+
+<!-- MODAL ADMIN -->
+<div class="mbg" id="adminModal">
+  <div class="mbox">
+    <div class="mhandle"></div>
+    <div class="mt">Acces Administrateur</div>
+    <div class="fg"><label>Identifiant</label><input type="text" id="adm-user" placeholder="Identifiant"/></div>
+    <div class="fg"><label>Code</label><input type="password" id="adm-pass" placeholder="Code acces"/></div>
+    <button class="btn-main" onclick="doAdminLogin()">Acceder au tableau de bord</button>
+    <button class="mcancel" onclick="closeModal('adminModal')">Annuler</button>
+  </div>
+</div>
+
+<script>
+var isGuest=false, currentUser=null, currentPlaceId=null, revStar=0, addStar=0;
+var userPlaces=0, userReviews=0, currentCat="Tous";
+
+var CATS=[
+  {l:"Tous",i:"🗺️"},{l:"Restaurant",i:"🍽️"},{l:"Bar",i:"🍹"},
+  {l:"Hotel",i:"🏨"},{l:"Shopping",i:"🛍️"},{l:"Sante",i:"🏥"},{l:"Loisirs",i:"🌊"}
+];
+
+var DEFAULT_PLACES=[
+  {id:1,em:"🍽️",name:"Restaurant Le Dialogue",cat:"Restaurant",quartier:"Plateau",addr:"Bd Triomphal, face a la mairie",phone:"+241 01 72 11 22",hours:"Lun-Sam 11h-23h",rating:4.7,reviews:128,open:true,status:"approved",submittedBy:"Admin",submittedAt:"01/01/2025",photos:["🥘","🍷","🌿","🏺"],avis:[{user:"Amina K.",stars:5,txt:"Le meilleur restaurant de Libreville !"},{user:"Jean-Paul M.",stars:4,txt:"Super cadre, bonne cuisine locale."}]},
+  {id:2,em:"🍹",name:"Bar Le Makokou",cat:"Bar",quartier:"Bord de mer",addr:"Quartier Louis, face a la plage",phone:"+241 06 44 55 66",hours:"Mar-Dim 17h-02h",rating:4.5,reviews:204,open:true,status:"approved",submittedBy:"Admin",submittedAt:"01/01/2025",photos:["🍸","🎵","🌴","🥂"],avis:[{user:"Sandra O.",stars:5,txt:"Ambiance folle le week-end !"},{user:"Cedric B.",stars:4,txt:"Cocktails delicieux, terrasse face mer."}]},
+  {id:3,em:"🍹",name:"Saveur des Tropiques",cat:"Bar",quartier:"Libreville",addr:"Avenue Bouet",phone:"+241 01 44 88 99",hours:"Lun-Dim 15h-01h",rating:4.2,reviews:97,open:true,status:"approved",submittedBy:"Admin",submittedAt:"01/01/2025",photos:["🍺","🎤","🌺","🎶"],avis:[{user:"Patrice N.",stars:4,txt:"Bieres locales excellentes !"},{user:"Florence A.",stars:4,txt:"Bonne ambiance, personnel sympa."}]},
+  {id:4,em:"🏨",name:"Hotel Tropicana",cat:"Hotel",quartier:"Corniche",addr:"Corniche de Libreville",phone:"+241 01 44 55 66",hours:"Reception 24h/24",rating:4.2,reviews:87,open:true,status:"approved",submittedBy:"Admin",submittedAt:"01/01/2025",photos:["🏊","🌊","🛏️","🌅"],avis:[{user:"Sophie N.",stars:4,txt:"Tres bel hotel avec vue sur mer."},{user:"Rodrigue B.",stars:4,txt:"Bon rapport qualite-prix."}]},
+  {id:5,em:"🛍️",name:"Centre Commercial Mbolo",cat:"Shopping",quartier:"Libreville",addr:"Avenue Bouet",phone:"+241 01 23 45 67",hours:"Lun-Dim 09h-21h",rating:3.9,reviews:214,open:true,status:"approved",submittedBy:"Admin",submittedAt:"01/01/2025",photos:["🛍️","👗","👟","🧴"],avis:[{user:"Carole A.",stars:4,txt:"Grand choix de marques locales."}]},
+  {id:6,em:"🏥",name:"Clinique El-Rapha",cat:"Sante",quartier:"Akanda",addr:"Quartier Akanda",phone:"+241 01 88 99 00",hours:"Lun-Sam 07h30-18h",rating:4.5,reviews:63,open:true,status:"approved",submittedBy:"Admin",submittedAt:"01/01/2025",photos:["🏥","🩺","💊","🧬"],avis:[{user:"Marie-Claire F.",stars:5,txt:"Personnel tres professionnel."},{user:"Patrick E.",stars:4,txt:"Equipement moderne."}]},
+  {id:7,em:"🌊",name:"Plage des Cocotiers",cat:"Loisirs",quartier:"Corniche",addr:"Corniche de Libreville",phone:"-",hours:"Ouvert toute la journee",rating:4.4,reviews:305,open:true,status:"approved",submittedBy:"Admin",submittedAt:"01/01/2025",photos:["🌴","🌊","🏄","🌅"],avis:[{user:"Ibrahim D.",stars:5,txt:"La plus belle plage de Libreville !"},{user:"Nadia L.",stars:4,txt:"Tres belle plage."}]},
+  {id:8,em:"🍹",name:"Bar Le Panthere",cat:"Bar",quartier:"Plateau",addr:"Plateau, Quartier Glass",phone:"+241 01 77 66 55",hours:"Mer-Dim 18h-03h",rating:4.6,reviews:156,open:true,status:"approved",submittedBy:"Admin",submittedAt:"01/01/2025",photos:["🍸","🎸","🪩","🌃"],avis:[{user:"Guy-Roger E.",stars:5,txt:"Le meilleur bar du Plateau !"},{user:"Brice M.",stars:5,txt:"Ambiance electrique le vendredi soir."}]},
+  {id:9,em:"🍽️",name:"Chez Jeannot",cat:"Restaurant",quartier:"Louis",addr:"Quartier Louis",phone:"+241 06 11 22 33",hours:"Lun-Sam 12h-22h",rating:4.3,reviews:89,open:true,status:"approved",submittedBy:"Admin",submittedAt:"01/01/2025",photos:["🍗","🥗","🍜","🥘"],avis:[{user:"Regine M.",stars:4,txt:"Cuisine traditionnelle authentique !"},{user:"Armel B.",stars:5,txt:"Le meilleur poulet braise de Libreville."}]}
+];
+
+var DEFAULT_ACTUS=[
+  {id:1,img:"🎵",bg:"#E1F5EE",tag:"Evenement",title:"Festival Gabao 2025",txt:"Le Festival Gabao revient avec une programmation exceptionnelle. Les artistes de toute Afrique centrale seront presents.",date:"15 mars 2025"},
+  {id:2,img:"🏗️",bg:"#fff8d6",tag:"Infra",title:"Nouveau boulevard bord de mer inaugure",txt:"Le nouveau boulevard de la Corniche est officiellement ouvert, redonnant a Libreville son visage maritime.",date:"10 mars 2025"},
+  {id:3,img:"🌊",bg:"#e8f0fb",tag:"Sortie",title:"Top 5 spots plage ce week-end",txt:"Profitez du beau temps sur les plus belles plages de Libreville. La Plage des Cocotiers est au meilleur niveau.",date:"8 mars 2025"},
+  {id:4,img:"🍹",bg:"#FAECE7",tag:"Bar",title:"Les bars du Plateau ouvrent tot",txt:"Ce week-end, plusieurs bars du Plateau ouvrent des 15h. Le Bar Le Panthere propose des cocktails speciaux.",date:"5 mars 2025"},
+  {id:5,img:"🏛️",bg:"#EAF3DE",tag:"Culture",title:"Musee National : nouvelle exposition",txt:"Une nouvelle exposition sur l'histoire du Gabon a ouvert ses portes. Entree gratuite le week-end.",date:"1 mars 2025"}
+];
+
+function loadData(){
+  try{
+    var p=localStorage.getItem("mbolo_places");
+    var a=localStorage.getItem("mbolo_actus");
+    return {places:p?JSON.parse(p):JSON.parse(JSON.stringify(DEFAULT_PLACES)), actus:a?JSON.parse(a):JSON.parse(JSON.stringify(DEFAULT_ACTUS))};
+  }catch(e){return {places:JSON.parse(JSON.stringify(DEFAULT_PLACES)),actus:JSON.parse(JSON.stringify(DEFAULT_ACTUS))};}
+}
+function saveData(){
+  try{localStorage.setItem("mbolo_places",JSON.stringify(places));localStorage.setItem("mbolo_actus",JSON.stringify(actus));}catch(e){}
+}
+
+var data=loadData();
+var places=data.places;
+var actus=data.actus;
+
+function getFeaturedIds(){try{var f=localStorage.getItem("mbolo_featured");return f?JSON.parse(f):[];}catch(e){return [];}}
+
+function stH(n){var r=Math.round(n);return "★".repeat(r)+"☆".repeat(5-r);}
+
+function toast(msg){
+  var t=document.getElementById("toast");
+  t.textContent=msg;t.classList.add("show");
+  setTimeout(function(){t.classList.remove("show");},2500);
+}
+
+function go(id){
+  document.querySelectorAll(".screen").forEach(function(s){s.classList.remove("on");});
+  document.getElementById(id).classList.add("on");
+}
+
+function closeModal(id){document.getElementById(id).classList.remove("on");}
+function goGuest(){isGuest=true;currentUser={name:"Visiteur",guest:true};go("s-main");switchTab("home");}
+
+function goAdmin(){
+  document.getElementById("adm-user").value="";
+  document.getElementById("adm-pass").value="";
+  document.getElementById("adminModal").classList.add("on");
+}
+
+function doAdminLogin(){
+  var u=document.getElementById("adm-user").value.trim();
+  var p=document.getElementById("adm-pass").value.trim();
+  var ok={admin:"mbolo2025",superadmin:"gabon2025"};
+  if(ok[u]&&ok[u]===p){closeModal("adminModal");window.location.href="mbolo-admin.html";}
+  else{toast("Code incorrect.");}
+}
+
+function doLogin(){
+  var e=document.getElementById("li-email").value.trim();
+  if(!e){alert("Email requis.");return;}
+  currentUser={name:e.split("@")[0]||"Utilisateur",email:e,guest:false};
+  isGuest=false;go("s-main");switchTab("home");
+}
+
+function doRegister(){
+  var n=document.getElementById("rg-name").value.trim();
+  var e=document.getElementById("rg-email").value.trim();
+  var ph=document.getElementById("rg-phone").value.trim();
+  if(!n||!e){alert("Nom et email requis.");return;}
+  currentUser={name:n,email:e,guest:false};
+  isGuest=false;
+  try{
+    var users=JSON.parse(localStorage.getItem("mbolo_users")||"[]");
+    if(!users.find(function(u){return u.email===e;})){
+      users.push({id:Date.now(),name:n,email:e,phone:ph||"Non renseigne",joinDate:new Date().toLocaleDateString("fr-FR"),places:0,reviews:0,status:"active"});
+      localStorage.setItem("mbolo_users",JSON.stringify(users));
+    }
+  }catch(ex){}
+  go("s-main");switchTab("home");toast("Bienvenue sur MBOLO, "+n+" !");
+}
+
+function switchTab(t){
+  document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("on");});
+  var el=document.getElementById("tab-"+t);
+  if(el)el.classList.add("on");
+  var map={home:renderHome,bar:renderBar,actu:renderActu,add:renderAdd,prof:renderProf};
+  if(map[t])map[t]();
+}
+
+function buildFeaturedSection(){
+  var ids=getFeaturedIds();
+  if(!ids.length)return "";
+  var fps=ids.map(function(id){return places.find(function(p){return p.id===id&&p.status!=="suspended";});}).filter(Boolean);
+  if(!fps.length)return "";
+  var cards=fps.map(function(p){
+    return '<div class="fc" onclick="openPlace('+p.id+')">'
+      +'<div class="fc-badge">Vedette</div>'
+      +'<div class="fc-em">'+p.em+'</div>'
+      +'<div class="fc-body">'
+      +'<div class="fc-name">'+p.name+'</div>'
+      +'<div class="fc-cat">'+p.cat+'</div>'
+      +'<div class="fc-stars">'+stH(p.rating)+' '+p.rating+'</div>'
+      +'</div></div>';
+  }).join("");
+  return '<div class="sh"><span class="sh-t">⭐ Mis en avant</span>'
+    +'<span style="font-size:10px;color:var(--y2);font-weight:700;background:var(--y3);padding:3px 9px;border-radius:20px">Selection MBOLO</span></div>'
+    +'<div class="fstrip">'+cards+'</div>';
+}
+
+function renderHome(){
+  var un=currentUser?currentUser.name:"Visiteur";
+  var initials=un.substring(0,2).toUpperCase();
+  var guestBanner=isGuest?'<div class="gbanner"><span style="font-size:18px">🇬🇦</span><div class="gb-txt">Mode visiteur. Creez un compte pour publier.</div><button class="gb-btn" onclick="go(\'s-register\')">Rejoindre</button></div>':"";
+  var newsCards=actus.slice(0,4).map(function(a){
+    return '<div class="nc" onclick="switchTab(\'actu\')"><div class="nc-img" style="background:'+a.bg+'">'+a.img+'</div><div class="nc-b"><div class="nc-tag">'+a.tag+'</div><div class="nc-t">'+a.title+'</div></div></div>';
+  }).join("");
+  document.getElementById("mainScroll").innerHTML=guestBanner
+    +'<div class="hdr">'
+    +'<div class="hdr-row"><div class="hdr-logo">MBOLO</div>'
+    +'<div style="display:flex;gap:8px;align-items:center"><div class="hdr-flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div></div></div>'
+    +'<div class="hdr-loc">📍 Libreville, Gabon</div>'
+    +'<div class="uchip"><div class="av-sm">'+initials+'</div><span>'+un+'</span></div>'
+    +'<div class="sbox"><span style="font-size:15px;color:#bbb">🔍</span><input type="text" id="searchInput" placeholder="Restaurant, bar, hotel..." oninput="renderPlaces()"/><button class="flt-btn">Filtrer</button></div>'
+    +'</div>'
+    +'<div class="cats" id="catStrip"></div>'
+    +buildFeaturedSection()
+    +'<div class="sh"><span class="sh-t">Actualites Libreville</span><button class="see-all" onclick="switchTab(\'actu\')">Tout voir</button></div>'
+    +'<div class="nstrip">'+newsCards+'</div>'
+    +'<div class="sh"><span class="sh-t">Etablissements</span></div>'
+    +'<div class="plist" id="placeList"></div>'
+    +'<div style="height:88px"></div>';
+  renderCats();
+  renderPlaces();
+}
+
+function renderCats(){
+  var s=document.getElementById("catStrip");
+  if(!s)return;
+  s.innerHTML=CATS.map(function(c){
+    return '<div class="cat'+(c.l===currentCat?" on":"")+'" onclick="filterCat(\''+c.l+'\')"><span>'+c.i+'</span> '+c.l+'</div>';
+  }).join("");
+}
+
+function filterCat(cat){currentCat=cat;renderCats();renderPlaces();}
+
+function renderPlaces(){
+  var q=(document.getElementById("searchInput")||{}).value||"";
+  var list=document.getElementById("placeList");
+  if(!list)return;
+  var filtered=places.filter(function(p){
+    if(p.status==="suspended")return false;
+    var mc=currentCat==="Tous"||p.cat===currentCat;
+    var mq=!q||p.name.toLowerCase().includes(q.toLowerCase())||p.addr.toLowerCase().includes(q.toLowerCase())||(p.quartier||"").toLowerCase().includes(q.toLowerCase());
+    return mc&&mq;
+  });
+  if(!filtered.length){list.innerHTML='<div style="text-align:center;padding:28px;color:var(--muted);font-size:13px">Aucun resultat</div>';return;}
+  var featIds=getFeaturedIds();
+  list.innerHTML=filtered.map(function(p){
+    var isFeat=featIds.includes(p.id);
+    return '<div class="pc" onclick="openPlace('+p.id+')">'
+      +'<div class="pc-th">'+p.em+'</div>'
+      +'<div class="pc-inf">'
+      +'<div class="pc-nm">'+p.name+(isFeat?' <span style="font-size:9px;background:var(--y3);color:var(--y2);padding:2px 6px;border-radius:20px;font-weight:700">⭐</span>':'')+(p.status==="pending"?' <span class="badge pending">En attente</span>':'')+'</div>'
+      +'<div class="pc-ct">'+p.cat+' · '+(p.quartier||'')+'</div>'
+      +'<div class="pc-mt"><span class="stars">'+stH(p.rating)+'</span><span class="sct">'+p.rating+' ('+p.reviews+')</span>'+(p.open?'<span class="badge open">Ouvert</span>':'')+(p.cat==="Bar"?'<span class="badge bar">Bar</span>':'')+'</div>'
+      +'<div class="pc-addr">📍 '+p.addr+'</div>'
+      +'</div></div>';
+  }).join("");
+}
+
+function openPlace(id){
+  var p=places.find(function(x){return x.id===id;});
+  if(!p)return;
+  currentPlaceId=id;
+  document.getElementById("d-em").textContent=p.em;
+  document.getElementById("d-nm").textContent=p.name;
+  document.getElementById("d-ct").textContent=p.cat+" · "+(p.quartier||"");
+  document.getElementById("d-st").textContent=stH(p.rating)+" "+p.rating;
+  document.getElementById("d-rc").textContent=p.reviews+" avis";
+  document.getElementById("d-ad").textContent=p.addr;
+  document.getElementById("d-hr").textContent=p.hours;
+  document.getElementById("d-ph").textContent=p.phone;
+  document.getElementById("d-photos").innerHTML=(p.photos||[]).map(function(ph){return '<div class="phi">'+ph+'</div>';}).join("");
+  var avis=p.avis||[];
+  document.getElementById("d-reviews").innerHTML=avis.length
+    ?avis.map(function(a){return '<div class="rv"><div class="rv-u">'+a.user+'</div><div class="rv-s">'+stH(a.stars)+'</div><div class="rv-t">'+a.txt+'</div></div>';}).join("")
+    :'<div style="padding:14px;font-size:12px;color:var(--muted)">Aucun avis pour le moment.</div>';
+  go("s-detail");
+}
+
+function openReview(){
+  if(!currentUser||isGuest){document.getElementById("mustRegModal").classList.add("on");return;}
+  revStar=0;
+  document.getElementById("revTxt").value="";
+  document.querySelectorAll("#revStars .sp").forEach(function(s){s.classList.remove("on");});
+  document.getElementById("reviewModal").classList.add("on");
+}
+
+function setStar(n){
+  revStar=n;
+  document.querySelectorAll("#revStars .sp").forEach(function(s,i){s.classList.toggle("on",i<n);});
+}
+
+function submitReview(){
+  var txt=document.getElementById("revTxt").value.trim();
+  if(!txt||!revStar){alert("Note et commentaire requis.");return;}
+  var p=places.find(function(x){return x.id===currentPlaceId;});
+  if(!p)return;
+  if(!p.avis)p.avis=[];
+  p.avis.unshift({user:currentUser.name,stars:revStar,txt:txt});
+  p.reviews++;
+  p.rating=Math.round((p.rating*(p.reviews-1)+revStar)/p.reviews*10)/10;
+  userReviews++;
+  try{
+    var users=JSON.parse(localStorage.getItem("mbolo_users")||"[]");
+    var u=users.find(function(x){return x.email===currentUser.email;});
+    if(u){u.reviews=(u.reviews||0)+1;localStorage.setItem("mbolo_users",JSON.stringify(users));}
+  }catch(ex){}
+  saveData();
+  closeModal("reviewModal");
+  openPlace(currentPlaceId);
+  toast("Votre avis a ete publie !");
+}
+
+function renderBar(){
+  var bars=places.filter(function(p){return p.cat==="Bar"&&p.status!=="suspended";});
+  var cards=bars.map(function(p){
+    return '<div class="pc" onclick="openPlace('+p.id+')">'
+      +'<div class="pc-th" style="background:#e8f0fb">'+p.em+'</div>'
+      +'<div class="pc-inf"><div class="pc-nm">'+p.name+'</div>'
+      +'<div class="pc-ct">'+p.addr+'</div>'
+      +'<div class="pc-mt"><span class="stars">'+stH(p.rating)+'</span><span class="sct">'+p.rating+' ('+p.reviews+')</span>'+(p.open?'<span class="badge open">Ouvert</span>':'')+'</div>'
+      +'<div class="pc-addr">🕐 '+p.hours+'</div></div></div>';
+  }).join("");
+  document.getElementById("mainScroll").innerHTML=
+    '<div class="bar-hero"><div class="bar-t">Bars et Boissons 🍹</div><div class="bar-s">Tous les bars de Libreville</div><div class="bar-bdg">'+bars.length+' bars references</div></div>'
+    +'<div class="bcats"><div class="bcat on">Tous</div><div class="bcat">Cocktails</div><div class="bcat">Biere locale</div><div class="bcat">Terrasse</div><div class="bcat">Musique live</div></div>'
+    +'<div class="sh"><span class="sh-t">Bars populaires</span></div>'
+    +'<div class="plist">'+cards+'</div>'
+    +'<div style="height:88px"></div>';
+  document.querySelectorAll(".bcat").forEach(function(bc){
+    bc.onclick=function(){document.querySelectorAll(".bcat").forEach(function(x){x.classList.remove("on");});this.classList.add("on");};
+  });
+}
+
+function renderActu(){
+  var newsHTML=actus.map(function(a){
+    return '<div class="ac-card"><div class="ac-img" style="background:'+a.bg+'">'+a.img+'</div>'
+      +'<div class="ac-body"><div class="ac-tag">'+a.tag+'</div><div class="ac-title">'+a.title+'</div>'
+      +'<div class="ac-txt">'+a.txt+'</div><div class="ac-date">📅 '+a.date+'</div></div></div>';
+  }).join("");
+  var newPlaces=places.filter(function(p){return p.status==="approved";});
+  var placesHTML=newPlaces.length?newPlaces.map(function(p){
+    return '<div class="ac-card" onclick="openPlace('+p.id+')" style="cursor:pointer">'
+      +'<div style="padding:14px;display:flex;align-items:center;gap:14px">'
+      +'<div style="font-size:40px">'+p.em+'</div>'
+      +'<div style="flex:1"><div style="display:flex;gap:6px;margin-bottom:4px"><span class="ac-tag">Nouveau</span></div>'
+      +'<div style="font-size:14px;font-weight:700;color:var(--text)">'+p.name+'</div>'
+      +'<div style="font-size:11px;color:var(--muted)">📍 '+p.quartier+' — '+p.addr+'</div>'
+      +(p.submittedBy&&p.submittedBy!=="Admin"?'<div style="font-size:10px;color:var(--g);margin-top:3px;font-weight:600">Ajoute par '+p.submittedBy+'</div>':"")
+      +'</div></div></div>';
+  }).join(""):'<div style="text-align:center;padding:40px 20px;color:var(--muted);font-size:13px">Aucun lieu pour le moment.</div>';
+  document.getElementById("mainScroll").innerHTML=
+    '<div class="hdr" style="padding-bottom:18px">'
+    +'<div class="hdr-row"><div class="hdr-logo">Actualites 📰</div>'
+    +'<div class="hdr-flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div></div>'
+    +'<div class="hdr-loc">📍 Libreville, Gabon</div></div>'
+    +'<div style="display:flex;gap:6px;padding:14px 14px 0">'
+    +'<button id="at-news" onclick="showActuTab(\'news\')" style="flex:1;padding:9px;border-radius:10px;border:1.5px solid var(--g);background:var(--g);color:#fff;font-size:12px;font-weight:700;cursor:pointer">📰 Actualites</button>'
+    +'<button id="at-places" onclick="showActuTab(\'places\')" style="flex:1;padding:9px;border-radius:10px;border:1.5px solid var(--bd);background:var(--bg);color:var(--muted);font-size:12px;font-weight:700;cursor:pointer">📍 Nouveaux lieux</button>'
+    +'</div>'
+    +'<div id="ap-news" style="padding:12px 14px 0">'+newsHTML+'</div>'
+    +'<div id="ap-places" style="display:none;padding:12px 14px 0">'+placesHTML+'</div>'
+    +'<div style="height:88px"></div>';
+}
+
+function showActuTab(tab){
+  document.getElementById("ap-news").style.display=tab==="news"?"block":"none";
+  document.getElementById("ap-places").style.display=tab==="places"?"block":"none";
+  var bn=document.getElementById("at-news");
+  var bp=document.getElementById("at-places");
+  if(tab==="news"){bn.style.cssText="flex:1;padding:9px;border-radius:10px;border:1.5px solid var(--g);background:var(--g);color:#fff;font-size:12px;font-weight:700;cursor:pointer";bp.style.cssText="flex:1;padding:9px;border-radius:10px;border:1.5px solid var(--bd);background:var(--bg);color:var(--muted);font-size:12px;font-weight:700;cursor:pointer";}
+  else{bp.style.cssText="flex:1;padding:9px;border-radius:10px;border:1.5px solid var(--g);background:var(--g);color:#fff;font-size:12px;font-weight:700;cursor:pointer";bn.style.cssText="flex:1;padding:9px;border-radius:10px;border:1.5px solid var(--bd);background:var(--bg);color:var(--muted);font-size:12px;font-weight:700;cursor:pointer";}
+}
+
+function renderAdd(){
+  if(isGuest){
+    document.getElementById("mainScroll").innerHTML=
+      '<div style="text-align:center;padding:70px 24px">'
+      +'<div style="font-size:48px;margin-bottom:16px">🔒</div>'
+      +'<div style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:8px">Connexion requise</div>'
+      +'<div style="font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.6">Creez un compte pour ajouter des etablissements.</div>'
+      +'<button class="btn-main" style="max-width:270px;margin:0 auto;display:block" onclick="go(\'s-register\')">Creer un compte gratuit</button>'
+      +'<div class="alink" style="margin-top:12px"><span onclick="go(\'s-login\')">Deja membre ? Se connecter</span></div>'
+      +'</div><div style="height:88px"></div>';
+    return;
+  }
+  document.getElementById("mainScroll").innerHTML=
+    '<div class="add-top"><div class="add-t">Ajouter un lieu</div><div class="add-s">Partagez une adresse avec la communaute</div></div>'
+    +'<div class="stripe"><div></div><div></div><div></div></div>'
+    +'<div class="add-body">'
+    +'<div style="background:#fff8d6;border:1px solid #fcd116;border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:#7a5c00">Votre etablissement sera soumis a validation avant publication.</div>'
+    +'<div class="fg"><label>Nom *</label><input type="text" id="newName" placeholder="Ex: Restaurant Le Perroquet"/></div>'
+    +'<div class="fg"><label>Categorie *</label><select id="newCat"><option>Restaurant</option><option>Bar</option><option>Hotel</option><option>Shopping</option><option>Sante</option><option>Loisirs</option><option>Autre</option></select></div>'
+    +'<div class="fg"><label>Quartier *</label><input type="text" id="newQrt" placeholder="Ex: Plateau, Louis, Akanda..."/></div>'
+    +'<div class="fg"><label>Adresse *</label><input type="text" id="newAddr" placeholder="Ex: Face au marche Mont-Bouet"/></div>'
+    +'<div class="fg"><label>Telephone</label><input type="tel" id="newPhone" placeholder="+241 06 ..."/></div>'
+    +'<div class="fg"><label>Horaires</label><input type="text" id="newHours" placeholder="Ex: Lun-Sam 08h-22h"/></div>'
+    +'<div class="fg"><label>Note initiale</label><div class="sp-w" id="addStars"><span class="sp" onclick="setAddStar(1)">★</span><span class="sp" onclick="setAddStar(2)">★</span><span class="sp" onclick="setAddStar(3)">★</span><span class="sp" onclick="setAddStar(4)">★</span><span class="sp" onclick="setAddStar(5)">★</span></div></div>'
+    +'<button class="btn-main yellow" onclick="submitPlace()">Soumettre pour validation</button>'
+    +'</div><div style="height:88px"></div>';
+}
+
+function setAddStar(n){addStar=n;document.querySelectorAll("#addStars .sp").forEach(function(s,i){s.classList.toggle("on",i<n);});}
+
+function submitPlace(){
+  var name=(document.getElementById("newName")||{}).value||"";
+  var addr=(document.getElementById("newAddr")||{}).value||"";
+  var qrt=(document.getElementById("newQrt")||{}).value||"";
+  var cat=(document.getElementById("newCat")||{}).value||"Restaurant";
+  if(!name.trim()||!addr.trim()||!qrt.trim()){alert("Nom, quartier et adresse sont requis.");return;}
+  var icons={Restaurant:"🍽️",Bar:"🍹",Hotel:"🏨",Shopping:"🛍️",Sante:"🏥",Loisirs:"🌊",Autre:"📍"};
+  var newPlace={id:Date.now(),em:icons[cat]||"📍",name:name.trim(),cat:cat,quartier:qrt.trim(),addr:addr.trim(),
+    phone:(document.getElementById("newPhone")||{}).value||"-",hours:(document.getElementById("newHours")||{}).value||"-",
+    rating:addStar||0,reviews:0,open:true,status:"pending",submittedBy:currentUser.name,submittedAt:new Date().toLocaleDateString("fr-FR"),photos:["📷"],avis:[]};
+  places.unshift(newPlace);userPlaces++;addStar=0;
+  try{var users=JSON.parse(localStorage.getItem("mbolo_users")||"[]");var u=users.find(function(x){return x.email===currentUser.email;});if(u){u.places=(u.places||0)+1;localStorage.setItem("mbolo_users",JSON.stringify(users));}}catch(ex){}
+  saveData();
+  toast("Soumis ! En attente de validation.");
+  switchTab("home");
+}
+
+function renderProf(){
+  var un=currentUser?currentUser.name:"Visiteur";
+  var em=currentUser&&currentUser.email?currentUser.email:"";
+  var initials=un.substring(0,2).toUpperCase();
+  var body="";
+  if(isGuest){
+    body='<div style="background:var(--y3);border:1.5px solid var(--y);border-radius:12px;padding:18px;text-align:center;margin-bottom:16px">'
+      +'<div style="font-size:14px;font-weight:700;color:#7a5c00;margin-bottom:6px">Rejoignez la communaute MBOLO 🇬🇦</div>'
+      +'<div style="font-size:12px;color:#7a5c00;margin-bottom:14px">Publiez des avis et ajoutez des lieux.</div>'
+      +'<button class="btn-main" style="max-width:200px;margin:0 auto;display:block" onclick="go(\'s-register\')">Creer un compte</button>'
+      +'<div class="alink" style="margin-top:10px"><span onclick="go(\'s-login\')">Se connecter</span></div>'
+      +'</div>';
+  } else {
+    body='<div style="background:var(--bg2);border-radius:10px;padding:13px 14px;margin-bottom:8px">'
+      +'<div style="font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Mon compte</div>'
+      +'<div style="font-size:13px;font-weight:700;color:var(--text)">'+un+'</div>'
+      +(em?'<div style="font-size:12px;color:var(--muted);margin-top:2px">'+em+'</div>':"")
+      +'</div>'
+      +'<div class="pmenu">'
+      +'<div class="pmi" onclick="showMyReviews()"><div class="pmi-l"><span style="font-size:16px">💬</span> Mes avis publies</div><span style="color:var(--muted)">›</span></div>'
+      +'<div class="pmi" onclick="showMyPlaces()"><div class="pmi-l"><span style="font-size:16px">📍</span> Mes lieux ajoutes</div><span style="color:var(--muted)">›</span></div>'
+      +'<div class="pmi" onclick="toast(\'Fonctionnalite bientot disponible\')"><div class="pmi-l"><span style="font-size:16px">🔔</span> Notifications</div><span style="color:var(--muted)">›</span></div>'
+      +'<button class="logout" onclick="logout()">Se deconnecter</button>'
+      +'</div>';
+  }
+  document.getElementById("mainScroll").innerHTML=
+    '<div class="prof-top"><div class="av-lg">'+initials+'</div>'
+    +'<div class="prof-nm">'+un+'</div>'
+    +'<div class="prof-si">'+(isGuest?"Mode visiteur":"Membre MBOLO 🇬🇦")+'</div></div>'
+    +'<div class="stripe"><div></div><div></div><div></div></div>'
+    +'<div class="prof-body">'
+    +'<div class="stats">'
+    +'<div class="stat"><div class="stat-n">'+userPlaces+'</div><div class="stat-l">Ajoutes</div></div>'
+    +'<div class="stat"><div class="stat-n">'+userReviews+'</div><div class="stat-l">Avis</div></div>'
+    +'<div class="stat"><div class="stat-n">🇬🇦</div><div class="stat-l">Libreville</div></div>'
+    +'</div>'+body+'</div>'
+    +'<div style="height:88px"></div>';
+}
+
+function showMyReviews(){
+  var reviews=[];
+  places.forEach(function(p){(p.avis||[]).filter(function(a){return a.user===currentUser.name;}).forEach(function(a){reviews.push({place:p,avis:a});});});
+  if(!reviews.length){toast("Vous n avez pas encore publie d avis.");return;}
+  var html='<div style="padding:14px"><button onclick="switchTab(\'prof\')" style="background:none;border:none;color:var(--g);font-size:13px;cursor:pointer;font-weight:700;margin-bottom:14px">← Retour au profil</button>'
+    +'<div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:14px">Mes avis ('+reviews.length+')</div>';
+  reviews.forEach(function(r){
+    html+='<div style="border:1.5px solid var(--bd);border-radius:12px;padding:13px;margin-bottom:10px;cursor:pointer" onclick="openPlace('+r.place.id+')">'
+      +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:7px"><span style="font-size:22px">'+r.place.em+'</span>'
+      +'<div><div style="font-size:13px;font-weight:700;color:var(--text)">'+r.place.name+'</div></div></div>'
+      +'<div style="color:#F59E0B;font-size:12px;margin-bottom:4px">'+stH(r.avis.stars)+'</div>'
+      +'<div style="font-size:12px;color:var(--muted)">'+r.avis.txt+'</div></div>';
+  });
+  html+='</div><div style="height:88px"></div>';
+  document.getElementById("mainScroll").innerHTML=html;
+}
+
+function showMyPlaces(){
+  var mine=places.filter(function(p){return p.submittedBy===currentUser.name;});
+  if(!mine.length){toast("Vous n avez pas encore ajoute de lieu.");return;}
+  var html='<div style="padding:14px"><button onclick="switchTab(\'prof\')" style="background:none;border:none;color:var(--g);font-size:13px;cursor:pointer;font-weight:700;margin-bottom:14px">← Retour au profil</button>'
+    +'<div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:14px">Mes lieux ('+mine.length+')</div>';
+  mine.forEach(function(p){
+    var sc=p.status==="approved"?"background:#EAF3DE;color:#3B6D11":p.status==="pending"?"background:#fff3cd;color:#856404":"background:rgba(226,75,74,0.1);color:#E24B4A";
+    var sl=p.status==="approved"?"Approuve":p.status==="pending"?"En attente":"Suspendu";
+    html+='<div style="border:1.5px solid var(--bd);border-radius:12px;overflow:hidden;display:flex;cursor:pointer;margin-bottom:10px" onclick="openPlace('+p.id+')">'
+      +'<div style="width:64px;display:flex;align-items:center;justify-content:center;font-size:26px;background:var(--bg2)">'+p.em+'</div>'
+      +'<div style="padding:10px;flex:1"><div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px">'+p.name+'</div>'
+      +'<div style="font-size:11px;color:var(--muted);margin-bottom:5px">'+p.cat+' · '+(p.quartier||"")+'</div>'
+      +'<span style="font-size:9px;padding:2px 8px;border-radius:20px;font-weight:700;'+sc+'">'+sl+'</span>'
+      +'</div></div>';
+  });
+  html+='</div><div style="height:88px"></div>';
+  document.getElementById("mainScroll").innerHTML=html;
+}
+
+function logout(){if(!confirm("Se deconnecter ?"))return;isGuest=false;currentUser=null;go("s-splash");}
+</script>
+</body>
+</html>
