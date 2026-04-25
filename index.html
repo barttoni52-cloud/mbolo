@@ -3,949 +3,726 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>MBOLO - Libreville</title>
+<meta name="theme-color" content="#009e60">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="MBOLO">
+<title>MBOLO — Guide de Libreville</title>
 <style>
-:root {
-  --vert: #009e60;
-  --jaune: #fcd116;
-  --bleu: #3a75c4;
-  --blanc: #ffffff;
-  --gris: #f5f5f5;
-  --gris2: #e0e0e0;
-  --texte: #1a1a1a;
-  --texte2: #555;
-  --ombre: rgba(0,0,0,0.08);
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f0f0f0;display:flex;justify-content:center;min-height:100vh;}
+:root{
+  --g:#009e60;--g2:#007a4a;--g3:#e6f7ef;
+  --y:#fcd116;--y2:#c9a800;--y3:#fffbdd;
+  --b:#3a75c4;--b2:#0C447C;--b3:#e8f0fb;
+  --text:#1a1a1a;--muted:#666;--bg:#fff;--bg2:#f5f5f5;--bd:#e0e0e0;
+  --red:#E24B4A;
 }
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: 'Segoe UI', sans-serif; background:#f0f0f0; color:var(--texte); max-width:480px; margin:0 auto; min-height:100vh; position:relative; }
+.app{width:100%;max-width:430px;background:var(--bg);min-height:100vh;display:flex;flex-direction:column;position:relative;}
+.screen{display:none;flex-direction:column;flex:1;min-height:100vh;}
+.screen.on{display:flex;}
+.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
 
 /* SPLASH */
-#splash {
-  position:fixed; inset:0; z-index:9999;
-  background:var(--vert);
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  transition:opacity 0.6s;
-}
-#splash .logo { font-size:3.5rem; font-weight:900; color:var(--blanc); letter-spacing:4px; }
-#splash .logo span { color:var(--jaune); }
-#splash .sub { color:rgba(255,255,255,0.8); margin-top:8px; font-size:0.9rem; letter-spacing:2px; }
-#splash .bande { display:flex; width:120px; height:6px; margin-top:24px; border-radius:3px; overflow:hidden; }
-#splash .bande div { flex:1; }
+.splash{background:var(--g);flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 28px;min-height:100vh;}
+.flag{display:flex;width:60px;height:40px;border-radius:8px;overflow:hidden;margin-bottom:20px;border:2px solid rgba(255,255,255,0.3);}
+.flag div{flex:1;}
+.logo-big{font-size:56px;font-weight:800;color:#fff;letter-spacing:-2px;margin-bottom:4px;}
+.logo-sub{font-size:12px;color:rgba(255,255,255,0.7);letter-spacing:3px;text-transform:uppercase;margin-bottom:40px;}
+.splash-dots{display:flex;gap:6px;margin-bottom:40px;}
+.sdot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.3);}
+.sdot.y{background:var(--y);}
+.btn-y{width:100%;padding:16px;background:var(--y);color:#7a5c00;font-size:15px;font-weight:700;border:none;border-radius:14px;cursor:pointer;margin-bottom:10px;}
+.btn-wh{width:100%;padding:15px;background:rgba(255,255,255,0.15);color:#fff;font-size:14px;font-weight:500;border:1.5px solid rgba(255,255,255,0.35);border-radius:14px;cursor:pointer;margin-bottom:10px;}
+.btn-ghost{width:100%;padding:12px;background:transparent;color:rgba(255,255,255,0.65);font-size:13px;border:none;cursor:pointer;}
+.splash-foot{margin-top:24px;font-size:10px;color:rgba(255,255,255,0.4);}
 
 /* AUTH */
-#auth {
-  position:fixed; inset:0; z-index:998;
-  background:linear-gradient(160deg, var(--vert) 0%, #007a4a 50%, var(--bleu) 100%);
-  display:none; flex-direction:column; align-items:center; justify-content:center; padding:24px;
-}
-#auth .auth-card {
-  background:var(--blanc); border-radius:20px; padding:32px 24px; width:100%; max-width:360px;
-  box-shadow:0 20px 60px rgba(0,0,0,0.25);
-}
-#auth .auth-logo { text-align:center; font-size:2.5rem; font-weight:900; color:var(--vert); letter-spacing:3px; margin-bottom:4px; }
-#auth .auth-logo span { color:var(--jaune); }
-#auth .auth-city { text-align:center; color:var(--texte2); font-size:0.85rem; margin-bottom:28px; }
-#auth input {
-  width:100%; padding:14px 16px; border:2px solid var(--gris2); border-radius:12px;
-  font-size:1rem; margin-bottom:12px; outline:none; transition:border 0.2s;
-}
-#auth input:focus { border-color:var(--vert); }
-.btn-vert { width:100%; padding:14px; background:var(--vert); color:#fff; border:none; border-radius:12px; font-size:1rem; font-weight:700; cursor:pointer; margin-bottom:12px; }
-.btn-contour { width:100%; padding:14px; background:transparent; color:var(--vert); border:2px solid var(--vert); border-radius:12px; font-size:0.95rem; font-weight:600; cursor:pointer; }
-#auth .sep { text-align:center; color:var(--texte2); margin:8px 0; font-size:0.85rem; }
-#auth-msg { color:#e53935; font-size:0.85rem; text-align:center; margin-bottom:8px; display:none; }
-
-/* APP */
-#app { display:none; padding-bottom:80px; }
+.auth-top{background:var(--g);padding:28px 20px 36px;}
+.auth-back{background:rgba(255,255,255,0.2);border:none;color:#fff;border-radius:8px;padding:7px 14px;font-size:12px;cursor:pointer;margin-bottom:16px;display:inline-block;}
+.auth-h{font-size:24px;font-weight:700;color:#fff;}
+.auth-s{font-size:12px;color:rgba(255,255,255,0.7);margin-top:4px;}
+.stripe{display:flex;height:5px;}
+.stripe div:nth-child(1){flex:1;background:#009e60;}
+.stripe div:nth-child(2){flex:1;background:#fcd116;}
+.stripe div:nth-child(3){flex:1;background:#3a75c4;}
+.auth-body{padding:24px 20px;flex:1;overflow-y:auto;}
+.fg{margin-bottom:16px;}
+.fg label{font-size:11px;color:var(--muted);display:block;margin-bottom:5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;}
+.fg input,.fg select,.fg textarea{width:100%;padding:12px 14px;border:1.5px solid var(--bd);border-radius:11px;font-size:14px;background:var(--bg2);color:var(--text);outline:none;font-family:inherit;transition:border-color .15s;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--g);}
+.btn-main{width:100%;padding:14px;background:var(--g);color:#fff;font-size:15px;font-weight:700;border:none;border-radius:12px;cursor:pointer;margin-top:8px;}
+.btn-main.yellow{background:var(--y);color:#7a5c00;}
+.alink{text-align:center;margin-top:14px;font-size:13px;color:var(--muted);}
+.alink span{color:var(--g);cursor:pointer;font-weight:600;}
+.divider{display:flex;align-items:center;gap:10px;margin:18px 0;color:var(--muted);font-size:12px;}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--bd);}
+.motif{display:flex;justify-content:center;gap:5px;padding:14px 0;}
+.mb{width:5px;height:22px;border-radius:3px;}
 
 /* HEADER */
-.header {
-  background:var(--vert); color:#fff; padding:16px 20px;
-  display:flex; align-items:center; justify-content:space-between;
-  position:sticky; top:0; z-index:100;
-  box-shadow:0 2px 10px rgba(0,0,0,0.15);
-}
-.header-logo { font-size:1.6rem; font-weight:900; letter-spacing:2px; }
-.header-logo span { color:var(--jaune); }
-.header-right { display:flex; align-items:center; gap:10px; }
-.header-user { font-size:0.8rem; opacity:0.9; }
-.btn-deco { background:rgba(255,255,255,0.2); border:none; color:#fff; padding:6px 12px; border-radius:20px; font-size:0.8rem; cursor:pointer; }
+.hdr{background:var(--g);padding:16px 16px 52px;position:relative;overflow:hidden;}
+.hdr::before{content:'';position:absolute;top:-20px;right:-20px;width:110px;height:110px;border-radius:50%;background:rgba(255,255,255,0.06);}
+.hdr::after{content:'';position:absolute;bottom:-10px;left:50px;width:90px;height:90px;border-radius:50%;background:rgba(252,209,22,0.1);}
+.hdr-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.hdr-logo{color:#fff;font-size:22px;font-weight:800;letter-spacing:-0.5px;}
+.hdr-flag{display:flex;height:20px;width:30px;border-radius:3px;overflow:hidden;}
+.hdr-flag div{flex:1;}
+.hdr-loc{font-size:11px;color:rgba(255,255,255,0.75);margin-bottom:12px;}
+.uchip{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);border-radius:20px;padding:5px 12px 5px 5px;margin-bottom:14px;}
+.av-sm{width:24px;height:24px;border-radius:50%;background:var(--y);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#7a5c00;}
+.uchip span{font-size:11px;color:#fff;}
+.sbox{background:#fff;border-radius:12px;display:flex;align-items:center;gap:8px;padding:10px 14px;position:relative;z-index:2;}
+.sbox input{border:none;outline:none;flex:1;font-size:13px;color:var(--text);background:transparent;}
+.sbox input::placeholder{color:#bbb;}
+.flt-btn{background:var(--g3);border:none;color:var(--g2);border-radius:8px;padding:6px 11px;cursor:pointer;font-size:12px;font-weight:700;}
 
-/* TABS */
-.tabs {
-  position:fixed; bottom:0; left:50%; transform:translateX(-50%);
-  width:100%; max-width:480px;
-  background:#fff; display:flex; border-top:1px solid var(--gris2);
-  z-index:200; box-shadow:0 -2px 10px var(--ombre);
-}
-.tab {
-  flex:1; display:flex; flex-direction:column; align-items:center;
-  padding:8px 4px; cursor:pointer; border:none; background:none;
-  color:var(--texte2); font-size:0.6rem; gap:2px; transition:color 0.2s;
-}
-.tab.active { color:var(--vert); }
-.tab-icon { font-size:1.3rem; }
-.tab.active .tab-icon { transform:scale(1.1); }
+/* CATS */
+.cats{display:flex;gap:8px;overflow-x:auto;padding:14px 14px 0;scrollbar-width:none;}
+.cats::-webkit-scrollbar{display:none;}
+.cat{flex-shrink:0;padding:8px 13px;border-radius:20px;font-size:12px;cursor:pointer;border:1.5px solid var(--bd);background:var(--bg);color:var(--muted);display:flex;align-items:center;gap:5px;font-weight:500;}
+.cat.on{background:var(--y);color:#7a5c00;border-color:var(--y);}
+.cat-ic{font-size:14px;}
 
-/* SECTIONS */
-.section { display:none; animation:fadeIn 0.3s; }
-.section.active { display:block; }
-@keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+/* ACTU STRIP */
+.sh{display:flex;justify-content:space-between;align-items:center;padding:16px 14px 8px;}
+.sh-t{font-size:14px;font-weight:700;color:var(--text);}
+.see-all{font-size:12px;color:var(--g);cursor:pointer;background:none;border:none;font-weight:600;}
+.nstrip{display:flex;gap:10px;overflow-x:auto;padding:0 14px;scrollbar-width:none;}
+.nstrip::-webkit-scrollbar{display:none;}
+.nc{flex-shrink:0;width:180px;border-radius:12px;overflow:hidden;border:1.5px solid var(--bd);background:var(--bg);cursor:pointer;}
+.nc-img{height:76px;display:flex;align-items:center;justify-content:center;font-size:28px;}
+.nc-b{padding:9px;}
+.nc-tag{font-size:9px;font-weight:700;color:#085041;background:#9FE1CB;padding:2px 6px;border-radius:20px;display:inline-block;margin-bottom:4px;text-transform:uppercase;letter-spacing:.3px;}
+.nc-t{font-size:11px;font-weight:600;color:var(--text);line-height:1.4;}
 
-/* BANNER */
-.banner {
-  background:linear-gradient(135deg, var(--vert), var(--bleu));
-  color:#fff; padding:24px 20px; text-align:center;
-}
-.banner h2 { font-size:1.4rem; font-weight:800; }
-.banner p { font-size:0.85rem; opacity:0.9; margin-top:4px; }
+/* PLACE CARDS */
+.plist{padding:0 14px;display:flex;flex-direction:column;gap:10px;}
+.pc{background:var(--bg);border:1.5px solid var(--bd);border-radius:14px;overflow:hidden;cursor:pointer;display:flex;transition:.12s;}
+.pc:active{transform:scale(0.98);}
+.pc-th{width:76px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:28px;background:var(--bg2);}
+.pc-inf{padding:11px;flex:1;}
+.pc-nm{font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px;}
+.pc-ct{font-size:10px;color:var(--muted);margin-bottom:5px;}
+.pc-mt{display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+.stars{color:#F59E0B;font-size:11px;}
+.sct{font-size:10px;color:var(--muted);}
+.badge{font-size:9px;padding:2px 7px;border-radius:20px;font-weight:700;}
+.badge.open{background:#EAF3DE;color:#3B6D11;}
+.badge.bar{background:var(--b3);color:var(--b2);}
+.badge.pending{background:#fff3cd;color:#856404;}
+.pc-addr{font-size:10px;color:var(--muted);margin-top:3px;}
 
-/* SEARCH */
-.search-bar {
-  padding:12px 16px;
-  background:#fff;
-  border-bottom:1px solid var(--gris2);
-}
-.search-bar input {
-  width:100%; padding:10px 16px; border:2px solid var(--gris2);
-  border-radius:24px; font-size:0.9rem; outline:none;
-}
-.search-bar input:focus { border-color:var(--vert); }
+/* TABBAR */
+.tabbar{border-top:1.5px solid var(--bd);display:flex;background:var(--bg);padding-bottom:env(safe-area-inset-bottom,4px);}
+.tab{flex:1;padding:10px 0 6px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;border:none;background:none;}
+.ti{font-size:20px;}
+.tl{font-size:9px;color:var(--muted);font-weight:500;}
+.tab.on .tl{color:var(--g);}
 
-/* FILTRES */
-.filtres {
-  display:flex; gap:8px; padding:12px 16px; overflow-x:auto;
-  background:#fff; border-bottom:1px solid var(--gris2);
-}
-.filtre {
-  white-space:nowrap; padding:6px 14px; border-radius:20px;
-  border:2px solid var(--gris2); background:#fff; font-size:0.8rem;
-  cursor:pointer; transition:all 0.2s;
-}
-.filtre.active { background:var(--vert); color:#fff; border-color:var(--vert); }
+/* DETAIL */
+.det-top{background:var(--g);padding:16px 16px 18px;}
+.det-back{background:rgba(255,255,255,0.2);border:none;color:#fff;border-radius:8px;padding:7px 14px;font-size:12px;cursor:pointer;margin-bottom:10px;font-weight:600;}
+.det-sc{flex:1;overflow-y:auto;}
+.det-em{font-size:52px;text-align:center;padding:20px;background:var(--bg2);border-radius:14px;margin:0 14px 14px;}
+.det-nm{font-size:20px;font-weight:700;color:var(--text);padding:0 14px 3px;}
+.det-ct{font-size:13px;color:var(--muted);padding:0 14px 10px;}
+.det-st{font-size:18px;color:#F59E0B;padding:0 14px 2px;}
+.det-rc{font-size:12px;color:var(--muted);padding:0 14px 14px;}
+.infor{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);padding:4px 14px;}
+.infor span:first-child{font-size:15px;width:18px;}
+.act-row{display:flex;gap:8px;padding:12px 14px;}
+.act-b{flex:1;padding:10px;border:1.5px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--text);font-size:12px;cursor:pointer;text-align:center;font-weight:600;}
+.act-b.green{background:var(--g);color:#fff;border-color:var(--g);}
+.act-b.yellow{background:var(--y);color:#7a5c00;border-color:var(--y);}
+.phg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 14px 4px;}
+.phi{aspect-ratio:1;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:32px;background:var(--bg2);}
+.rv{border-top:1px solid var(--bd);padding:12px 14px;}
+.rv-u{font-size:12px;font-weight:700;color:var(--text);margin-bottom:2px;}
+.rv-s{font-size:11px;color:#F59E0B;margin-bottom:4px;}
+.rv-t{font-size:12px;color:var(--muted);line-height:1.5;}
 
-/* CARDS */
-.cards-grid { padding:16px; display:flex; flex-direction:column; gap:12px; }
-.card {
-  background:#fff; border-radius:16px; padding:16px;
-  box-shadow:0 2px 12px var(--ombre); cursor:pointer;
-  transition:transform 0.2s, box-shadow 0.2s;
-}
-.card:active { transform:scale(0.98); }
-.card-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px; }
-.card-nom { font-weight:700; font-size:1rem; color:var(--texte); }
-.badge {
-  font-size:0.7rem; padding:3px 8px; border-radius:20px;
-  font-weight:600; white-space:nowrap;
-}
-.badge-resto { background:#fff3e0; color:#e65100; }
-.badge-bar { background:#e8f5e9; color:#2e7d32; }
-.badge-hotel { background:#e3f2fd; color:#1565c0; }
-.card-quartier { font-size:0.82rem; color:var(--texte2); margin-bottom:4px; }
-.card-repere { font-size:0.78rem; color:#888; margin-bottom:8px; }
-.card-footer { display:flex; justify-content:space-between; align-items:center; }
-.card-tel { font-size:0.78rem; color:var(--bleu); font-weight:600; }
-.card-stars { color:var(--jaune); font-size:0.85rem; }
-.card-desc { font-size:0.8rem; color:var(--texte2); margin-bottom:8px; font-style:italic; }
-.card-horaires { font-size:0.75rem; color:var(--vert); font-weight:600; }
+/* BAR */
+.bar-hero{background:var(--b);padding:22px 16px 44px;position:relative;overflow:hidden;}
+.bar-hero::before{content:'';position:absolute;top:-15px;right:-15px;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,0.07);}
+.bar-t{font-size:22px;font-weight:700;color:#fff;margin-bottom:4px;}
+.bar-s{font-size:13px;color:rgba(255,255,255,0.7);}
+.bar-bdg{display:inline-block;background:var(--y);color:#7a5c00;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;margin-top:8px;}
+.bcats{display:flex;gap:8px;overflow-x:auto;padding:12px 14px 0;scrollbar-width:none;}
+.bcats::-webkit-scrollbar{display:none;}
+.bcat{flex-shrink:0;padding:7px 13px;border-radius:20px;font-size:11px;cursor:pointer;border:1.5px solid var(--bd);background:var(--bg);color:var(--muted);font-weight:500;}
+.bcat.on{background:var(--b);color:#fff;border-color:var(--b);}
 
-/* MISE EN AVANT */
-.mis-en-avant { padding:16px; }
-.mis-en-avant h3 { font-size:1rem; font-weight:700; color:var(--texte); margin-bottom:12px; display:flex; align-items:center; gap:6px; }
-.featured-scroll { display:flex; gap:12px; overflow-x:auto; padding-bottom:8px; }
-.featured-card {
-  min-width:200px; background:linear-gradient(135deg, var(--vert), var(--bleu));
-  border-radius:16px; padding:20px 16px; color:#fff; cursor:pointer;
-  flex-shrink:0;
-}
-.featured-card .fc-nom { font-weight:800; font-size:1rem; margin-bottom:4px; }
-.featured-card .fc-quartier { font-size:0.78rem; opacity:0.85; }
-.featured-card .fc-badge { background:rgba(255,255,255,0.25); border-radius:20px; padding:2px 8px; font-size:0.7rem; margin-top:8px; display:inline-block; }
+/* ACTU PAGE */
+.ac-card{border:1.5px solid var(--bd);border-radius:14px;overflow:hidden;cursor:pointer;margin-bottom:10px;}
+.ac-img{height:110px;display:flex;align-items:center;justify-content:center;font-size:40px;}
+.ac-body{padding:14px;}
+.ac-tag{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;color:#085041;background:#9FE1CB;padding:2px 7px;border-radius:20px;display:inline-block;margin-bottom:6px;}
+.ac-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:5px;line-height:1.4;}
+.ac-txt{font-size:12px;color:var(--muted);line-height:1.6;}
+.ac-date{font-size:10px;color:var(--muted);margin-top:6px;}
+
+/* ADD */
+.add-top{background:var(--g);padding:22px 16px 28px;}
+.add-t{font-size:20px;font-weight:700;color:#fff;margin-bottom:4px;}
+.add-s{font-size:12px;color:rgba(255,255,255,0.7);}
+.add-body{padding:16px;flex:1;overflow-y:auto;}
+.sp-w{display:flex;gap:6px;margin:4px 0;}
+.sp{font-size:24px;cursor:pointer;color:#ddd;}
+.sp.on{color:#F59E0B;}
+.ph-btn{width:100%;padding:26px;border:1.5px dashed var(--bd);border-radius:10px;background:var(--bg2);color:var(--muted);cursor:pointer;font-size:13px;}
+
+/* PROFILE */
+.prof-top{background:var(--g);padding:30px 16px 48px;text-align:center;position:relative;overflow:hidden;}
+.av-lg{width:72px;height:72px;border-radius:50%;background:var(--y);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:24px;font-weight:800;color:#7a5c00;border:3px solid #fff;}
+.prof-nm{font-size:18px;font-weight:700;color:#fff;}
+.prof-si{font-size:11px;color:rgba(255,255,255,0.7);margin-top:4px;}
+.prof-body{padding:14px;}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;}
+.stat{text-align:center;background:var(--bg2);border-radius:10px;padding:13px;}
+.stat-n{font-size:20px;font-weight:800;color:var(--text);}
+.stat-l{font-size:9px;color:var(--muted);margin-top:2px;}
+.pmenu{display:flex;flex-direction:column;gap:8px;}
+.pmi{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;background:var(--bg2);border-radius:10px;cursor:pointer;}
+.pmi-l{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text);font-weight:500;}
+.pmi-ic{font-size:16px;}
+.logout{width:100%;padding:13px;background:none;border:1.5px solid var(--red);color:var(--red);border-radius:12px;font-size:14px;cursor:pointer;margin-top:8px;font-weight:600;}
+.gbanner{background:var(--y3);border:1.5px solid var(--y);border-radius:10px;padding:10px 14px;margin:10px 14px 0;display:flex;align-items:center;gap:10px;}
+.gb-txt{font-size:11px;color:#7a5c00;flex:1;line-height:1.5;}
+.gb-btn{background:var(--g);color:#fff;border:none;border-radius:8px;padding:6px 11px;font-size:10px;cursor:pointer;white-space:nowrap;font-weight:700;}
 
 /* MODAL */
-.modal-overlay {
-  position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:500;
-  display:none; align-items:flex-end; justify-content:center;
-}
-.modal-overlay.open { display:flex; }
-.modal {
-  background:#fff; border-radius:24px 24px 0 0; width:100%; max-width:480px;
-  max-height:85vh; overflow-y:auto; padding:24px;
-  animation:slideUp 0.3s ease;
-}
-@keyframes slideUp { from{transform:translateY(100%)} to{transform:translateY(0)} }
-.modal-handle { width:40px; height:4px; background:var(--gris2); border-radius:2px; margin:0 auto 16px; }
-.modal-nom { font-size:1.4rem; font-weight:800; margin-bottom:4px; }
-.modal-cat { font-size:0.85rem; font-weight:600; margin-bottom:12px; }
-.modal-info { display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
-.modal-info-row { display:flex; align-items:flex-start; gap:8px; font-size:0.9rem; }
-.modal-info-row .label { color:var(--texte2); min-width:80px; font-size:0.8rem; }
-.modal-info-row .val { color:var(--texte); font-weight:500; flex:1; }
-.modal-info-row .val.tel { color:var(--bleu); font-weight:700; }
-.btn-close { width:100%; padding:14px; background:var(--gris); border:none; border-radius:12px; font-size:0.95rem; cursor:pointer; margin-top:12px; }
+.mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:100;align-items:flex-end;justify-content:center;}
+.mbg.on{display:flex;}
+.mbox{background:var(--bg);border-radius:20px 20px 0 0;width:100%;max-width:430px;padding:20px 18px 40px;max-height:88vh;overflow-y:auto;}
+.mhandle{width:38px;height:4px;background:var(--bd);border-radius:2px;margin:0 auto 18px;}
+.mt{font-size:16px;font-weight:700;margin-bottom:16px;color:var(--text);}
+.mcancel{width:100%;padding:12px;background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;margin-top:6px;}
 
-/* FORMULAIRE AJOUT */
-.form-section { padding:16px; }
-.form-section h3 { font-size:1.1rem; font-weight:700; margin-bottom:16px; }
-.form-group { margin-bottom:14px; }
-.form-group label { display:block; font-size:0.85rem; color:var(--texte2); margin-bottom:6px; font-weight:600; }
-.form-group input, .form-group select, .form-group textarea {
-  width:100%; padding:12px 14px; border:2px solid var(--gris2);
-  border-radius:12px; font-size:0.9rem; outline:none; font-family:inherit;
-}
-.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--vert); }
-.form-group textarea { min-height:80px; resize:vertical; }
-.btn-soumettre { width:100%; padding:14px; background:var(--vert); color:#fff; border:none; border-radius:12px; font-size:1rem; font-weight:700; cursor:pointer; }
-.success-msg { background:#e8f5e9; border:1px solid #a5d6a7; border-radius:12px; padding:16px; text-align:center; color:#2e7d32; margin-top:12px; display:none; }
+/* TOAST */
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;}
+.toast.show{opacity:1;}
 
-/* PROFIL */
-.profil-section { padding:16px; }
-.profil-card { background:#fff; border-radius:16px; padding:24px; box-shadow:0 2px 12px var(--ombre); text-align:center; margin-bottom:16px; }
-.profil-avatar { width:64px; height:64px; background:var(--vert); border-radius:50%; margin:0 auto 12px; display:flex; align-items:center; justify-content:center; font-size:1.8rem; color:#fff; font-weight:800; }
-.profil-nom { font-weight:700; font-size:1.1rem; }
-.profil-type { font-size:0.8rem; color:var(--texte2); margin-top:4px; }
-.profil-actions { display:flex; flex-direction:column; gap:10px; }
-.btn-action { padding:14px; background:#fff; border:2px solid var(--gris2); border-radius:12px; font-size:0.95rem; cursor:pointer; text-align:left; display:flex; align-items:center; gap:10px; }
-.btn-action.danger { color:#e53935; border-color:#ffcdd2; }
+/* ADMIN LINK */
+.admin-link{display:block;text-align:center;padding:10px;font-size:11px;color:var(--muted);cursor:pointer;text-decoration:none;}
 
-/* ACTUALITES */
-.actu-section { padding:16px; display:flex; flex-direction:column; gap:12px; }
-.actu-card { background:#fff; border-radius:16px; padding:16px; box-shadow:0 2px 12px var(--ombre); }
-.actu-tag { display:inline-block; background:var(--jaune); color:var(--texte); font-size:0.7rem; font-weight:700; padding:2px 8px; border-radius:20px; margin-bottom:8px; }
-.actu-titre { font-weight:700; font-size:0.95rem; margin-bottom:6px; }
-.actu-texte { font-size:0.82rem; color:var(--texte2); margin-bottom:8px; }
-.actu-date { font-size:0.75rem; color:#aaa; }
+/* PHOTOS */
+.card-photo { width:100%; height:160px; object-fit:cover; border-radius:12px 12px 0 0; display:block; }
+.card-photo-wrap { border-radius:12px 12px 0 0; overflow:hidden; }
+.card { padding:0; overflow:hidden; }
+.card-body { padding:16px; }
+.modal-photos { display:flex; gap:8px; margin-bottom:16px; overflow-x:auto; }
+.modal-photo { width:140px; height:100px; object-fit:cover; border-radius:10px; flex-shrink:0; cursor:pointer; }
+.modal-photo:hover { opacity:0.9; }
+.photo-note-google { display:inline-flex; align-items:center; gap:4px; background:#fff8e1; border:1px solid #ffe082; border-radius:20px; padding:3px 10px; font-size:0.8rem; font-weight:600; color:#f57f17; margin-bottom:12px; }
 
-/* COMMERCE */
-.commerce-section { padding:16px; }
-.commerce-card { background:#fff; border-radius:16px; padding:16px; box-shadow:0 2px 12px var(--ombre); margin-bottom:12px; }
-.commerce-card .cc-nom { font-weight:700; }
-.commerce-card .cc-tag { font-size:0.75rem; color:var(--vert); font-weight:600; }
-.commerce-card .cc-desc { font-size:0.82rem; color:var(--texte2); margin-top:4px; }
-.badge-verified { background:#e8f5e9; color:#2e7d32; font-size:0.7rem; padding:2px 8px; border-radius:20px; font-weight:700; }
-.badge-top { background:#fff8e1; color:#f57f17; font-size:0.7rem; padding:2px 8px; border-radius:20px; font-weight:700; }
-
-/* INVITÉ notice */
-.invite-notice {
-  background:#fff8e1; border:1px solid var(--jaune); border-radius:12px;
-  padding:12px 16px; margin:16px; font-size:0.85rem; color:#6d4c00;
-  display:none;
-}
-
-/* NO RESULTS */
-.no-results { text-align:center; padding:48px 24px; color:var(--texte2); }
-.no-results .icon { font-size:3rem; margin-bottom:12px; }
-
-/* BANDE DE COULEURS */
-.bande-top { display:flex; height:4px; }
-.bande-top .b1 { flex:1; background:var(--vert); }
-.bande-top .b2 { flex:1; background:var(--jaune); }
-.bande-top .b3 { flex:1; background:var(--bleu); }
 </style>
 </head>
 <body>
+<div class="app" id="app">
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
 <!-- SPLASH -->
-<div id="splash">
-  <div class="logo">MBO<span>LO</span></div>
-  <div class="sub">LIBREVILLE · GABON</div>
-  <div class="bande">
-    <div style="background:#fff"></div>
-    <div style="background:#fcd116"></div>
-    <div style="background:#3a75c4"></div>
+<div class="screen on" id="s-splash">
+  <div class="splash">
+    <div class="flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div>
+    <div class="logo-big">MBOLO</div>
+    <div class="logo-sub">Guide de Libreville</div>
+    <div class="splash-dots"><div class="sdot y"></div><div class="sdot"></div><div class="sdot y"></div><div class="sdot"></div><div class="sdot y"></div></div>
+    <div style="width:100%">
+      <button class="btn-y" onclick="go('s-register')">Créer un compte</button>
+      <button class="btn-wh" onclick="go('s-login')">Se connecter</button>
+      <button class="btn-ghost" onclick="goGuest()">Parcourir sans compte →</button>
+    </div>
+    <div class="splash-foot">🇬🇦 Fait avec fierté pour Libreville</div>
+    <a class="admin-link" onclick="goAdmin()">⚙️ Accès administrateur</a>
   </div>
 </div>
 
-<!-- AUTH -->
-<div id="auth">
-  <div class="auth-card">
-    <div class="auth-logo">MBO<span>LO</span></div>
-    <div class="auth-city">Le guide de Libreville</div>
-    <div id="auth-msg"></div>
-    <div id="form-connexion">
-      <input type="text" id="login-nom" placeholder="Nom d'utilisateur">
-      <input type="password" id="login-mdp" placeholder="Mot de passe">
-      <button class="btn-vert" onclick="seConnecter()">Se connecter</button>
-      <div class="sep">— ou —</div>
-      <button class="btn-contour" onclick="continuerInvite()">Continuer en tant qu'invité</button>
-      <div style="text-align:center;margin-top:12px;">
-        <span style="font-size:0.85rem;color:#888;cursor:pointer;" onclick="afficherInscription()">Pas encore de compte ? S'inscrire</span>
-      </div>
-    </div>
-    <div id="form-inscription" style="display:none;">
-      <input type="text" id="reg-nom" placeholder="Nom d'utilisateur">
-      <input type="email" id="reg-email" placeholder="Email">
-      <input type="password" id="reg-mdp" placeholder="Mot de passe">
-      <button class="btn-vert" onclick="sInscrire()">Créer mon compte</button>
-      <div class="sep">— ou —</div>
-      <button class="btn-contour" onclick="afficherConnexion()">Déjà un compte ? Se connecter</button>
-    </div>
+<!-- LOGIN -->
+<div class="screen" id="s-login">
+  <div class="stripe"><div></div><div></div><div></div></div>
+  <div class="auth-top">
+    <button class="auth-back" onclick="go('s-splash')">← Retour</button>
+    <div class="auth-h">Connexion</div>
+    <div class="auth-s">Bon retour sur MBOLO 🇬🇦</div>
+  </div>
+  <div class="auth-body">
+    <div class="fg"><label>Email</label><input type="email" placeholder="votre@email.com" id="li-email"/></div>
+    <div class="fg"><label>Mot de passe</label><input type="password" placeholder="••••••••" id="li-pwd"/></div>
+    <div style="text-align:right;margin-bottom:14px"><span style="font-size:12px;color:var(--g);cursor:pointer">Mot de passe oublié ?</span></div>
+    <button class="btn-main" onclick="doLogin()">Se connecter</button>
+    <div class="divider">ou</div>
+    <div class="alink">Pas de compte ? <span onclick="go('s-register')">Créer un compte</span></div>
+    <div class="alink" style="margin-top:8px"><span onclick="goGuest()">Continuer sans compte →</span></div>
   </div>
 </div>
 
-<!-- APP -->
-<div id="app">
-  <div class="bande-top"><div class="b1"></div><div class="b2"></div><div class="b3"></div></div>
-  <div class="header">
-    <div class="header-logo">MBO<span>LO</span></div>
-    <div class="header-right">
-      <div class="header-user" id="header-user"></div>
-      <button class="btn-deco" onclick="seDeconnecter()">Quitter</button>
-    </div>
+<!-- REGISTER -->
+<div class="screen" id="s-register">
+  <div class="stripe"><div></div><div></div><div></div></div>
+  <div class="auth-top">
+    <button class="auth-back" onclick="go('s-splash')">← Retour</button>
+    <div class="auth-h">Créer un compte</div>
+    <div class="auth-s">Rejoignez la communauté MBOLO</div>
   </div>
-
-  <div id="invite-notice" class="invite-notice">
-    Mode invité — <strong>Connectez-vous</strong> pour noter et ajouter des établissements.
-    <span style="cursor:pointer;color:var(--bleu);font-weight:700;" onclick="goAuth()"> Se connecter →</span>
-  </div>
-
-  <!-- TAB ACCUEIL -->
-  <div id="sec-accueil" class="section active">
-    <div class="banner">
-      <h2>Bienvenue à Libreville</h2>
-      <p>Découvrez les meilleurs endroits de la capitale</p>
+  <div class="auth-body">
+    <div class="fg"><label>Prénom & Nom</label><input type="text" placeholder="ex: Amina Ngoubili" id="rg-name"/></div>
+    <div class="fg"><label>Email</label><input type="email" placeholder="votre@email.com" id="rg-email"/></div>
+    <div class="fg"><label>Téléphone (optionnel)</label><input type="tel" placeholder="+241 06 ..."/></div>
+    <div class="fg"><label>Mot de passe</label><input type="password" placeholder="Min. 8 caractères" id="rg-pwd"/></div>
+    <div class="fg"><label>Confirmer le mot de passe</label><input type="password" placeholder="••••••••"/></div>
+    <div class="motif">
+      <div class="mb" style="background:#009e60"></div><div class="mb" style="background:#fcd116"></div><div class="mb" style="background:#3a75c4"></div>
+      <div class="mb" style="background:#009e60"></div><div class="mb" style="background:#fcd116"></div><div class="mb" style="background:#3a75c4"></div>
     </div>
-    <div class="mis-en-avant">
-      <h3>⭐ Mis en avant</h3>
-      <div class="featured-scroll" id="featured-list"></div>
-    </div>
-    <div class="search-bar">
-      <input type="text" id="search-accueil" placeholder="🔍  Rechercher un endroit..." oninput="filtrerAccueil()">
-    </div>
-    <div class="cards-grid" id="cards-accueil"></div>
-  </div>
-
-  <!-- TAB BAR -->
-  <div id="sec-bar" class="section">
-    <div class="banner" style="background:linear-gradient(135deg,#1b5e20,#2e7d32)">
-      <h2>🍺 Bars de Libreville</h2>
-      <p>Sorties et ambiance locale</p>
-    </div>
-    <div class="search-bar">
-      <input type="text" id="search-bar" placeholder="🔍  Rechercher un bar..." oninput="filtrerBars()">
-    </div>
-    <div class="filtres" id="filtres-bar">
-      <button class="filtre active" onclick="setFiltreBar('Tous')">Tous</button>
-      <button class="filtre" onclick="setFiltreBar('Centre-ville')">Centre-ville</button>
-      <button class="filtre" onclick="setFiltreBar('Bord de mer')">Bord de mer</button>
-      <button class="filtre" onclick="setFiltreBar('Autres')">Quartiers</button>
-    </div>
-    <div class="cards-grid" id="cards-bar"></div>
-  </div>
-
-  <!-- TAB ACTUALITES -->
-  <div id="sec-actus" class="section">
-    <div class="banner" style="background:linear-gradient(135deg,var(--bleu),#1a237e)">
-      <h2>📰 Actualités</h2>
-      <p>Les nouvelles de Libreville</p>
-    </div>
-    <div class="actu-section" id="cards-actus"></div>
-  </div>
-
-  <!-- TAB AJOUTER -->
-  <div id="sec-ajouter" class="section">
-    <div class="banner" style="background:linear-gradient(135deg,#e65100,#bf360c)">
-      <h2>➕ Ajouter un établissement</h2>
-      <p>Contribuez au guide de Libreville</p>
-    </div>
-    <div class="form-section">
-      <div class="form-group">
-        <label>Nom de l'établissement *</label>
-        <input type="text" id="add-nom" placeholder="Ex: Restaurant Chez Ali">
-      </div>
-      <div class="form-group">
-        <label>Catégorie *</label>
-        <select id="add-cat">
-          <option value="">-- Choisir --</option>
-          <option value="Restaurant">Restaurant</option>
-          <option value="Bar">Bar</option>
-          <option value="Hotel">Hôtel</option>
-          <option value="Commerce">Commerce</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Quartier *</label>
-        <input type="text" id="add-quartier" placeholder="Ex: Centre-ville, Batterie IV...">
-      </div>
-      <div class="form-group">
-        <label>Repère / Adresse</label>
-        <input type="text" id="add-repere" placeholder="Ex: face au marché, boulevard...">
-      </div>
-      <div class="form-group">
-        <label>Téléphone</label>
-        <input type="tel" id="add-tel" placeholder="Ex: +241 77 00 00 00">
-      </div>
-      <div class="form-group">
-        <label>Description</label>
-        <textarea id="add-desc" placeholder="Type de cuisine, ambiance, spécialités..."></textarea>
-      </div>
-      <div class="form-group">
-        <label>Horaires</label>
-        <input type="text" id="add-horaires" placeholder="Ex: Lun-Sam 12h-23h">
-      </div>
-      <button class="btn-soumettre" onclick="soumettreLieu()">Soumettre pour validation</button>
-      <div class="success-msg" id="add-success">
-        ✅ Merci ! Votre établissement a été soumis et sera validé par l'administrateur.
-      </div>
-    </div>
-  </div>
-
-  <!-- TAB COMMERCE -->
-  <div id="sec-commerce" class="section">
-    <div class="banner" style="background:linear-gradient(135deg,#4a148c,#6a1b9a)">
-      <h2>🛍️ Commerce</h2>
-      <p>Vendeurs et boutiques locales</p>
-    </div>
-    <div class="form-section">
-      <h3>Enregistrer ma boutique</h3>
-      <div class="form-group">
-        <label>Nom de la boutique *</label>
-        <input type="text" id="com-nom" placeholder="Nom de votre commerce">
-      </div>
-      <div class="form-group">
-        <label>Type de commerce *</label>
-        <input type="text" id="com-type" placeholder="Ex: Vêtements, Électronique, Alimentaire...">
-      </div>
-      <div class="form-group">
-        <label>Facebook / Instagram</label>
-        <input type="text" id="com-social" placeholder="@votreboutique">
-      </div>
-      <div class="form-group">
-        <label>WhatsApp</label>
-        <input type="tel" id="com-tel" placeholder="+241 77 00 00 00">
-      </div>
-      <div class="form-group">
-        <label>Description</label>
-        <textarea id="com-desc" placeholder="Décrivez vos produits et services..."></textarea>
-      </div>
-      <button class="btn-soumettre" onclick="soumettreCommerce()">Enregistrer ma boutique</button>
-      <div class="success-msg" id="com-success">
-        ✅ Boutique soumise ! Elle apparaîtra après validation.
-      </div>
-    </div>
-    <div class="commerce-section" style="padding-top:0;">
-      <h3 style="margin-bottom:12px;font-size:1rem;">Boutiques validées</h3>
-      <div id="cards-commerce"></div>
-    </div>
-  </div>
-
-  <!-- TAB PROFIL -->
-  <div id="sec-profil" class="section">
-    <div class="banner">
-      <h2>👤 Mon Profil</h2>
-    </div>
-    <div class="profil-section">
-      <div class="profil-card">
-        <div class="profil-avatar" id="profil-avatar">?</div>
-        <div class="profil-nom" id="profil-nom">Invité</div>
-        <div class="profil-type" id="profil-type">Mode visiteur</div>
-      </div>
-      <div class="profil-actions">
-        <button class="btn-action" onclick="goSection('ajouter')">➕ Ajouter un établissement</button>
-        <button class="btn-action" onclick="goSection('commerce')">🛍️ Enregistrer ma boutique</button>
-        <button class="btn-action danger" onclick="seDeconnecter()">🚪 Se déconnecter</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- TABS NAV -->
-  <div class="tabs">
-    <button class="tab active" onclick="goSection('accueil')" id="tab-accueil">
-      <span class="tab-icon">🏠</span><span>Accueil</span>
-    </button>
-    <button class="tab" onclick="goSection('bar')" id="tab-bar">
-      <span class="tab-icon">🍺</span><span>Bars</span>
-    </button>
-    <button class="tab" onclick="goSection('actus')" id="tab-actus">
-      <span class="tab-icon">📰</span><span>Actus</span>
-    </button>
-    <button class="tab" onclick="goSection('ajouter')" id="tab-ajouter">
-      <span class="tab-icon">➕</span><span>Ajouter</span>
-    </button>
-    <button class="tab" onclick="goSection('commerce')" id="tab-commerce">
-      <span class="tab-icon">🛍️</span><span>Commerce</span>
-    </button>
-    <button class="tab" onclick="goSection('profil')" id="tab-profil">
-      <span class="tab-icon">👤</span><span>Profil</span>
-    </button>
+    <button class="btn-main yellow" onclick="doRegister()">Créer mon compte</button>
+    <div class="alink" style="margin-top:12px">Déjà membre ? <span onclick="go('s-login')">Se connecter</span></div>
+    <div class="alink" style="margin-top:8px"><span onclick="goGuest()">Continuer sans compte →</span></div>
   </div>
 </div>
 
-<!-- MODAL DETAIL -->
-<div class="modal-overlay" id="modal-overlay" onclick="fermerModal(event)">
-  <div class="modal" id="modal-content">
-    <div class="modal-handle"></div>
-    <div id="modal-body"></div>
-    <button class="btn-close" onclick="fermerModal()">Fermer</button>
+<!-- MAIN -->
+<div class="screen" id="s-main">
+  <div class="scroll" id="mainScroll"></div>
+  <div class="tabbar">
+    <button class="tab on" id="tab-home" onclick="switchTab('home')"><span class="ti">🏠</span><span class="tl">Accueil</span></button>
+    <button class="tab" id="tab-bar" onclick="switchTab('bar')"><span class="ti">🍹</span><span class="tl">Bar</span></button>
+    <button class="tab" id="tab-actu" onclick="switchTab('actu')"><span class="ti">📰</span><span class="tl">Actualités</span></button>
+    <button class="tab" id="tab-add" onclick="switchTab('add')"><span class="ti">➕</span><span class="tl">Ajouter</span></button>
+    <button class="tab" id="tab-prof" onclick="switchTab('prof')"><span class="ti">👤</span><span class="tl">Profil</span></button>
+  </div>
+</div>
+
+<!-- DETAIL -->
+<div class="screen" id="s-detail">
+  <div class="det-top"><button class="det-back" onclick="goBack()">← Retour</button></div>
+  <div class="det-sc">
+    <div class="det-em" id="d-em">🍽️</div>
+    <div class="det-nm" id="d-nm"></div>
+    <div class="det-ct" id="d-ct"></div>
+    <div class="det-st" id="d-st"></div>
+    <div class="det-rc" id="d-rc"></div>
+    <div class="infor"><span>📍</span><span id="d-ad"></span></div>
+    <div class="infor"><span>🕐</span><span id="d-hr"></span></div>
+    <div class="infor"><span>📞</span><span id="d-ph"></span></div>
+    <div class="act-row">
+      <button class="act-b yellow" onclick="openReview()">★ Avis</button>
+      <button class="act-b" onclick="sharePlace()">↗ Partager</button>
+      <button class="act-b green" onclick="navPlace()">🗺 Y aller</button>
+    </div>
+    <div style="padding:0 14px;font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px">Photos</div>
+    <div class="phg" id="d-photos"></div>
+    <div style="padding:0 14px;font-size:13px;font-weight:700;color:var(--text);margin:13px 0 0">Avis clients</div>
+    <div id="d-reviews"></div>
+    <div style="height:24px"></div>
+  </div>
+</div>
+
+<!-- REVIEW MODAL -->
+<div class="mbg" id="reviewModal">
+  <div class="mbox">
+    <div class="mhandle"></div>
+    <div class="mt">Laisser un avis</div>
+    <div class="fg"><label>Note</label>
+      <div class="sp-w" id="revStars">
+        <span class="sp" onclick="setStar(1)">★</span><span class="sp" onclick="setStar(2)">★</span>
+        <span class="sp" onclick="setStar(3)">★</span><span class="sp" onclick="setStar(4)">★</span>
+        <span class="sp" onclick="setStar(5)">★</span>
+      </div>
+    </div>
+    <div class="fg"><label>Commentaire</label>
+      <textarea id="revTxt" rows="4" placeholder="Partagez votre expérience..."></textarea>
+    </div>
+    <button class="btn-main" onclick="submitReview()">Publier mon avis</button>
+    <button class="mcancel" onclick="closeModal('reviewModal')">Annuler</button>
+  </div>
+</div>
+
+<!-- ADD PLACE MODAL (guest) -->
+<div class="mbg" id="addGuestModal">
+  <div class="mbox">
+    <div class="mhandle"></div>
+    <div style="text-align:center;padding:20px 0">
+      <div style="font-size:44px;margin-bottom:16px">🔒</div>
+      <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px">Connexion requise</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:22px;line-height:1.6">Créez un compte gratuit pour ajouter des établissements et partager vos découvertes.</div>
+      <button class="btn-main" onclick="closeModal('addGuestModal');go('s-register')">Créer un compte gratuit</button>
+      <div class="alink" style="margin-top:10px"><span onclick="closeModal('addGuestModal');go('s-login')">J'ai déjà un compte</span></div>
+    </div>
+    <button class="mcancel" onclick="closeModal('addGuestModal')">Continuer en visiteur</button>
+  </div>
+</div>
+
+<!-- ADMIN LOGIN MODAL -->
+<div class="mbg" id="adminModal">
+  <div class="mbox">
+    <div class="mhandle"></div>
+    <div class="mt">⚙️ Accès Administrateur</div>
+    <div class="fg"><label>Code admin</label><input type="password" placeholder="Entrez le code admin" id="admin-code"/></div>
+    <div style="font-size:11px;color:var(--muted);margin-bottom:14px">Code par défaut : <strong>mbolo2025</strong></div>
+    <button class="btn-main" onclick="doAdminLogin()">Accéder au tableau de bord</button>
+    <button class="mcancel" onclick="closeModal('adminModal')">Annuler</button>
   </div>
 </div>
 
 <script>
-// ========== DONNÉES INITIALES ==========
-var LIEUX_INITIAUX = [
-  // -------- HOTELS --------
-  {id:"h01", nom:"Radisson Blu OkouMe Palace", categorie:"Hotel", quartier:"Bord de mer / Centre", repere:"Boulevard de Nice, face ocean, 2km de l aeroport Leon M ba", telephone:"+241 74 37 88 88", description:"Luxe 5 etoiles - piscine, plage, 4 restaurants", horaires:"24h/24", statut:"approuve", misEnAvant:true, note:5, avis:[]},
-  {id:"h02", nom:"Park Inn by Radisson", categorie:"Hotel", quartier:"Quartier Louis", repere:"Descente J. Ebori, non loin de la montee de Louis", telephone:"", description:"4 etoiles - vue ocean, piscine, 2 restaurants", horaires:"24h/24", statut:"approuve", misEnAvant:true, note:4, avis:[]},
-  {id:"h03", nom:"ONOMO Hotel Libreville", categorie:"Hotel", quartier:"La Sabliere / Ambassades", repere:"Route d Angondje, Quartier des Ambassades US, non loin de l aeroport", telephone:"", description:"Hotel moderne - restaurant, bar, piscine", horaires:"24h/24", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"h04", nom:"Hotel Le Cristal", categorie:"Hotel", quartier:"Centre-ville", repere:"Boulevard Triomphal, non loin de la Chambre de Commerce", telephone:"", description:"5 etoiles - restaurant, bar, business center", horaires:"24h/24", statut:"approuve", misEnAvant:true, note:5, avis:[]},
-  {id:"h05", nom:"Hotel LEET Dorian", categorie:"Hotel", quartier:"Quartier Louis", repere:"Quartier Louis, non loin de la montee de Louis", telephone:"", description:"Hotel residentiel - restaurant, terrasse", horaires:"24h/24", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"h06", nom:"Residence Oceane", categorie:"Hotel", quartier:"Quartier Louis", repere:"Quartier Louis, en bord de mer", telephone:"", description:"Residence hoteliere - appartements meubles", horaires:"24h/24", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"h07", nom:"Hotel Hibiscus", categorie:"Hotel", quartier:"Centre-ville", repere:"Boulevard Triomphal, centre-ville", telephone:"", description:"Hotel d affaires, restaurant", horaires:"24h/24", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"h08", nom:"Residence Hoteliere du Phare", categorie:"Hotel", quartier:"La Sabliere", repere:"Rond-point Les Jardins de Jade, Quartier La Sabliere", telephone:"", description:"Residence avec piscine, restaurant", horaires:"24h/24", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"h09", nom:"Roma Restaurant & Hotel", categorie:"Hotel", quartier:"Centre-ville", repere:"Centre-ville de Libreville", telephone:"", description:"Hotel-restaurant - cuisine italienne", horaires:"", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"h10", nom:"Nomad Suites Residence", categorie:"Hotel", quartier:"Centre-ville", repere:"Centre-ville - appartements hoteliers", telephone:"", description:"Residence meublee longue duree", horaires:"24h/24", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  // -------- RESTAURANTS --------
-  {id:"r01", nom:"Le Lokua", categorie:"Restaurant", quartier:"Glass", repere:"Quartier Glass - monter les escaliers, derriere la porte qui ne paie pas de mine", telephone:"", description:"Francaise gastronomique - poisson, fruits de mer", horaires:"Dejeuner et diner - ferme lundi", statut:"approuve", misEnAvant:true, note:5, avis:[]},
-  {id:"r02", nom:"Le Phare du Large", categorie:"Restaurant", quartier:"Batterie IV", repere:"Batterie IV - L101, en bord de mer", telephone:"+241 77 24 24 19", description:"Gastronomique francaise - salons prives", horaires:"Lun-Ven 12h-23h30 / Sam 17h-23h30", statut:"approuve", misEnAvant:true, note:5, avis:[]},
-  {id:"r03", nom:"La Piazza", categorie:"Restaurant", quartier:"Glass", repere:"Quartier Glass - Village des Myenes, sur 2 niveaux avec baie vitree", telephone:"", description:"Italienne - pates, bruschettas, pizzas", horaires:"Dejeuner et diner", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r04", nom:"BANTU Restaurant", categorie:"Restaurant", quartier:"Centre-ville", repere:"Centre-ville de Libreville", telephone:"", description:"Gabonaise et pizzeria - ambiance locale", horaires:"", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r05", nom:"Beach Club", categorie:"Restaurant", quartier:"Bord de mer", repere:"En bord de mer, acces plage", telephone:"", description:"Francaise et africaine - terrasse vue mer", horaires:"", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r06", nom:"La Voile Rouge", categorie:"Restaurant", quartier:"Centre-ville", repere:"Centre-ville", telephone:"", description:"Gabonaise et internationale", horaires:"", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r07", nom:"Restaurant LYNN'S", categorie:"Restaurant", quartier:"Centre-ville", repere:"Centre-ville de Libreville", telephone:"", description:"Gabonaise authentique", horaires:"", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r08", nom:"Lamaia Lounge Bar & Restaurant", categorie:"Restaurant", quartier:"Centre-ville", repere:"Centre-ville", telephone:"", description:"Francaise et locale - bar lounge", horaires:"", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r09", nom:"Restaurant Mystic Bantu", categorie:"Restaurant", quartier:"Centre-ville", repere:"Centre-ville", telephone:"", description:"Gabonaise - plats traditionnels", horaires:"", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r10", nom:"Le Palais Gourmet", categorie:"Restaurant", quartier:"Centre-ville", repere:"Centre-ville de Libreville", telephone:"", description:"Locale et internationale", horaires:"", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"r11", nom:"Restaurant Le Mississipi", categorie:"Restaurant", quartier:"Petit Paris", repere:"Quartier Petit Paris - centre-ville", telephone:"", description:"Locale et internationale", horaires:"", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"r12", nom:"L Ella", categorie:"Restaurant", quartier:"Centre-ville", repere:"Centre-ville", telephone:"", description:"Haute cuisine francaise", horaires:"", statut:"approuve", misEnAvant:false, note:5, avis:[]},
-  {id:"r13", nom:"L Emir", categorie:"Restaurant", quartier:"Centre-ville", repere:"Centre-ville", telephone:"", description:"Libanaise authentique", horaires:"", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r14", nom:"Exotica Restaurant", categorie:"Restaurant", quartier:"Centre-ville", repere:"Centre-ville", telephone:"", description:"Pizzas, salades, cocktails, glaces", horaires:"", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r15", nom:"Le Topaz", categorie:"Restaurant", quartier:"Centre-ville", repere:"Centre-ville", telephone:"", description:"Locale et internationale, terrasse", horaires:"", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"r16", nom:"Le QG", categorie:"Restaurant", quartier:"Glass", repere:"Quartier Glass - non loin de l entree du Glass cote mer", telephone:"", description:"Paella, bouillabaisse - ambiance conviviale", horaires:"Dejeuner et diner", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r17", nom:"Wapety", categorie:"Restaurant", quartier:"Montee Louis", repere:"Montee Louis - non loin du marche de Louis", telephone:"", description:"Locale et internationale", horaires:"", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"r18", nom:"Restaurant U Piscadore", categorie:"Restaurant", quartier:"Glass", repere:"Quartier Glass", telephone:"", description:"Poissons, fruits de mer", horaires:"", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r19", nom:"Le Bateau Ivre", categorie:"Restaurant", quartier:"Bord de mer", repere:"9, bord de mer - centre-ville", telephone:"", description:"Fruits de mer, cuisine francaise", horaires:"", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r20", nom:"Idiora Restaurant-Bar", categorie:"Restaurant", quartier:"Centre-ville", repere:"Complexe Majestic, Libreville", telephone:"", description:"Locale et internationale - bar attenant", horaires:"", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r21", nom:"Okoume Restaurant Lounge", categorie:"Restaurant", quartier:"Quartier Louis", repere:"Quartier Louis - en bord de mer", telephone:"", description:"Gabonaise - terrasse lounge", horaires:"", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r22", nom:"L Assiette d Or", categorie:"Restaurant", quartier:"Quartier Louis", repere:"Quartier Louis - ruelle de Gabon Pain", telephone:"", description:"Cuisine africaine, riz et viande grillee", horaires:"Dejeuner et diner", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r23", nom:"Euphoria Libreville", categorie:"Restaurant", quartier:"Centre-ville", repere:"Centre-ville", telephone:"", description:"Gabonaise et internationale", horaires:"", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"r24", nom:"Amaya Restaurant", categorie:"Restaurant", quartier:"Bord de mer", repere:"Hotel Radisson Blu, Boulevard de Nice", telephone:"", description:"Indienne - Amaya by Vanny's Shalimar", horaires:"Mar-Dim 17h-22h", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r25", nom:"Olatano", categorie:"Restaurant", quartier:"Bord de mer", repere:"Radisson Blu et Park Inn, Boulevard de Nice", telephone:"", description:"Buffet international et local - sushis", horaires:"Tous les jours", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r26", nom:"La Palette Restaurant", categorie:"Restaurant", quartier:"Quartier Louis", repere:"Park Inn by Radisson, Descente J. Ebori", telephone:"", description:"Buffet petit-dejeuner et dejeuner", horaires:"Matin et midi", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r27", nom:"Le Baobab", categorie:"Restaurant", quartier:"Quartier Louis", repere:"Entre le marche de Louis et le feu rouge Gros-Bouquet", telephone:"+241 73 89 93", description:"Senegalaise et creole - langoustes, tieboudienne", horaires:"Dejeuner et diner", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r28", nom:"Chez Marcelline", categorie:"Restaurant", quartier:"Nombakelé", repere:"Nombakelé - grande terrasse, en venant de Nombakelé", telephone:"+241 74 20 49", description:"Gabonaise - poisson a la braise, ambiance africaine", horaires:"Dejeuner et diner", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r29", nom:"Chez Marie-qui-fau-chaud", categorie:"Restaurant", quartier:"Glass", repere:"Quartier Glass - face a la Maison de la Presse", telephone:"", description:"Africaine et europeenne - terrasse", horaires:"Dejeuner et diner", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r30", nom:"Restaurant Senegalais", categorie:"Restaurant", quartier:"Nombakelé", repere:"Nombakelé - en face de Gaboprix", telephone:"", description:"Senegalaise - Yassa, riz-sauce. Sans alcool", horaires:"Dejeuner et diner", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"r31", nom:"Corisco Chica chez Katia", categorie:"Restaurant", quartier:"Nombakelé", repere:"Nombakelé - direction Akebe, apres la station a droite, face au stade", telephone:"", description:"Locale - couteaux de mer, nyembwe, crevettes", horaires:"Dejeuner et diner", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r32", nom:"Papa Union", categorie:"Restaurant", quartier:"Montee de Louis", repere:"Montee de Louis - decor en bambou", telephone:"+241 73 86 80", description:"Africaine - langoustes, gambas, couscous vendredi", horaires:"Tous les jours", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r33", nom:"Illico Restaurant", categorie:"Restaurant", quartier:"Centre-ville", repere:"Centre-ville - face au Campagnard", telephone:"", description:"Rapide et bonne - tchiep et plats du jour", horaires:"Lun-Sam dejeuner", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"r34", nom:"Le New Palmas", categorie:"Restaurant", quartier:"Montagne Sainte", repere:"Montagne Sainte - rue Alsace-Lorraine", telephone:"", description:"Africaine - petite adresse sympathique", horaires:"Dejeuner et diner", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"r35", nom:"Le Bon Coin de Louis chez Ali", categorie:"Restaurant", quartier:"Quartier Louis", repere:"Entre le marche de Louis et le feu rouge Gros-Bouquet", telephone:"+241 73 13 74", description:"Africaine et europeenne", horaires:"Dejeuner et diner", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r36", nom:"Nouveau Petit Chalut", categorie:"Restaurant", quartier:"Centre-ville", repere:"Centre-ville de Libreville", telephone:"", description:"Gabonaise - poissons et fruits de mer", horaires:"", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"r37", nom:"Le Bar a Bouillon Ogasso", categorie:"Restaurant", quartier:"Centre-ville", repere:"Centre-ville", telephone:"", description:"Gabonaise - bouillons et plats mijotos", horaires:"", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"r38", nom:"Sky Life", categorie:"Restaurant", quartier:"Pont de Guegue", repere:"Pont de Guegue - vue sur la riviere", telephone:"", description:"Locale et internationale", horaires:"", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"r39", nom:"River Lodge", categorie:"Restaurant", quartier:"Pointe Denis", repere:"Pointe Denis - face a Libreville, cote Atlantique", telephone:"", description:"Locale - cadre naturel en bord de mer", horaires:"", statut:"approuve", misEnAvant:false, note:5, avis:[]},
-  {id:"r40", nom:"Restaurant La Polinette", categorie:"Restaurant", quartier:"Centre-ville", repere:"Centre-ville", telephone:"", description:"Locale et internationale", horaires:"", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  // -------- BARS --------
-  {id:"b01", nom:"Le No Stress", categorie:"Bar", quartier:"Centre-ville / Bord de mer", repere:"Centre-ville, bord de mer", telephone:"+241 76 56 01 66", description:"Lounge - cocktails, ambiance decontractee", horaires:"Soir", statut:"approuve", misEnAvant:true, note:4, avis:[]},
-  {id:"b02", nom:"Le Bijou Beach", categorie:"Bar", quartier:"Bas de Guegue", repere:"Bas de Guegue - en bord de mer", telephone:"+241 62 17 97 97", description:"Bar de plage - ambiance festive", horaires:"Soir et week-end", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"b03", nom:"Waiybar", categorie:"Bar", quartier:"Montee de Louis", repere:"Montee de Louis", telephone:"+241 74 50 91 50", description:"Bar lounge - musique live et DJ", horaires:"Soir", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"b04", nom:"The Spot", categorie:"Bar", quartier:"Centre-ville", repere:"Centre-ville", telephone:"", description:"Bar festif - culture gabonaise", horaires:"Soir", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"b05", nom:"Hype Bar Lounge", categorie:"Bar", quartier:"Centre-ville", repere:"Centre-ville", telephone:"", description:"Lounge - cocktails, musique", horaires:"Soir", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"b06", nom:"Yoka Sports Bar", categorie:"Bar", quartier:"Centre-ville", repere:"Centre-ville", telephone:"", description:"Sports bar - cuisine, ecrans geants", horaires:"Jour et soir", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"b07", nom:"The Lantern", categorie:"Bar", quartier:"Centre-ville", repere:"Centre-ville", telephone:"", description:"Tapas bar - local et international", horaires:"Soir", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"b08", nom:"Blu Bar", categorie:"Bar", quartier:"Centre-ville", repere:"Centre-ville", telephone:"", description:"Bar branche - drinks et ambiance", horaires:"Soir", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"b09", nom:"The Black Moon", categorie:"Bar", quartier:"Centre-ville", repere:"Centre-ville - lounge style", telephone:"", description:"Cocktails - ambiance feutree", horaires:"Soir", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"b10", nom:"Hama Bar", categorie:"Bar", quartier:"Centre-ville", repere:"Centre-ville", telephone:"", description:"Bar local - ambiance vivante", horaires:"Soir", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"b11", nom:"Le Kyel's Bar & Food", categorie:"Bar", quartier:"Derriere Prison", repere:"Derriere Prison - derriere Soveman, en face de l Eglise du Gabon", telephone:"", description:"Bar et restauration - local", horaires:"Jour et soir", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"b12", nom:"Murmure Lounge", categorie:"Bar", quartier:"Centre-ville", repere:"Centre-ville", telephone:"", description:"Lounge - cocktails et ambiance moderne", horaires:"Soir", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"b13", nom:"Lollipop Bar", categorie:"Bar", quartier:"Centre-ville", repere:"Boulevard de l Independance", telephone:"+241 04 17 96 29", description:"Bar colore - cocktails festifs", horaires:"Soir", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"b14", nom:"Bar Guinness", categorie:"Bar", quartier:"Centre-ville", repere:"Centre-ville - bar populaire", telephone:"", description:"Bar local - ambiance gabonaise et bieres", horaires:"Jour et soir", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"b15", nom:"Le Baril Authentic Bar", categorie:"Bar", quartier:"Centre-ville", repere:"Centre-ville", telephone:"", description:"Bar authentique - culture locale", horaires:"Jour et soir", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"b16", nom:"Le Yoss", categorie:"Bar", quartier:"Centre-ville", repere:"Centre-ville", telephone:"", description:"Cocktail bar - ambiance jeune", horaires:"Soir", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"b17", nom:"Best Vibes", categorie:"Bar", quartier:"Centre-ville", repere:"Centre-ville - lounge festif", telephone:"", description:"Lounge et bar - soirees", horaires:"Soir et week-end", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"b18", nom:"Bar Lounge PN", categorie:"Bar", quartier:"Centre-ville", repere:"Centre-ville", telephone:"", description:"Bar lounge style", horaires:"Soir", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"b19", nom:"Wai Bar", categorie:"Bar", quartier:"Bord de mer", repere:"Radisson Blu Okoume Palace, Boulevard de Nice", telephone:"", description:"Bar piscine - cocktails et vue mer", horaires:"Tous les jours", statut:"approuve", misEnAvant:false, note:5, avis:[]},
-  {id:"b20", nom:"Bar du Rond-point Avorbam", categorie:"Bar", quartier:"Avorbam", repere:"Rond-point Avorbam", telephone:"+241 76 59 40 43", description:"Bar de quartier - local", horaires:"Jour et soir", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"b21", nom:"Le Bar de Glass", categorie:"Bar", quartier:"Glass", repere:"Glass - ruelle CKDO, face eglise", telephone:"+241 65 10 31 31", description:"Bar et snack - face a l eglise de Glass", horaires:"Lun-Sam 9h-22h", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"b22", nom:"La Montee Quaben", categorie:"Bar", quartier:"Montee Quaben", repere:"Montee Quaben", telephone:"+241 65 85 50 75", description:"Bar local", horaires:"Soir", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"b23", nom:"Bar Cite des Ailes", categorie:"Bar", quartier:"Cite des Ailes", repere:"Rond-point de la Cite des Ailes", telephone:"+241 65 70 64 55", description:"Bar de quartier", horaires:"Jour et soir", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"b24", nom:"Bar Owendo", categorie:"Bar", quartier:"Owendo", repere:"Owendo - en direction du port d Owendo", telephone:"+241 77 22 22 16", description:"Bar local - ambiance populaire", horaires:"Jour et soir", statut:"approuve", misEnAvant:false, note:3, avis:[]},
-  {id:"b25", nom:"Calypso", categorie:"Bar", quartier:"Boulevard Joseph Deemin", repere:"Boulevard Joseph Deemin - Descente de Chez Jeannot", telephone:"", description:"Bar-restaurant - terrasse animee", horaires:"Jour et soir", statut:"approuve", misEnAvant:false, note:4, avis:[]},
-  {id:"b26", nom:"Batterie IV Bar", categorie:"Bar", quartier:"Batterie IV", repere:"Batterie IV - non loin du Phare du Large", telephone:"+241 62 60 00 05", description:"Bar de quartier", horaires:"Jour et soir", statut:"approuve", misEnAvant:false, note:3, avis:[]}
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let isGuest=false,currentUser=null,currentPlaceId=null,revStar=0,addStar=0;
+let userPlaces=0,userReviews=0,currentCat='Tous',prevTab='home';
+
+const ADMIN_CODE='mbolo2025';
+
+const CATS=[
+  {l:'Tous',i:'🗺️'},{l:'Restaurant',i:'🍽️'},{l:'Bar',i:'🍹'},
+  {l:'Hôtel',i:'🏨'},{l:'Shopping',i:'🛍️'},{l:'Santé',i:'🏥'},{l:'Loisirs',i:'🌊'}
 ];
 
-// ========== INIT DATA ==========
-function initData() {
-  if (!localStorage.getItem("mbolo_lieux")) {
-    localStorage.setItem("mbolo_lieux", JSON.stringify(LIEUX_INITIAUX));
-  }
-  if (!localStorage.getItem("mbolo_actus")) {
-    var actus = [
-      {id:"a01", titre:"MBOLO lance son annuaire des 76 etablissements", texte:"Bars, restaurants, hotels : retrouvez tous les bons plans de Libreville sur MBOLO.", tag:"Nouveaute", date:"25/04/2026"},
-      {id:"a02", titre:"Rejoignez la communaute MBOLO", texte:"Creez votre compte pour noter les etablissements et contribuer au guide de Libreville.", tag:"Communaute", date:"25/04/2026"},
-      {id:"a03", titre:"Les etablissements de Glass a l honneur", texte:"Quartier Glass : Le Lokua, La Piazza, Le QG et Le Bar de Glass vous attendent.", tag:"Quartier", date:"25/04/2026"}
-    ];
-    localStorage.setItem("mbolo_actus", JSON.stringify(actus));
-  }
-  if (!localStorage.getItem("mbolo_commerces")) {
-    localStorage.setItem("mbolo_commerces", JSON.stringify([]));
-  }
-  if (!localStorage.getItem("mbolo_membres")) {
-    localStorage.setItem("mbolo_membres", JSON.stringify([]));
-  }
+const DEFAULT_PLACES=[
+  {id:1,em:'🍽️',name:'Restaurant Le Dialogue',cat:'Restaurant',quartier:'Plateau',addr:'Bd Triomphal, face à la mairie',phone:'+241 01 72 11 22',hours:'Lun-Sam 11h-23h',rating:4.7,reviews:128,open:true,status:'approved',photos:['🥘','🍷','🌿','🏺'],avis:[{user:'Amina K.',stars:5,txt:'Le meilleur restaurant de Libreville !'},{user:'Jean-Paul M.',stars:4,txt:'Super cadre, bonne cuisine locale.'}]},
+  {id:2,em:'🍹',name:'Bar Le Makokou',cat:'Bar',quartier:'Bord de mer',addr:'Quartier Louis, face à la plage',phone:'+241 06 44 55 66',hours:'Mar-Dim 17h-02h',rating:4.5,reviews:204,open:true,status:'approved',photos:['🍸','🎵','🌴','🥂'],avis:[{user:'Sandra O.',stars:5,txt:'Ambiance folle le week-end !'},{user:'Cédric B.',stars:4,txt:'Cocktails délicieux, terrasse face mer.'}]},
+  {id:3,em:'🍹',name:'Saveur des Tropiques',cat:'Bar',quartier:'Libreville',addr:'Avenue Bouet',phone:'+241 01 44 88 99',hours:'Lun-Dim 15h-01h',rating:4.2,reviews:97,open:true,status:'approved',photos:['🍺','🎤','🌺','🎶'],avis:[{user:'Patrice N.',stars:4,txt:'Bières locales excellentes !'},{user:'Florence A.',stars:4,txt:'Bonne ambiance, personnel sympa.'}]},
+  {id:4,em:'🏨',name:'Hôtel Tropicana',cat:'Hôtel',quartier:'Corniche',addr:'Corniche de Libreville',phone:'+241 01 44 55 66',hours:'Réception 24h/24',rating:4.2,reviews:87,open:true,status:'approved',photos:['🏊','🌊','🛏️','🌅'],avis:[{user:'Sophie N.',stars:4,txt:'Très bel hôtel avec vue sur mer.'},{user:'Rodrigue B.',stars:4,txt:'Bon rapport qualité-prix.'}]},
+  {id:5,em:'🛍️',name:'Centre Commercial Mbolo',cat:'Shopping',quartier:'Libreville',addr:'Avenue Bouet',phone:'+241 01 23 45 67',hours:'Lun-Dim 09h-21h',rating:3.9,reviews:214,open:true,status:'approved',photos:['🛍️','👗','👟','🧴'],avis:[{user:'Carole A.',stars:4,txt:'Grand choix de marques locales.'},{user:'Thierry O.',stars:3,txt:'Correct, mais certains commerces ferment tôt.'}]},
+  {id:6,em:'🏥',name:'Clinique El-Rapha',cat:'Santé',quartier:'Akanda',addr:'Quartier Akanda',phone:'+241 01 88 99 00',hours:'Lun-Sam 07h30-18h',rating:4.5,reviews:63,open:true,status:'approved',photos:['🏥','🩺','💊','🧬'],avis:[{user:'Marie-Claire F.',stars:5,txt:'Personnel très professionnel.'},{user:'Patrick E.',stars:4,txt:'Équipement moderne.'}]},
+  {id:7,em:'🌊',name:'Plage des Cocotiers',cat:'Loisirs',quartier:'Corniche',addr:'Corniche de Libreville',phone:'-',hours:'Ouvert toute la journée',rating:4.4,reviews:305,open:true,status:'approved',photos:['🌴','🌊','🏄','🌅'],avis:[{user:'Ibrahim D.',stars:5,txt:'La plus belle plage de Libreville !'},{user:'Nadia L.',stars:4,txt:'Très belle plage.'}]},
+  {id:8,em:'🍹',name:'Bar Le Panthère',cat:'Bar',quartier:'Plateau',addr:'Plateau, Quartier Glass',phone:'+241 01 77 66 55',hours:'Mer-Dim 18h-03h',rating:4.6,reviews:156,open:true,status:'approved',photos:['🍸','🎸','🪩','🌃'],avis:[{user:'Guy-Roger E.',stars:5,txt:'Le meilleur bar du Plateau !'},{user:'Brice M.',stars:5,txt:'Ambiance électrique le vendredi soir.'}]},
+  {id:9,em:'🍽️',name:'Chez Jeannot',cat:'Restaurant',quartier:'Louis',addr:'Quartier Louis',phone:'+241 06 11 22 33',hours:'Lun-Sam 12h-22h',rating:4.3,reviews:89,open:true,status:'approved',photos:['🍗','🥗','🍜','🥘'],avis:[{user:'Régine M.',stars:4,txt:'Cuisine traditionnelle authentique !'},{user:'Armel B.',stars:5,txt:'Le meilleur poulet braisé de Libreville.'}]},
+];
+
+const DEFAULT_ACTUS=[
+  {id:1,img:'🎵',bg:'#E1F5EE',tag:'Événement',title:'Festival Gabao 2025 — artistes confirmés',txt:'Le Festival Gabao revient cette année avec une programmation exceptionnelle. Les artistes de toute l\'Afrique centrale seront présents pour célébrer la musique gabonaise.',date:'15 mars 2025'},
+  {id:2,img:'🏗️',bg:'#fff8d6',tag:'Infra',title:'Nouveau boulevard bord de mer inauguré',txt:'Le nouveau boulevard de la Corniche est officiellement ouvert. Cette infrastructure moderne redonne à Libreville son visage maritime tant attendu.',date:'10 mars 2025'},
+  {id:3,img:'🌊',bg:'#e8f0fb',tag:'Sortie',title:'Top 5 spots plage ce week-end',txt:'Profitez du beau temps ce week-end sur les plus belles plages de Libreville. La Plage des Cocotiers et la Plage de la Sablière sont à leur meilleur niveau.',date:'8 mars 2025'},
+  {id:4,img:'🍹',bg:'#FAECE7',tag:'Bar',title:'Les bars branchés du Plateau ouvrent tôt',txt:'Ce week-end, plusieurs bars du Plateau ont décidé d\'ouvrir dès 15h pour profiter de l\'ambiance festive. Le Bar Le Panthère propose des cocktails spéciaux.',date:'5 mars 2025'},
+  {id:5,img:'🏛️',bg:'#EAF3DE',tag:'Culture',title:'Musée National : nouvelle exposition',txt:'Une nouvelle exposition sur l\'histoire du Gabon vient d\'ouvrir ses portes au Musée National de Libreville. Entrée gratuite le week-end.',date:'1 mars 2025'},
+];
+
+// ─── PERSISTENCE ─────────────────────────────────────────────────────────────
+function loadData(){
+  try{
+    const p=localStorage.getItem('mbolo_places');
+    const a=localStorage.getItem('mbolo_actus');
+    return {
+      places: p?JSON.parse(p):[...DEFAULT_PLACES],
+      actus: a?JSON.parse(a):[...DEFAULT_ACTUS]
+    };
+  }catch(e){return{places:[...DEFAULT_PLACES],actus:[...DEFAULT_ACTUS]};}
+}
+function saveData(){
+  try{
+    localStorage.setItem('mbolo_places',JSON.stringify(places));
+    localStorage.setItem('mbolo_actus',JSON.stringify(actus));
+  }catch(e){}
 }
 
-// ========== HELPERS ==========
-function getLieux() { return JSON.parse(localStorage.getItem("mbolo_lieux") || "[]"); }
-function getActus() { return JSON.parse(localStorage.getItem("mbolo_actus") || "[]"); }
-function getCommerces() { return JSON.parse(localStorage.getItem("mbolo_commerces") || "[]"); }
+let {places,actus}=loadData();
 
-function etoiles(n) {
-  var s = "";
-  for (var i = 0; i < 5; i++) { s += i < n ? "★" : "☆"; }
-  return s;
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+function stH(n){return '★'.repeat(Math.round(n))+'☆'.repeat(5-Math.round(n));}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+
+function go(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
 }
-
-function badgeClasse(cat) {
-  if (cat === "Restaurant") return "badge-resto";
-  if (cat === "Bar") return "badge-bar";
-  return "badge-hotel";
-}
-
-function badgeLabel(cat) {
-  if (cat === "Restaurant") return "🍽️ Restaurant";
-  if (cat === "Bar") return "🍺 Bar";
-  if (cat === "Hotel") return "🏨 Hotel";
-  return cat;
+function goBack(){go('s-main');}
+function goGuest(){isGuest=true;currentUser={name:'Visiteur',guest:true};go('s-main');switchTab('home');}
+function goAdmin(){document.getElementById('admin-code').value='';document.getElementById('adminModal').classList.add('on');}
+function doAdminLogin(){
+  const code=document.getElementById('admin-code').value;
+  if(code===ADMIN_CODE){closeModal('adminModal');window.location.href='mbolo-admin.html';}
+  else{alert('Code incorrect.');}
 }
 
-function makeCard(lieu) {
-  var tel = lieu.telephone ? '<div class="card-tel">📞 ' + lieu.telephone + '</div>' : '<div></div>';
-  var desc = lieu.description ? '<div class="card-desc">' + lieu.description + '</div>' : '';
-  var horaires = lieu.horaires ? '<div class="card-horaires">🕐 ' + lieu.horaires + '</div>' : '';
-  var html = '<div class="card" onclick="ouvrirModal(\'' + lieu.id + '\')">';
-  html += '<div class="card-header">';
-  html += '<div class="card-nom">' + lieu.nom + '</div>';
-  html += '<span class="badge ' + badgeClasse(lieu.categorie) + '">' + badgeLabel(lieu.categorie) + '</span>';
-  html += '</div>';
-  html += '<div class="card-quartier">📍 ' + lieu.quartier + '</div>';
-  html += '<div class="card-repere">' + lieu.repere + '</div>';
-  html += desc;
-  html += horaires;
-  html += '<div class="card-footer">' + tel + '<span class="card-stars">' + etoiles(lieu.note) + '</span></div>';
-  html += '</div>';
-  return html;
+function doLogin(){
+  const e=document.getElementById('li-email').value.trim();
+  if(!e){alert('Email requis.');return;}
+  currentUser={name:e.split('@')[0]||'Utilisateur',email:e,guest:false};
+  isGuest=false;go('s-main');switchTab('home');
+}
+function doRegister(){
+  const n=document.getElementById('rg-name').value.trim();
+  const e=document.getElementById('rg-email').value.trim();
+  if(!n||!e){alert('Nom et email requis.');return;}
+  currentUser={name:n,email:e,guest:false};
+  isGuest=false;go('s-main');switchTab('home');toast('Bienvenue sur MBOLO, '+n+' ! 🇬🇦');
 }
 
-// ========== ACCUEIL ==========
-var filtreAccueilTexte = "";
-function filtrerAccueil() {
-  filtreAccueilTexte = document.getElementById("search-accueil").value.toLowerCase();
-  renderAccueil();
+function closeModal(id){document.getElementById(id).classList.remove('on');}
+
+// ─── TABS ─────────────────────────────────────────────────────────────────────
+function switchTab(t){
+  prevTab=t;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  const el=document.getElementById('tab-'+t);
+  if(el)el.classList.add('on');
+  const map={home:renderHome,bar:renderBar,actu:renderActu,add:renderAdd,prof:renderProf};
+  if(map[t])map[t]();
 }
 
-function renderAccueil() {
-  var lieux = getLieux().filter(function(l) { return l.statut === "approuve"; });
-  // Featured
-  var featured = lieux.filter(function(l) { return l.misEnAvant; });
-  var fl = document.getElementById("featured-list");
-  fl.innerHTML = "";
-  if (featured.length === 0) {
-    fl.innerHTML = '<div style="color:#999;font-size:0.85rem;padding:8px;">Aucun etablissement mis en avant.</div>';
-  } else {
-    featured.forEach(function(l) {
-      fl.innerHTML += '<div class="featured-card" onclick="ouvrirModal(\'' + l.id + '\')">'
-        + '<div class="fc-nom">' + l.nom + '</div>'
-        + '<div class="fc-quartier">📍 ' + l.quartier + '</div>'
-        + '<div class="fc-badge">' + badgeLabel(l.categorie) + '</div>'
-        + '</div>';
-    });
-  }
-  // All cards
-  var filtre = filtreAccueilTexte;
-  var filtered = lieux;
-  if (filtre) {
-    filtered = lieux.filter(function(l) {
-      return l.nom.toLowerCase().indexOf(filtre) >= 0
-        || l.quartier.toLowerCase().indexOf(filtre) >= 0
-        || l.categorie.toLowerCase().indexOf(filtre) >= 0
-        || l.description.toLowerCase().indexOf(filtre) >= 0;
-    });
-  }
-  var el = document.getElementById("cards-accueil");
-  if (filtered.length === 0) {
-    el.innerHTML = '<div class="no-results"><div class="icon">🔍</div><div>Aucun resultat</div></div>';
-  } else {
-    el.innerHTML = filtered.map(makeCard).join("");
-  }
+// ─── HOME ─────────────────────────────────────────────────────────────────────
+function renderHome(){
+  const un=currentUser?currentUser.name:'Visiteur';
+  const initials=un.substring(0,2).toUpperCase();
+  document.getElementById('mainScroll').innerHTML=`
+    ${isGuest?`<div class="gbanner"><span style="font-size:18px">🇬🇦</span><div class="gb-txt">Naviguez en visiteur. Créez un compte pour publier.</div><button class="gb-btn" onclick="go('s-register')">Rejoindre</button></div>`:''}
+    <div class="hdr">
+      <div class="hdr-row">
+        <div class="hdr-logo">MBOLO</div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <div class="hdr-flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div>
+          <button style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.15);border:none;cursor:pointer;font-size:15px;color:#fff">🔔</button>
+        </div>
+      </div>
+      <div class="hdr-loc">📍 Libreville, Gabon</div>
+      <div class="uchip"><div class="av-sm">${initials}</div><span>${un}</span></div>
+      <div class="sbox">
+        <span style="font-size:15px;color:#bbb">🔍</span>
+        <input type="text" placeholder="Restaurant, bar, hôtel, pharmacie..." id="searchInput" oninput="renderPlaces()"/>
+        <button class="flt-btn">Filtrer</button>
+      </div>
+    </div>
+    <div class="cats" id="catStrip"></div>
+    <div class="sh"><span class="sh-t">Actualités Libreville</span><button class="see-all" onclick="switchTab('actu')">Tout voir</button></div>
+    <div class="nstrip">
+      ${actus.slice(0,4).map(a=>`<div class="nc" onclick="switchTab('actu')"><div class="nc-img" style="background:${a.bg}">${a.img}</div><div class="nc-b"><div class="nc-tag">${a.tag}</div><div class="nc-t">${a.title}</div></div></div>`).join('')}
+    </div>
+    <div class="sh"><span class="sh-t">Établissements</span><button class="see-all">Tout voir</button></div>
+    <div class="plist" id="placeList"></div>
+    <div style="height:88px"></div>`;
+  renderCats();renderPlaces();
 }
 
-// ========== BARS ==========
-var filtreBarsTexte = "";
-var filtreBarsQuartier = "Tous";
-function filtrerBars() {
-  filtreBarsTexte = document.getElementById("search-bar").value.toLowerCase();
-  renderBars();
+function renderCats(){
+  const s=document.getElementById('catStrip');if(!s)return;
+  s.innerHTML=CATS.map(c=>`<div class="cat${c.l===currentCat?' on':''}" onclick="filterCat('${c.l}')"><span class="cat-ic">${c.i}</span>${c.l}</div>`).join('');
 }
-function setFiltreBar(q) {
-  filtreBarsQuartier = q;
-  document.querySelectorAll("#filtres-bar .filtre").forEach(function(b) { b.classList.remove("active"); });
-  event.target.classList.add("active");
-  renderBars();
-}
-function renderBars() {
-  var lieux = getLieux().filter(function(l) { return l.statut === "approuve" && l.categorie === "Bar"; });
-  if (filtreBarsTexte) {
-    lieux = lieux.filter(function(l) {
-      return l.nom.toLowerCase().indexOf(filtreBarsTexte) >= 0 || l.quartier.toLowerCase().indexOf(filtreBarsTexte) >= 0;
-    });
-  }
-  if (filtreBarsQuartier !== "Tous") {
-    if (filtreBarsQuartier === "Centre-ville") {
-      lieux = lieux.filter(function(l) { return l.quartier.toLowerCase().indexOf("centre") >= 0; });
-    } else if (filtreBarsQuartier === "Bord de mer") {
-      lieux = lieux.filter(function(l) { return l.quartier.toLowerCase().indexOf("bord") >= 0 || l.quartier.toLowerCase().indexOf("plage") >= 0; });
-    } else {
-      lieux = lieux.filter(function(l) { return l.quartier.toLowerCase().indexOf("centre") < 0 && l.quartier.toLowerCase().indexOf("bord") < 0; });
-    }
-  }
-  var el = document.getElementById("cards-bar");
-  if (lieux.length === 0) {
-    el.innerHTML = '<div class="no-results"><div class="icon">🍺</div><div>Aucun bar trouve</div></div>';
-  } else {
-    el.innerHTML = lieux.map(makeCard).join("");
-  }
-}
+function filterCat(cat){currentCat=cat;renderCats();renderPlaces();}
 
-// ========== ACTUS ==========
-function renderActus() {
-  var actus = getActus();
-  var el = document.getElementById("cards-actus");
-  if (actus.length === 0) {
-    el.innerHTML = '<div class="no-results"><div class="icon">📰</div><div>Aucune actualite</div></div>';
-  } else {
-    el.innerHTML = actus.map(function(a) {
-      return '<div class="actu-card">'
-        + '<span class="actu-tag">' + a.tag + '</span>'
-        + '<div class="actu-titre">' + a.titre + '</div>'
-        + '<div class="actu-texte">' + a.texte + '</div>'
-        + '<div class="actu-date">' + a.date + '</div>'
-        + '</div>';
-    }).join("");
-  }
-}
-
-// ========== COMMERCE ==========
-function renderCommerce() {
-  var commerces = getCommerces().filter(function(c) { return c.statut === "approuve"; });
-  var el = document.getElementById("cards-commerce");
-  if (commerces.length === 0) {
-    el.innerHTML = '<div style="color:#999;font-size:0.85rem;text-align:center;padding:24px 0;">Aucune boutique validee pour le moment.</div>';
-  } else {
-    el.innerHTML = commerces.map(function(c) {
-      var badges = "";
-      if (c.verified) badges += '<span class="badge-verified">✓ Verifie</span> ';
-      if (c.topSeller) badges += '<span class="badge-top">⭐ Top vendeur</span>';
-      return '<div class="commerce-card">'
-        + '<div style="display:flex;justify-content:space-between;align-items:flex-start;">'
-        + '<div class="cc-nom">' + c.nom + '</div>'
-        + '<div>' + badges + '</div>'
-        + '</div>'
-        + '<div class="cc-tag">' + c.type + '</div>'
-        + '<div class="cc-desc">' + c.description + '</div>'
-        + (c.social ? '<div style="font-size:0.78rem;color:var(--bleu);margin-top:4px;">📲 ' + c.social + '</div>' : '')
-        + (c.telephone ? '<div style="font-size:0.78rem;color:var(--vert);margin-top:2px;">📞 ' + c.telephone + '</div>' : '')
-        + '</div>';
-    }).join("");
-  }
-}
-
-// ========== MODAL ==========
-function ouvrirModal(id) {
-  var lieu = getLieux().find(function(l) { return l.id === id; });
-  if (!lieu) return;
-  var telHtml = lieu.telephone
-    ? '<div class="modal-info-row"><span class="label">Tel.</span><span class="val tel"><a href="tel:' + lieu.telephone + '" style="color:inherit;text-decoration:none;">' + lieu.telephone + '</a></span></div>'
-    : '';
-  var horHtml = lieu.horaires
-    ? '<div class="modal-info-row"><span class="label">Horaires</span><span class="val">' + lieu.horaires + '</span></div>'
-    : '';
-  var descHtml = lieu.description
-    ? '<div class="modal-info-row"><span class="label">A propos</span><span class="val">' + lieu.description + '</span></div>'
-    : '';
-  document.getElementById("modal-body").innerHTML =
-    '<div class="modal-nom">' + lieu.nom + '</div>'
-    + '<div class="modal-cat" style="color:' + (lieu.categorie === "Restaurant" ? "#e65100" : lieu.categorie === "Bar" ? "#2e7d32" : "#1565c0") + '">' + badgeLabel(lieu.categorie) + '</div>'
-    + '<div class="modal-info">'
-    + '<div class="modal-info-row"><span class="label">Quartier</span><span class="val">📍 ' + lieu.quartier + '</span></div>'
-    + '<div class="modal-info-row"><span class="label">Repere</span><span class="val">' + lieu.repere + '</span></div>'
-    + telHtml
-    + horHtml
-    + descHtml
-    + '<div class="modal-info-row"><span class="label">Note</span><span class="val" style="color:var(--jaune);font-size:1.1rem;">' + etoiles(lieu.note) + '</span></div>'
-    + '</div>';
-  document.getElementById("modal-overlay").classList.add("open");
-}
-
-function fermerModal(e) {
-  if (!e || e.target === document.getElementById("modal-overlay")) {
-    document.getElementById("modal-overlay").classList.remove("open");
-  }
-}
-
-// ========== AJOUTER ==========
-function soumettreLieu() {
-  var nom = document.getElementById("add-nom").value.trim();
-  var cat = document.getElementById("add-cat").value;
-  var quartier = document.getElementById("add-quartier").value.trim();
-  if (!nom || !cat || !quartier) { alert("Merci de remplir les champs obligatoires (*)"); return; }
-  var lieux = getLieux();
-  var newId = "u" + Date.now();
-  lieux.push({
-    id: newId,
-    nom: nom,
-    categorie: cat,
-    quartier: quartier,
-    repere: document.getElementById("add-repere").value.trim(),
-    telephone: document.getElementById("add-tel").value.trim(),
-    description: document.getElementById("add-desc").value.trim(),
-    horaires: document.getElementById("add-horaires").value.trim(),
-    statut: "pending",
-    misEnAvant: false,
-    note: 0,
-    avis: []
+function renderPlaces(){
+  const q=(document.getElementById('searchInput')||{}).value||'';
+  const list=document.getElementById('placeList');if(!list)return;
+  const filtered=places.filter(p=>{
+    if(p.status==='suspended')return false;
+    const mc=currentCat==='Tous'||p.cat===currentCat;
+    const mq=!q||p.name.toLowerCase().includes(q.toLowerCase())||p.addr.toLowerCase().includes(q.toLowerCase())||p.cat.toLowerCase().includes(q.toLowerCase())||(p.quartier||'').toLowerCase().includes(q.toLowerCase());
+    return mc&&mq;
   });
-  localStorage.setItem("mbolo_lieux", JSON.stringify(lieux));
-  document.getElementById("add-nom").value = "";
-  document.getElementById("add-cat").value = "";
-  document.getElementById("add-quartier").value = "";
-  document.getElementById("add-repere").value = "";
-  document.getElementById("add-tel").value = "";
-  document.getElementById("add-desc").value = "";
-  document.getElementById("add-horaires").value = "";
-  document.getElementById("add-success").style.display = "block";
-  setTimeout(function() { document.getElementById("add-success").style.display = "none"; }, 4000);
+  list.innerHTML=filtered.length?filtered.map(p=>`
+    <div class="pc" onclick="openPlace(${p.id})">
+      <div class="pc-th">${p.em}</div>
+      <div class="pc-inf">
+        <div class="pc-nm">${p.name}${p.status==='pending'?' <span class="badge pending">En attente</span>':''}</div>
+        <div class="pc-ct">${p.cat} · ${p.quartier||''}</div>
+        <div class="pc-mt">
+          <span class="stars">${stH(p.rating)}</span>
+          <span class="sct">${p.rating} (${p.reviews})</span>
+          ${p.open?'<span class="badge open">Ouvert</span>':''}
+          ${p.cat==='Bar'?'<span class="badge bar">Bar</span>':''}
+        </div>
+        <div class="pc-addr">📍 ${p.addr}</div>
+      </div>
+    </div>`).join(''):`<div style="text-align:center;padding:28px;color:var(--muted);font-size:13px">Aucun résultat trouvé</div>`;
 }
 
-function soumettreCommerce() {
-  var nom = document.getElementById("com-nom").value.trim();
-  var type = document.getElementById("com-type").value.trim();
-  if (!nom || !type) { alert("Merci de remplir les champs obligatoires (*)"); return; }
-  var commerces = getCommerces();
-  commerces.push({
-    id: "c" + Date.now(),
-    nom: nom,
-    type: type,
-    social: document.getElementById("com-social").value.trim(),
-    telephone: document.getElementById("com-tel").value.trim(),
-    description: document.getElementById("com-desc").value.trim(),
-    statut: "pending",
-    verified: false,
-    topSeller: false
-  });
-  localStorage.setItem("mbolo_commerces", JSON.stringify(commerces));
-  document.getElementById("com-nom").value = "";
-  document.getElementById("com-type").value = "";
-  document.getElementById("com-social").value = "";
-  document.getElementById("com-tel").value = "";
-  document.getElementById("com-desc").value = "";
-  document.getElementById("com-success").style.display = "block";
-  setTimeout(function() { document.getElementById("com-success").style.display = "none"; }, 4000);
+function openPlace(id){
+  const p=places.find(x=>x.id===id);if(!p)return;
+  currentPlaceId=id;
+  document.getElementById('d-em').textContent=p.em;
+  document.getElementById('d-nm').textContent=p.name;
+  document.getElementById('d-ct').textContent=p.cat+' · '+p.quartier;
+  document.getElementById('d-st').textContent=stH(p.rating)+' '+p.rating;
+  document.getElementById('d-rc').textContent=p.reviews+' avis';
+  document.getElementById('d-ad').textContent=p.addr;
+  document.getElementById('d-hr').textContent=p.hours;
+  document.getElementById('d-ph').textContent=p.phone;
+  document.getElementById('d-photos').innerHTML=(p.photos||[]).map(ph=>`<div class="phi">${ph}</div>`).join('');
+  document.getElementById('d-reviews').innerHTML=(p.avis||[]).length
+    ?(p.avis.map(a=>`<div class="rv"><div class="rv-u">${a.user}</div><div class="rv-s">${stH(a.stars)}</div><div class="rv-t">${a.txt}</div></div>`).join(''))
+    :'<div style="padding:14px;font-size:12px;color:var(--muted)">Aucun avis pour l\'instant. Soyez le premier !</div>';
+  go('s-detail');
 }
 
-// ========== NAVIGATION ==========
-var sectionCourante = "accueil";
-function goSection(nom) {
-  document.querySelectorAll(".section").forEach(function(s) { s.classList.remove("active"); });
-  document.querySelectorAll(".tab").forEach(function(t) { t.classList.remove("active"); });
-  document.getElementById("sec-" + nom).classList.add("active");
-  document.getElementById("tab-" + nom).classList.add("active");
-  sectionCourante = nom;
-  if (nom === "accueil") renderAccueil();
-  if (nom === "bar") renderBars();
-  if (nom === "actus") renderActus();
-  if (nom === "commerce") renderCommerce();
+function sharePlace(){toast('🔗 Lien copié dans le presse-papiers !');}
+function navPlace(){const p=places.find(x=>x.id===currentPlaceId);if(p)toast('📍 Ouverture de la navigation vers '+p.name);}
+
+// ─── REVIEW ───────────────────────────────────────────────────────────────────
+function openReview(){
+  if(isGuest){if(confirm('Créez un compte pour publier un avis.'))go('s-register');return;}
+  revStar=0;document.getElementById('revTxt').value='';
+  document.querySelectorAll('#revStars .sp').forEach(s=>s.classList.remove('on'));
+  document.getElementById('reviewModal').classList.add('on');
+}
+function setStar(n){revStar=n;document.querySelectorAll('#revStars .sp').forEach((s,i)=>s.classList.toggle('on',i<n));}
+function submitReview(){
+  const txt=document.getElementById('revTxt').value.trim();
+  if(!txt||!revStar){alert('Note et commentaire requis.');return;}
+  const p=places.find(x=>x.id===currentPlaceId);if(!p)return;
+  if(!p.avis)p.avis=[];
+  p.avis.unshift({user:currentUser.name,stars:revStar,txt});
+  p.reviews++;
+  p.rating=Math.round((p.rating*(p.reviews-1)+revStar)/p.reviews*10)/10;
+  userReviews++;saveData();
+  closeModal('reviewModal');openPlace(currentPlaceId);
+  toast('✅ Votre avis a été publié !');
 }
 
-// ========== AUTH ==========
-var utilisateur = null;
-function seConnecter() {
-  var nom = document.getElementById("login-nom").value.trim();
-  var mdp = document.getElementById("login-mdp").value;
-  if (!nom || !mdp) { afficherErreur("Remplissez tous les champs."); return; }
-  var membres = JSON.parse(localStorage.getItem("mbolo_membres") || "[]");
-  var trouve = membres.find(function(m) { return m.nom === nom && m.mdp === mdp; });
-  if (!trouve) { afficherErreur("Identifiants incorrects."); return; }
-  utilisateur = {nom: nom, type: "membre"};
-  localStorage.setItem("mbolo_session", JSON.stringify(utilisateur));
-  lancerApp();
+// ─── BAR ──────────────────────────────────────────────────────────────────────
+function renderBar(){
+  const bars=places.filter(p=>p.cat==='Bar'&&p.status!=='suspended');
+  document.getElementById('mainScroll').innerHTML=`
+    <div class="bar-hero">
+      <div class="bar-t">Bars & Boissons 🍹</div>
+      <div class="bar-s">Tous les bars de Libreville</div>
+      <div class="bar-bdg">${bars.length} bars référencés</div>
+    </div>
+    <div class="bcats">
+      <div class="bcat on">Tous</div><div class="bcat">Cocktails</div><div class="bcat">Bière locale</div>
+      <div class="bcat">Terrasse</div><div class="bcat">Musique live</div><div class="bcat">Nuit</div>
+    </div>
+    <div class="sh"><span class="sh-t">Bars populaires</span></div>
+    <div class="plist">
+      ${bars.map(p=>`<div class="pc" onclick="openPlace(${p.id})">
+        <div class="pc-th" style="background:#e8f0fb">${p.em}</div>
+        <div class="pc-inf">
+          <div class="pc-nm">${p.name}</div>
+          <div class="pc-ct">${p.addr}</div>
+          <div class="pc-mt"><span class="stars">${stH(p.rating)}</span><span class="sct">${p.rating} (${p.reviews})</span>${p.open?'<span class="badge open">Ouvert</span>':''}</div>
+          <div class="pc-addr">🕐 ${p.hours}</div>
+        </div></div>`).join('')}
+    </div><div style="height:88px"></div>`;
+  document.querySelectorAll('.bcat').forEach(bc=>{bc.onclick=function(){document.querySelectorAll('.bcat').forEach(x=>x.classList.remove('on'));this.classList.add('on');};});
 }
 
-function sInscrire() {
-  var nom = document.getElementById("reg-nom").value.trim();
-  var email = document.getElementById("reg-email").value.trim();
-  var mdp = document.getElementById("reg-mdp").value;
-  if (!nom || !email || !mdp) { afficherErreur("Remplissez tous les champs."); return; }
-  var membres = JSON.parse(localStorage.getItem("mbolo_membres") || "[]");
-  if (membres.find(function(m) { return m.nom === nom; })) { afficherErreur("Ce nom est deja pris."); return; }
-  membres.push({nom: nom, email: email, mdp: mdp, date: new Date().toLocaleDateString("fr-FR")});
-  localStorage.setItem("mbolo_membres", JSON.stringify(membres));
-  utilisateur = {nom: nom, type: "membre"};
-  localStorage.setItem("mbolo_session", JSON.stringify(utilisateur));
-  lancerApp();
+// ─── ACTUS ────────────────────────────────────────────────────────────────────
+function renderActu(){
+  document.getElementById('mainScroll').innerHTML=`
+    <div class="hdr" style="padding-bottom:18px">
+      <div class="hdr-row">
+        <div class="hdr-logo">Actualités 📰</div>
+        <div class="hdr-flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div>
+      </div>
+      <div class="hdr-loc">📍 Libreville, Gabon</div>
+    </div>
+    <div style="padding:12px 14px 0">
+      ${actus.map(a=>`<div class="ac-card">
+        <div class="ac-img" style="background:${a.bg}">${a.img}</div>
+        <div class="ac-body">
+          <div class="ac-tag">${a.tag}</div>
+          <div class="ac-title">${a.title}</div>
+          <div class="ac-txt">${a.txt}</div>
+          <div class="ac-date">📅 ${a.date}</div>
+        </div></div>`).join('')}
+    </div><div style="height:88px"></div>`;
 }
 
-function continuerInvite() {
-  utilisateur = {nom: "Invite", type: "invite"};
-  lancerApp();
+// ─── ADD ──────────────────────────────────────────────────────────────────────
+function renderAdd(){
+  if(isGuest){
+    document.getElementById('mainScroll').innerHTML=`
+      <div style="text-align:center;padding:70px 24px">
+        <div style="font-size:48px;margin-bottom:16px">🔒</div>
+        <div style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:8px">Connexion requise</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.6">Créez un compte gratuit pour ajouter des établissements et partager vos découvertes avec la communauté MBOLO.</div>
+        <button class="btn-main" style="max-width:270px;margin:0 auto;display:block" onclick="go('s-register')">Créer un compte gratuit</button>
+        <div class="alink" style="margin-top:12px"><span onclick="go('s-login')">J'ai déjà un compte</span></div>
+      </div><div style="height:88px"></div>`;
+    return;
+  }
+  document.getElementById('mainScroll').innerHTML=`
+    <div class="add-top"><div class="add-t">Ajouter un lieu</div><div class="add-s">Partagez une adresse avec la communauté</div></div>
+    <div class="stripe"><div></div><div></div><div></div></div>
+    <div class="add-body">
+      <div style="background:#fff8d6;border:1px solid #fcd116;border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:#7a5c00">
+        ℹ️ Votre établissement sera soumis à validation avant d'apparaître dans l'application.
+      </div>
+      <div class="fg"><label>Nom de l'établissement *</label><input type="text" placeholder="Ex: Restaurant Le Perroquet" id="newName"/></div>
+      <div class="fg"><label>Catégorie *</label>
+        <select id="newCat">
+          <option>Restaurant</option><option>Bar</option><option>Hôtel</option>
+          <option>Shopping</option><option>Santé</option><option>Loisirs</option><option>Autre</option>
+        </select>
+      </div>
+      <div class="fg"><label>Quartier *</label><input type="text" placeholder="Ex: Plateau, Louis, Akanda..." id="newQrt"/></div>
+      <div class="fg"><label>Adresse *</label><input type="text" placeholder="Ex: Face au marché Mont-Bouët" id="newAddr"/></div>
+      <div class="fg"><label>Téléphone</label><input type="tel" placeholder="+241 06 ..." id="newPhone"/></div>
+      <div class="fg"><label>Horaires</label><input type="text" placeholder="Ex: Lun-Sam 08h-22h" id="newHours"/></div>
+      <div class="fg"><label>Description</label><textarea rows="3" placeholder="Décrivez le lieu..." id="newDesc"></textarea></div>
+      <div class="fg"><label>Photos</label>
+        <button class="ph-btn" onclick="toast('📷 Upload photo disponible dans la version publiée')">📷 Ajouter des photos</button>
+      </div>
+      <div class="fg"><label>Votre note initiale</label>
+        <div class="sp-w" id="addStars">
+          <span class="sp" onclick="setAddStar(1)">★</span><span class="sp" onclick="setAddStar(2)">★</span>
+          <span class="sp" onclick="setAddStar(3)">★</span><span class="sp" onclick="setAddStar(4)">★</span>
+          <span class="sp" onclick="setAddStar(5)">★</span>
+        </div>
+      </div>
+      <button class="btn-main yellow" onclick="submitPlace()">Soumettre pour validation</button>
+    </div><div style="height:88px"></div>`;
+}
+function setAddStar(n){addStar=n;document.querySelectorAll('#addStars .sp').forEach((s,i)=>s.classList.toggle('on',i<n));}
+function submitPlace(){
+  const name=(document.getElementById('newName')||{}).value||'';
+  const addr=(document.getElementById('newAddr')||{}).value||'';
+  const qrt=(document.getElementById('newQrt')||{}).value||'';
+  const cat=(document.getElementById('newCat')||{}).value||'Restaurant';
+  if(!name.trim()||!addr.trim()||!qrt.trim()){alert('Nom, quartier et adresse sont requis.');return;}
+  const icons={Restaurant:'🍽️',Bar:'🍹',Hôtel:'🏨',Shopping:'🛍️',Santé:'🏥',Loisirs:'🌊',Autre:'📍'};
+  const newPlace={
+    id:Date.now(),em:icons[cat]||'📍',name:name.trim(),cat,
+    quartier:qrt.trim(),addr:addr.trim(),
+    phone:(document.getElementById('newPhone')||{}).value||'-',
+    hours:(document.getElementById('newHours')||{}).value||'-',
+    rating:addStar||0,reviews:0,open:true,
+    status:'pending',
+    submittedBy:currentUser.name,
+    submittedAt:new Date().toLocaleDateString('fr-FR'),
+    photos:['📷'],avis:[]
+  };
+  places.unshift(newPlace);userPlaces++;addStar=0;saveData();
+  toast('✅ Soumis ! En attente de validation par l\'admin.');
+  switchTab('home');
 }
 
-function seDeconnecter() {
-  localStorage.removeItem("mbolo_session");
-  utilisateur = null;
-  document.getElementById("app").style.display = "none";
-  document.getElementById("auth").style.display = "flex";
+// ─── PROFILE ──────────────────────────────────────────────────────────────────
+function renderProf(){
+  const un=currentUser?currentUser.name:'Visiteur';
+  const initials=un.substring(0,2).toUpperCase();
+  document.getElementById('mainScroll').innerHTML=`
+    <div class="prof-top">
+      <div class="av-lg">${initials}</div>
+      <div class="prof-nm">${un}</div>
+      <div class="prof-si">${isGuest?'Mode visiteur':'Membre MBOLO 🇬🇦'}</div>
+    </div>
+    <div class="stripe"><div></div><div></div><div></div></div>
+    <div class="prof-body">
+      <div class="stats">
+        <div class="stat"><div class="stat-n">${userPlaces}</div><div class="stat-l">Ajoutés</div></div>
+        <div class="stat"><div class="stat-n">${userReviews}</div><div class="stat-l">Avis</div></div>
+        <div class="stat"><div class="stat-n">🇬🇦</div><div class="stat-l">Libreville</div></div>
+      </div>
+      ${isGuest?`
+        <div style="background:var(--y3);border:1.5px solid var(--y);border-radius:12px;padding:16px;text-align:center;margin-bottom:16px">
+          <div style="font-size:14px;font-weight:700;color:#7a5c00;margin-bottom:6px">Rejoignez la communauté MBOLO 🇬🇦</div>
+          <div style="font-size:12px;color:#7a5c00;margin-bottom:14px;line-height:1.5">Publiez des avis et ajoutez des lieux.</div>
+          <button class="btn-main" style="max-width:200px;margin:0 auto;display:block" onclick="go('s-register')">Créer un compte</button>
+        </div>
+        <div style="text-align:center;padding:8px"><a onclick="goAdmin()" style="font-size:12px;color:var(--g);cursor:pointer">⚙️ Accès administrateur</a></div>`:`
+        <div class="pmenu">
+          <div class="pmi"><div class="pmi-l"><span class="pmi-ic">👤</span>Modifier le profil</div><span style="color:var(--muted)">›</span></div>
+          <div class="pmi"><div class="pmi-l"><span class="pmi-ic">🔔</span>Notifications</div><span style="color:var(--muted)">›</span></div>
+          <div class="pmi"><div class="pmi-l"><span class="pmi-ic">🗺️</span>Mes avis publiés</div><span style="color:var(--muted)">›</span></div>
+          <div class="pmi"><div class="pmi-l"><span class="pmi-ic">📍</span>Mes lieux ajoutés</div><span style="color:var(--muted)">›</span></div>
+          <div class="pmi" onclick="goAdmin()"><div class="pmi-l"><span class="pmi-ic">⚙️</span>Administration MBOLO</div><span style="color:var(--muted)">›</span></div>
+          <button class="logout" onclick="logout()">Se déconnecter</button>
+        </div>`}
+    </div><div style="height:88px"></div>`;
 }
-
-function goAuth() {
-  seDeconnecter();
-}
-
-function afficherErreur(msg) {
-  var el = document.getElementById("auth-msg");
-  el.textContent = msg;
-  el.style.display = "block";
-}
-
-function afficherInscription() {
-  document.getElementById("form-connexion").style.display = "none";
-  document.getElementById("form-inscription").style.display = "block";
-  document.getElementById("auth-msg").style.display = "none";
-}
-
-function afficherConnexion() {
-  document.getElementById("form-inscription").style.display = "none";
-  document.getElementById("form-connexion").style.display = "block";
-  document.getElementById("auth-msg").style.display = "none";
-}
-
-function lancerApp() {
-  document.getElementById("auth").style.display = "none";
-  document.getElementById("app").style.display = "block";
-  document.getElementById("header-user").textContent = utilisateur.nom;
-  var notice = document.getElementById("invite-notice");
-  notice.style.display = utilisateur.type === "invite" ? "block" : "none";
-  document.getElementById("profil-avatar").textContent = utilisateur.nom.charAt(0).toUpperCase();
-  document.getElementById("profil-nom").textContent = utilisateur.nom;
-  document.getElementById("profil-type").textContent = utilisateur.type === "invite" ? "Mode visiteur" : "Membre MBOLO";
-  renderAccueil();
-}
-
-// ========== BOOT ==========
-initData();
-setTimeout(function() {
-  document.getElementById("splash").style.opacity = "0";
-  setTimeout(function() {
-    document.getElementById("splash").style.display = "none";
-    var session = localStorage.getItem("mbolo_session");
-    if (session) {
-      utilisateur = JSON.parse(session);
-      lancerApp();
-    } else {
-      document.getElementById("auth").style.display = "flex";
-    }
-  }, 600);
-}, 2000);
+function logout(){if(!confirm('Se déconnecter ?'))return;isGuest=false;currentUser=null;go('s-splash');}
 </script>
 </body>
 </html>
