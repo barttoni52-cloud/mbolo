@@ -5,25 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="theme-color" content="#009e60">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="MBOLO">
 <title>MBOLO — Guide de Libreville</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f0f0f0;display:flex;justify-content:center;min-height:100vh;}
-:root{
-  --g:#009e60;--g2:#007a4a;--g3:#e6f7ef;
-  --y:#fcd116;--y2:#c9a800;--y3:#fffbdd;
-  --b:#3a75c4;--b2:#0C447C;--b3:#e8f0fb;
-  --text:#1a1a1a;--muted:#666;--bg:#fff;--bg2:#f5f5f5;--bd:#e0e0e0;
-  --red:#E24B4A;
-}
+:root{--g:#009e60;--g2:#007a4a;--g3:#e6f7ef;--y:#fcd116;--y2:#c9a800;--y3:#fffbdd;--b:#3a75c4;--b2:#0C447C;--b3:#e8f0fb;--text:#1a1a1a;--muted:#666;--bg:#fff;--bg2:#f5f5f5;--bd:#e0e0e0;--red:#E24B4A;}
 .app{width:100%;max-width:430px;background:var(--bg);min-height:100vh;display:flex;flex-direction:column;position:relative;}
 .screen{display:none;flex-direction:column;flex:1;min-height:100vh;}
 .screen.on{display:flex;}
 .scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
-
-/* SPLASH */
 .splash{background:var(--g);flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 28px;min-height:100vh;}
 .flag{display:flex;width:60px;height:40px;border-radius:8px;overflow:hidden;margin-bottom:20px;border:2px solid rgba(255,255,255,0.3);}
 .flag div{flex:1;}
@@ -36,8 +27,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .btn-wh{width:100%;padding:15px;background:rgba(255,255,255,0.15);color:#fff;font-size:14px;font-weight:500;border:1.5px solid rgba(255,255,255,0.35);border-radius:14px;cursor:pointer;margin-bottom:10px;}
 .btn-ghost{width:100%;padding:12px;background:transparent;color:rgba(255,255,255,0.65);font-size:13px;border:none;cursor:pointer;}
 .splash-foot{margin-top:24px;font-size:10px;color:rgba(255,255,255,0.4);}
-
-/* AUTH */
 .auth-top{background:var(--g);padding:28px 20px 36px;}
 .auth-back{background:rgba(255,255,255,0.2);border:none;color:#fff;border-radius:8px;padding:7px 14px;font-size:12px;cursor:pointer;margin-bottom:16px;display:inline-block;}
 .auth-h{font-size:24px;font-weight:700;color:#fff;}
@@ -59,11 +48,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--bd);}
 .motif{display:flex;justify-content:center;gap:5px;padding:14px 0;}
 .mb{width:5px;height:22px;border-radius:3px;}
-
-/* HEADER */
 .hdr{background:var(--g);padding:16px 16px 52px;position:relative;overflow:hidden;}
 .hdr::before{content:'';position:absolute;top:-20px;right:-20px;width:110px;height:110px;border-radius:50%;background:rgba(255,255,255,0.06);}
-.hdr::after{content:'';position:absolute;bottom:-10px;left:50px;width:90px;height:90px;border-radius:50%;background:rgba(252,209,22,0.1);}
 .hdr-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
 .hdr-logo{color:#fff;font-size:22px;font-weight:800;letter-spacing:-0.5px;}
 .hdr-flag{display:flex;height:20px;width:30px;border-radius:3px;overflow:hidden;}
@@ -76,15 +62,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .sbox input{border:none;outline:none;flex:1;font-size:13px;color:var(--text);background:transparent;}
 .sbox input::placeholder{color:#bbb;}
 .flt-btn{background:var(--g3);border:none;color:var(--g2);border-radius:8px;padding:6px 11px;cursor:pointer;font-size:12px;font-weight:700;}
-
-/* CATS */
 .cats{display:flex;gap:8px;overflow-x:auto;padding:14px 14px 0;scrollbar-width:none;}
 .cats::-webkit-scrollbar{display:none;}
 .cat{flex-shrink:0;padding:8px 13px;border-radius:20px;font-size:12px;cursor:pointer;border:1.5px solid var(--bd);background:var(--bg);color:var(--muted);display:flex;align-items:center;gap:5px;font-weight:500;}
 .cat.on{background:var(--y);color:#7a5c00;border-color:var(--y);}
-.cat-ic{font-size:14px;}
-
-/* ACTU STRIP */
 .sh{display:flex;justify-content:space-between;align-items:center;padding:16px 14px 8px;}
 .sh-t{font-size:14px;font-weight:700;color:var(--text);}
 .see-all{font-size:12px;color:var(--g);cursor:pointer;background:none;border:none;font-weight:600;}
@@ -95,12 +76,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .nc-b{padding:9px;}
 .nc-tag{font-size:9px;font-weight:700;color:#085041;background:#9FE1CB;padding:2px 6px;border-radius:20px;display:inline-block;margin-bottom:4px;text-transform:uppercase;letter-spacing:.3px;}
 .nc-t{font-size:11px;font-weight:600;color:var(--text);line-height:1.4;}
-
-/* PLACE CARDS */
 .plist{padding:0 14px;display:flex;flex-direction:column;gap:10px;}
 .pc{background:var(--bg);border:1.5px solid var(--bd);border-radius:14px;overflow:hidden;cursor:pointer;display:flex;transition:.12s;}
 .pc:active{transform:scale(0.98);}
 .pc-th{width:76px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:28px;background:var(--bg2);}
+.pc-th img{width:76px;height:76px;object-fit:cover;}
 .pc-inf{padding:11px;flex:1;}
 .pc-nm{font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px;}
 .pc-ct{font-size:10px;color:var(--muted);margin-bottom:5px;}
@@ -112,20 +92,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .badge.bar{background:var(--b3);color:var(--b2);}
 .badge.pending{background:#fff3cd;color:#856404;}
 .pc-addr{font-size:10px;color:var(--muted);margin-top:3px;}
-
-/* TABBAR */
 .tabbar{border-top:1.5px solid var(--bd);display:flex;background:var(--bg);padding-bottom:env(safe-area-inset-bottom,4px);}
 .tab{flex:1;padding:10px 0 6px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;border:none;background:none;}
 .ti{font-size:20px;}
 .tl{font-size:9px;color:var(--muted);font-weight:500;}
 .tab.on .tl{color:var(--g);}
-
-/* DETAIL */
 .det-top{background:var(--g);padding:16px 16px 18px;}
 .det-back{background:rgba(255,255,255,0.2);border:none;color:#fff;border-radius:8px;padding:7px 14px;font-size:12px;cursor:pointer;margin-bottom:10px;font-weight:600;}
 .det-sc{flex:1;overflow-y:auto;}
-.det-em{font-size:52px;text-align:center;padding:20px;background:var(--bg2);border-radius:14px;margin:0 14px 14px;}
-.det-nm{font-size:20px;font-weight:700;color:var(--text);padding:0 14px 3px;}
+.det-cover{width:100%;height:200px;object-fit:cover;display:block;background:var(--bg2);}
+.det-cover-em{height:200px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:64px;}
+.det-nm{font-size:20px;font-weight:700;color:var(--text);padding:14px 14px 3px;}
 .det-ct{font-size:13px;color:var(--muted);padding:0 14px 10px;}
 .det-st{font-size:18px;color:#F59E0B;padding:0 14px 2px;}
 .det-rc{font-size:12px;color:var(--muted);padding:0 14px 14px;}
@@ -136,15 +113,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .act-b.green{background:var(--g);color:#fff;border-color:var(--g);}
 .act-b.yellow{background:var(--y);color:#7a5c00;border-color:var(--y);}
 .phg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 14px 4px;}
-.phi{aspect-ratio:1;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:32px;background:var(--bg2);}
+.phi{aspect-ratio:1;border-radius:10px;overflow:hidden;background:var(--bg2);}
+.phi img{width:100%;height:100%;object-fit:cover;}
+.phi-em{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px;}
 .rv{border-top:1px solid var(--bd);padding:12px 14px;}
 .rv-u{font-size:12px;font-weight:700;color:var(--text);margin-bottom:2px;}
 .rv-s{font-size:11px;color:#F59E0B;margin-bottom:4px;}
 .rv-t{font-size:12px;color:var(--muted);line-height:1.5;}
-
-/* BAR */
 .bar-hero{background:var(--b);padding:22px 16px 44px;position:relative;overflow:hidden;}
-.bar-hero::before{content:'';position:absolute;top:-15px;right:-15px;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,0.07);}
 .bar-t{font-size:22px;font-weight:700;color:#fff;margin-bottom:4px;}
 .bar-s{font-size:13px;color:rgba(255,255,255,0.7);}
 .bar-bdg{display:inline-block;background:var(--y);color:#7a5c00;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;margin-top:8px;}
@@ -152,8 +128,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .bcats::-webkit-scrollbar{display:none;}
 .bcat{flex-shrink:0;padding:7px 13px;border-radius:20px;font-size:11px;cursor:pointer;border:1.5px solid var(--bd);background:var(--bg);color:var(--muted);font-weight:500;}
 .bcat.on{background:var(--b);color:#fff;border-color:var(--b);}
-
-/* ACTU PAGE */
 .ac-card{border:1.5px solid var(--bd);border-radius:14px;overflow:hidden;cursor:pointer;margin-bottom:10px;}
 .ac-img{height:110px;display:flex;align-items:center;justify-content:center;font-size:40px;}
 .ac-body{padding:14px;}
@@ -161,8 +135,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .ac-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:5px;line-height:1.4;}
 .ac-txt{font-size:12px;color:var(--muted);line-height:1.6;}
 .ac-date{font-size:10px;color:var(--muted);margin-top:6px;}
-
-/* ADD */
 .add-top{background:var(--g);padding:22px 16px 28px;}
 .add-t{font-size:20px;font-weight:700;color:#fff;margin-bottom:4px;}
 .add-s{font-size:12px;color:rgba(255,255,255,0.7);}
@@ -171,8 +143,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .sp{font-size:24px;cursor:pointer;color:#ddd;}
 .sp.on{color:#F59E0B;}
 .ph-btn{width:100%;padding:26px;border:1.5px dashed var(--bd);border-radius:10px;background:var(--bg2);color:var(--muted);cursor:pointer;font-size:13px;}
-
-/* PROFILE */
 .prof-top{background:var(--g);padding:30px 16px 48px;text-align:center;position:relative;overflow:hidden;}
 .av-lg{width:72px;height:72px;border-radius:50%;background:var(--y);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:24px;font-weight:800;color:#7a5c00;border:3px solid #fff;}
 .prof-nm{font-size:18px;font-weight:700;color:#fff;}
@@ -190,27 +160,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .gbanner{background:var(--y3);border:1.5px solid var(--y);border-radius:10px;padding:10px 14px;margin:10px 14px 0;display:flex;align-items:center;gap:10px;}
 .gb-txt{font-size:11px;color:#7a5c00;flex:1;line-height:1.5;}
 .gb-btn{background:var(--g);color:#fff;border:none;border-radius:8px;padding:6px 11px;font-size:10px;cursor:pointer;white-space:nowrap;font-weight:700;}
-
-/* MODAL */
 .mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:100;align-items:flex-end;justify-content:center;}
 .mbg.on{display:flex;}
 .mbox{background:var(--bg);border-radius:20px 20px 0 0;width:100%;max-width:430px;padding:20px 18px 40px;max-height:88vh;overflow-y:auto;}
 .mhandle{width:38px;height:4px;background:var(--bd);border-radius:2px;margin:0 auto 18px;}
 .mt{font-size:16px;font-weight:700;margin-bottom:16px;color:var(--text);}
 .mcancel{width:100%;padding:12px;background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;margin-top:6px;}
-
-/* TOAST */
 .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;}
 .toast.show{opacity:1;}
-
-/* ADMIN LINK */
 .admin-link{display:block;text-align:center;padding:10px;font-size:11px;color:var(--muted);cursor:pointer;text-decoration:none;}
+.share-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px;color:#fff;margin-bottom:10px;}
 </style>
 </head>
 <body>
 <div class="app" id="app">
-
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <!-- SPLASH -->
@@ -241,7 +204,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="auth-body">
     <div class="fg"><label>Email</label><input type="email" placeholder="votre@email.com" id="li-email"/></div>
     <div class="fg"><label>Mot de passe</label><input type="password" placeholder="••••••••" id="li-pwd"/></div>
-    <div style="text-align:right;margin-bottom:14px"><span style="font-size:12px;color:var(--g);cursor:pointer">Mot de passe oublié ?</span></div>
     <button class="btn-main" onclick="doLogin()">Se connecter</button>
     <div class="divider">ou</div>
     <div class="alink">Pas de compte ? <span onclick="go('s-register')">Créer un compte</span></div>
@@ -263,10 +225,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="fg"><label>Téléphone (optionnel)</label><input type="tel" placeholder="+241 06 ..."/></div>
     <div class="fg"><label>Mot de passe</label><input type="password" placeholder="Min. 8 caractères" id="rg-pwd"/></div>
     <div class="fg"><label>Confirmer le mot de passe</label><input type="password" placeholder="••••••••"/></div>
-    <div class="motif">
-      <div class="mb" style="background:#009e60"></div><div class="mb" style="background:#fcd116"></div><div class="mb" style="background:#3a75c4"></div>
-      <div class="mb" style="background:#009e60"></div><div class="mb" style="background:#fcd116"></div><div class="mb" style="background:#3a75c4"></div>
-    </div>
     <button class="btn-main yellow" onclick="doRegister()">Créer mon compte</button>
     <div class="alink" style="margin-top:12px">Déjà membre ? <span onclick="go('s-login')">Se connecter</span></div>
     <div class="alink" style="margin-top:8px"><span onclick="goGuest()">Continuer sans compte →</span></div>
@@ -289,7 +247,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div class="screen" id="s-detail">
   <div class="det-top"><button class="det-back" onclick="goBack()">← Retour</button></div>
   <div class="det-sc">
-    <div class="det-em" id="d-em">🍽️</div>
+    <div id="d-cover"></div>
     <div class="det-nm" id="d-nm"></div>
     <div class="det-ct" id="d-ct"></div>
     <div class="det-st" id="d-st"></div>
@@ -330,22 +288,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
-<!-- ADD PLACE MODAL (guest) -->
-<div class="mbg" id="addGuestModal">
+<!-- SHARE MODAL -->
+<div class="mbg" id="shareModal">
   <div class="mbox">
     <div class="mhandle"></div>
-    <div style="text-align:center;padding:20px 0">
-      <div style="font-size:44px;margin-bottom:16px">🔒</div>
-      <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px">Connexion requise</div>
-      <div style="font-size:13px;color:var(--muted);margin-bottom:22px;line-height:1.6">Créez un compte gratuit pour ajouter des établissements et partager vos découvertes.</div>
-      <button class="btn-main" onclick="closeModal('addGuestModal');go('s-register')">Créer un compte gratuit</button>
-      <div class="alink" style="margin-top:10px"><span onclick="closeModal('addGuestModal');go('s-login')">J'ai déjà un compte</span></div>
-    </div>
-    <button class="mcancel" onclick="closeModal('addGuestModal')">Continuer en visiteur</button>
+    <div class="mt" id="share-title">Partager</div>
+    <a id="share-wa" href="#" target="_blank" class="share-btn" style="background:#25D366">📱 Partager sur WhatsApp</a>
+    <a id="share-fb" href="#" target="_blank" class="share-btn" style="background:#1877F2">📘 Partager sur Facebook</a>
+    <button onclick="copyShareLink()" class="act-b" style="width:100%;margin-bottom:10px">🔗 Copier le lien</button>
+    <button class="mcancel" onclick="closeModal('shareModal')">Annuler</button>
   </div>
 </div>
 
-<!-- ADMIN LOGIN MODAL -->
+<!-- ADMIN MODAL -->
 <div class="mbg" id="adminModal">
   <div class="mbox">
     <div class="mhandle"></div>
@@ -358,120 +313,141 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </div>
 
 <script>
-// ─── STATE ───────────────────────────────────────────────────────────────────
+const SITE_URL='https://barttoni52-cloud.github.io/mbolo/';
+const ADMIN_CODE='mbolo2025';
 let isGuest=false,currentUser=null,currentPlaceId=null,revStar=0,addStar=0;
 let userPlaces=0,userReviews=0,currentCat='Tous',prevTab='home';
-
-const ADMIN_CODE='mbolo2025';
 
 const CATS=[
   {l:'Tous',i:'🗺️'},{l:'Restaurant',i:'🍽️'},{l:'Bar',i:'🍹'},
   {l:'Hôtel',i:'🏨'},{l:'Shopping',i:'🛍️'},{l:'Santé',i:'🏥'},{l:'Loisirs',i:'🌊'}
 ];
 
-const DEFAULT_PLACES=[
-  {id:1,em:'🍽️',name:'Restaurant Le Dialogue',cat:'Restaurant',quartier:'Plateau',addr:'Bd Triomphal, face à la mairie',phone:'+241 01 72 11 22',hours:'Lun-Sam 11h-23h',rating:4.7,reviews:128,open:true,status:'approved',photos:['🥘','🍷','🌿','🏺'],avis:[{user:'Amina K.',stars:5,txt:'Le meilleur restaurant de Libreville !'},{user:'Jean-Paul M.',stars:4,txt:'Super cadre, bonne cuisine locale.'}]},
-  {id:2,em:'🍹',name:'Bar Le Makokou',cat:'Bar',quartier:'Bord de mer',addr:'Quartier Louis, face à la plage',phone:'+241 06 44 55 66',hours:'Mar-Dim 17h-02h',rating:4.5,reviews:204,open:true,status:'approved',photos:['🍸','🎵','🌴','🥂'],avis:[{user:'Sandra O.',stars:5,txt:'Ambiance folle le week-end !'},{user:'Cédric B.',stars:4,txt:'Cocktails délicieux, terrasse face mer.'}]},
-  {id:3,em:'🍹',name:'Saveur des Tropiques',cat:'Bar',quartier:'Libreville',addr:'Avenue Bouet',phone:'+241 01 44 88 99',hours:'Lun-Dim 15h-01h',rating:4.2,reviews:97,open:true,status:'approved',photos:['🍺','🎤','🌺','🎶'],avis:[{user:'Patrice N.',stars:4,txt:'Bières locales excellentes !'},{user:'Florence A.',stars:4,txt:'Bonne ambiance, personnel sympa.'}]},
-  {id:4,em:'🏨',name:'Hôtel Tropicana',cat:'Hôtel',quartier:'Corniche',addr:'Corniche de Libreville',phone:'+241 01 44 55 66',hours:'Réception 24h/24',rating:4.2,reviews:87,open:true,status:'approved',photos:['🏊','🌊','🛏️','🌅'],avis:[{user:'Sophie N.',stars:4,txt:'Très bel hôtel avec vue sur mer.'},{user:'Rodrigue B.',stars:4,txt:'Bon rapport qualité-prix.'}]},
-  {id:5,em:'🛍️',name:'Centre Commercial Mbolo',cat:'Shopping',quartier:'Libreville',addr:'Avenue Bouet',phone:'+241 01 23 45 67',hours:'Lun-Dim 09h-21h',rating:3.9,reviews:214,open:true,status:'approved',photos:['🛍️','👗','👟','🧴'],avis:[{user:'Carole A.',stars:4,txt:'Grand choix de marques locales.'},{user:'Thierry O.',stars:3,txt:'Correct, mais certains commerces ferment tôt.'}]},
-  {id:6,em:'🏥',name:'Clinique El-Rapha',cat:'Santé',quartier:'Akanda',addr:'Quartier Akanda',phone:'+241 01 88 99 00',hours:'Lun-Sam 07h30-18h',rating:4.5,reviews:63,open:true,status:'approved',photos:['🏥','🩺','💊','🧬'],avis:[{user:'Marie-Claire F.',stars:5,txt:'Personnel très professionnel.'},{user:'Patrick E.',stars:4,txt:'Équipement moderne.'}]},
-  {id:7,em:'🌊',name:'Plage des Cocotiers',cat:'Loisirs',quartier:'Corniche',addr:'Corniche de Libreville',phone:'-',hours:'Ouvert toute la journée',rating:4.4,reviews:305,open:true,status:'approved',photos:['🌴','🌊','🏄','🌅'],avis:[{user:'Ibrahim D.',stars:5,txt:'La plus belle plage de Libreville !'},{user:'Nadia L.',stars:4,txt:'Très belle plage.'}]},
-  {id:8,em:'🍹',name:'Bar Le Panthère',cat:'Bar',quartier:'Plateau',addr:'Plateau, Quartier Glass',phone:'+241 01 77 66 55',hours:'Mer-Dim 18h-03h',rating:4.6,reviews:156,open:true,status:'approved',photos:['🍸','🎸','🪩','🌃'],avis:[{user:'Guy-Roger E.',stars:5,txt:'Le meilleur bar du Plateau !'},{user:'Brice M.',stars:5,txt:'Ambiance électrique le vendredi soir.'}]},
-  {id:9,em:'🍽️',name:'Chez Jeannot',cat:'Restaurant',quartier:'Louis',addr:'Quartier Louis',phone:'+241 06 11 22 33',hours:'Lun-Sam 12h-22h',rating:4.3,reviews:89,open:true,status:'approved',photos:['🍗','🥗','🍜','🥘'],avis:[{user:'Régine M.',stars:4,txt:'Cuisine traditionnelle authentique !'},{user:'Armel B.',stars:5,txt:'Le meilleur poulet braisé de Libreville.'}]},
+const PLACES=[
+  {id:1,em:'🏨',name:'Radisson Blu Okoumé Palace',cat:'Hôtel',quartier:'Bord de mer',addr:"Boulevard de Nice, face à l'océan — à 2 km de l'aéroport",phone:'+241 74 37 88 88',hours:'24h/24',rating:0,reviews:0,open:true,status:'approved',placeId:'ChIJTWOdc549fxARCja4Xt39BM',photos:['h01_1.jpg','h01_2.jpg','h01_3.jpg'],avis:[]},
+  {id:2,em:'🏨',name:'Park Inn by Radisson',cat:'Hôtel',quartier:'Quartier Louis',addr:'Descente J. Ebori, non loin de la montée de Louis',phone:'',hours:'24h/24',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['h02_1.jpg','h02_2.jpg','h02_3.jpg'],avis:[]},
+  {id:3,em:'🏨',name:'ONOMO Hotel Libreville',cat:'Hôtel',quartier:'La Sablière',addr:"Route d'Angondjé, Quartier des Ambassades",phone:'',hours:'24h/24',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['h03_1.jpg','h03_2.jpg','h03_3.jpg'],avis:[]},
+  {id:4,em:'🏨',name:'Hôtel Le Cristal',cat:'Hôtel',quartier:'Centre-ville',addr:'Boulevard Triomphal, non loin de la Chambre de Commerce',phone:'',hours:'24h/24',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['h04_1.jpg','h04_2.jpg','h04_3.jpg'],avis:[]},
+  {id:5,em:'🏨',name:'Hôtel LEET Dorian',cat:'Hôtel',quartier:'Quartier Louis',addr:'Quartier Louis, non loin de la montée de Louis',phone:'',hours:'24h/24',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['h05_1.jpg','h05_2.jpg','h05_3.jpg'],avis:[]},
+  {id:6,em:'🏨',name:'Résidence Océane',cat:'Hôtel',quartier:'Quartier Louis',addr:'Quartier Louis, en bord de mer',phone:'',hours:'24h/24',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:7,em:'🏨',name:'Hôtel Hibiscus',cat:'Hôtel',quartier:'Centre-ville',addr:'Boulevard Triomphal, centre-ville',phone:'',hours:'24h/24',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['h07_1.jpg','h07_2.jpg','h07_3.jpg'],avis:[]},
+  {id:8,em:'🏨',name:'Résidence Hôtelière du Phare',cat:'Hôtel',quartier:'La Sablière',addr:'Rond-point Les Jardins de Jade',phone:'',hours:'24h/24',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:9,em:'🏨',name:'Roma Restaurant & Hotel',cat:'Hôtel',quartier:'Centre-ville',addr:'Centre-ville de Libreville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:10,em:'🏨',name:'Nomad Suites Residence',cat:'Hôtel',quartier:'Centre-ville',addr:'Centre-ville — appartements hôteliers',phone:'',hours:'24h/24',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:11,em:'🍽️',name:'Le Lokua',cat:'Restaurant',quartier:'Glass',addr:'Quartier Glass — escaliers, porte discrète',phone:'',hours:'Déj. & dîner — fermé lundi',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r01_1.jpg','r01_2.jpg','r01_3.jpg'],avis:[]},
+  {id:12,em:'🍽️',name:'Le Phare du Large',cat:'Restaurant',quartier:'Batterie IV',addr:'Batterie IV — L101, en bord de mer',phone:'+241 77 24 24 19',hours:'Lun-Ven 12h-23h30 / Sam 17h-23h30',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r02_1.jpg','r02_2.jpg','r02_3.jpg'],avis:[]},
+  {id:13,em:'🍽️',name:'La Piazza',cat:'Restaurant',quartier:'Glass',addr:'Quartier Glass — Village des Myénés',phone:'',hours:'Déj. & dîner',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r03_1.jpg','r03_2.jpg','r03_3.jpg'],avis:[]},
+  {id:14,em:'🍽️',name:'BANTU Restaurant',cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville de Libreville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r04_1.jpg','r04_2.jpg','r04_3.jpg'],avis:[]},
+  {id:15,em:'🍽️',name:'Beach Club',cat:'Restaurant',quartier:'Bord de mer',addr:'En bord de mer, accès plage',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r05_1.jpg','r05_2.jpg','r05_3.jpg'],avis:[]},
+  {id:16,em:'🍽️',name:'La Voile Rouge',cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r06_1.jpg','r06_2.jpg','r06_3.jpg'],avis:[]},
+  {id:17,em:'🍽️',name:"Restaurant LYNN'S",cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville de Libreville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:18,em:'🍽️',name:'Lamaia Lounge Bar & Restaurant',cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:19,em:'🍽️',name:'Restaurant Mystic Bantu',cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:20,em:'🍽️',name:'Le Palais Gourmet',cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville de Libreville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r10_1.jpg','r10_2.jpg','r10_3.jpg'],avis:[]},
+  {id:21,em:'🍽️',name:'Restaurant Le Mississipi',cat:'Restaurant',quartier:'Petit Paris',addr:'Quartier Petit Paris — centre-ville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r12_1.jpg','r12_2.jpg','r12_3.jpg'],avis:[]},
+  {id:22,em:'🍽️',name:"L'Ella",cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r13_1.jpg','r13_2.jpg','r13_3.jpg'],avis:[]},
+  {id:23,em:'🍽️',name:"L'Émir",cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r14_1.jpg','r14_2.jpg','r14_3.jpg'],avis:[]},
+  {id:24,em:'🍽️',name:'Exotica Restaurant',cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r15_1.jpg','r15_2.jpg','r15_3.jpg'],avis:[]},
+  {id:25,em:'🍽️',name:'Le Topaz',cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:26,em:'🍽️',name:'Le QG',cat:'Restaurant',quartier:'Glass',addr:'Quartier Glass — entrée côté mer',phone:'',hours:'Déj. & dîner',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r16_1.jpg','r16_2.jpg','r16_3.jpg'],avis:[]},
+  {id:27,em:'🍽️',name:'Wapety',cat:'Restaurant',quartier:'Montée Louis',addr:'Montée Louis — non loin du marché de Louis',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r17_1.jpg','r17_2.jpg','r17_3.jpg'],avis:[]},
+  {id:28,em:'🍽️',name:'Restaurant U Piscadore',cat:'Restaurant',quartier:'Glass',addr:'Quartier Glass',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:29,em:'🍽️',name:'Le Bateau Ivre',cat:'Restaurant',quartier:'Bord de mer',addr:'9, bord de mer — centre-ville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r19_1.jpg','r19_2.jpg','r19_3.jpg'],avis:[]},
+  {id:30,em:'🍽️',name:'Idiora Restaurant-Bar',cat:'Restaurant',quartier:'Centre-ville',addr:'Complexe Majestic, Libreville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r20_1.jpg','r20_2.jpg','r20_3.jpg'],avis:[]},
+  {id:31,em:'🍽️',name:'Okoumé Restaurant Lounge',cat:'Restaurant',quartier:'Quartier Louis',addr:'Quartier Louis — en bord de mer',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r21_1.jpg','r21_2.jpg','r21_3.jpg'],avis:[]},
+  {id:32,em:'🍽️',name:"L'Assiette d'Or",cat:'Restaurant',quartier:'Quartier Louis',addr:'Quartier Louis — ruelle de Gabon Pain',phone:'',hours:'Déj. & dîner',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r22_1.jpg','r22_2.jpg','r22_3.jpg'],avis:[]},
+  {id:33,em:'🍽️',name:'Euphoria Libreville',cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:34,em:'🍽️',name:'Amaya Restaurant',cat:'Restaurant',quartier:'Bord de mer',addr:'Hôtel Radisson Blu, Boulevard de Nice',phone:'',hours:'Mar-Dim 17h-22h',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r24_1.jpg','r24_2.jpg','r24_3.jpg'],avis:[]},
+  {id:35,em:'🍽️',name:'Olatano',cat:'Restaurant',quartier:'Bord de mer',addr:'Radisson Blu & Park Inn, Boulevard de Nice',phone:'',hours:'Tous les jours',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:36,em:'🍽️',name:'La Palette Restaurant',cat:'Restaurant',quartier:'Quartier Louis',addr:'Park Inn by Radisson, Descente J. Ebori',phone:'',hours:'Matin & midi',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:37,em:'🍽️',name:'Le Baobab',cat:'Restaurant',quartier:'Quartier Louis',addr:'Entre le marché de Louis et le feu rouge Gros-Bouquet',phone:'+241 73 89 93',hours:'Déj. & dîner',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r27_1.jpg','r27_2.jpg','r27_3.jpg'],avis:[]},
+  {id:38,em:'🍽️',name:'Chez Marcelline',cat:'Restaurant',quartier:'Nombakélé',addr:'Nombakélé — grande terrasse',phone:'+241 74 20 49',hours:'Déj. & dîner',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r28_1.jpg'],avis:[]},
+  {id:39,em:'🍽️',name:'Chez Marie-qui-faü-chaud',cat:'Restaurant',quartier:'Glass',addr:'Quartier Glass — face à la Maison de la Presse',phone:'',hours:'Déj. & dîner',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:40,em:'🍽️',name:'Restaurant Sénégalais',cat:'Restaurant',quartier:'Nombakélé',addr:'Nombakélé — en face de Gaboprix',phone:'',hours:'Déj. & dîner',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:41,em:'🍽️',name:'Corisco Chica chez Katia',cat:'Restaurant',quartier:'Nombakélé',addr:'Direction Akébé, après la station face au stade',phone:'',hours:'Déj. & dîner',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:42,em:'🍽️',name:'Papa Union',cat:'Restaurant',quartier:'Montée de Louis',addr:'Montée de Louis — décor en bambou',phone:'+241 73 86 80',hours:'Tous les jours',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r32_1.jpg','r32_2.jpg','r32_3.jpg'],avis:[]},
+  {id:43,em:'🍽️',name:'Illico Restaurant',cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville — face au Campagnard',phone:'',hours:'Lun-Sam déj.',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r33_1.jpg','r33_2.jpg','r33_3.jpg'],avis:[]},
+  {id:44,em:'🍽️',name:'Le New Palmas',cat:'Restaurant',quartier:'Montagne Sainte',addr:'Montagne Sainte — rue Alsace-Lorraine',phone:'',hours:'Déj. & dîner',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:45,em:'🍽️',name:'Le Bon Coin de Louis chez Ali',cat:'Restaurant',quartier:'Quartier Louis',addr:'Entre le marché de Louis et le feu rouge Gros-Bouquet',phone:'+241 73 13 74',hours:'Déj. & dîner',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:46,em:'🍽️',name:'Nouveau Petit Chalut',cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville de Libreville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r36_1.jpg','r36_2.jpg','r36_3.jpg'],avis:[]},
+  {id:47,em:'🍽️',name:'Le Bar à Bouillon Ogasso',cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:48,em:'🍽️',name:'Sky Life',cat:'Restaurant',quartier:'Pont de Guégué',addr:'Pont de Guégué — vue sur la rivière',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r38_1.jpg'],avis:[]},
+  {id:49,em:'🍽️',name:'River Lodge',cat:'Restaurant',quartier:'Pointe Denis',addr:'Pointe Denis — face à Libreville, côté Atlantique',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:50,em:'🍽️',name:'Restaurant La Polinette',cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:51,em:'🍺',name:'Le No Stress',cat:'Bar',quartier:'Bord de mer',addr:'Centre-ville, bord de mer',phone:'+241 76 56 01 66',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['b01_1.jpg','b01_2.jpg','b01_3.jpg'],avis:[]},
+  {id:52,em:'🍺',name:'Le Bijou Beach',cat:'Bar',quartier:'Bas de Guégué',addr:'Bas de Guégué — en bord de mer',phone:'+241 62 17 97 97',hours:'Soir & week-end',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['b02_1.jpg','b02_2.jpg','b02_3.jpg'],avis:[]},
+  {id:53,em:'🍺',name:'Waïybar',cat:'Bar',quartier:'Montée de Louis',addr:'Montée de Louis',phone:'+241 74 50 91 50',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['b03_1.jpg','b03_2.jpg','b03_3.jpg'],avis:[]},
+  {id:54,em:'🍺',name:'The Spot',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['b04_1.jpg','b04_2.jpg','b04_3.jpg'],avis:[]},
+  {id:55,em:'🍺',name:'Hype Bar Lounge',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['b05_1.jpg','b05_2.jpg','b05_3.jpg'],avis:[]},
+  {id:56,em:'🍺',name:'Yoka Sports Bar',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'Jour & soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['b06_1.jpg','b06_2.jpg','b06_3.jpg'],avis:[]},
+  {id:57,em:'🍺',name:'The Lantern',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:58,em:'🍺',name:'Blu Bar',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:59,em:'🍺',name:'The Black Moon',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville — lounge stylé',phone:'',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:60,em:'🍺',name:'Hama Bar',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:61,em:'🍺',name:"Le Kyel's Bar & Food",cat:'Bar',quartier:'Derrière Prison',addr:"Derrière Soveman, en face de l'Église du Gabon",phone:'',hours:'Jour & soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['b11_1.jpg','b11_2.jpg','b11_3.jpg'],avis:[]},
+  {id:62,em:'🍺',name:'Murmure Lounge',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['b12_1.jpg','b12_2.jpg','b12_3.jpg'],avis:[]},
+  {id:63,em:'🍺',name:'Lollipop Bar',cat:'Bar',quartier:'Centre-ville',addr:"Boulevard de l'Indépendance",phone:'+241 04 17 96 29',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:64,em:'🍺',name:'Bar Guinness',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville — bar populaire',phone:'',hours:'Jour & soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:65,em:'🍺',name:'Le Baril Authentic Bar',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'Jour & soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:66,em:'🍺',name:'Le Yoss',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:67,em:'🍺',name:'Best Vibes',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville — lounge festif',phone:'',hours:'Soir & week-end',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:68,em:'🍺',name:'Bar Lounge PN',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:69,em:'🍺',name:'Wai Bar',cat:'Bar',quartier:'Bord de mer',addr:'Radisson Blu Okoumé Palace, Boulevard de Nice',phone:'',hours:'Tous les jours',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['b19_1.jpg','b19_2.jpg','b19_3.jpg'],avis:[]},
+  {id:70,em:'🍺',name:'Bar du Rond-point Avorbam',cat:'Bar',quartier:'Avorbam',addr:'Rond-point Avorbam',phone:'+241 76 59 40 43',hours:'Jour & soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:71,em:'🍺',name:'Le Bar de Glass',cat:'Bar',quartier:'Glass',addr:'Glass — ruelle CKDO, face église',phone:'+241 65 10 31 31',hours:'Lun-Sam 9h-22h',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:72,em:'🍺',name:'La Montée Quaben',cat:'Bar',quartier:'Montée Quaben',addr:'Montée Quaben',phone:'+241 65 85 50 75',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:73,em:'🍺',name:'Bar Cité des Ailes',cat:'Bar',quartier:'Cité des Ailes',addr:'Rond-point de la Cité des Ailes',phone:'+241 65 70 64 55',hours:'Jour & soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:74,em:'🍺',name:'Bar Owendo',cat:'Bar',quartier:'Owendo',addr:"Owendo — en direction du port d'Owendo",phone:'+241 77 22 22 16',hours:'Jour & soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:75,em:'🍺',name:'Calypso',cat:'Bar',quartier:'Boulevard Joseph Deemin',addr:'Boulevard Joseph Deemin — Descente de Chez Jeannot',phone:'',hours:'Jour & soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
+  {id:76,em:'🍺',name:'Batterie IV Bar',cat:'Bar',quartier:'Batterie IV',addr:'Batterie IV — non loin du Phare du Large',phone:'+241 62 60 00 05',hours:'Jour & soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
 ];
 
-const DEFAULT_ACTUS=[
-  {id:1,img:'🎵',bg:'#E1F5EE',tag:'Événement',title:'Festival Gabao 2025 — artistes confirmés',txt:'Le Festival Gabao revient cette année avec une programmation exceptionnelle. Les artistes de toute l\'Afrique centrale seront présents pour célébrer la musique gabonaise.',date:'15 mars 2025'},
-  {id:2,img:'🏗️',bg:'#fff8d6',tag:'Infra',title:'Nouveau boulevard bord de mer inauguré',txt:'Le nouveau boulevard de la Corniche est officiellement ouvert. Cette infrastructure moderne redonne à Libreville son visage maritime tant attendu.',date:'10 mars 2025'},
-  {id:3,img:'🌊',bg:'#e8f0fb',tag:'Sortie',title:'Top 5 spots plage ce week-end',txt:'Profitez du beau temps ce week-end sur les plus belles plages de Libreville. La Plage des Cocotiers et la Plage de la Sablière sont à leur meilleur niveau.',date:'8 mars 2025'},
-  {id:4,img:'🍹',bg:'#FAECE7',tag:'Bar',title:'Les bars branchés du Plateau ouvrent tôt',txt:'Ce week-end, plusieurs bars du Plateau ont décidé d\'ouvrir dès 15h pour profiter de l\'ambiance festive. Le Bar Le Panthère propose des cocktails spéciaux.',date:'5 mars 2025'},
-  {id:5,img:'🏛️',bg:'#EAF3DE',tag:'Culture',title:'Musée National : nouvelle exposition',txt:'Une nouvelle exposition sur l\'histoire du Gabon vient d\'ouvrir ses portes au Musée National de Libreville. Entrée gratuite le week-end.',date:'1 mars 2025'},
+const ACTUS=[
+  {id:1,img:'🎵',bg:'#E1F5EE',tag:'Événement',title:'MBOLO — Le guide de Libreville est lancé !',txt:"Bars, restaurants, hôtels : retrouvez tous les bons plans de Libreville sur MBOLO. Notez, partagez et découvrez les meilleures adresses de la capitale.",date:'25 avril 2026'},
+  {id:2,img:'🇬🇦',bg:'#fff8d6',tag:'Communauté',title:'Rejoignez la communauté MBOLO',txt:'Créez votre compte pour noter les établissements et contribuer au guide de Libreville. Votre avis compte !',date:'25 avril 2026'},
+  {id:3,img:'🍽️',bg:'#e8f0fb',tag:'Quartier',title:'Les établissements de Glass à l'honneur',txt:'Quartier Glass : Le Lokua, La Piazza, Le QG et Le Bar de Glass vous attendent avec des adresses incontournables.',date:'25 avril 2026'},
+  {id:4,img:'🏨',bg:'#FAECE7',tag:'Hôtels',title:'Les meilleurs hôtels de Libreville',txt:'Du Radisson Blu Okoumé Palace au Park Inn by Radisson, découvrez les hébergements de qualité de la capitale gabonaise.',date:'25 avril 2026'},
 ];
 
-// ─── PERSISTENCE ─────────────────────────────────────────────────────────────
-function loadData(){
-  try{
-    const p=localStorage.getItem('mbolo_places');
-    const a=localStorage.getItem('mbolo_actus');
-    return {
-      places: p?JSON.parse(p):[...DEFAULT_PLACES],
-      actus: a?JSON.parse(a):[...DEFAULT_ACTUS]
-    };
-  }catch(e){return{places:[...DEFAULT_PLACES],actus:[...DEFAULT_ACTUS]};}
-}
-function saveData(){
-  try{
-    localStorage.setItem('mbolo_places',JSON.stringify(places));
-    localStorage.setItem('mbolo_actus',JSON.stringify(actus));
-  }catch(e){}
-}
+let places=[...PLACES];
+let actus=[...ACTUS];
 
-let {places,actus}=loadData();
-
-// ─── HELPERS ─────────────────────────────────────────────────────────────────
-function stH(n){return '★'.repeat(Math.round(n))+'☆'.repeat(5-Math.round(n));}
+function stH(n){if(!n||n===0)return '☆☆☆☆☆';return '★'.repeat(Math.round(n))+'☆'.repeat(5-Math.round(n));}
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
-
-function go(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
-  document.getElementById(id).classList.add('on');
-}
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');}
 function goBack(){go('s-main');}
 function goGuest(){isGuest=true;currentUser={name:'Visiteur',guest:true};go('s-main');switchTab('home');}
 function goAdmin(){document.getElementById('admin-code').value='';document.getElementById('adminModal').classList.add('on');}
-function doAdminLogin(){
-  const code=document.getElementById('admin-code').value;
-  if(code===ADMIN_CODE){closeModal('adminModal');window.location.href='mbolo-admin.html';}
-  else{alert('Code incorrect.');}
-}
-
-function doLogin(){
-  const e=document.getElementById('li-email').value.trim();
-  if(!e){alert('Email requis.');return;}
-  currentUser={name:e.split('@')[0]||'Utilisateur',email:e,guest:false};
-  isGuest=false;go('s-main');switchTab('home');
-}
-function doRegister(){
-  const n=document.getElementById('rg-name').value.trim();
-  const e=document.getElementById('rg-email').value.trim();
-  if(!n||!e){alert('Nom et email requis.');return;}
-  currentUser={name:n,email:e,guest:false};
-  isGuest=false;go('s-main');switchTab('home');toast('Bienvenue sur MBOLO, '+n+' ! 🇬🇦');
-}
-
+function doAdminLogin(){const code=document.getElementById('admin-code').value;if(code===ADMIN_CODE){closeModal('adminModal');window.location.href='mbolo-admin.html';}else{alert('Code incorrect.');}}
+function doLogin(){const e=document.getElementById('li-email').value.trim();if(!e){alert('Email requis.');return;}currentUser={name:e.split('@')[0]||'Utilisateur',email:e,guest:false};isGuest=false;go('s-main');switchTab('home');}
+function doRegister(){const n=document.getElementById('rg-name').value.trim();const e=document.getElementById('rg-email').value.trim();if(!n||!e){alert('Nom et email requis.');return;}currentUser={name:n,email:e,guest:false};isGuest=false;go('s-main');switchTab('home');toast('Bienvenue sur MBOLO, '+n+' ! 🇬🇦');}
 function closeModal(id){document.getElementById(id).classList.remove('on');}
 
-// ─── TABS ─────────────────────────────────────────────────────────────────────
 function switchTab(t){
   prevTab=t;
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
-  const el=document.getElementById('tab-'+t);
-  if(el)el.classList.add('on');
+  const el=document.getElementById('tab-'+t);if(el)el.classList.add('on');
   const map={home:renderHome,bar:renderBar,actu:renderActu,add:renderAdd,prof:renderProf};
   if(map[t])map[t]();
 }
 
-// ─── HOME ─────────────────────────────────────────────────────────────────────
 function renderHome(){
   const un=currentUser?currentUser.name:'Visiteur';
   const initials=un.substring(0,2).toUpperCase();
   document.getElementById('mainScroll').innerHTML=`
-    ${isGuest?`<div class="gbanner"><span style="font-size:18px">🇬🇦</span><div class="gb-txt">Naviguez en visiteur. Créez un compte pour publier.</div><button class="gb-btn" onclick="go('s-register')">Rejoindre</button></div>`:''}
+    ${isGuest?'<div class="gbanner"><span style="font-size:18px">🇬🇦</span><div class="gb-txt">Naviguez en visiteur. Créez un compte pour publier.</div><button class="gb-btn" onclick="go(\'s-register\')">Rejoindre</button></div>':''}
     <div class="hdr">
       <div class="hdr-row">
         <div class="hdr-logo">MBOLO</div>
         <div style="display:flex;gap:8px;align-items:center">
           <div class="hdr-flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div>
-          <button style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.15);border:none;cursor:pointer;font-size:15px;color:#fff">🔔</button>
         </div>
       </div>
       <div class="hdr-loc">📍 Libreville, Gabon</div>
       <div class="uchip"><div class="av-sm">${initials}</div><span>${un}</span></div>
       <div class="sbox">
         <span style="font-size:15px;color:#bbb">🔍</span>
-        <input type="text" placeholder="Restaurant, bar, hôtel, pharmacie..." id="searchInput" oninput="renderPlaces()"/>
-        <button class="flt-btn">Filtrer</button>
+        <input type="text" placeholder="Restaurant, bar, hôtel..." id="searchInput" oninput="renderPlaces()"/>
       </div>
     </div>
     <div class="cats" id="catStrip"></div>
@@ -479,7 +455,7 @@ function renderHome(){
     <div class="nstrip">
       ${actus.slice(0,4).map(a=>`<div class="nc" onclick="switchTab('actu')"><div class="nc-img" style="background:${a.bg}">${a.img}</div><div class="nc-b"><div class="nc-tag">${a.tag}</div><div class="nc-t">${a.title}</div></div></div>`).join('')}
     </div>
-    <div class="sh"><span class="sh-t">Établissements</span><button class="see-all">Tout voir</button></div>
+    <div class="sh"><span class="sh-t">Établissements (${places.filter(p=>p.status==='approved').length})</span></div>
     <div class="plist" id="placeList"></div>
     <div style="height:88px"></div>`;
   renderCats();renderPlaces();
@@ -490,6 +466,11 @@ function renderCats(){
   s.innerHTML=CATS.map(c=>`<div class="cat${c.l===currentCat?' on':''}" onclick="filterCat('${c.l}')"><span class="cat-ic">${c.i}</span>${c.l}</div>`).join('');
 }
 function filterCat(cat){currentCat=cat;renderCats();renderPlaces();}
+
+function getThumb(p){
+  if(p.photos&&p.photos.length){return `<img src="${p.photos[0]}" style="width:76px;height:76px;object-fit:cover;" onerror="this.parentElement.innerHTML='${p.em}'">`;}
+  return p.em;
+}
 
 function renderPlaces(){
   const q=(document.getElementById('searchInput')||{}).value||'';
@@ -502,15 +483,13 @@ function renderPlaces(){
   });
   list.innerHTML=filtered.length?filtered.map(p=>`
     <div class="pc" onclick="openPlace(${p.id})">
-      <div class="pc-th">${p.em}</div>
+      <div class="pc-th">${getThumb(p)}</div>
       <div class="pc-inf">
-        <div class="pc-nm">${p.name}${p.status==='pending'?' <span class="badge pending">En attente</span>':''}</div>
+        <div class="pc-nm">${p.name}</div>
         <div class="pc-ct">${p.cat} · ${p.quartier||''}</div>
         <div class="pc-mt">
-          <span class="stars">${stH(p.rating)}</span>
-          <span class="sct">${p.rating} (${p.reviews})</span>
+          ${p.rating>0?`<span class="stars">${stH(p.rating)}</span><span class="sct">${p.rating} (${p.reviews})</span>`:'<span class="sct">Pas encore noté</span>'}
           ${p.open?'<span class="badge open">Ouvert</span>':''}
-          ${p.cat==='Bar'?'<span class="badge bar">Bar</span>':''}
         </div>
         <div class="pc-addr">📍 ${p.addr}</div>
       </div>
@@ -520,25 +499,63 @@ function renderPlaces(){
 function openPlace(id){
   const p=places.find(x=>x.id===id);if(!p)return;
   currentPlaceId=id;
-  document.getElementById('d-em').textContent=p.em;
+  // Cover photo
+  const cover=document.getElementById('d-cover');
+  if(p.photos&&p.photos.length){
+    cover.innerHTML=`<img class="det-cover" src="${p.photos[0]}" onerror="this.parentElement.innerHTML='<div class=det-cover-em>${p.em}</div>'">`;
+  }else{
+    cover.innerHTML=`<div class="det-cover-em">${p.em}</div>`;
+  }
   document.getElementById('d-nm').textContent=p.name;
   document.getElementById('d-ct').textContent=p.cat+' · '+p.quartier;
-  document.getElementById('d-st').textContent=stH(p.rating)+' '+p.rating;
+  document.getElementById('d-st').textContent=p.rating>0?stH(p.rating)+' '+p.rating:'Pas encore noté';
   document.getElementById('d-rc').textContent=p.reviews+' avis';
   document.getElementById('d-ad').textContent=p.addr;
-  document.getElementById('d-hr').textContent=p.hours;
-  document.getElementById('d-ph').textContent=p.phone;
-  document.getElementById('d-photos').innerHTML=(p.photos||[]).map(ph=>`<div class="phi">${ph}</div>`).join('');
-  document.getElementById('d-reviews').innerHTML=(p.avis||[]).length
-    ?(p.avis.map(a=>`<div class="rv"><div class="rv-u">${a.user}</div><div class="rv-s">${stH(a.stars)}</div><div class="rv-t">${a.txt}</div></div>`).join(''))
+  document.getElementById('d-hr').textContent=p.hours||'—';
+  document.getElementById('d-ph').textContent=p.phone||'—';
+  // Photos grid
+  const phEl=document.getElementById('d-photos');
+  if(p.photos&&p.photos.length){
+    phEl.innerHTML=p.photos.map(url=>`<div class="phi"><img src="${url}" onerror="this.parentElement.innerHTML='<div class=phi-em>📷</div>'"></div>`).join('');
+  }else{
+    phEl.innerHTML='<div style="grid-column:1/-1;padding:16px;text-align:center;color:#999;font-size:12px">📷 Photos bientôt disponibles</div>';
+  }
+  // Reviews
+  const rev=p.avis||[];
+  document.getElementById('d-reviews').innerHTML=rev.length
+    ?rev.map(a=>`<div class="rv"><div class="rv-u">${a.user}</div><div class="rv-s">${stH(a.stars)}</div><div class="rv-t">${a.txt}</div></div>`).join('')
     :'<div style="padding:14px;font-size:12px;color:var(--muted)">Aucun avis pour l\'instant. Soyez le premier !</div>';
   go('s-detail');
 }
 
-function sharePlace(){toast('🔗 Lien copié dans le presse-papiers !');}
-function navPlace(){const p=places.find(x=>x.id===currentPlaceId);if(p)toast('📍 Ouverture de la navigation vers '+p.name);}
+function sharePlace(){
+  const p=places.find(x=>x.id===currentPlaceId);if(!p)return;
+  const url=SITE_URL+'?p='+p.id;
+  const txt=p.name+' — '+p.cat+' à Libreville\n'+p.addr+'\n\nDécouvert sur MBOLO : '+url;
+  if(navigator.share){
+    navigator.share({title:p.name,text:p.cat+' à Libreville',url:url}).catch(()=>{});
+    return;
+  }
+  document.getElementById('share-title').textContent='Partager — '+p.name;
+  document.getElementById('share-wa').href='https://wa.me/?text='+encodeURIComponent(txt);
+  document.getElementById('share-fb').href='https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(url);
+  document.getElementById('shareModal').classList.add('on');
+}
 
-// ─── REVIEW ───────────────────────────────────────────────────────────────────
+function copyShareLink(){
+  const p=places.find(x=>x.id===currentPlaceId);if(!p)return;
+  const url=SITE_URL+'?p='+p.id;
+  navigator.clipboard.writeText(url).then(()=>{toast('🔗 Lien copié !');closeModal('shareModal');}).catch(()=>{toast('Lien : '+url);});
+}
+
+function navPlace(){
+  const p=places.find(x=>x.id===currentPlaceId);if(!p)return;
+  const url=p.placeId
+    ?'https://www.google.com/maps/place/?q=place_id:'+p.placeId
+    :'https://www.google.com/maps/search/'+encodeURIComponent(p.name+' Libreville Gabon');
+  window.open(url,'_blank');
+}
+
 function openReview(){
   if(isGuest){if(confirm('Créez un compte pour publier un avis.'))go('s-register');return;}
   revStar=0;document.getElementById('revTxt').value='';
@@ -554,12 +571,10 @@ function submitReview(){
   p.avis.unshift({user:currentUser.name,stars:revStar,txt});
   p.reviews++;
   p.rating=Math.round((p.rating*(p.reviews-1)+revStar)/p.reviews*10)/10;
-  userReviews++;saveData();
-  closeModal('reviewModal');openPlace(currentPlaceId);
+  userReviews++;closeModal('reviewModal');openPlace(currentPlaceId);
   toast('✅ Votre avis a été publié !');
 }
 
-// ─── BAR ──────────────────────────────────────────────────────────────────────
 function renderBar(){
   const bars=places.filter(p=>p.cat==='Bar'&&p.status!=='suspended');
   document.getElementById('mainScroll').innerHTML=`
@@ -568,54 +583,41 @@ function renderBar(){
       <div class="bar-s">Tous les bars de Libreville</div>
       <div class="bar-bdg">${bars.length} bars référencés</div>
     </div>
-    <div class="bcats">
-      <div class="bcat on">Tous</div><div class="bcat">Cocktails</div><div class="bcat">Bière locale</div>
-      <div class="bcat">Terrasse</div><div class="bcat">Musique live</div><div class="bcat">Nuit</div>
-    </div>
     <div class="sh"><span class="sh-t">Bars populaires</span></div>
     <div class="plist">
       ${bars.map(p=>`<div class="pc" onclick="openPlace(${p.id})">
-        <div class="pc-th" style="background:#e8f0fb">${p.em}</div>
+        <div class="pc-th" style="background:#e8f0fb">${getThumb(p)}</div>
         <div class="pc-inf">
           <div class="pc-nm">${p.name}</div>
           <div class="pc-ct">${p.addr}</div>
-          <div class="pc-mt"><span class="stars">${stH(p.rating)}</span><span class="sct">${p.rating} (${p.reviews})</span>${p.open?'<span class="badge open">Ouvert</span>':''}</div>
+          <div class="pc-mt">${p.rating>0?`<span class="stars">${stH(p.rating)}</span><span class="sct">${p.rating}</span>`:'<span class="sct">Pas encore noté</span>'}${p.open?'<span class="badge open">Ouvert</span>':''}</div>
           <div class="pc-addr">🕐 ${p.hours}</div>
         </div></div>`).join('')}
     </div><div style="height:88px"></div>`;
-  document.querySelectorAll('.bcat').forEach(bc=>{bc.onclick=function(){document.querySelectorAll('.bcat').forEach(x=>x.classList.remove('on'));this.classList.add('on');};});
 }
 
-// ─── ACTUS ────────────────────────────────────────────────────────────────────
 function renderActu(){
   document.getElementById('mainScroll').innerHTML=`
     <div class="hdr" style="padding-bottom:18px">
-      <div class="hdr-row">
-        <div class="hdr-logo">Actualités 📰</div>
-        <div class="hdr-flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div>
-      </div>
+      <div class="hdr-row"><div class="hdr-logo">Actualités 📰</div>
+      <div class="hdr-flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div></div>
       <div class="hdr-loc">📍 Libreville, Gabon</div>
     </div>
     <div style="padding:12px 14px 0">
       ${actus.map(a=>`<div class="ac-card">
         <div class="ac-img" style="background:${a.bg}">${a.img}</div>
-        <div class="ac-body">
-          <div class="ac-tag">${a.tag}</div>
-          <div class="ac-title">${a.title}</div>
-          <div class="ac-txt">${a.txt}</div>
-          <div class="ac-date">📅 ${a.date}</div>
-        </div></div>`).join('')}
+        <div class="ac-body"><div class="ac-tag">${a.tag}</div><div class="ac-title">${a.title}</div><div class="ac-txt">${a.txt}</div><div class="ac-date">📅 ${a.date}</div></div>
+      </div>`).join('')}
     </div><div style="height:88px"></div>`;
 }
 
-// ─── ADD ──────────────────────────────────────────────────────────────────────
 function renderAdd(){
   if(isGuest){
     document.getElementById('mainScroll').innerHTML=`
       <div style="text-align:center;padding:70px 24px">
         <div style="font-size:48px;margin-bottom:16px">🔒</div>
         <div style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:8px">Connexion requise</div>
-        <div style="font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.6">Créez un compte gratuit pour ajouter des établissements et partager vos découvertes avec la communauté MBOLO.</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.6">Créez un compte gratuit pour ajouter des établissements.</div>
         <button class="btn-main" style="max-width:270px;margin:0 auto;display:block" onclick="go('s-register')">Créer un compte gratuit</button>
         <div class="alink" style="margin-top:12px"><span onclick="go('s-login')">J'ai déjà un compte</span></div>
       </div><div style="height:88px"></div>`;
@@ -626,34 +628,21 @@ function renderAdd(){
     <div class="stripe"><div></div><div></div><div></div></div>
     <div class="add-body">
       <div style="background:#fff8d6;border:1px solid #fcd116;border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:#7a5c00">
-        ℹ️ Votre établissement sera soumis à validation avant d'apparaître dans l'application.
+        ℹ️ Votre établissement sera soumis à validation avant d'apparaître.
       </div>
-      <div class="fg"><label>Nom de l'établissement *</label><input type="text" placeholder="Ex: Restaurant Le Perroquet" id="newName"/></div>
+      <div class="fg"><label>Nom *</label><input type="text" id="newName" placeholder="Ex: Restaurant Le Perroquet"/></div>
       <div class="fg"><label>Catégorie *</label>
-        <select id="newCat">
-          <option>Restaurant</option><option>Bar</option><option>Hôtel</option>
-          <option>Shopping</option><option>Santé</option><option>Loisirs</option><option>Autre</option>
-        </select>
+        <select id="newCat"><option>Restaurant</option><option>Bar</option><option>Hôtel</option><option>Shopping</option><option>Santé</option><option>Loisirs</option><option>Autre</option></select>
       </div>
-      <div class="fg"><label>Quartier *</label><input type="text" placeholder="Ex: Plateau, Louis, Akanda..." id="newQrt"/></div>
-      <div class="fg"><label>Adresse *</label><input type="text" placeholder="Ex: Face au marché Mont-Bouët" id="newAddr"/></div>
-      <div class="fg"><label>Téléphone</label><input type="tel" placeholder="+241 06 ..." id="newPhone"/></div>
-      <div class="fg"><label>Horaires</label><input type="text" placeholder="Ex: Lun-Sam 08h-22h" id="newHours"/></div>
-      <div class="fg"><label>Description</label><textarea rows="3" placeholder="Décrivez le lieu..." id="newDesc"></textarea></div>
-      <div class="fg"><label>Photos</label>
-        <button class="ph-btn" onclick="toast('📷 Upload photo disponible dans la version publiée')">📷 Ajouter des photos</button>
-      </div>
-      <div class="fg"><label>Votre note initiale</label>
-        <div class="sp-w" id="addStars">
-          <span class="sp" onclick="setAddStar(1)">★</span><span class="sp" onclick="setAddStar(2)">★</span>
-          <span class="sp" onclick="setAddStar(3)">★</span><span class="sp" onclick="setAddStar(4)">★</span>
-          <span class="sp" onclick="setAddStar(5)">★</span>
-        </div>
-      </div>
+      <div class="fg"><label>Quartier *</label><input type="text" id="newQrt" placeholder="Ex: Plateau, Louis, Akanda..."/></div>
+      <div class="fg"><label>Adresse *</label><input type="text" id="newAddr" placeholder="Ex: Face au marché Mont-Bouët"/></div>
+      <div class="fg"><label>Téléphone</label><input type="tel" id="newPhone" placeholder="+241 06 ..."/></div>
+      <div class="fg"><label>Horaires</label><input type="text" id="newHours" placeholder="Ex: Lun-Sam 08h-22h"/></div>
+      <div class="fg"><label>Description</label><textarea rows="3" id="newDesc" placeholder="Décrivez le lieu..."></textarea></div>
       <button class="btn-main yellow" onclick="submitPlace()">Soumettre pour validation</button>
     </div><div style="height:88px"></div>`;
 }
-function setAddStar(n){addStar=n;document.querySelectorAll('#addStars .sp').forEach((s,i)=>s.classList.toggle('on',i<n));}
+
 function submitPlace(){
   const name=(document.getElementById('newName')||{}).value||'';
   const addr=(document.getElementById('newAddr')||{}).value||'';
@@ -661,23 +650,13 @@ function submitPlace(){
   const cat=(document.getElementById('newCat')||{}).value||'Restaurant';
   if(!name.trim()||!addr.trim()||!qrt.trim()){alert('Nom, quartier et adresse sont requis.');return;}
   const icons={Restaurant:'🍽️',Bar:'🍹',Hôtel:'🏨',Shopping:'🛍️',Santé:'🏥',Loisirs:'🌊',Autre:'📍'};
-  const newPlace={
-    id:Date.now(),em:icons[cat]||'📍',name:name.trim(),cat,
-    quartier:qrt.trim(),addr:addr.trim(),
+  places.unshift({id:Date.now(),em:icons[cat]||'📍',name:name.trim(),cat,quartier:qrt.trim(),addr:addr.trim(),
     phone:(document.getElementById('newPhone')||{}).value||'-',
     hours:(document.getElementById('newHours')||{}).value||'-',
-    rating:addStar||0,reviews:0,open:true,
-    status:'pending',
-    submittedBy:currentUser.name,
-    submittedAt:new Date().toLocaleDateString('fr-FR'),
-    photos:['📷'],avis:[]
-  };
-  places.unshift(newPlace);userPlaces++;addStar=0;saveData();
-  toast('✅ Soumis ! En attente de validation par l\'admin.');
-  switchTab('home');
+    rating:0,reviews:0,open:true,status:'pending',photos:[],avis:[]});
+  userPlaces++;toast('✅ Soumis ! En attente de validation.');switchTab('home');
 }
 
-// ─── PROFILE ──────────────────────────────────────────────────────────────────
 function renderProf(){
   const un=currentUser?currentUser.name:'Visiteur';
   const initials=un.substring(0,2).toUpperCase();
@@ -696,14 +675,11 @@ function renderProf(){
       </div>
       ${isGuest?`
         <div style="background:var(--y3);border:1.5px solid var(--y);border-radius:12px;padding:16px;text-align:center;margin-bottom:16px">
-          <div style="font-size:14px;font-weight:700;color:#7a5c00;margin-bottom:6px">Rejoignez la communauté MBOLO 🇬🇦</div>
-          <div style="font-size:12px;color:#7a5c00;margin-bottom:14px;line-height:1.5">Publiez des avis et ajoutez des lieux.</div>
+          <div style="font-size:14px;font-weight:700;color:#7a5c00;margin-bottom:6px">Rejoignez MBOLO 🇬🇦</div>
           <button class="btn-main" style="max-width:200px;margin:0 auto;display:block" onclick="go('s-register')">Créer un compte</button>
         </div>
-        <div style="text-align:center;padding:8px"><a onclick="goAdmin()" style="font-size:12px;color:var(--g);cursor:pointer">⚙️ Accès administrateur</a></div>`:`
+        <div style="text-align:center"><a onclick="goAdmin()" style="font-size:12px;color:var(--g);cursor:pointer">⚙️ Accès administrateur</a></div>`:`
         <div class="pmenu">
-          <div class="pmi"><div class="pmi-l"><span class="pmi-ic">👤</span>Modifier le profil</div><span style="color:var(--muted)">›</span></div>
-          <div class="pmi"><div class="pmi-l"><span class="pmi-ic">🔔</span>Notifications</div><span style="color:var(--muted)">›</span></div>
           <div class="pmi"><div class="pmi-l"><span class="pmi-ic">🗺️</span>Mes avis publiés</div><span style="color:var(--muted)">›</span></div>
           <div class="pmi"><div class="pmi-l"><span class="pmi-ic">📍</span>Mes lieux ajoutés</div><span style="color:var(--muted)">›</span></div>
           <div class="pmi" onclick="goAdmin()"><div class="pmi-l"><span class="pmi-ic">⚙️</span>Administration MBOLO</div><span style="color:var(--muted)">›</span></div>
@@ -712,83 +688,6 @@ function renderProf(){
     </div><div style="height:88px"></div>`;
 }
 function logout(){if(!confirm('Se déconnecter ?'))return;isGuest=false;currentUser=null;go('s-splash');}
-
-// === MBOLO OVERRIDE ===
-(function(){
-var v='mbv4';if(localStorage.getItem('_mv')!==v){localStorage.removeItem('mbolo_places');localStorage.setItem('_mv',v);}
-var MBOLO_PLACES=[{"id":1,"mbid":"h01","em":"🏨","name":"Radisson Blu Okoume Palace","cat":"Hotel","quartier":"Bord de mer","addr":"Boulevard de Nice, face a l ocean","phone":"+241 74 37 88 88","hours":"24h/24","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJuRzSgSM7fxARHOSHdyDg7Yg","photos":["h01_1.jpg","h01_2.jpg","h01_3.jpg"],"avis":[]},{"id":2,"mbid":"h02","em":"🏨","name":"Park Inn by Radisson","cat":"Hotel","quartier":"Quartier Louis","addr":"Descente J. Ebori, non loin de la montee de Louis","phone":"","hours":"24h/24","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJ67yMkCM7fxARyVPeBcWlWiY","photos":["h02_1.jpg","h02_2.jpg","h02_3.jpg"],"avis":[]},{"id":3,"mbid":"h03","em":"🏨","name":"ONOMO Hotel Libreville","cat":"Hotel","quartier":"La Sabliere","addr":"Route Angondje, Quartier Ambassades","phone":"","hours":"24h/24","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJK1LBUqclfxARdtFEbvb3ndk","photos":["h03_1.jpg","h03_2.jpg","h03_3.jpg"],"avis":[]},{"id":4,"mbid":"h04","em":"🏨","name":"Hotel Le Cristal","cat":"Hotel","quartier":"Centre-ville","addr":"Boulevard Triomphal, non loin Chambre de Commerce","phone":"","hours":"24h/24","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJazQLSO07fxARjYRReB9Vb9o","photos":["h04_1.jpg","h04_2.jpg","h04_3.jpg"],"avis":[]},{"id":5,"mbid":"h05","em":"🏨","name":"Hotel LEET Dorian","cat":"Hotel","quartier":"Quartier Louis","addr":"Quartier Louis, non loin de la montee de Louis","phone":"","hours":"24h/24","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJZdhn8I87fxARxarBGyS9iKU","photos":["h05_1.jpg","h05_2.jpg","h05_3.jpg"],"avis":[]},{"id":6,"mbid":"h06","em":"🏨","name":"Residence Oceane","cat":"Hotel","quartier":"Quartier Louis","addr":"Quartier Louis, en bord de mer","phone":"","hours":"24h/24","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJT4Ka7RklfxARsOSBn_g4l5I","photos":["h06_1.jpg","h06_2.jpg","h06_3.jpg"],"avis":[]},{"id":7,"mbid":"h07","em":"🏨","name":"Hotel Hibiscus","cat":"Hotel","quartier":"Centre-ville","addr":"Boulevard Triomphal, centre-ville","phone":"","hours":"24h/24","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJL4P-OG07fxARqrJk5KeO5WQ","photos":["h07_1.jpg","h07_2.jpg","h07_3.jpg"],"avis":[]},{"id":8,"mbid":"h08","em":"🏨","name":"Residence Hoteliere du Phare","cat":"Hotel","quartier":"La Sabliere","addr":"Rond-point Les Jardins de Jade","phone":"","hours":"24h/24","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":9,"mbid":"h09","em":"🏨","name":"Roma Restaurant Hotel","cat":"Hotel","quartier":"Centre-ville","addr":"Centre-ville de Libreville","phone":"","hours":"","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":10,"mbid":"h10","em":"🏨","name":"Nomad Suites Residence","cat":"Hotel","quartier":"Centre-ville","addr":"Centre-ville appartements hoteliers","phone":"","hours":"24h/24","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":11,"mbid":"r01","em":"🍽️","name":"Le Lokua","cat":"Restaurant","quartier":"Glass","addr":"Quartier Glass escaliers porte discrete","phone":"","hours":"Dej. et diner ferme lundi","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJ-Zj_K_E7fxARqvyIH7C0PXg","photos":["r01_1.jpg","r01_2.jpg","r01_3.jpg"],"avis":[]},{"id":12,"mbid":"r02","em":"🍽️","name":"Le Phare du Large","cat":"Restaurant","quartier":"Batterie IV","addr":"Batterie IV L101 en bord de mer","phone":"+241 77 24 24 19","hours":"Lun-Ven 12h-23h30","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJLZ6uKA47fxARw5eDI2Ysxr8","photos":["r02_1.jpg","r02_2.jpg","r02_3.jpg"],"avis":[]},{"id":13,"mbid":"r03","em":"🍽️","name":"La Piazza","cat":"Restaurant","quartier":"Glass","addr":"Quartier Glass Village des Myenes","phone":"","hours":"Dej. et diner","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJRdYL59M7fxAR0AJ3t3SPLOo","photos":["r03_1.jpg","r03_2.jpg","r03_3.jpg"],"avis":[]},{"id":14,"mbid":"r04","em":"🍽️","name":"BANTU Restaurant","cat":"Restaurant","quartier":"Centre-ville","addr":"Centre-ville de Libreville","phone":"","hours":"","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJNxAD-1E9fxARNsWfk-8ynNo","photos":["r04_1.jpg","r04_2.jpg","r04_3.jpg"],"avis":[]},{"id":15,"mbid":"r05","em":"🍽️","name":"Beach Club","cat":"Restaurant","quartier":"Bord de mer","addr":"En bord de mer acces plage","phone":"","hours":"","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJ4-4M9w4lfxARMyOTVgjY4iQ","photos":["r05_1.jpg","r05_2.jpg","r05_3.jpg"],"avis":[]},{"id":16,"mbid":"r06","em":"🍽️","name":"La Voile Rouge","cat":"Restaurant","quartier":"Centre-ville","addr":"Centre-ville","phone":"","hours":"","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJpYXkniI7fxARDtu78sQ_za4","photos":["r06_1.jpg","r06_2.jpg","r06_3.jpg"],"avis":[]},{"id":17,"mbid":"r07","em":"🍽️","name":"Restaurant LYNNS","cat":"Restaurant","quartier":"Centre-ville","addr":"Centre-ville de Libreville","phone":"","hours":"","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":18,"mbid":"r08","em":"🍽️","name":"Lamaia Lounge Restaurant","cat":"Restaurant","quartier":"Centre-ville","addr":"Centre-ville","phone":"","hours":"","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":19,"mbid":"r09","em":"🍽️","name":"Restaurant Mystic Bantu","cat":"Restaurant","quartier":"Centre-ville","addr":"Centre-ville","phone":"","hours":"","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":20,"mbid":"r10","em":"🍽️","name":"Le Palais Gourmet","cat":"Restaurant","quartier":"Centre-ville","addr":"Centre-ville de Libreville","phone":"","hours":"","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJCZMpXZk7fxARKU9XaxW2aUw","photos":["r10_1.jpg","r10_2.jpg","r10_3.jpg"],"avis":[]},{"id":21,"mbid":"r11","em":"🍽️","name":"Restaurant Le Mississipi","cat":"Restaurant","quartier":"Petit Paris","addr":"Quartier Petit Paris centre-ville","phone":"","hours":"","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":22,"mbid":"r12","em":"🍽️","name":"L Ella","cat":"Restaurant","quartier":"Centre-ville","addr":"Centre-ville","phone":"","hours":"","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJ0ZO8gMolfxAR8PwZEDZ-g9o","photos":["r12_1.jpg","r12_2.jpg","r12_3.jpg"],"avis":[]},{"id":23,"mbid":"r13","em":"🍽️","name":"L Emir","cat":"Restaurant","quartier":"Centre-ville","addr":"Centre-ville","phone":"","hours":"","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJrbgAad47fxARRF0207yIFmM","photos":["r13_1.jpg","r13_2.jpg","r13_3.jpg"],"avis":[]},{"id":24,"mbid":"r14","em":"🍽️","name":"Exotica Restaurant","cat":"Restaurant","quartier":"Centre-ville","addr":"Centre-ville","phone":"","hours":"","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJQS8omYolfxARdiqdSJAUHKo","photos":["r14_1.jpg","r14_2.jpg","r14_3.jpg"],"avis":[]},{"id":25,"mbid":"r15","em":"🍽️","name":"Le Topaz","cat":"Restaurant","quartier":"Centre-ville","addr":"Centre-ville","phone":"","hours":"","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJxSoYXvg7fxARsBk8mvSRdOc","photos":["r15_1.jpg","r15_2.jpg","r15_3.jpg"],"avis":[]},{"id":26,"mbid":"r16","em":"🍽️","name":"Le QG","cat":"Restaurant","quartier":"Glass","addr":"Quartier Glass entree cote mer","phone":"","hours":"Dej. et diner","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJi3cE6M89fxARgpT9h_Cb3Q8","photos":["r16_1.jpg","r16_2.jpg","r16_3.jpg"],"avis":[]},{"id":27,"mbid":"r17","em":"🍽️","name":"Wapety","cat":"Restaurant","quartier":"Montee Louis","addr":"Montee Louis marche de Louis","phone":"","hours":"","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJzSqCDgs7fxARE221eqdGk-Q","photos":["r17_1.jpg","r17_2.jpg","r17_3.jpg"],"avis":[]},{"id":28,"mbid":"r18","em":"🍽️","name":"Restaurant U Piscadore","cat":"Restaurant","quartier":"Glass","addr":"Quartier Glass","phone":"","hours":"","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":29,"mbid":"r19","em":"🍽️","name":"Le Bateau Ivre","cat":"Restaurant","quartier":"Bord de mer","addr":"9 bord de mer centre-ville","phone":"","hours":"","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJT_rkjg47fxARNI7-ltEZQUU","photos":["r19_1.jpg","r19_2.jpg","r19_3.jpg"],"avis":[]},{"id":30,"mbid":"r20","em":"🍽️","name":"Idiora Restaurant Bar","cat":"Restaurant","quartier":"Centre-ville","addr":"Complexe Majestic Libreville","phone":"","hours":"","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJ2RKxvp87fxARMmG1FY36ZQA","photos":["r20_1.jpg","r20_2.jpg","r20_3.jpg"],"avis":[]},{"id":31,"mbid":"r21","em":"🍽️","name":"Okoume Restaurant Lounge","cat":"Restaurant","quartier":"Quartier Louis","addr":"Quartier Louis en bord de mer","phone":"","hours":"","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJ9ZHpMuU7fxARP5lGHfukUR0","photos":["r21_1.jpg","r21_2.jpg","r21_3.jpg"],"avis":[]},{"id":32,"mbid":"r22","em":"🍽️","name":"L Assiette d Or","cat":"Restaurant","quartier":"Quartier Louis","addr":"Quartier Louis ruelle Gabon Pain","phone":"","hours":"Dej. et diner","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJdZUoKnU7fxARH_BPSyZ9Tow","photos":["r22_1.jpg","r22_2.jpg","r22_3.jpg"],"avis":[]},{"id":33,"mbid":"r23","em":"🍽️","name":"Euphoria Libreville","cat":"Restaurant","quartier":"Centre-ville","addr":"Centre-ville","phone":"","hours":"","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":34,"mbid":"r24","em":"🍽️","name":"Amaya Restaurant","cat":"Restaurant","quartier":"Bord de mer","addr":"Hotel Radisson Blu Boulevard de Nice","phone":"","hours":"Mar-Dim 17h-22h","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJ4QgMNW47fxART_6SgnPB0ls","photos":["r24_1.jpg","r24_2.jpg","r24_3.jpg"],"avis":[]},{"id":35,"mbid":"r25","em":"🍽️","name":"Olatano","cat":"Restaurant","quartier":"Bord de mer","addr":"Radisson Blu et Park Inn Boulevard de Nice","phone":"","hours":"Tous les jours","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":36,"mbid":"r26","em":"🍽️","name":"La Palette Restaurant","cat":"Restaurant","quartier":"Quartier Louis","addr":"Park Inn by Radisson Descente J. Ebori","phone":"","hours":"Matin et midi","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":37,"mbid":"r27","em":"🍽️","name":"Le Baobab","cat":"Restaurant","quartier":"Quartier Louis","addr":"Entre marche Louis et feu rouge Gros-Bouquet","phone":"+241 73 89 93","hours":"Dej. et diner","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJucfrD0xy5kcRynLAwtN7P9M","photos":["r27_1.jpg","r27_2.jpg","r27_3.jpg"],"avis":[]},{"id":38,"mbid":"r28","em":"🍽️","name":"Chez Marcelline","cat":"Restaurant","quartier":"Nombakele","addr":"Nombakele grande terrasse","phone":"+241 74 20 49","hours":"Dej. et diner","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJyWsbD3g9fxARh9HFTTMxXhM","photos":["r28_1.jpg"],"avis":[]},{"id":39,"mbid":"r29","em":"🍽️","name":"Chez Marie qui fau chaud","cat":"Restaurant","quartier":"Glass","addr":"Quartier Glass face a la Maison de la Presse","phone":"","hours":"Dej. et diner","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":40,"mbid":"r30","em":"🍽️","name":"Restaurant Senegalais","cat":"Restaurant","quartier":"Nombakele","addr":"Nombakele en face de Gaboprix","phone":"","hours":"Dej. et diner","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":41,"mbid":"r31","em":"🍽️","name":"Corisco Chica chez Katia","cat":"Restaurant","quartier":"Nombakele","addr":"Direction Akebe apres la station face au stade","phone":"","hours":"Dej. et diner","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":42,"mbid":"r32","em":"🍽️","name":"Papa Union","cat":"Restaurant","quartier":"Montee de Louis","addr":"Montee de Louis decor en bambou","phone":"+241 73 86 80","hours":"Tous les jours","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJU2wdSxM7fxAR4O0iLDkfRdc","photos":["r32_1.jpg","r32_2.jpg","r32_3.jpg"],"avis":[]},{"id":43,"mbid":"r33","em":"🍽️","name":"Illico Restaurant","cat":"Restaurant","quartier":"Centre-ville","addr":"Centre-ville face au Campagnard","phone":"","hours":"Lun-Sam dejeuner","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJ10JT01I7fxARa7rKtMvgxd4","photos":["r33_1.jpg","r33_2.jpg","r33_3.jpg"],"avis":[]},{"id":44,"mbid":"r34","em":"🍽️","name":"Le New Palmas","cat":"Restaurant","quartier":"Montagne Sainte","addr":"Montagne Sainte rue Alsace-Lorraine","phone":"","hours":"Dej. et diner","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":45,"mbid":"r35","em":"🍽️","name":"Le Bon Coin de Louis chez Ali","cat":"Restaurant","quartier":"Quartier Louis","addr":"Entre marche Louis et feu rouge Gros-Bouquet","phone":"+241 73 13 74","hours":"Dej. et diner","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":46,"mbid":"r36","em":"🍽️","name":"Nouveau Petit Chalut","cat":"Restaurant","quartier":"Centre-ville","addr":"Centre-ville de Libreville","phone":"","hours":"","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJodtVCAE8fxARQ3MfAa7lxfs","photos":["r36_1.jpg","r36_2.jpg","r36_3.jpg"],"avis":[]},{"id":47,"mbid":"r37","em":"🍽️","name":"Le Bar a Bouillon Ogasso","cat":"Restaurant","quartier":"Centre-ville","addr":"Centre-ville","phone":"","hours":"","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":48,"mbid":"r38","em":"🍽️","name":"Sky Life","cat":"Restaurant","quartier":"Pont de Guegue","addr":"Pont de Guegue vue sur la riviere","phone":"","hours":"","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJLQ9rzIk7fxARfED3YnR-n0M","photos":["r38_1.jpg"],"avis":[]},{"id":49,"mbid":"r39","em":"🍽️","name":"River Lodge","cat":"Restaurant","quartier":"Pointe Denis","addr":"Pointe Denis face a Libreville cote Atlantique","phone":"","hours":"","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":50,"mbid":"r40","em":"🍽️","name":"Restaurant La Polinette","cat":"Restaurant","quartier":"Centre-ville","addr":"Centre-ville","phone":"","hours":"","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":51,"mbid":"b01","em":"🍺","name":"Le No Stress","cat":"Bar","quartier":"Bord de mer","addr":"Centre-ville bord de mer","phone":"+241 76 56 01 66","hours":"Soir","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJR8fPZg47fxARj_2tJJo_ZEI","photos":["b01_1.jpg","b01_2.jpg","b01_3.jpg"],"avis":[]},{"id":52,"mbid":"b02","em":"🍺","name":"Le Bijou Beach","cat":"Bar","quartier":"Bas de Guegue","addr":"Bas de Guegue en bord de mer","phone":"+241 62 17 97 97","hours":"Soir et week-end","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJFdzYQA0_fxARiqLTtiWbxxI","photos":["b02_1.jpg","b02_2.jpg","b02_3.jpg"],"avis":[]},{"id":53,"mbid":"b03","em":"🍺","name":"Waiybar","cat":"Bar","quartier":"Montee de Louis","addr":"Montee de Louis","phone":"+241 74 50 91 50","hours":"Soir","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJgyYhWI07fxAR8Ls224eTkDE","photos":["b03_1.jpg","b03_2.jpg","b03_3.jpg"],"avis":[]},{"id":54,"mbid":"b04","em":"🍺","name":"The Spot","cat":"Bar","quartier":"Centre-ville","addr":"Centre-ville","phone":"","hours":"Soir","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJTWOdc549fxAR3cja4Xt39BM","photos":["b04_1.jpg","b04_2.jpg","b04_3.jpg"],"avis":[]},{"id":55,"mbid":"b05","em":"🍺","name":"Hype Bar Lounge","cat":"Bar","quartier":"Centre-ville","addr":"Centre-ville","phone":"","hours":"Soir","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJ5cGvApA7fxAR0ivmZjTaBps","photos":["b05_1.jpg","b05_2.jpg","b05_3.jpg"],"avis":[]},{"id":56,"mbid":"b06","em":"🍺","name":"Yoka Sports Bar","cat":"Bar","quartier":"Centre-ville","addr":"Centre-ville","phone":"","hours":"Jour et soir","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJe37oVzY7fxARz6jqOoiiBUI","photos":["b06_1.jpg","b06_2.jpg","b06_3.jpg"],"avis":[]},{"id":57,"mbid":"b07","em":"🍺","name":"The Lantern","cat":"Bar","quartier":"Centre-ville","addr":"Centre-ville","phone":"","hours":"Soir","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":58,"mbid":"b08","em":"🍺","name":"Blu Bar","cat":"Bar","quartier":"Centre-ville","addr":"Centre-ville","phone":"","hours":"Soir","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":59,"mbid":"b09","em":"🍺","name":"The Black Moon","cat":"Bar","quartier":"Centre-ville","addr":"Centre-ville lounge style","phone":"","hours":"Soir","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":60,"mbid":"b10","em":"🍺","name":"Hama Bar","cat":"Bar","quartier":"Centre-ville","addr":"Centre-ville","phone":"","hours":"Soir","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":61,"mbid":"b11","em":"🍺","name":"Le Kyels Bar Food","cat":"Bar","quartier":"Derriere Prison","addr":"Derriere Soveman face a l Eglise du Gabon","phone":"","hours":"Jour et soir","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJoX5E3yQ7fxARnOQzCIzcecg","photos":["b11_1.jpg","b11_2.jpg","b11_3.jpg"],"avis":[]},{"id":62,"mbid":"b12","em":"🍺","name":"Murmure Lounge","cat":"Bar","quartier":"Centre-ville","addr":"Centre-ville","phone":"","hours":"Soir","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJ325dLG07fxAR-iNTulQd_Ts","photos":["b12_1.jpg","b12_2.jpg","b12_3.jpg"],"avis":[]},{"id":63,"mbid":"b13","em":"🍺","name":"Lollipop Bar","cat":"Bar","quartier":"Centre-ville","addr":"Boulevard de l Independance","phone":"+241 04 17 96 29","hours":"Soir","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJM0MZSe07fxARKQNMGwyVLm8","photos":[],"avis":[]},{"id":64,"mbid":"b14","em":"🍺","name":"Bar Guinness","cat":"Bar","quartier":"Centre-ville","addr":"Centre-ville bar populaire","phone":"","hours":"Jour et soir","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJFZ7vRyA9fxARV_-y_zVKxA0","photos":[],"avis":[]},{"id":65,"mbid":"b15","em":"🍺","name":"Le Baril Authentic Bar","cat":"Bar","quartier":"Centre-ville","addr":"Centre-ville","phone":"","hours":"Jour et soir","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":66,"mbid":"b16","em":"🍺","name":"Le Yoss","cat":"Bar","quartier":"Centre-ville","addr":"Centre-ville","phone":"","hours":"Soir","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":67,"mbid":"b17","em":"🍺","name":"Best Vibes","cat":"Bar","quartier":"Centre-ville","addr":"Centre-ville lounge festif","phone":"","hours":"Soir et week-end","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":68,"mbid":"b18","em":"🍺","name":"Bar Lounge PN","cat":"Bar","quartier":"Centre-ville","addr":"Centre-ville","phone":"","hours":"Soir","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":69,"mbid":"b19","em":"🍺","name":"Wai Bar Radisson","cat":"Bar","quartier":"Bord de mer","addr":"Radisson Blu Okoume Palace Boulevard de Nice","phone":"","hours":"Tous les jours","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"ChIJgyYhWI07fxAR8Ls224eTkDE","photos":["b19_1.jpg","b19_2.jpg","b19_3.jpg"],"avis":[]},{"id":70,"mbid":"b20","em":"🍺","name":"Bar du Rond-point Avorbam","cat":"Bar","quartier":"Avorbam","addr":"Rond-point Avorbam","phone":"+241 76 59 40 43","hours":"Jour et soir","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":71,"mbid":"b21","em":"🍺","name":"Le Bar de Glass","cat":"Bar","quartier":"Glass","addr":"Glass ruelle CKDO face eglise","phone":"+241 65 10 31 31","hours":"Lun-Sam 9h-22h","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":72,"mbid":"b22","em":"🍺","name":"La Montee Quaben","cat":"Bar","quartier":"Montee Quaben","addr":"Montee Quaben","phone":"+241 65 85 50 75","hours":"Soir","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":73,"mbid":"b23","em":"🍺","name":"Bar Cite des Ailes","cat":"Bar","quartier":"Cite des Ailes","addr":"Rond-point de la Cite des Ailes","phone":"+241 65 70 64 55","hours":"Jour et soir","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":74,"mbid":"b24","em":"🍺","name":"Bar Owendo","cat":"Bar","quartier":"Owendo","addr":"Owendo direction port d Owendo","phone":"+241 77 22 22 16","hours":"Jour et soir","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":75,"mbid":"b25","em":"🍺","name":"Calypso","cat":"Bar","quartier":"Boulevard Joseph Deemin","addr":"Descente de Chez Jeannot","phone":"","hours":"Jour et soir","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]},{"id":76,"mbid":"b26","em":"🍺","name":"Batterie IV Bar","cat":"Bar","quartier":"Batterie IV","addr":"Batterie IV non loin du Phare du Large","phone":"+241 62 60 00 05","hours":"Jour et soir","rating":0,"reviews":0,"open":true,"status":"approved","placeId":"","photos":[],"avis":[]}];
-places=MBOLO_PLACES;
-try{localStorage.setItem('mbolo_places',JSON.stringify(places));}catch(e){}
-
-var SITE_URL='https://barttoni52-cloud.github.io/mbolo/';
-
-window.openPlace=function(id){
-  var p=places.find(function(x){return x.id===id;});
-  if(!p)return;
-  currentPlaceId=id;
-  document.getElementById('d-em').textContent=p.em;
-  document.getElementById('d-nm').textContent=p.name;
-  document.getElementById('d-ct').textContent=p.cat+' · '+p.quartier;
-  document.getElementById('d-st').textContent=p.rating>0?(p.rating+'/5 ★'):'Pas encore note';
-  document.getElementById('d-rc').textContent=p.reviews+' avis';
-  document.getElementById('d-ad').textContent=p.addr;
-  document.getElementById('d-hr').textContent=p.hours||'-';
-  document.getElementById('d-ph').textContent=p.phone||'-';
-  var ph=p.photos||[];
-  var phEl=document.getElementById('d-photos');
-  if(ph.length){
-    phEl.innerHTML=ph.map(function(url){
-      return '<div class="phi" style="background:#eee;overflow:hidden;padding:0;border-radius:10px"><img src="'+url+'" style="width:100%;height:100%;object-fit:cover" onerror="this.parentElement.innerHTML=\'&#128247;\'"/></div>';
-    }).join('');
-  }else{
-    phEl.innerHTML='<div style="grid-column:1/-1;padding:16px;text-align:center;color:#999;font-size:12px">&#128247; Photos bientot disponibles</div>';
-  }
-  var rev=p.avis||[];
-  document.getElementById('d-reviews').innerHTML=rev.length
-    ?rev.map(function(a){return '<div class="rv"><div class="rv-u">'+a.user+'</div><div class="rv-s">'+stH(a.stars)+'</div><div class="rv-t">'+a.txt+'</div></div>';}).join('')
-    :'<div style="padding:14px;font-size:12px;color:var(--muted)">Aucun avis pour l\'instant. Soyez le premier !</div>';
-  go('s-detail');
-};
-
-window.navPlace=function(){
-  var p=places.find(function(x){return x.id===currentPlaceId;});
-  if(!p)return;
-  var url=p.placeId
-    ?'https://www.google.com/maps/place/?q=place_id:'+p.placeId
-    :'https://www.google.com/maps/search/'+encodeURIComponent(p.name+' Libreville Gabon');
-  window.open(url,'_blank');
-};
-
-window.sharePlace=function(){
-  var p=places.find(function(x){return x.id===currentPlaceId;});
-  if(!p)return;
-  var url=SITE_URL+'?place='+p.id;
-  var txt=p.name+' — '+p.cat+' à Libreville
-'+p.addr+'
-
-Decouvert sur MBOLO : '+url;
-  if(navigator.share){
-    navigator.share({title:p.name,text:p.cat+' a Libreville',url:url}).catch(function(){});
-  }else{
-    // Fallback : modal partage
-    var modal=document.createElement('div');
-    modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;display:flex;align-items:flex-end;justify-content:center';
-    modal.innerHTML='<div style="background:#fff;border-radius:20px 20px 0 0;width:100%;max-width:430px;padding:24px 20px 40px">'
-      +'<div style="width:38px;height:4px;background:#e0e0e0;border-radius:2px;margin:0 auto 18px"></div>'
-      +'<div style="font-size:15px;font-weight:700;margin-bottom:16px">Partager '+p.name+'</div>'
-      +'<div style="display:flex;gap:12px;margin-bottom:20px">'
-      +'<a href="https://wa.me/?text='+encodeURIComponent(txt)+'" target="_blank" style="flex:1;background:#25D366;color:#fff;text-align:center;padding:12px;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px">WhatsApp</a>'
-      +'<a href="https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(url)+'" target="_blank" style="flex:1;background:#1877F2;color:#fff;text-align:center;padding:12px;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px">Facebook</a>'
-      +'</div>'
-      +'<button onclick="navigator.clipboard.writeText(''+url+'').then(function(){alert('Lien copie !');})" style="width:100%;padding:12px;border:1.5px solid #e0e0e0;border-radius:10px;background:#fff;font-size:13px;cursor:pointer;margin-bottom:8px">&#128279; Copier le lien</button>'
-      +'<button onclick="this.closest('div[style*=fixed]').remove()" style="width:100%;padding:12px;border:none;background:none;color:#666;font-size:13px;cursor:pointer">Annuler</button>'
-      +'</div>';
-    modal.onclick=function(e){if(e.target===modal)modal.remove();};
-    document.body.appendChild(modal);
-  }
-};
-})();
-// === FIN OVERRIDE ===
 </script>
 </body>
 </html>
