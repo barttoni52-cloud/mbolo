@@ -16,12 +16,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .screen{display:none;flex-direction:column;flex:1;min-height:100vh}
 .screen.on{display:flex}
 .scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
-/* LOADING */
 .loading{position:fixed;inset:0;background:var(--g);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .4s}
 .loading-logo{font-size:52px;font-weight:800;color:#fff;letter-spacing:-2px;margin-bottom:20px}
 .spinner{width:32px;height:32px;border:3px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-/* SPLASH */
 .splash{background:var(--g);flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 28px;min-height:100vh}
 .flag{display:flex;width:60px;height:40px;border-radius:8px;overflow:hidden;margin-bottom:20px;border:2px solid rgba(255,255,255,.3)}
 .flag div{flex:1}
@@ -34,7 +32,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .btn-wh{width:100%;padding:15px;background:rgba(255,255,255,.15);color:#fff;font-size:14px;font-weight:500;border:1.5px solid rgba(255,255,255,.35);border-radius:14px;cursor:pointer;margin-bottom:10px}
 .btn-ghost{width:100%;padding:12px;background:transparent;color:rgba(255,255,255,.65);font-size:13px;border:none;cursor:pointer}
 .splash-foot{margin-top:24px;font-size:10px;color:rgba(255,255,255,.4)}
-/* AUTH */
 .auth-top{background:var(--g);padding:28px 20px 36px}
 .auth-back{background:rgba(255,255,255,.2);border:none;color:#fff;border-radius:8px;padding:7px 14px;font-size:12px;cursor:pointer;margin-bottom:16px;display:inline-block}
 .auth-h{font-size:24px;font-weight:700;color:#fff}
@@ -55,7 +52,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .divider{display:flex;align-items:center;gap:10px;margin:18px 0;color:var(--muted);font-size:12px}
 .divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--bd)}
 .auth-err{color:var(--red);font-size:12px;text-align:center;margin-bottom:10px;display:none}
-/* HEADER */
 .hdr{background:var(--g);padding:16px 16px 52px;position:relative;overflow:hidden}
 .hdr-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .hdr-logo{color:#fff;font-size:22px;font-weight:800}
@@ -67,16 +63,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .uchip span{font-size:11px;color:#fff}
 .sbox{background:#fff;border-radius:12px;display:flex;align-items:center;gap:8px;padding:10px 14px;position:relative;z-index:2}
 .sbox input{border:none;outline:none;flex:1;font-size:13px;color:var(--text);background:transparent}
-/* CATS */
 .cats{display:flex;gap:8px;overflow-x:auto;padding:14px 14px 0;scrollbar-width:none}
 .cats::-webkit-scrollbar{display:none}
 .cat{flex-shrink:0;padding:8px 13px;border-radius:20px;font-size:12px;cursor:pointer;border:1.5px solid var(--bd);background:var(--bg);color:var(--muted);display:flex;align-items:center;gap:5px;font-weight:500}
 .cat.on{background:var(--y);color:#7a5c00;border-color:var(--y)}
-/* SECTION HEADER */
 .sh{display:flex;justify-content:space-between;align-items:center;padding:16px 14px 8px}
 .sh-t{font-size:14px;font-weight:700;color:var(--text)}
 .see-all{font-size:12px;color:var(--g);cursor:pointer;background:none;border:none;font-weight:600}
-/* NEWS STRIP */
 .nstrip{display:flex;gap:10px;overflow-x:auto;padding:0 14px;scrollbar-width:none}
 .nstrip::-webkit-scrollbar{display:none}
 .nc{flex-shrink:0;width:180px;border-radius:12px;overflow:hidden;border:1.5px solid var(--bd);background:var(--bg);cursor:pointer}
@@ -84,7 +77,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .nc-b{padding:9px}
 .nc-tag{font-size:9px;font-weight:700;color:#085041;background:#9FE1CB;padding:2px 6px;border-radius:20px;display:inline-block;margin-bottom:4px;text-transform:uppercase}
 .nc-t{font-size:11px;font-weight:600;color:var(--text);line-height:1.4}
-/* PLACE CARDS */
 .plist{padding:0 14px;display:flex;flex-direction:column;gap:10px}
 .pc{background:var(--bg);border:1.5px solid var(--bd);border-radius:14px;overflow:hidden;cursor:pointer;display:flex;transition:.12s}
 .pc:active{transform:scale(.98)}
@@ -96,15 +88,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .pc-mt{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 .stars{color:#F59E0B;font-size:11px}
 .sct{font-size:10px;color:var(--muted)}
-.badge.open{background:#EAF3DE;color:#3B6D11;font-size:9px;padding:2px 7px;border-radius:20px;font-weight:700}
+.badge-open{background:#EAF3DE;color:#3B6D11;font-size:9px;padding:2px 7px;border-radius:20px;font-weight:700}
 .pc-addr{font-size:10px;color:var(--muted);margin-top:3px}
-/* TABBAR */
 .tabbar{border-top:1.5px solid var(--bd);display:flex;background:var(--bg);padding-bottom:env(safe-area-inset-bottom,4px)}
 .tab{flex:1;padding:10px 0 6px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;border:none;background:none}
 .ti{font-size:20px}
 .tl{font-size:9px;color:var(--muted);font-weight:500}
 .tab.on .tl{color:var(--g)}
-/* DETAIL */
 .det-top{background:var(--g);padding:16px 16px 18px}
 .det-back{background:rgba(255,255,255,.2);border:none;color:#fff;border-radius:8px;padding:7px 14px;font-size:12px;cursor:pointer;margin-bottom:10px;font-weight:600}
 .det-sc{flex:1;overflow-y:auto}
@@ -123,18 +113,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .phg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 14px 4px}
 .phi{aspect-ratio:1;border-radius:10px;overflow:hidden;background:var(--bg2)}
 .phi img{width:100%;height:100%;object-fit:cover}
-.phi-em{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px}
 .rv{border-top:1px solid var(--bd);padding:12px 14px}
+.rv-header{display:flex;justify-content:space-between;align-items:flex-start}
 .rv-u{font-size:12px;font-weight:700;color:var(--text);margin-bottom:2px}
 .rv-s{font-size:11px;color:#F59E0B;margin-bottom:4px}
-.rv-t{font-size:12px;color:var(--muted);line-height:1.5}
+.rv-t{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:6px}
 .rv-date{font-size:10px;color:#bbb;margin-top:4px}
-/* BAR */
+.rv-photo{width:100%;max-height:180px;object-fit:cover;border-radius:8px;margin-top:6px;cursor:pointer}
+.btn-report{background:none;border:1px solid #ffcccc;color:var(--red);font-size:10px;padding:3px 8px;border-radius:6px;cursor:pointer;white-space:nowrap}
+.btn-report:hover{background:#ffeeee}
 .bar-hero{background:var(--b);padding:22px 16px 44px}
 .bar-t{font-size:22px;font-weight:700;color:#fff;margin-bottom:4px}
 .bar-s{font-size:13px;color:rgba(255,255,255,.7)}
 .bar-bdg{display:inline-block;background:var(--y);color:#7a5c00;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;margin-top:8px}
-/* ACTUS */
 .ac-card{border:1.5px solid var(--bd);border-radius:14px;overflow:hidden;cursor:pointer;margin-bottom:10px}
 .ac-img{height:110px;display:flex;align-items:center;justify-content:center;font-size:40px}
 .ac-body{padding:14px}
@@ -142,7 +133,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .ac-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:5px;line-height:1.4}
 .ac-txt{font-size:12px;color:var(--muted);line-height:1.6}
 .ac-date{font-size:10px;color:var(--muted);margin-top:6px}
-/* ADD */
 .add-top{background:var(--g);padding:22px 16px 28px}
 .add-t{font-size:20px;font-weight:700;color:#fff;margin-bottom:4px}
 .add-s{font-size:12px;color:rgba(255,255,255,.7)}
@@ -150,7 +140,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .sp-w{display:flex;gap:6px;margin:4px 0}
 .sp{font-size:24px;cursor:pointer;color:#ddd}
 .sp.on{color:#F59E0B}
-/* PROFILE */
 .prof-top{background:var(--g);padding:30px 16px 48px;text-align:center}
 .av-lg{width:72px;height:72px;border-radius:50%;background:var(--y);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:24px;font-weight:800;color:#7a5c00;border:3px solid #fff}
 .prof-nm{font-size:18px;font-weight:700;color:#fff}
@@ -167,25 +156,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .gbanner{background:var(--y3);border:1.5px solid var(--y);border-radius:10px;padding:10px 14px;margin:10px 14px 0;display:flex;align-items:center;gap:10px}
 .gb-txt{font-size:11px;color:#7a5c00;flex:1;line-height:1.5}
 .gb-btn{background:var(--g);color:#fff;border:none;border-radius:8px;padding:6px 11px;font-size:10px;cursor:pointer;white-space:nowrap;font-weight:700}
-/* MODALS */
 .mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:100;align-items:flex-end;justify-content:center}
 .mbg.on{display:flex}
-.mbox{background:var(--bg);border-radius:20px 20px 0 0;width:100%;max-width:430px;padding:20px 18px 40px;max-height:88vh;overflow-y:auto}
+.mbox{background:var(--bg);border-radius:20px 20px 0 0;width:100%;max-width:430px;padding:20px 18px 40px;max-height:90vh;overflow-y:auto}
 .mhandle{width:38px;height:4px;background:var(--bd);border-radius:2px;margin:0 auto 18px}
 .mt{font-size:16px;font-weight:700;margin-bottom:16px;color:var(--text)}
 .mcancel{width:100%;padding:12px;background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;margin-top:6px}
-/* TOAST */
 .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
 .toast.show{opacity:1}
 .share-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px;color:#fff;margin-bottom:10px}
 .rules-box{background:#fff3cd;border:1px solid #ffc107;border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:11px;color:#856404;line-height:1.6}
+.upload-zone{border:2px dashed var(--bd);border-radius:10px;padding:20px;text-align:center;cursor:pointer;transition:.2s;margin-bottom:8px;background:var(--bg2)}
+.upload-zone:hover{border-color:var(--g);background:#f0faf5}
+.upload-preview{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.upload-preview img{width:70px;height:70px;object-fit:cover;border-radius:8px;border:1px solid var(--bd)}
+.upload-preview .rm-ph{position:relative;display:inline-block}
+.upload-preview .rm-btn{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;border:none;border-radius:50%;width:16px;height:16px;font-size:10px;cursor:pointer;line-height:16px;text-align:center;padding:0}
 </style>
 </head>
 <body>
 <div class="app" id="app">
 <div class="toast" id="toast"></div>
-
-<!-- LOADING -->
 <div class="loading" id="loading">
   <div class="loading-logo">MBOLO</div>
   <div class="spinner"></div>
@@ -287,15 +278,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
   <div class="mbox">
     <div class="mhandle"></div>
     <div class="mt">Laisser un avis</div>
-    <div class="rules-box">
-      ⚠️ <strong>Règles MBOLO</strong> — Il est formellement interdit de proférer des injures, menaces ou propos irrespectueux. Tout avis inapproprié sera supprimé.
-    </div>
+    <div class="rules-box">⚠️ <strong>Règles MBOLO</strong> — Il est formellement interdit de proférer des injures, menaces ou propos irrespectueux. Tout avis inapproprié sera supprimé.</div>
     <div class="fg"><label>Note *</label>
       <div class="sp-w" id="revStars">
-        <span class="sp" data-star="1">★</span>
-        <span class="sp" data-star="2">★</span>
-        <span class="sp" data-star="3">★</span>
-        <span class="sp" data-star="4">★</span>
+        <span class="sp" data-star="1">★</span><span class="sp" data-star="2">★</span>
+        <span class="sp" data-star="3">★</span><span class="sp" data-star="4">★</span>
         <span class="sp" data-star="5">★</span>
       </div>
     </div>
@@ -305,6 +292,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
       <div id="rev-char" style="font-size:10px;color:#999;text-align:right;margin-top:3px">0 / 500</div>
     </div>
     <div class="fg"><label>Prénom</label><input type="text" id="revNom" placeholder="Votre prénom"/></div>
+    <div class="fg">
+      <label>Photo (optionnelle)</label>
+      <div class="upload-zone" id="rev-upload-zone">
+        <input type="file" id="rev-photo-input" accept="image/*" style="display:none"/>
+        <div style="font-size:24px;margin-bottom:6px">📷</div>
+        <div style="font-size:12px;color:var(--muted)">Ajouter une photo à votre avis</div>
+      </div>
+      <div id="rev-photo-preview" style="display:none;position:relative;display:none">
+        <img id="rev-photo-thumb" style="width:100%;height:120px;object-fit:cover;border-radius:8px;"/>
+        <button id="rev-photo-remove" style="position:absolute;top:6px;right:6px;background:var(--red);color:#fff;border:none;border-radius:50%;width:24px;height:24px;font-size:14px;cursor:pointer;">×</button>
+      </div>
+      <div id="rev-upload-progress" style="display:none;font-size:12px;color:var(--g);padding:8px 0;">⏳ Upload en cours...</div>
+    </div>
     <button class="btn-main" id="btn-submit-review">Publier mon avis</button>
     <button class="mcancel" id="btn-cancel-review">Annuler</button>
   </div>
@@ -322,6 +322,32 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
   </div>
 </div>
 
+<!-- REPORT MODAL -->
+<div class="mbg" id="reportModal">
+  <div class="mbox">
+    <div class="mhandle"></div>
+    <div class="mt">🚨 Signaler ce contenu</div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.6">Pourquoi signalez-vous ce contenu ? L'administrateur sera notifié immédiatement.</div>
+    <div class="fg">
+      <label>Raison *</label>
+      <select id="report-reason">
+        <option value="">Sélectionner une raison</option>
+        <option value="photo_choquante">Photo choquante ou inappropriée</option>
+        <option value="injures">Injures ou menaces</option>
+        <option value="faux_avis">Faux avis / spam</option>
+        <option value="contenu_inapproprie">Contenu inapproprié</option>
+        <option value="autre">Autre raison</option>
+      </select>
+    </div>
+    <div class="fg">
+      <label>Précisions (optionnel)</label>
+      <textarea id="report-details" rows="3" placeholder="Décrivez le problème..."></textarea>
+    </div>
+    <button class="btn-main" id="btn-submit-report" style="background:var(--red)">🚨 Envoyer le signalement</button>
+    <button class="mcancel" id="btn-cancel-report">Annuler</button>
+  </div>
+</div>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, getDocs, addDoc, updateDoc, doc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
@@ -336,561 +362,402 @@ const firebaseConfig = {
   appId: "1:1079636501599:web:8b8ed3fa9ce4a1f875a7ea"
 };
 
+const CLOUDINARY_CLOUD = "djngux5fk";
+const CLOUDINARY_PRESET = "mbolo_upload";
+const SITE_URL = "https://barttoni52-cloud.github.io/mbolo/";
+
 const fbApp = initializeApp(firebaseConfig);
 const db = getFirestore(fbApp);
 const auth = getAuth(fbApp);
-const SITE_URL = "https://barttoni52-cloud.github.io/mbolo/";
 
-// STATE
-let currentUser = null;
-let isGuest = false;
-let currentPlaceId = null;
-let currentPlaceData = null;
-let revStar = 0;
-let userReviews = 0;
-let userPlaces = 0;
-let currentCat = "Tous";
-let allPlaces = [];
+let currentUser = null, isGuest = false, currentPlaceId = null;
+let currentPlaceData = null, revStar = 0, userReviews = 0, userPlaces = 0;
+let currentCat = "Tous", allPlaces = [], reportTarget = null;
+let revPhotoUrl = null, addPhotos = [];
 
 const CATS = [
   {l:"Tous",i:"🗺️"},{l:"Restaurant",i:"🍽️"},{l:"Bar",i:"🍹"},
   {l:"Hotel",i:"🏨"},{l:"Shopping",i:"🛍️"},{l:"Sante",i:"🏥"},{l:"Loisirs",i:"🌊"}
 ];
-
 const ACTUS = [
   {img:"🎵",bg:"#E1F5EE",tag:"Lancement",title:"MBOLO est lancé !",txt:"Bars, restaurants, hôtels : retrouvez les meilleures adresses de Libreville.",date:"26 avril 2026"},
   {img:"🇬🇦",bg:"#fff8d6",tag:"Communauté",title:"Rejoignez MBOLO",txt:"Créez un compte pour noter et contribuer au guide de Libreville.",date:"26 avril 2026"},
   {img:"🍽️",bg:"#e8f0fb",tag:"Quartier",title:"Les adresses de Glass",txt:"Quartier Glass : Le Lokua, La Piazza, Le QG vous attendent.",date:"26 avril 2026"},
 ];
 
-// HELPERS
-function stH(n) {
-  if (!n || n === 0) return "☆☆☆☆☆";
-  return "★".repeat(Math.round(n)) + "☆".repeat(5 - Math.round(n));
+function stH(n){if(!n||n===0)return "☆☆☆☆☆";return "★".repeat(Math.round(n))+"☆".repeat(5-Math.round(n))}
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2500)}
+function go(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("on"));document.getElementById(id).classList.add("on")}
+function closeModal(id){document.getElementById(id).classList.remove("on")}
+function hideLoading(){const el=document.getElementById("loading");el.style.opacity="0";setTimeout(()=>el.style.display="none",400)}
+
+// Cloudinary upload
+async function uploadToCloudinary(file) {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", CLOUDINARY_PRESET);
+  formData.append("folder", "mbolo");
+  const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, {method:"POST",body:formData});
+  const data = await res.json();
+  if (data.secure_url) return data.secure_url;
+  throw new Error(data.error?.message || "Upload failed");
 }
 
-function toast(msg) {
-  const t = document.getElementById("toast");
-  t.textContent = msg;
-  t.classList.add("show");
-  setTimeout(() => t.classList.remove("show"), 2500);
-}
-
-function go(id) {
-  document.querySelectorAll(".screen").forEach(s => s.classList.remove("on"));
-  document.getElementById(id).classList.add("on");
-}
-
-function closeModal(id) {
-  document.getElementById(id).classList.remove("on");
-}
-
-function hideLoading() {
-  const el = document.getElementById("loading");
-  el.style.opacity = "0";
-  setTimeout(() => el.style.display = "none", 400);
-}
-
-// AUTH STATE
+// AUTH
 onAuthStateChanged(auth, user => {
   hideLoading();
   if (user) {
-    currentUser = {uid: user.uid, name: user.displayName || user.email.split("@")[0], email: user.email, guest: false};
+    currentUser = {uid:user.uid, name:user.displayName||user.email.split("@")[0], email:user.email, guest:false};
     isGuest = false;
-    go("s-main");
-    switchTab("home");
-  } else {
-    go("s-splash");
-  }
+    go("s-main"); switchTab("home");
+  } else { go("s-splash"); }
 });
 
-// EVENTS - SPLASH
 document.getElementById("btn-register").onclick = () => go("s-register");
 document.getElementById("btn-login").onclick = () => go("s-login");
-document.getElementById("btn-guest").onclick = () => {
-  isGuest = true;
-  currentUser = {name: "Visiteur", guest: true};
-  go("s-main");
-  switchTab("home");
-};
-
-// EVENTS - LOGIN
+document.getElementById("btn-guest").onclick = () => { isGuest=true; currentUser={name:"Visiteur",guest:true}; go("s-main"); switchTab("home"); };
 document.getElementById("login-back").onclick = () => go("s-splash");
 document.getElementById("link-to-register").onclick = () => go("s-register");
-document.getElementById("link-guest-login").onclick = () => {
-  isGuest = true;
-  currentUser = {name: "Visiteur", guest: true};
-  go("s-main");
-  switchTab("home");
-};
-document.getElementById("btn-do-login").onclick = async () => {
-  const email = document.getElementById("li-email").value.trim();
-  const pwd = document.getElementById("li-pwd").value;
-  const err = document.getElementById("login-err");
-  err.style.display = "none";
-  if (!email || !pwd) { err.textContent = "Email et mot de passe requis."; err.style.display = "block"; return; }
-  try {
-    await signInWithEmailAndPassword(auth, email, pwd);
-  } catch(e) {
-    err.textContent = "Email ou mot de passe incorrect.";
-    err.style.display = "block";
-  }
-};
-
-// EVENTS - REGISTER
+document.getElementById("link-guest-login").onclick = () => { isGuest=true; currentUser={name:"Visiteur",guest:true}; go("s-main"); switchTab("home"); };
 document.getElementById("register-back").onclick = () => go("s-splash");
 document.getElementById("link-to-login").onclick = () => go("s-login");
-document.getElementById("link-guest-reg").onclick = () => {
-  isGuest = true;
-  currentUser = {name: "Visiteur", guest: true};
-  go("s-main");
-  switchTab("home");
-};
-document.getElementById("btn-do-register").onclick = async () => {
-  const name = document.getElementById("rg-name").value.trim();
-  const email = document.getElementById("rg-email").value.trim();
-  const pwd = document.getElementById("rg-pwd").value;
-  const err = document.getElementById("reg-err");
-  err.style.display = "none";
-  if (!name || !email || !pwd) { err.textContent = "Tous les champs sont requis."; err.style.display = "block"; return; }
-  if (pwd.length < 6) { err.textContent = "Mot de passe trop court (min. 6 caractères)."; err.style.display = "block"; return; }
-  try {
-    const cred = await createUserWithEmailAndPassword(auth, email, pwd);
-    await addDoc(collection(db, "membres"), {nom: name, email, uid: cred.user.uid, date: serverTimestamp()});
-    toast(`Bienvenue sur MBOLO, ${name} ! 🇬🇦`);
-  } catch(e) {
-    err.textContent = e.code === "auth/email-already-in-use" ? "Email déjà utilisé." : "Erreur : " + e.message;
-    err.style.display = "block";
-  }
+document.getElementById("link-guest-reg").onclick = () => { isGuest=true; currentUser={name:"Visiteur",guest:true}; go("s-main"); switchTab("home"); };
+
+document.getElementById("btn-do-login").onclick = async () => {
+  const email=document.getElementById("li-email").value.trim(), pwd=document.getElementById("li-pwd").value;
+  const err=document.getElementById("login-err"); err.style.display="none";
+  if(!email||!pwd){err.textContent="Email et mot de passe requis.";err.style.display="block";return;}
+  try{await signInWithEmailAndPassword(auth,email,pwd);}
+  catch(e){err.textContent="Email ou mot de passe incorrect.";err.style.display="block";}
 };
 
-// EVENTS - DETAIL
+document.getElementById("btn-do-register").onclick = async () => {
+  const name=document.getElementById("rg-name").value.trim(), email=document.getElementById("rg-email").value.trim(), pwd=document.getElementById("rg-pwd").value;
+  const err=document.getElementById("reg-err"); err.style.display="none";
+  if(!name||!email||!pwd){err.textContent="Tous les champs sont requis.";err.style.display="block";return;}
+  if(pwd.length<6){err.textContent="Mot de passe trop court (min. 6 caractères).";err.style.display="block";return;}
+  try{
+    const cred=await createUserWithEmailAndPassword(auth,email,pwd);
+    await addDoc(collection(db,"membres"),{nom:name,email,uid:cred.user.uid,date:serverTimestamp()});
+    toast("Bienvenue sur MBOLO, "+name+" ! 🇬🇦");
+  }catch(e){err.textContent=e.code==="auth/email-already-in-use"?"Email déjà utilisé.":"Erreur : "+e.message;err.style.display="block";}
+};
+
+// DETAIL EVENTS
 document.getElementById("det-back-btn").onclick = () => go("s-main");
 document.getElementById("btn-avis").onclick = openReview;
 document.getElementById("btn-share").onclick = sharePlace;
 document.getElementById("btn-nav").onclick = navPlace;
 
-// EVENTS - REVIEW MODAL
-document.getElementById("btn-cancel-review").onclick = () => closeModal("reviewModal");
-document.getElementById("btn-submit-review").onclick = submitReview;
-document.getElementById("revTxt").oninput = function() {
-  const len = this.value.length;
-  const el = document.getElementById("rev-char");
-  el.textContent = `${len} / 500`;
-  el.style.color = len > 450 ? "#E24B4A" : "#999";
-};
-document.querySelectorAll("#revStars .sp").forEach(sp => {
-  sp.onclick = () => {
-    revStar = parseInt(sp.dataset.star);
-    document.querySelectorAll("#revStars .sp").forEach((s, i) => s.classList.toggle("on", i < revStar));
-  };
-});
-
-// EVENTS - SHARE MODAL
-document.getElementById("btn-cancel-share").onclick = () => closeModal("shareModal");
-document.getElementById("btn-copy-link").onclick = () => {
-  const url = `${SITE_URL}?p=${currentPlaceId}`;
-  navigator.clipboard.writeText(url).then(() => {
-    toast("🔗 Lien copié !");
-    closeModal("shareModal");
-  }).catch(() => toast(url));
-};
-
-// EVENTS - TABBAR
-document.querySelectorAll(".tab").forEach(tab => {
-  tab.onclick = () => switchTab(tab.dataset.tab);
-});
-
 // TABS
+document.querySelectorAll(".tab").forEach(tab => { tab.onclick = () => switchTab(tab.dataset.tab); });
 function switchTab(t) {
-  document.querySelectorAll(".tab").forEach(x => x.classList.remove("on"));
-  const el = document.getElementById(`tab-${t}`);
-  if (el) el.classList.add("on");
-  const map = {home: renderHome, bar: renderBar, actu: renderActu, add: renderAdd, prof: renderProf};
-  if (map[t]) map[t]();
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("on"));
+  const el=document.getElementById("tab-"+t); if(el)el.classList.add("on");
+  const map={home:renderHome,bar:renderBar,actu:renderActu,add:renderAdd,prof:renderProf};
+  if(map[t])map[t]();
 }
 
-// LOAD PLACES
-async function loadPlaces() {
-  const snap = await getDocs(collection(db, "places"));
-  allPlaces = [];
-  snap.forEach(d => allPlaces.push({...d.data(), fbId: d.id}));
-  return allPlaces;
-}
+// PLACES
+async function loadPlaces(){const snap=await getDocs(collection(db,"places"));allPlaces=[];snap.forEach(d=>allPlaces.push({...d.data(),fbId:d.id}));return allPlaces;}
 
-// RENDER HOME
 async function renderHome() {
-  const un = currentUser ? currentUser.name : "Visiteur";
-  const initials = un.substring(0, 2).toUpperCase();
-  const ms = document.getElementById("mainScroll");
-
+  const un=currentUser?currentUser.name:"Visiteur", initials=un.substring(0,2).toUpperCase();
+  const ms=document.getElementById("mainScroll");
   ms.innerHTML = `
-    ${isGuest ? `<div class="gbanner"><span style="font-size:18px">🇬🇦</span><div class="gb-txt">Naviguez en visiteur. Créez un compte pour publier.</div><button class="gb-btn" id="gbanner-btn">Rejoindre</button></div>` : ""}
+    ${isGuest?'<div class="gbanner"><span style="font-size:18px">🇬🇦</span><div class="gb-txt">Naviguez en visiteur. Créez un compte pour publier.</div><button class="gb-btn" id="gbanner-btn">Rejoindre</button></div>':""}
     <div class="hdr">
-      <div class="hdr-row">
-        <div class="hdr-logo">MBOLO</div>
+      <div class="hdr-row"><div class="hdr-logo">MBOLO</div>
         <div class="hdr-flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div>
       </div>
       <div class="hdr-loc">📍 Libreville, Gabon</div>
       <div class="uchip"><div class="av-sm">${initials}</div><span>${un}</span></div>
-      <div class="sbox">
-        <span style="font-size:15px;color:#bbb">🔍</span>
-        <input type="text" placeholder="Restaurant, bar, hôtel..." id="searchInput"/>
-      </div>
+      <div class="sbox"><span style="font-size:15px;color:#bbb">🔍</span><input type="text" placeholder="Restaurant, bar, hôtel..." id="searchInput"/></div>
     </div>
     <div class="cats" id="catStrip"></div>
     <div class="sh"><span class="sh-t">Actualités</span><button class="see-all" id="see-actus">Tout voir</button></div>
     <div class="nstrip" id="nstrip"></div>
     <div class="sh"><span class="sh-t" id="places-count">Établissements</span></div>
     <div class="plist" id="placeList"></div>
-    <div style="height:88px"></div>
-  `;
-
-  // Events inside rendered HTML
-  const gbBtn = document.getElementById("gbanner-btn");
-  if (gbBtn) gbBtn.onclick = () => go("s-register");
-  document.getElementById("see-actus").onclick = () => switchTab("actu");
-  document.getElementById("searchInput").oninput = filterPlaces;
-
-  // Actus strip
-  const nstrip = document.getElementById("nstrip");
-  ACTUS.forEach(a => {
-    const nc = document.createElement("div");
-    nc.className = "nc";
-    nc.onclick = () => switchTab("actu");
-    nc.innerHTML = `<div class="nc-img" style="background:${a.bg}">${a.img}</div><div class="nc-b"><div class="nc-tag">${a.tag}</div><div class="nc-t">${a.title}</div></div>`;
-    nstrip.appendChild(nc);
-  });
-
-  renderCats();
-  await loadPlaces();
-  renderPlacesList(allPlaces);
+    <div style="height:88px"></div>`;
+  const gbBtn=document.getElementById("gbanner-btn"); if(gbBtn)gbBtn.onclick=()=>go("s-register");
+  document.getElementById("see-actus").onclick=()=>switchTab("actu");
+  document.getElementById("searchInput").oninput=filterPlaces;
+  const nstrip=document.getElementById("nstrip");
+  ACTUS.forEach(a=>{const nc=document.createElement("div");nc.className="nc";nc.onclick=()=>switchTab("actu");nc.innerHTML=`<div class="nc-img" style="background:${a.bg}">${a.img}</div><div class="nc-b"><div class="nc-tag">${a.tag}</div><div class="nc-t">${a.title}</div></div>`;nstrip.appendChild(nc);});
+  renderCats(); await loadPlaces(); renderPlacesList(allPlaces);
 }
 
-function renderCats() {
-  const s = document.getElementById("catStrip");
-  if (!s) return;
-  s.innerHTML = "";
-  CATS.forEach(c => {
-    const div = document.createElement("div");
-    div.className = "cat" + (c.l === currentCat ? " on" : "");
-    div.textContent = c.i + " " + c.l;
-    div.onclick = () => { currentCat = c.l; renderCats(); filterPlaces(); };
-    s.appendChild(div);
-  });
-}
+function renderCats(){const s=document.getElementById("catStrip");if(!s)return;s.innerHTML="";CATS.forEach(c=>{const div=document.createElement("div");div.className="cat"+(c.l===currentCat?" on":"");div.textContent=c.i+" "+c.l;div.onclick=()=>{currentCat=c.l;renderCats();filterPlaces();};s.appendChild(div);});}
+function filterPlaces(){const q=(document.getElementById("searchInput")||{}).value||"";const filtered=allPlaces.filter(p=>{if(p.status==="suspended")return false;const mc=currentCat==="Tous"||p.cat===currentCat;const mq=!q||p.name.toLowerCase().includes(q.toLowerCase())||(p.quartier||"").toLowerCase().includes(q.toLowerCase());return mc&&mq;});renderPlacesList(filtered);}
 
-function filterPlaces() {
-  const q = (document.getElementById("searchInput") || {}).value || "";
-  const filtered = allPlaces.filter(p => {
-    if (p.status === "suspended") return false;
-    const mc = currentCat === "Tous" || p.cat === currentCat;
-    const mq = !q || p.name.toLowerCase().includes(q.toLowerCase()) || (p.quartier || "").toLowerCase().includes(q.toLowerCase());
-    return mc && mq;
-  });
-  renderPlacesList(filtered);
-}
-
-function renderPlacesList(places) {
-  const list = document.getElementById("placeList");
-  if (!list) return;
-  const countEl = document.getElementById("places-count");
-  const approved = places.filter(p => p.status === "approved");
-  if (countEl) countEl.textContent = `Établissements (${approved.length})`;
-  list.innerHTML = "";
-  if (!approved.length) {
-    list.innerHTML = `<div style="text-align:center;padding:28px;color:var(--muted);font-size:13px">Aucun résultat</div>`;
-    return;
-  }
-  approved.forEach(p => {
-    const pc = document.createElement("div");
-    pc.className = "pc";
-    pc.onclick = () => openPlace(p.fbId);
-    const hasPhoto = p.photos && p.photos.length;
-    const thumb = hasPhoto
-      ? `<img src="${p.photos[0]}" style="width:76px;height:76px;object-fit:cover;" onerror="this.parentElement.innerHTML='${p.em}'">`
-      : p.em;
-    const ratingHtml = p.rating > 0
-      ? `<span class="stars">${stH(p.rating)}</span><span class="sct">${p.rating} (${p.reviews})</span>`
-      : `<span class="sct">Pas encore noté</span>`;
-    pc.innerHTML = `
-      <div class="pc-th">${thumb}</div>
-      <div class="pc-inf">
-        <div class="pc-nm">${p.name}</div>
-        <div class="pc-ct">${p.cat} · ${p.quartier || ""}</div>
-        <div class="pc-mt">${ratingHtml}</div>
-        <div class="pc-addr">📍 ${p.addr}</div>
-      </div>`;
+function renderPlacesList(places){
+  const list=document.getElementById("placeList"); if(!list)return;
+  const countEl=document.getElementById("places-count");
+  const approved=places.filter(p=>p.status==="approved");
+  if(countEl)countEl.textContent=`Établissements (${approved.length})`;
+  list.innerHTML="";
+  if(!approved.length){list.innerHTML='<div style="text-align:center;padding:28px;color:var(--muted);font-size:13px">Aucun résultat</div>';return;}
+  approved.forEach(p=>{
+    const pc=document.createElement("div"); pc.className="pc"; pc.onclick=()=>openPlace(p.fbId);
+    const thumb=(p.photos&&p.photos.length)?`<img src="${p.photos[0]}" style="width:76px;height:76px;object-fit:cover;" onerror="this.parentElement.innerHTML='${p.em}'">`:`${p.em}`;
+    const ratingHtml=p.rating>0?`<span class="stars">${stH(p.rating)}</span><span class="sct">${p.rating} (${p.reviews})</span>`:'<span class="sct">Pas encore noté</span>';
+    pc.innerHTML=`<div class="pc-th">${thumb}</div><div class="pc-inf"><div class="pc-nm">${p.name}</div><div class="pc-ct">${p.cat} · ${p.quartier||""}</div><div class="pc-mt">${ratingHtml}</div><div class="pc-addr">📍 ${p.addr}</div></div>`;
     list.appendChild(pc);
   });
 }
 
-// OPEN PLACE
-async function openPlace(fbId) {
-  const p = allPlaces.find(x => x.fbId === fbId);
-  if (!p) return;
-  currentPlaceId = fbId;
-  currentPlaceData = p;
-
-  const cover = document.getElementById("d-cover");
-  if (p.photos && p.photos.length) {
-    cover.innerHTML = `<img class="det-cover" src="${p.photos[0]}" onerror="this.parentElement.innerHTML='<div class=det-cover-em>${p.em}</div>'">`;
-  } else {
-    cover.innerHTML = `<div class="det-cover-em">${p.em}</div>`;
-  }
-
-  document.getElementById("d-nm").textContent = p.name;
-  document.getElementById("d-ct").textContent = `${p.cat} · ${p.quartier || ""}`;
-  document.getElementById("d-st").innerHTML = p.rating > 0 ? stH(p.rating) + " " + p.rating : "Pas encore noté";
-  document.getElementById("d-rc").textContent = (p.reviews || 0) + " avis";
-  document.getElementById("d-ad").textContent = p.addr;
-  document.getElementById("d-hr").textContent = p.hours || "—";
-  document.getElementById("d-ph").textContent = p.phone || "—";
-
-  const phEl = document.getElementById("d-photos");
-  if (p.photos && p.photos.length) {
-    phEl.innerHTML = "";
-    p.photos.forEach(url => {
-      const div = document.createElement("div");
-      div.className = "phi";
-      div.innerHTML = `<img src="${url}" onerror="this.parentElement.innerHTML='<div class=phi-em>📷</div>'">`;
-      phEl.appendChild(div);
-    });
-  } else {
-    phEl.innerHTML = `<div style="grid-column:1/-1;padding:16px;text-align:center;color:#999;font-size:12px">📷 Photos bientôt disponibles</div>`;
-  }
-
+async function openPlace(fbId){
+  const p=allPlaces.find(x=>x.fbId===fbId); if(!p)return;
+  currentPlaceId=fbId; currentPlaceData=p;
+  const cover=document.getElementById("d-cover");
+  cover.innerHTML=p.photos&&p.photos.length?`<img class="det-cover" src="${p.photos[0]}" onerror="this.parentElement.innerHTML='<div class=det-cover-em>${p.em}</div>'">`:`<div class="det-cover-em">${p.em}</div>`;
+  document.getElementById("d-nm").textContent=p.name;
+  document.getElementById("d-ct").textContent=`${p.cat} · ${p.quartier||""}`;
+  document.getElementById("d-st").innerHTML=p.rating>0?stH(p.rating)+" "+p.rating:"Pas encore noté";
+  document.getElementById("d-rc").textContent=(p.reviews||0)+" avis";
+  document.getElementById("d-ad").textContent=p.addr;
+  document.getElementById("d-hr").textContent=p.hours||"—";
+  document.getElementById("d-ph").textContent=p.phone||"—";
+  const phEl=document.getElementById("d-photos");
+  if(p.photos&&p.photos.length){phEl.innerHTML="";p.photos.forEach(url=>{const div=document.createElement("div");div.className="phi";div.innerHTML=`<img src="${url}" onerror="this.parentElement.innerHTML='<div style=padding:20px;text-align:center>📷</div>'">`;phEl.appendChild(div);});}
+  else{phEl.innerHTML='<div style="grid-column:1/-1;padding:16px;text-align:center;color:#999;font-size:12px">📷 Photos bientôt disponibles</div>';}
   await loadReviews(fbId);
   go("s-detail");
 }
 
-async function loadReviews(placeId) {
-  const el = document.getElementById("d-reviews");
-  el.innerHTML = `<div style="padding:14px;font-size:12px;color:#999">Chargement...</div>`;
-  try {
-    const q2 = query(collection(db, "places", placeId, "avis"), orderBy("date", "desc"));
-    const snap = await getDocs(q2);
-    const avis = [];
-    snap.forEach(d => avis.push({...d.data(), id: d.id}));
-    if (!avis.length) {
-      el.innerHTML = `<div style="padding:14px;font-size:12px;color:var(--muted)">Aucun avis pour le moment. Soyez le premier !</div>`;
-    } else {
-      el.innerHTML = "";
-      avis.forEach(a => {
-        const div = document.createElement("div");
-        div.className = "rv";
-        const dateHtml = a.dateStr ? '<div class="rv-date">📅 ' + a.dateStr + '</div>' : '';
-        div.innerHTML = '<div class="rv-u">' + (a.user||'Anonyme') + '</div><div class="rv-s">' + stH(a.stars) + '</div><div class="rv-t">' + a.txt + '</div>' + dateHtml;
-        el.appendChild(div);
-      });
-    }
-  } catch(e) {
-    el.innerHTML = `<div style="padding:14px;font-size:12px;color:#999">Impossible de charger les avis.</div>`;
-  }
+async function loadReviews(placeId){
+  const el=document.getElementById("d-reviews");
+  el.innerHTML='<div style="padding:14px;font-size:12px;color:#999">Chargement...</div>';
+  try{
+    const q2=query(collection(db,"places",placeId,"avis"),orderBy("date","desc"));
+    const snap=await getDocs(q2);
+    const avis=[]; snap.forEach(d=>avis.push({...d.data(),id:d.id}));
+    el.innerHTML="";
+    if(!avis.length){el.innerHTML='<div style="padding:14px;font-size:12px;color:var(--muted)">Aucun avis pour le moment. Soyez le premier !</div>';return;}
+    avis.forEach(a=>{
+      const div=document.createElement("div"); div.className="rv";
+      const photoHtml=a.photoUrl?`<img src="${a.photoUrl}" class="rv-photo" onerror="this.style.display='none'" onclick="viewPhoto('${a.photoUrl}')"/>`:"";
+      const dateHtml=a.dateStr?`<div class="rv-date">📅 ${a.dateStr}</div>`:"";
+      div.innerHTML=`
+        <div class="rv-header">
+          <div><div class="rv-u">${a.user||"Anonyme"}</div><div class="rv-s">${stH(a.stars)}</div></div>
+          <button class="btn-report" onclick="openReport('avis','${placeId}','${a.id}','${(a.user||"Anonyme").replace(/'/g,"")}')">🚨 Signaler</button>
+        </div>
+        <div class="rv-t">${a.txt}</div>
+        ${photoHtml}${dateHtml}`;
+      el.appendChild(div);
+    });
+  }catch(e){el.innerHTML='<div style="padding:14px;font-size:12px;color:#999">Impossible de charger les avis.</div>';}
 }
 
-// REVIEW
-function openReview() {
-  if (isGuest) { if (confirm("Créez un compte pour publier un avis.")) go("s-register"); return; }
-  revStar = 0;
-  document.getElementById("revTxt").value = "";
-  document.getElementById("revNom").value = "";
-  document.getElementById("rev-char").textContent = "0 / 500";
-  document.querySelectorAll("#revStars .sp").forEach(s => s.classList.remove("on"));
+function viewPhoto(url){window.open(url,"_blank");}
+
+// REVIEW MODAL
+// Photo upload in review
+document.getElementById("rev-upload-zone").onclick = () => document.getElementById("rev-photo-input").click();
+document.getElementById("rev-photo-input").onchange = async function() {
+  const file=this.files[0]; if(!file)return;
+  if(file.size>10*1024*1024){toast("Photo trop lourde (max 10MB)");return;}
+  const prog=document.getElementById("rev-upload-progress");
+  const preview=document.getElementById("rev-photo-preview");
+  const thumb=document.getElementById("rev-photo-thumb");
+  prog.style.display="block";
+  document.getElementById("rev-upload-zone").style.display="none";
+  try{
+    revPhotoUrl=await uploadToCloudinary(file);
+    thumb.src=revPhotoUrl; preview.style.display="block";
+    toast("📸 Photo ajoutée !");
+  }catch(e){toast("Erreur upload : "+e.message);document.getElementById("rev-upload-zone").style.display="block";}
+  prog.style.display="none"; this.value="";
+};
+document.getElementById("rev-photo-remove").onclick = () => {
+  revPhotoUrl=null;
+  document.getElementById("rev-photo-preview").style.display="none";
+  document.getElementById("rev-upload-zone").style.display="block";
+};
+
+function openReview(){
+  if(isGuest){if(confirm("Créez un compte pour publier un avis."))go("s-register");return;}
+  revStar=0; revPhotoUrl=null;
+  document.getElementById("revTxt").value="";
+  document.getElementById("revNom").value="";
+  document.getElementById("rev-char").textContent="0 / 500";
+  document.getElementById("rev-photo-preview").style.display="none";
+  document.getElementById("rev-upload-zone").style.display="block";
+  document.querySelectorAll("#revStars .sp").forEach(s=>s.classList.remove("on"));
   document.getElementById("reviewModal").classList.add("on");
 }
 
-async function submitReview() {
-  const txt = document.getElementById("revTxt").value.trim();
-  const nom = document.getElementById("revNom").value.trim();
-  if (!txt || !revStar) { alert("Note et commentaire requis."); return; }
-  if (txt.length > 500) { alert("Maximum 500 caractères."); return; }
-  const now = new Date();
-  const dateStr = now.toLocaleDateString("fr-FR", {day: "2-digit", month: "long", year: "numeric"});
-  const avisNom = nom || (currentUser && !currentUser.guest ? currentUser.name : "Anonyme");
-  try {
-    await addDoc(collection(db, "places", currentPlaceId, "avis"), {
-      user: avisNom, stars: revStar, txt, dateStr, date: serverTimestamp(),
-      uid: currentUser ? currentUser.uid : null
-    });
-    const snap = await getDocs(collection(db, "places", currentPlaceId, "avis"));
-    let total = 0, count = 0;
-    snap.forEach(d => { total += d.data().stars; count++; });
-    const newRating = Math.round(total / count * 10) / 10;
-    await updateDoc(doc(db, "places", currentPlaceId), {rating: newRating, reviews: count});
-    if (currentPlaceData) { currentPlaceData.rating = newRating; currentPlaceData.reviews = count; }
-    revStar = 0;
-    closeModal("reviewModal");
-    await loadReviews(currentPlaceId);
-    toast("✅ Avis publié ! Merci 👏");
-    userReviews++;
-  } catch(e) {
-    toast("Erreur : " + e.message);
-  }
-}
+document.getElementById("btn-cancel-review").onclick = () => closeModal("reviewModal");
+document.getElementById("btn-submit-review").onclick = async () => {
+  const txt=document.getElementById("revTxt").value.trim(), nom=document.getElementById("revNom").value.trim();
+  if(!txt||!revStar){alert("Note et commentaire requis.");return;}
+  if(txt.length>500){alert("Maximum 500 caractères.");return;}
+  const now=new Date(), dateStr=now.toLocaleDateString("fr-FR",{day:"2-digit",month:"long",year:"numeric"});
+  const avisNom=nom||(currentUser&&!currentUser.guest?currentUser.name:"Anonyme");
+  try{
+    const avisData={user:avisNom,stars:revStar,txt,dateStr,date:serverTimestamp(),uid:currentUser?currentUser.uid:null};
+    if(revPhotoUrl)avisData.photoUrl=revPhotoUrl;
+    await addDoc(collection(db,"places",currentPlaceId,"avis"),avisData);
+    const snap=await getDocs(collection(db,"places",currentPlaceId,"avis"));
+    let total=0,count=0; snap.forEach(d=>{total+=d.data().stars;count++;});
+    const newRating=Math.round(total/count*10)/10;
+    await updateDoc(doc(db,"places",currentPlaceId),{rating:newRating,reviews:count});
+    if(currentPlaceData){currentPlaceData.rating=newRating;currentPlaceData.reviews=count;}
+    revStar=0; revPhotoUrl=null;
+    closeModal("reviewModal"); await loadReviews(currentPlaceId);
+    toast("✅ Avis publié ! Merci 👏"); userReviews++;
+  }catch(e){toast("Erreur : "+e.message);}
+};
 
-// SHARE
-function sharePlace() {
-  const p = currentPlaceData;
-  if (!p) return;
-  const url = `${SITE_URL}?p=${currentPlaceId}`;
-  const txt = `${p.name} — ${p.cat} à Libreville\n${p.addr}\n\nDécouvert sur MBOLO : ${url}`;
-  if (navigator.share) { navigator.share({title: p.name, url}).catch(() => {}); return; }
-  document.getElementById("share-title").textContent = "Partager — " + p.name;
-  document.getElementById("share-wa").href = "https://wa.me/?text=" + encodeURIComponent(txt);
-  document.getElementById("share-fb").href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url);
+document.querySelectorAll("#revStars .sp").forEach(sp=>{sp.onclick=()=>{revStar=parseInt(sp.dataset.star);document.querySelectorAll("#revStars .sp").forEach((s,i)=>s.classList.toggle("on",i<revStar));};});
+document.getElementById("revTxt").oninput=function(){const len=this.value.length;const el=document.getElementById("rev-char");el.textContent=`${len} / 500`;el.style.color=len>450?"#E24B4A":"#999";};
+
+// REPORT
+function openReport(type, placeId, contentId, userName) {
+  reportTarget={type,placeId,contentId,userName};
+  document.getElementById("report-reason").value="";
+  document.getElementById("report-details").value="";
+  document.getElementById("reportModal").classList.add("on");
+}
+document.getElementById("btn-cancel-report").onclick = () => closeModal("reportModal");
+document.getElementById("btn-submit-report").onclick = async () => {
+  const reason=document.getElementById("report-reason").value;
+  const details=document.getElementById("report-details").value.trim();
+  if(!reason){alert("Veuillez sélectionner une raison.");return;}
+  try{
+    await addDoc(collection(db,"signalements"),{
+      ...reportTarget, reason, details, date:serverTimestamp(),
+      reportedBy:currentUser?currentUser.uid:"anonyme", status:"pending"
+    });
+    closeModal("reportModal");
+    toast("🚨 Signalement envoyé. Merci !");
+  }catch(e){toast("Erreur : "+e.message);}
+};
+
+// SHARE & NAV
+function sharePlace(){
+  const p=currentPlaceData; if(!p)return;
+  const url=`${SITE_URL}?p=${currentPlaceId}`;
+  const txt=`${p.name} — ${p.cat} à Libreville\n${p.addr}\n\nDécouvert sur MBOLO : ${url}`;
+  if(navigator.share){navigator.share({title:p.name,url}).catch(()=>{});return;}
+  document.getElementById("share-title").textContent="Partager — "+p.name;
+  document.getElementById("share-wa").href="https://wa.me/?text="+encodeURIComponent(txt);
+  document.getElementById("share-fb").href="https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(url);
   document.getElementById("shareModal").classList.add("on");
 }
-
-// NAV
-function navPlace() {
-  const p = currentPlaceData;
-  if (!p) return;
-  const url = p.placeId
-    ? `https://www.google.com/maps/place/?q=place_id:${p.placeId}`
-    : `https://www.google.com/maps/search/${encodeURIComponent(p.name + " Libreville Gabon")}`;
-  window.open(url, "_blank");
-}
+function navPlace(){const p=currentPlaceData;if(!p)return;window.open(p.placeId?`https://www.google.com/maps/place/?q=place_id:${p.placeId}`:`https://www.google.com/maps/search/${encodeURIComponent(p.name+" Libreville Gabon")}`,"_blank");}
+document.getElementById("btn-cancel-share").onclick=()=>closeModal("shareModal");
+document.getElementById("btn-copy-link").onclick=()=>{const url=`${SITE_URL}?p=${currentPlaceId}`;navigator.clipboard.writeText(url).then(()=>{toast("🔗 Lien copié !");closeModal("shareModal");}).catch(()=>toast(url));};
 
 // BAR TAB
-async function renderBar() {
+async function renderBar(){
   await loadPlaces();
-  const bars = allPlaces.filter(p => p.cat === "Bar" && p.status === "approved");
-  const ms = document.getElementById("mainScroll");
-  ms.innerHTML = `
-    <div class="bar-hero">
-      <div class="bar-t">Bars 🍹</div>
-      <div class="bar-s">Tous les bars de Libreville</div>
-      <div class="bar-bdg">${bars.length} bars référencés</div>
-    </div>
-    <div class="sh"><span class="sh-t">Bars populaires</span></div>
-    <div class="plist" id="bar-list"></div>
-    <div style="height:88px"></div>`;
-  const list = document.getElementById("bar-list");
-  bars.forEach(p => {
-    const pc = document.createElement("div");
-    pc.className = "pc";
-    pc.onclick = () => openPlace(p.fbId);
-    const thumb = (p.photos && p.photos.length)
-      ? `<img src="${p.photos[0]}" style="width:76px;height:76px;object-fit:cover;" onerror="this.parentElement.innerHTML='${p.em}'">`
-      : p.em;
-    const ratingHtml = p.rating > 0
-      ? `<span class="stars">${stH(p.rating)}</span><span class="sct">${p.rating}</span>`
-      : `<span class="sct">Pas encore noté</span>`;
-    pc.innerHTML = `
-      <div class="pc-th" style="background:#e8f0fb">${thumb}</div>
-      <div class="pc-inf">
-        <div class="pc-nm">${p.name}</div>
-        <div class="pc-ct">${p.addr}</div>
-        <div class="pc-mt">${ratingHtml}</div>
-        <div class="pc-addr">🕐 ${p.hours || "—"}</div>
-      </div>`;
+  const bars=allPlaces.filter(p=>p.cat==="Bar"&&p.status==="approved");
+  const ms=document.getElementById("mainScroll");
+  ms.innerHTML=`<div class="bar-hero"><div class="bar-t">Bars 🍹</div><div class="bar-s">Tous les bars de Libreville</div><div class="bar-bdg">${bars.length} bars référencés</div></div><div class="sh"><span class="sh-t">Bars populaires</span></div><div class="plist" id="bar-list"></div><div style="height:88px"></div>`;
+  const list=document.getElementById("bar-list");
+  bars.forEach(p=>{
+    const pc=document.createElement("div"); pc.className="pc"; pc.onclick=()=>openPlace(p.fbId);
+    const thumb=(p.photos&&p.photos.length)?`<img src="${p.photos[0]}" style="width:76px;height:76px;object-fit:cover;" onerror="this.parentElement.innerHTML='${p.em}'">`:`${p.em}`;
+    const ratingHtml=p.rating>0?`<span class="stars">${stH(p.rating)}</span><span class="sct">${p.rating}</span>`:'<span class="sct">Pas encore noté</span>';
+    pc.innerHTML=`<div class="pc-th" style="background:#e8f0fb">${thumb}</div><div class="pc-inf"><div class="pc-nm">${p.name}</div><div class="pc-ct">${p.addr}</div><div class="pc-mt">${ratingHtml}</div><div class="pc-addr">🕐 ${p.hours||"—"}</div></div>`;
     list.appendChild(pc);
   });
 }
 
 // ACTUS TAB
-function renderActu() {
-  const ms = document.getElementById("mainScroll");
-  ms.innerHTML = `
-    <div class="hdr" style="padding-bottom:18px">
-      <div class="hdr-row">
-        <div class="hdr-logo">Actualités 📰</div>
-        <div class="hdr-flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div>
-      </div>
-      <div class="hdr-loc">📍 Libreville, Gabon</div>
-    </div>
-    <div style="padding:12px 14px 0" id="actu-list"></div>
-    <div style="height:88px"></div>`;
-  const list = document.getElementById("actu-list");
-  ACTUS.forEach(a => {
-    const card = document.createElement("div");
-    card.className = "ac-card";
-    card.innerHTML = `
-      <div class="ac-img" style="background:${a.bg}">${a.img}</div>
-      <div class="ac-body">
-        <div class="ac-tag">${a.tag}</div>
-        <div class="ac-title">${a.title}</div>
-        <div class="ac-txt">${a.txt}</div>
-        <div class="ac-date">📅 ${a.date}</div>
-      </div>`;
-    list.appendChild(card);
-  });
+function renderActu(){
+  const ms=document.getElementById("mainScroll");
+  ms.innerHTML=`<div class="hdr" style="padding-bottom:18px"><div class="hdr-row"><div class="hdr-logo">Actualités 📰</div><div class="hdr-flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div></div><div class="hdr-loc">📍 Libreville, Gabon</div></div><div style="padding:12px 14px 0" id="actu-list"></div><div style="height:88px"></div>`;
+  const list=document.getElementById("actu-list");
+  ACTUS.forEach(a=>{const card=document.createElement("div");card.className="ac-card";card.innerHTML=`<div class="ac-img" style="background:${a.bg}">${a.img}</div><div class="ac-body"><div class="ac-tag">${a.tag}</div><div class="ac-title">${a.title}</div><div class="ac-txt">${a.txt}</div><div class="ac-date">📅 ${a.date}</div></div>`;list.appendChild(card);});
 }
 
 // ADD TAB
-function renderAdd() {
-  const ms = document.getElementById("mainScroll");
-  if (isGuest) {
-    ms.innerHTML = `
-      <div style="text-align:center;padding:70px 24px">
-        <div style="font-size:48px;margin-bottom:16px">🔒</div>
-        <div style="font-size:17px;font-weight:700;margin-bottom:8px">Connexion requise</div>
-        <div style="font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.6">Créez un compte gratuit pour ajouter des établissements.</div>
-        <button class="btn-main" style="max-width:270px;margin:0 auto;display:block" id="add-guest-register">Créer un compte gratuit</button>
-        <div class="alink" style="margin-top:12px"><span id="add-guest-login">J ai déjà un compte</span></div>
-      </div>
-      <div style="height:88px"></div>`;
-    document.getElementById("add-guest-register").onclick = () => go("s-register");
-    document.getElementById("add-guest-login").onclick = () => go("s-login");
+function renderAdd(){
+  const ms=document.getElementById("mainScroll");
+  if(isGuest){
+    ms.innerHTML=`<div style="text-align:center;padding:70px 24px"><div style="font-size:48px;margin-bottom:16px">🔒</div><div style="font-size:17px;font-weight:700;margin-bottom:8px">Connexion requise</div><div style="font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.6">Créez un compte gratuit pour ajouter des établissements.</div><button class="btn-main" style="max-width:270px;margin:0 auto;display:block" id="add-guest-register">Créer un compte gratuit</button><div class="alink" style="margin-top:12px"><span id="add-guest-login">J ai déjà un compte</span></div></div><div style="height:88px"></div>`;
+    document.getElementById("add-guest-register").onclick=()=>go("s-register");
+    document.getElementById("add-guest-login").onclick=()=>go("s-login");
     return;
   }
-  ms.innerHTML = `
+  addPhotos=[];
+  ms.innerHTML=`
     <div class="add-top"><div class="add-t">Ajouter un lieu</div><div class="add-s">Partagez une adresse avec la communauté</div></div>
     <div class="stripe"><div></div><div></div><div></div></div>
     <div class="add-body">
-      <div style="background:#fff8d6;border:1px solid #fcd116;border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:#7a5c00">
-        ℹ️ Votre établissement sera soumis à validation avant d'apparaître.
-      </div>
+      <div style="background:#fff8d6;border:1px solid #fcd116;border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:#7a5c00">ℹ️ Votre établissement sera soumis à validation avant d'apparaître.</div>
       <div class="fg"><label>Nom *</label><input type="text" id="newName" placeholder="Ex: Restaurant Le Perroquet"/></div>
-      <div class="fg"><label>Catégorie *</label>
-        <select id="newCat">
-          <option>Restaurant</option><option>Bar</option><option>Hotel</option>
-          <option>Shopping</option><option>Sante</option><option>Loisirs</option><option>Autre</option>
-        </select>
-      </div>
+      <div class="fg"><label>Catégorie *</label><select id="newCat"><option>Restaurant</option><option>Bar</option><option>Hotel</option><option>Shopping</option><option>Sante</option><option>Loisirs</option><option>Autre</option></select></div>
       <div class="fg"><label>Quartier *</label><input type="text" id="newQrt" placeholder="Ex: Plateau, Louis, Akanda..."/></div>
       <div class="fg"><label>Adresse *</label><input type="text" id="newAddr" placeholder="Ex: Face au marché Mont-Bouet"/></div>
       <div class="fg"><label>Téléphone</label><input type="tel" id="newPhone" placeholder="+241 06 ..."/></div>
       <div class="fg"><label>Horaires</label><input type="text" id="newHours" placeholder="Ex: Lun-Sam 08h-22h"/></div>
+      <div class="fg">
+        <label>Photos (optionnel)</label>
+        <div class="upload-zone" id="add-upload-zone"><input type="file" id="add-photo-input" accept="image/*" multiple style="display:none"/><div style="font-size:24px;margin-bottom:6px">📷</div><div style="font-size:12px;color:var(--muted)">Ajouter des photos de l'établissement</div><div style="font-size:11px;color:#bbb;margin-top:4px">Max 5 photos</div></div>
+        <div id="add-upload-progress" style="display:none;font-size:12px;color:var(--g);padding:8px 0">⏳ Upload en cours...</div>
+        <div class="upload-preview" id="add-photos-preview"></div>
+      </div>
       <button class="btn-main yellow" id="btn-submit-place">Soumettre pour validation</button>
     </div>
     <div style="height:88px"></div>`;
-  document.getElementById("btn-submit-place").onclick = submitPlace;
+
+  document.getElementById("add-upload-zone").onclick=()=>document.getElementById("add-photo-input").click();
+  document.getElementById("add-photo-input").onchange=async function(){
+    const files=Array.from(this.files);
+    if(addPhotos.length+files.length>5){toast("Maximum 5 photos.");return;}
+    const prog=document.getElementById("add-upload-progress");
+    prog.style.display="block";
+    for(const file of files){
+      if(file.size>10*1024*1024){toast("Photo trop lourde : "+file.name);continue;}
+      try{
+        const url=await uploadToCloudinary(file);
+        addPhotos.push(url);
+        const preview=document.getElementById("add-photos-preview");
+        const wrap=document.createElement("div"); wrap.className="rm-ph";
+        const idx=addPhotos.length-1;
+        wrap.innerHTML=`<img src="${url}" style="width:70px;height:70px;object-fit:cover;border-radius:8px;border:1px solid var(--bd)"/><button class="rm-btn" onclick="removeAddPhoto(${idx})">×</button>`;
+        preview.appendChild(wrap);
+        toast("📸 Photo ajoutée !");
+      }catch(e){toast("Erreur : "+e.message);}
+    }
+    prog.style.display="none"; this.value="";
+  };
+  document.getElementById("btn-submit-place").onclick=submitPlace;
 }
 
-async function submitPlace() {
-  const name = (document.getElementById("newName") || {}).value || "";
-  const addr = (document.getElementById("newAddr") || {}).value || "";
-  const qrt = (document.getElementById("newQrt") || {}).value || "";
-  const cat = (document.getElementById("newCat") || {}).value || "Restaurant";
-  if (!name.trim() || !addr.trim() || !qrt.trim()) { alert("Nom, quartier et adresse sont requis."); return; }
-  const icons = {Restaurant: "🍽️", Bar: "🍹", Hotel: "🏨", Shopping: "🛍️", Sante: "🏥", Loisirs: "🌊", Autre: "📍"};
-  try {
-    await addDoc(collection(db, "places"), {
-      em: icons[cat] || "📍", name: name.trim(), cat, quartier: qrt.trim(), addr: addr.trim(),
-      phone: (document.getElementById("newPhone") || {}).value || "",
-      hours: (document.getElementById("newHours") || {}).value || "",
-      rating: 0, reviews: 0, open: true, status: "pending", photos: [], placeId: "",
-      submittedBy: currentUser ? currentUser.name : "", submittedAt: serverTimestamp()
+function removeAddPhoto(idx){addPhotos.splice(idx,1);const preview=document.getElementById("add-photos-preview");if(preview){const items=preview.querySelectorAll(".rm-ph");if(items[idx])items[idx].remove();}}
+
+async function submitPlace(){
+  const name=(document.getElementById("newName")||{}).value||"";
+  const addr=(document.getElementById("newAddr")||{}).value||"";
+  const qrt=(document.getElementById("newQrt")||{}).value||"";
+  const cat=(document.getElementById("newCat")||{}).value||"Restaurant";
+  if(!name.trim()||!addr.trim()||!qrt.trim()){alert("Nom, quartier et adresse sont requis.");return;}
+  const icons={Restaurant:"🍽️",Bar:"🍹",Hotel:"🏨",Shopping:"🛍️",Sante:"🏥",Loisirs:"🌊",Autre:"📍"};
+  try{
+    await addDoc(collection(db,"places"),{
+      em:icons[cat]||"📍",name:name.trim(),cat,quartier:qrt.trim(),addr:addr.trim(),
+      phone:(document.getElementById("newPhone")||{}).value||"",
+      hours:(document.getElementById("newHours")||{}).value||"",
+      rating:0,reviews:0,open:true,status:"pending",photos:addPhotos,placeId:"",
+      submittedBy:currentUser?currentUser.name:"",submittedAt:serverTimestamp()
     });
-    userPlaces++;
-    toast("✅ Soumis ! En attente de validation.");
-    switchTab("home");
-  } catch(e) { toast("Erreur : " + e.message); }
+    addPhotos=[]; userPlaces++;
+    toast("✅ Soumis ! En attente de validation."); switchTab("home");
+  }catch(e){toast("Erreur : "+e.message);}
 }
 
 // PROFILE TAB
-function renderProf() {
-  const un = currentUser ? currentUser.name : "Visiteur";
-  const initials = un.substring(0, 2).toUpperCase();
-  const ms = document.getElementById("mainScroll");
-  ms.innerHTML = `
-    <div class="prof-top">
-      <div class="av-lg">${initials}</div>
-      <div class="prof-nm">${un}</div>
-      <div class="prof-si">${isGuest ? "Mode visiteur" : "Membre MBOLO 🇬🇦"}</div>
-    </div>
+function renderProf(){
+  const un=currentUser?currentUser.name:"Visiteur", initials=un.substring(0,2).toUpperCase();
+  const ms=document.getElementById("mainScroll");
+  ms.innerHTML=`
+    <div class="prof-top"><div class="av-lg">${initials}</div><div class="prof-nm">${un}</div><div class="prof-si">${isGuest?"Mode visiteur":"Membre MBOLO 🇬🇦"}</div></div>
     <div class="stripe"><div></div><div></div><div></div></div>
     <div class="prof-body">
       <div class="stats">
@@ -898,21 +765,16 @@ function renderProf() {
         <div class="stat"><div class="stat-n">${userReviews}</div><div class="stat-l">Avis</div></div>
         <div class="stat"><div class="stat-n">🇬🇦</div><div class="stat-l">Libreville</div></div>
       </div>
-      <div id="prof-dynamic-content"></div>
+      <div id="prof-content"></div>
     </div>
     <div style="height:88px"></div>`;
-
-  const dynEl = document.getElementById("prof-dynamic-content");
-  if (isGuest) {
-    dynEl.innerHTML = '<div style="background:var(--y3);border:1.5px solid var(--y);border-radius:12px;padding:16px;text-align:center;margin-bottom:16px"><div style="font-size:14px;font-weight:700;color:#7a5c00;margin-bottom:6px">Rejoignez MBOLO</div><button class="btn-main" style="max-width:200px;margin:0 auto;display:block" id="prof-register-btn">Creer un compte</button></div>';
-    document.getElementById("prof-register-btn").onclick = () => go("s-register");
-  } else {
-    dynEl.innerHTML = '<div class="pmenu"><div class="pmi"><div class="pmi-l"><span>📷</span>Mes avis publies</div><span style="color:var(--muted)">›</span></div><div class="pmi"><div class="pmi-l"><span>📍</span>Mes lieux ajoutes</div><span style="color:var(--muted)">›</span></div><button class="logout" id="btn-logout">Se deconnecter</button></div>';
-    document.getElementById("btn-logout").onclick = async () => {
-      if (!confirm("Se deconnecter ?")) return;
-      await signOut(auth);
-      isGuest = false; currentUser = null;
-    };
+  const pc=document.getElementById("prof-content");
+  if(isGuest){
+    pc.innerHTML='<div style="background:var(--y3);border:1.5px solid var(--y);border-radius:12px;padding:16px;text-align:center;margin-bottom:16px"><div style="font-size:14px;font-weight:700;color:#7a5c00;margin-bottom:6px">Rejoignez MBOLO 🇬🇦</div><button class="btn-main" style="max-width:200px;margin:0 auto;display:block" id="prof-register-btn">Créer un compte</button></div>';
+    document.getElementById("prof-register-btn").onclick=()=>go("s-register");
+  }else{
+    pc.innerHTML='<div class="pmenu"><div class="pmi"><div class="pmi-l"><span>📷</span>Mes avis publiés</div><span style="color:var(--muted)">›</span></div><div class="pmi"><div class="pmi-l"><span>📍</span>Mes lieux ajoutés</div><span style="color:var(--muted)">›</span></div><button class="logout" id="btn-logout">Se déconnecter</button></div>';
+    document.getElementById("btn-logout").onclick=async()=>{if(!confirm("Se déconnecter ?"))return;await signOut(auth);isGuest=false;currentUser=null;};
   }
 }
 </script>
