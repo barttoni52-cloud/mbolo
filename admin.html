@@ -302,18 +302,28 @@ async function renderDashboard(){
 async function renderPending(){
   loading(true);
   var snap=await getDocs(collection(db,"places"));
-  var pending=[];snap.forEach(function(d){var data=d.data();if(data.status==="pending")pending.push({...data,fbId:d.id});});
+  var pending=[];snap.forEach(function(d){var data=d.data();if(data.status==="pending")pending.push(Object.assign({},data,{fbId:d.id}));});
   var el=document.getElementById("pending-list");
   if(!pending.length){el.innerHTML='<div class="empty"><div class="icon">&#127881;</div>Aucune demande en attente !</div>';loading(false);return;}
   var pendingPlaces=pending;
-  el.innerHTML=pending.map(function(p){
-    return '<div class="table-card" style="margin-bottom:16px"><div class="table-header"><div><div class="table-title">'+p.name+'</div><div style="font-size:12px;color:#666;margin-top:2px">'+p.cat+' &middot; '+p.quartier+'</div></div><span class="badge badge-pending">En attente</span></div>'+
-    '<table><tbody><tr><td style="width:140px;color:#666;font-size:12px">&#128205; Adresse</td><td>'+p.addr+'</td></tr>'+
-    '<tr><td style="color:#666;font-size:12px">&#128222; Tel</td><td>'+(p.phone||"Non renseigne")+'</td></tr>'+
-    '<tr><td style="color:#666;font-size:12px">&#128336; Horaires</td><td>'+(p.hours||"Non renseignes")+'</td></tr>'+
-    (p.submittedBy?'<tr><td style="color:#666;font-size:12px">&#128100; Soumis par</td><td>'+p.submittedBy+'</td></tr>':"")+'</tbody></table>'+
-    '<div style="padding:16px;display:flex;gap:10px"><button class="btn-primary" onclick="approvePlace(''+p.fbId+'',''+p.name+'')">&#9989; Valider</button><button class="btn-sm btn-reject" style="padding:8px 16px" onclick="rejectPlace(''+p.fbId+'',''+p.name+'')">&#10060; Refuser</button></div></div>';
-  }).join("");
+  el.innerHTML="";
+  pending.forEach(function(p){
+    var card=document.createElement("div");
+    card.className="table-card";
+    card.style.marginBottom="16px";
+    var header='<div class="table-header"><div><div class="table-title">'+p.name+'</div><div style="font-size:12px;color:#666;margin-top:2px">'+p.cat+' &middot; '+p.quartier+'</div></div><span class="badge badge-pending">En attente</span></div>';
+    var submittedRow=p.submittedBy?"<tr><td style='color:#666;font-size:12px'>&#128100; Soumis par</td><td>"+p.submittedBy+"</td></tr>":"";
+    var rows="<table><tbody><tr><td style='width:140px;color:#666;font-size:12px'>&#128205; Adresse</td><td>"+p.addr+"</td></tr><tr><td style='color:#666;font-size:12px'>&#128222; Tel</td><td>"+(p.phone||"Non renseigne")+"</td></tr><tr><td style='color:#666;font-size:12px'>&#128336; Horaires</td><td>"+(p.hours||"Non renseignes")+"</td></tr>"+submittedRow+"</tbody></table>";
+    var btnDiv='<div style="padding:16px;display:flex;gap:10px" id="btn-pend-'+p.fbId+'"></div>';
+    card.innerHTML=header+rows+btnDiv;
+    el.appendChild(card);
+    var bd=document.getElementById("btn-pend-"+p.fbId);
+    var ba=document.createElement("button");ba.className="btn-primary";ba.textContent="✅ Valider";
+    ba.onclick=(function(pid,pname){return function(){approvePlace(pid,pname);};})(p.fbId,p.name);
+    var br=document.createElement("button");br.className="btn-sm btn-reject";br.style.padding="10px 16px";br.textContent="❌ Refuser";
+    br.onclick=(function(pid,pname){return function(){rejectPlace(pid,pname);};})(p.fbId,p.name);
+    bd.appendChild(ba);bd.appendChild(br);
+  });
   loading(false);
 }
 window.approvePlace=async function(fbId,name){
@@ -335,13 +345,24 @@ async function renderPlaces(){
   document.getElementById("places-count").textContent=places.length+" etablissements";
   var el=document.getElementById("places-table");
   if(!places.length){el.innerHTML='<div class="empty"><div class="icon">&#128205;</div>Aucun etablissement</div>';loading(false);return;}
-  el.innerHTML='<table><thead><tr><th>Nom</th><th>Cat.</th><th>Quartier</th><th>Avis</th><th>Note</th><th>Photos</th><th>Actions</th></tr></thead><tbody>'+
-  places.map(function(p){
-    var photoCount = (p.photos||[]).length;
-    var photosEncoded = encodeURIComponent(JSON.stringify(p.photos||[]));
-    return '<tr><td><strong>'+p.name+'</strong></td><td>'+p.cat+'</td><td>'+p.quartier+'</td><td style="text-align:center">'+(p.reviews||0)+'</td><td style="color:#F59E0B">'+(p.rating>0?p.rating+"/5":"—")+'</td><td><button class="btn-sm btn-approve" onclick="openPhotoModal(''+p.fbId+'',''+p.name.replace(/'/g,"")+'',' + JSON.stringify(p.photos||[]).replace(/'/g,'"') + ')">📷 '+photoCount+'</button></td><td><button class="btn-sm btn-reject" onclick="suspendPlace(''+p.fbId+'',''+p.name+'')">&#128683; Suspendre</button></td></tr>';
-  }).join("")+'</tbody></table>';
-  loading(false);
+  var table2=document.createElement("table");
+  table2.innerHTML="<thead><tr><th>Nom</th><th>Cat.</th><th>Quartier</th><th>Avis</th><th>Note</th><th>Photos</th><th>Actions</th></tr></thead><tbody id='pl-tbody'></tbody>";
+  el.appendChild(table2);
+  var tb=document.getElementById("pl-tbody");
+  places.forEach(function(p){
+    var tr=document.createElement("tr");
+    tr.innerHTML="<td><strong>"+p.name+"</strong></td><td>"+p.cat+"</td><td>"+p.quartier+"</td><td style='text-align:center'>"+(p.reviews||0)+"</td><td style='color:#F59E0B'>"+(p.rating>0?p.rating+"/5":"—")+"</td><td></td><td></td>";
+    var ptd=tr.cells[5];
+    var bp=document.createElement("button");bp.className="btn-sm btn-approve";bp.textContent="📷 "+((p.photos||[]).length);
+    bp.onclick=(function(id,nm,ph){return function(){openPhotoModal(id,nm,ph);};})(p.fbId,p.name,p.photos||[]);
+    ptd.appendChild(bp);
+    var atd=tr.cells[6];
+    var bs=document.createElement("button");bs.className="btn-sm btn-reject";bs.textContent="🚫 Suspendre";
+    bs.onclick=(function(id,nm){return function(){suspendPlace(id,nm);};})(p.fbId,p.name);
+    atd.appendChild(bs);
+    tb.appendChild(tr);
+  });
+    loading(false);
 }
 window.suspendPlace=async function(fbId,name){
   if(!confirm("Suspendre "+name+" ?"))return;
@@ -360,9 +381,19 @@ async function renderReviews(){
   }
   var el=document.getElementById("reviews-list");
   if(!allAvis.length){el.innerHTML='<div class="empty"><div class="icon">&#128172;</div>Aucun avis</div>';loading(false);return;}
-  el.innerHTML='<div class="table-card"><div class="table-header"><div class="table-title">Tous les avis</div><div class="table-count">'+allAvis.length+' avis</div></div>'+
-  '<table><thead><tr><th>Etablissement</th><th>Auteur</th><th>Note</th><th>Commentaire</th><th>Date</th><th>Action</th></tr></thead><tbody>'+
-  allAvis.map(function(a){return '<tr><td><strong>'+a.placeName+'</strong></td><td>'+a.user+'</td><td style="color:#F59E0B">'+"&#9733;".repeat(a.stars)+'</td><td style="max-width:200px;font-size:12px">'+a.txt.substring(0,60)+(a.txt.length>60?"...":"")+'</td><td style="font-size:11px;color:#999">'+(a.dateStr||"—")+'</td><td><button class="btn-sm btn-delete" onclick="deleteAvis(''+a.placeId+'',''+a.id+'')">&#128465; Suppr.</button></td></tr>';}).join("")+'</tbody></table></div>';
+  var card=document.createElement("div");card.className="table-card";
+  card.innerHTML='<div class="table-header"><div class="table-title">Tous les avis</div><div class="table-count">'+allAvis.length+' avis</div></div><table><thead><tr><th>Etablissement</th><th>Auteur</th><th>Note</th><th>Commentaire</th><th>Date</th><th>Action</th></tr></thead><tbody id="reviews-tbody"></tbody></table>';
+  el.appendChild(card);
+  var tbody=document.getElementById("reviews-tbody");
+  allAvis.forEach(function(a){
+    var tr=document.createElement("tr");
+    var stars="";for(var s=0;s<a.stars;s++)stars+="&#9733;";
+    tr.innerHTML="<td><strong>"+a.placeName+"</strong></td><td>"+a.user+"</td><td style='color:#F59E0B'>"+stars+"</td><td style='max-width:200px;font-size:12px'>"+a.txt.substring(0,60)+(a.txt.length>60?"...":"")+"</td><td style='font-size:11px;color:#999'>"+(a.dateStr||"—")+"</td><td></td>";
+    var btn=document.createElement("button");btn.className="btn-sm btn-delete";btn.textContent="🗑️ Suppr.";
+    btn.onclick=(function(pid,aid){return function(){deleteAvis(pid,aid);};})(a.placeId,a.id);
+    tr.cells[5].appendChild(btn);
+    tbody.appendChild(tr);
+  });
   loading(false);
 }
 window.deleteAvis=async function(placeId,avisId){
