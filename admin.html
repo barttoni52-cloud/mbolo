@@ -281,7 +281,7 @@ async function renderDashboard(){
 
     var dp=document.getElementById("dash-pending");
     if(!pending.length){dp.innerHTML='<div class="empty"><div class="icon">&#9989;</div>Aucune demande en attente</div>';}
-    else{dp.innerHTML='<table><thead><tr><th>Etablissement</th><th>Categorie</th><th>Quartier</th><th>Actions</th></tr></thead><tbody>'+pending.slice(0,5).map(function(p){return '<tr><td><strong>'+p.name+'</strong></td><td>'+p.cat+'</td><td>'+p.quartier+'</td><td><button class="btn-sm btn-approve" onclick="approvePlace(''+p.fbId+'',''+p.name+'')">&#9989; Valider</button> <button class="btn-sm btn-reject" onclick="rejectPlace(''+p.fbId+'',''+p.name+'')">&#10060; Refuser</button></td></tr>';}).join("")+'</tbody></table>';}
+    else{dp.innerHTML='<table><thead><tr><th>Etablissement</th><th>Categorie</th><th>Quartier</th><th>Actions</th></tr></thead><tbody>'+pending.slice(0,5).map(function(p){var safeName=p.name.replace(/'/g,'');return '<tr><td><strong>'+p.name+'</strong></td><td>'+p.cat+'</td><td>'+p.quartier+'</td><td><button class="btn-sm btn-approve" onclick="approvePlace(\''+p.fbId+'\',\''+safeName+'\')" >&#9989; Valider</button> <button class="btn-sm btn-reject" onclick="rejectPlace(\''+p.fbId+'\',\''+safeName+'\')" >&#10060; Refuser</button></td></tr>';}).join('')+'</tbody></table>';}
   }catch(e){notif("Erreur : "+e.message);}
   loading(false);
 }
