@@ -4,166 +4,181 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="theme-color" content="#009e60">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="MBOLO">
 <title>MBOLO — Guide de Libreville</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f0f0f0;display:flex;justify-content:center;min-height:100vh;}
-:root{--g:#009e60;--g2:#007a4a;--g3:#e6f7ef;--y:#fcd116;--y3:#fffbdd;--b:#3a75c4;--b2:#0C447C;--b3:#e8f0fb;--text:#1a1a1a;--muted:#666;--bg:#fff;--bg2:#f5f5f5;--bd:#e0e0e0;--red:#E24B4A;}
-.app{width:100%;max-width:430px;background:var(--bg);min-height:100vh;display:flex;flex-direction:column;position:relative;}
-.screen{display:none;flex-direction:column;flex:1;min-height:100vh;}
-.screen.on{display:flex;}
-.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
-.splash{background:var(--g);flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 28px;min-height:100vh;}
-.flag{display:flex;width:60px;height:40px;border-radius:8px;overflow:hidden;margin-bottom:20px;border:2px solid rgba(255,255,255,0.3);}
-.flag div{flex:1;}
-.logo-big{font-size:56px;font-weight:800;color:#fff;letter-spacing:-2px;margin-bottom:4px;}
-.logo-sub{font-size:12px;color:rgba(255,255,255,0.7);letter-spacing:3px;text-transform:uppercase;margin-bottom:40px;}
-.splash-dots{display:flex;gap:6px;margin-bottom:40px;}
-.sdot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.3);}
-.sdot.y{background:var(--y);}
-.btn-y{width:100%;padding:16px;background:var(--y);color:#7a5c00;font-size:15px;font-weight:700;border:none;border-radius:14px;cursor:pointer;margin-bottom:10px;}
-.btn-wh{width:100%;padding:15px;background:rgba(255,255,255,0.15);color:#fff;font-size:14px;font-weight:500;border:1.5px solid rgba(255,255,255,0.35);border-radius:14px;cursor:pointer;margin-bottom:10px;}
-.btn-ghost{width:100%;padding:12px;background:transparent;color:rgba(255,255,255,0.65);font-size:13px;border:none;cursor:pointer;}
-.splash-foot{margin-top:24px;font-size:10px;color:rgba(255,255,255,0.4);}
-.auth-top{background:var(--g);padding:28px 20px 36px;}
-.auth-back{background:rgba(255,255,255,0.2);border:none;color:#fff;border-radius:8px;padding:7px 14px;font-size:12px;cursor:pointer;margin-bottom:16px;display:inline-block;}
-.auth-h{font-size:24px;font-weight:700;color:#fff;}
-.auth-s{font-size:12px;color:rgba(255,255,255,0.7);margin-top:4px;}
-.stripe{display:flex;height:5px;}
-.stripe div:nth-child(1){flex:1;background:#009e60;}
-.stripe div:nth-child(2){flex:1;background:#fcd116;}
-.stripe div:nth-child(3){flex:1;background:#3a75c4;}
-.auth-body{padding:24px 20px;flex:1;overflow-y:auto;}
-.fg{margin-bottom:16px;}
-.fg label{font-size:11px;color:var(--muted);display:block;margin-bottom:5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;}
-.fg input,.fg select,.fg textarea{width:100%;padding:12px 14px;border:1.5px solid var(--bd);border-radius:11px;font-size:14px;background:var(--bg2);color:var(--text);outline:none;font-family:inherit;transition:border-color .15s;}
-.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--g);}
-.btn-main{width:100%;padding:14px;background:var(--g);color:#fff;font-size:15px;font-weight:700;border:none;border-radius:12px;cursor:pointer;margin-top:8px;}
-.btn-main.yellow{background:var(--y);color:#7a5c00;}
-.alink{text-align:center;margin-top:14px;font-size:13px;color:var(--muted);}
-.alink span{color:var(--g);cursor:pointer;font-weight:600;}
-.divider{display:flex;align-items:center;gap:10px;margin:18px 0;color:var(--muted);font-size:12px;}
-.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--bd);}
-.hdr{background:var(--g);padding:16px 16px 52px;position:relative;overflow:hidden;}
-.hdr-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
-.hdr-logo{color:#fff;font-size:22px;font-weight:800;letter-spacing:-0.5px;}
-.hdr-flag{display:flex;height:20px;width:30px;border-radius:3px;overflow:hidden;}
-.hdr-flag div{flex:1;}
-.hdr-loc{font-size:11px;color:rgba(255,255,255,0.75);margin-bottom:12px;}
-.uchip{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);border-radius:20px;padding:5px 12px 5px 5px;margin-bottom:14px;}
-.av-sm{width:24px;height:24px;border-radius:50%;background:var(--y);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#7a5c00;}
-.uchip span{font-size:11px;color:#fff;}
-.sbox{background:#fff;border-radius:12px;display:flex;align-items:center;gap:8px;padding:10px 14px;position:relative;z-index:2;}
-.sbox input{border:none;outline:none;flex:1;font-size:13px;color:var(--text);background:transparent;}
-.cats{display:flex;gap:8px;overflow-x:auto;padding:14px 14px 0;scrollbar-width:none;}
-.cats::-webkit-scrollbar{display:none;}
-.cat{flex-shrink:0;padding:8px 13px;border-radius:20px;font-size:12px;cursor:pointer;border:1.5px solid var(--bd);background:var(--bg);color:var(--muted);display:flex;align-items:center;gap:5px;font-weight:500;}
-.cat.on{background:var(--y);color:#7a5c00;border-color:var(--y);}
-.sh{display:flex;justify-content:space-between;align-items:center;padding:16px 14px 8px;}
-.sh-t{font-size:14px;font-weight:700;color:var(--text);}
-.see-all{font-size:12px;color:var(--g);cursor:pointer;background:none;border:none;font-weight:600;}
-.nstrip{display:flex;gap:10px;overflow-x:auto;padding:0 14px;scrollbar-width:none;}
-.nstrip::-webkit-scrollbar{display:none;}
-.nc{flex-shrink:0;width:180px;border-radius:12px;overflow:hidden;border:1.5px solid var(--bd);background:var(--bg);cursor:pointer;}
-.nc-img{height:76px;display:flex;align-items:center;justify-content:center;font-size:28px;}
-.nc-b{padding:9px;}
-.nc-tag{font-size:9px;font-weight:700;color:#085041;background:#9FE1CB;padding:2px 6px;border-radius:20px;display:inline-block;margin-bottom:4px;text-transform:uppercase;}
-.nc-t{font-size:11px;font-weight:600;color:var(--text);line-height:1.4;}
-.plist{padding:0 14px;display:flex;flex-direction:column;gap:10px;}
-.pc{background:var(--bg);border:1.5px solid var(--bd);border-radius:14px;overflow:hidden;cursor:pointer;display:flex;transition:.12s;}
-.pc:active{transform:scale(0.98);}
-.pc-th{width:76px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:28px;background:var(--bg2);overflow:hidden;}
-.pc-th img{width:76px;height:76px;object-fit:cover;}
-.pc-inf{padding:11px;flex:1;}
-.pc-nm{font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px;}
-.pc-ct{font-size:10px;color:var(--muted);margin-bottom:5px;}
-.pc-mt{display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
-.stars{color:#F59E0B;font-size:11px;}
-.sct{font-size:10px;color:var(--muted);}
-.badge{font-size:9px;padding:2px 7px;border-radius:20px;font-weight:700;}
-.badge.open{background:#EAF3DE;color:#3B6D11;}
-.pc-addr{font-size:10px;color:var(--muted);margin-top:3px;}
-.tabbar{border-top:1.5px solid var(--bd);display:flex;background:var(--bg);padding-bottom:env(safe-area-inset-bottom,4px);}
-.tab{flex:1;padding:10px 0 6px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;border:none;background:none;}
-.ti{font-size:20px;}
-.tl{font-size:9px;color:var(--muted);font-weight:500;}
-.tab.on .tl{color:var(--g);}
-.det-top{background:var(--g);padding:16px 16px 18px;}
-.det-back{background:rgba(255,255,255,0.2);border:none;color:#fff;border-radius:8px;padding:7px 14px;font-size:12px;cursor:pointer;margin-bottom:10px;font-weight:600;}
-.det-sc{flex:1;overflow-y:auto;}
-.det-cover{width:100%;height:200px;object-fit:cover;display:block;background:var(--bg2);}
-.det-cover-em{height:200px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:64px;}
-.det-nm{font-size:20px;font-weight:700;color:var(--text);padding:14px 14px 3px;}
-.det-ct{font-size:13px;color:var(--muted);padding:0 14px 10px;}
-.det-st{font-size:18px;color:#F59E0B;padding:0 14px 2px;}
-.det-rc{font-size:12px;color:var(--muted);padding:0 14px 14px;}
-.infor{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);padding:4px 14px;}
-.infor span:first-child{font-size:15px;width:18px;}
-.act-row{display:flex;gap:8px;padding:12px 14px;}
-.act-b{flex:1;padding:10px;border:1.5px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--text);font-size:12px;cursor:pointer;text-align:center;font-weight:600;}
-.act-b.green{background:var(--g);color:#fff;border-color:var(--g);}
-.act-b.yellow{background:var(--y);color:#7a5c00;border-color:var(--y);}
-.phg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 14px 4px;}
-.phi{aspect-ratio:1;border-radius:10px;overflow:hidden;background:var(--bg2);}
-.phi img{width:100%;height:100%;object-fit:cover;}
-.phi-em{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px;}
-.rv{border-top:1px solid var(--bd);padding:12px 14px;}
-.rv-header{display:flex;justify-content:space-between;align-items:center;}
-.rv-u{font-size:12px;font-weight:700;color:var(--text);margin-bottom:2px;}
-.rv-s{font-size:11px;color:#F59E0B;margin-bottom:4px;}
-.rv-t{font-size:12px;color:var(--muted);line-height:1.5;}
-.rv-date{font-size:10px;color:#bbb;margin-top:4px;}
-.rv-del{background:none;border:none;color:var(--red);font-size:11px;cursor:pointer;padding:2px 8px;border-radius:6px;}
-.bar-hero{background:var(--b);padding:22px 16px 44px;position:relative;overflow:hidden;}
-.bar-t{font-size:22px;font-weight:700;color:#fff;margin-bottom:4px;}
-.bar-s{font-size:13px;color:rgba(255,255,255,0.7);}
-.bar-bdg{display:inline-block;background:var(--y);color:#7a5c00;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;margin-top:8px;}
-.ac-card{border:1.5px solid var(--bd);border-radius:14px;overflow:hidden;cursor:pointer;margin-bottom:10px;}
-.ac-img{height:110px;display:flex;align-items:center;justify-content:center;font-size:40px;}
-.ac-body{padding:14px;}
-.ac-tag{font-size:9px;font-weight:700;text-transform:uppercase;color:#085041;background:#9FE1CB;padding:2px 7px;border-radius:20px;display:inline-block;margin-bottom:6px;}
-.ac-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:5px;line-height:1.4;}
-.ac-txt{font-size:12px;color:var(--muted);line-height:1.6;}
-.ac-date{font-size:10px;color:var(--muted);margin-top:6px;}
-.add-top{background:var(--g);padding:22px 16px 28px;}
-.add-t{font-size:20px;font-weight:700;color:#fff;margin-bottom:4px;}
-.add-s{font-size:12px;color:rgba(255,255,255,0.7);}
-.add-body{padding:16px;flex:1;overflow-y:auto;}
-.sp-w{display:flex;gap:6px;margin:4px 0;}
-.sp{font-size:24px;cursor:pointer;color:#ddd;}
-.sp.on{color:#F59E0B;}
-.prof-top{background:var(--g);padding:30px 16px 48px;text-align:center;}
-.av-lg{width:72px;height:72px;border-radius:50%;background:var(--y);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:24px;font-weight:800;color:#7a5c00;border:3px solid #fff;}
-.prof-nm{font-size:18px;font-weight:700;color:#fff;}
-.prof-si{font-size:11px;color:rgba(255,255,255,0.7);margin-top:4px;}
-.prof-body{padding:14px;}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;}
-.stat{text-align:center;background:var(--bg2);border-radius:10px;padding:13px;}
-.stat-n{font-size:20px;font-weight:800;color:var(--text);}
-.stat-l{font-size:9px;color:var(--muted);margin-top:2px;}
-.pmenu{display:flex;flex-direction:column;gap:8px;}
-.pmi{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;background:var(--bg2);border-radius:10px;cursor:pointer;}
-.pmi-l{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text);font-weight:500;}
-.logout{width:100%;padding:13px;background:none;border:1.5px solid var(--red);color:var(--red);border-radius:12px;font-size:14px;cursor:pointer;margin-top:8px;font-weight:600;}
-.gbanner{background:var(--y3);border:1.5px solid var(--y);border-radius:10px;padding:10px 14px;margin:10px 14px 0;display:flex;align-items:center;gap:10px;}
-.gb-txt{font-size:11px;color:#7a5c00;flex:1;line-height:1.5;}
-.gb-btn{background:var(--g);color:#fff;border:none;border-radius:8px;padding:6px 11px;font-size:10px;cursor:pointer;white-space:nowrap;font-weight:700;}
-.mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:100;align-items:flex-end;justify-content:center;}
-.mbg.on{display:flex;}
-.mbox{background:var(--bg);border-radius:20px 20px 0 0;width:100%;max-width:430px;padding:20px 18px 40px;max-height:88vh;overflow-y:auto;}
-.mhandle{width:38px;height:4px;background:var(--bd);border-radius:2px;margin:0 auto 18px;}
-.mt{font-size:16px;font-weight:700;margin-bottom:16px;color:var(--text);}
-.mcancel{width:100%;padding:12px;background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;margin-top:6px;}
-.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;}
-.toast.show{opacity:1;}
-.loading{position:fixed;inset:0;background:var(--g);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;}
-.loading-logo{font-size:48px;font-weight:800;color:#fff;letter-spacing:-2px;margin-bottom:16px;}
-.loading-spinner{width:32px;height:32px;border:3px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.8s linear infinite;}
-@keyframes spin{to{transform:rotate(360deg);}}
-.share-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px;color:#fff;margin-bottom:10px;}
-.auth-err{color:var(--red);font-size:12px;text-align:center;margin-bottom:10px;display:none;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f0f0f0;display:flex;justify-content:center;min-height:100vh}
+:root{--g:#009e60;--g2:#007a4a;--y:#fcd116;--y3:#fffbdd;--b:#3a75c4;--text:#1a1a1a;--muted:#666;--bg:#fff;--bg2:#f5f5f5;--bd:#e0e0e0;--red:#E24B4A}
+.app{width:100%;max-width:430px;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.screen{display:none;flex-direction:column;flex:1;min-height:100vh}
+.screen.on{display:flex}
+.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+/* LOADING */
+.loading{position:fixed;inset:0;background:var(--g);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .4s}
+.loading-logo{font-size:52px;font-weight:800;color:#fff;letter-spacing:-2px;margin-bottom:20px}
+.spinner{width:32px;height:32px;border:3px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* SPLASH */
+.splash{background:var(--g);flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 28px;min-height:100vh}
+.flag{display:flex;width:60px;height:40px;border-radius:8px;overflow:hidden;margin-bottom:20px;border:2px solid rgba(255,255,255,.3)}
+.flag div{flex:1}
+.logo-big{font-size:56px;font-weight:800;color:#fff;letter-spacing:-2px;margin-bottom:4px}
+.logo-sub{font-size:12px;color:rgba(255,255,255,.7);letter-spacing:3px;text-transform:uppercase;margin-bottom:40px}
+.splash-dots{display:flex;gap:6px;margin-bottom:40px}
+.sdot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.3)}
+.sdot.y{background:var(--y)}
+.btn-y{width:100%;padding:16px;background:var(--y);color:#7a5c00;font-size:15px;font-weight:700;border:none;border-radius:14px;cursor:pointer;margin-bottom:10px}
+.btn-wh{width:100%;padding:15px;background:rgba(255,255,255,.15);color:#fff;font-size:14px;font-weight:500;border:1.5px solid rgba(255,255,255,.35);border-radius:14px;cursor:pointer;margin-bottom:10px}
+.btn-ghost{width:100%;padding:12px;background:transparent;color:rgba(255,255,255,.65);font-size:13px;border:none;cursor:pointer}
+.splash-foot{margin-top:24px;font-size:10px;color:rgba(255,255,255,.4)}
+/* AUTH */
+.auth-top{background:var(--g);padding:28px 20px 36px}
+.auth-back{background:rgba(255,255,255,.2);border:none;color:#fff;border-radius:8px;padding:7px 14px;font-size:12px;cursor:pointer;margin-bottom:16px;display:inline-block}
+.auth-h{font-size:24px;font-weight:700;color:#fff}
+.auth-s{font-size:12px;color:rgba(255,255,255,.7);margin-top:4px}
+.stripe{display:flex;height:5px}
+.stripe div:nth-child(1){flex:1;background:#009e60}
+.stripe div:nth-child(2){flex:1;background:#fcd116}
+.stripe div:nth-child(3){flex:1;background:#3a75c4}
+.auth-body{padding:24px 20px;flex:1;overflow-y:auto}
+.fg{margin-bottom:16px}
+.fg label{font-size:11px;color:var(--muted);display:block;margin-bottom:5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px}
+.fg input,.fg select,.fg textarea{width:100%;padding:12px 14px;border:1.5px solid var(--bd);border-radius:11px;font-size:14px;background:var(--bg2);color:var(--text);outline:none;font-family:inherit;transition:border-color .15s}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--g)}
+.btn-main{width:100%;padding:14px;background:var(--g);color:#fff;font-size:15px;font-weight:700;border:none;border-radius:12px;cursor:pointer;margin-top:8px}
+.btn-main.yellow{background:var(--y);color:#7a5c00}
+.alink{text-align:center;margin-top:14px;font-size:13px;color:var(--muted)}
+.alink span{color:var(--g);cursor:pointer;font-weight:600}
+.divider{display:flex;align-items:center;gap:10px;margin:18px 0;color:var(--muted);font-size:12px}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--bd)}
+.auth-err{color:var(--red);font-size:12px;text-align:center;margin-bottom:10px;display:none}
+/* HEADER */
+.hdr{background:var(--g);padding:16px 16px 52px;position:relative;overflow:hidden}
+.hdr-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.hdr-logo{color:#fff;font-size:22px;font-weight:800}
+.hdr-flag{display:flex;height:20px;width:30px;border-radius:3px;overflow:hidden}
+.hdr-flag div{flex:1}
+.hdr-loc{font-size:11px;color:rgba(255,255,255,.75);margin-bottom:12px}
+.uchip{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);border-radius:20px;padding:5px 12px 5px 5px;margin-bottom:14px}
+.av-sm{width:24px;height:24px;border-radius:50%;background:var(--y);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#7a5c00}
+.uchip span{font-size:11px;color:#fff}
+.sbox{background:#fff;border-radius:12px;display:flex;align-items:center;gap:8px;padding:10px 14px;position:relative;z-index:2}
+.sbox input{border:none;outline:none;flex:1;font-size:13px;color:var(--text);background:transparent}
+/* CATS */
+.cats{display:flex;gap:8px;overflow-x:auto;padding:14px 14px 0;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cat{flex-shrink:0;padding:8px 13px;border-radius:20px;font-size:12px;cursor:pointer;border:1.5px solid var(--bd);background:var(--bg);color:var(--muted);display:flex;align-items:center;gap:5px;font-weight:500}
+.cat.on{background:var(--y);color:#7a5c00;border-color:var(--y)}
+/* SECTION HEADER */
+.sh{display:flex;justify-content:space-between;align-items:center;padding:16px 14px 8px}
+.sh-t{font-size:14px;font-weight:700;color:var(--text)}
+.see-all{font-size:12px;color:var(--g);cursor:pointer;background:none;border:none;font-weight:600}
+/* NEWS STRIP */
+.nstrip{display:flex;gap:10px;overflow-x:auto;padding:0 14px;scrollbar-width:none}
+.nstrip::-webkit-scrollbar{display:none}
+.nc{flex-shrink:0;width:180px;border-radius:12px;overflow:hidden;border:1.5px solid var(--bd);background:var(--bg);cursor:pointer}
+.nc-img{height:76px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.nc-b{padding:9px}
+.nc-tag{font-size:9px;font-weight:700;color:#085041;background:#9FE1CB;padding:2px 6px;border-radius:20px;display:inline-block;margin-bottom:4px;text-transform:uppercase}
+.nc-t{font-size:11px;font-weight:600;color:var(--text);line-height:1.4}
+/* PLACE CARDS */
+.plist{padding:0 14px;display:flex;flex-direction:column;gap:10px}
+.pc{background:var(--bg);border:1.5px solid var(--bd);border-radius:14px;overflow:hidden;cursor:pointer;display:flex;transition:.12s}
+.pc:active{transform:scale(.98)}
+.pc-th{width:76px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:28px;background:var(--bg2);overflow:hidden}
+.pc-th img{width:76px;height:76px;object-fit:cover}
+.pc-inf{padding:11px;flex:1}
+.pc-nm{font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px}
+.pc-ct{font-size:10px;color:var(--muted);margin-bottom:5px}
+.pc-mt{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.stars{color:#F59E0B;font-size:11px}
+.sct{font-size:10px;color:var(--muted)}
+.badge.open{background:#EAF3DE;color:#3B6D11;font-size:9px;padding:2px 7px;border-radius:20px;font-weight:700}
+.pc-addr{font-size:10px;color:var(--muted);margin-top:3px}
+/* TABBAR */
+.tabbar{border-top:1.5px solid var(--bd);display:flex;background:var(--bg);padding-bottom:env(safe-area-inset-bottom,4px)}
+.tab{flex:1;padding:10px 0 6px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;border:none;background:none}
+.ti{font-size:20px}
+.tl{font-size:9px;color:var(--muted);font-weight:500}
+.tab.on .tl{color:var(--g)}
+/* DETAIL */
+.det-top{background:var(--g);padding:16px 16px 18px}
+.det-back{background:rgba(255,255,255,.2);border:none;color:#fff;border-radius:8px;padding:7px 14px;font-size:12px;cursor:pointer;margin-bottom:10px;font-weight:600}
+.det-sc{flex:1;overflow-y:auto}
+.det-cover{width:100%;height:200px;object-fit:cover;display:block}
+.det-cover-em{height:200px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:64px}
+.det-nm{font-size:20px;font-weight:700;color:var(--text);padding:14px 14px 3px}
+.det-ct{font-size:13px;color:var(--muted);padding:0 14px 10px}
+.det-st{font-size:18px;color:#F59E0B;padding:0 14px 2px}
+.det-rc{font-size:12px;color:var(--muted);padding:0 14px 14px}
+.infor{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);padding:4px 14px}
+.infor span:first-child{font-size:15px;width:18px}
+.act-row{display:flex;gap:8px;padding:12px 14px}
+.act-b{flex:1;padding:10px;border:1.5px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--text);font-size:12px;cursor:pointer;text-align:center;font-weight:600}
+.act-b.green{background:var(--g);color:#fff;border-color:var(--g)}
+.act-b.yellow{background:var(--y);color:#7a5c00;border-color:var(--y)}
+.phg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 14px 4px}
+.phi{aspect-ratio:1;border-radius:10px;overflow:hidden;background:var(--bg2)}
+.phi img{width:100%;height:100%;object-fit:cover}
+.phi-em{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px}
+.rv{border-top:1px solid var(--bd);padding:12px 14px}
+.rv-u{font-size:12px;font-weight:700;color:var(--text);margin-bottom:2px}
+.rv-s{font-size:11px;color:#F59E0B;margin-bottom:4px}
+.rv-t{font-size:12px;color:var(--muted);line-height:1.5}
+.rv-date{font-size:10px;color:#bbb;margin-top:4px}
+/* BAR */
+.bar-hero{background:var(--b);padding:22px 16px 44px}
+.bar-t{font-size:22px;font-weight:700;color:#fff;margin-bottom:4px}
+.bar-s{font-size:13px;color:rgba(255,255,255,.7)}
+.bar-bdg{display:inline-block;background:var(--y);color:#7a5c00;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;margin-top:8px}
+/* ACTUS */
+.ac-card{border:1.5px solid var(--bd);border-radius:14px;overflow:hidden;cursor:pointer;margin-bottom:10px}
+.ac-img{height:110px;display:flex;align-items:center;justify-content:center;font-size:40px}
+.ac-body{padding:14px}
+.ac-tag{font-size:9px;font-weight:700;text-transform:uppercase;color:#085041;background:#9FE1CB;padding:2px 7px;border-radius:20px;display:inline-block;margin-bottom:6px}
+.ac-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:5px;line-height:1.4}
+.ac-txt{font-size:12px;color:var(--muted);line-height:1.6}
+.ac-date{font-size:10px;color:var(--muted);margin-top:6px}
+/* ADD */
+.add-top{background:var(--g);padding:22px 16px 28px}
+.add-t{font-size:20px;font-weight:700;color:#fff;margin-bottom:4px}
+.add-s{font-size:12px;color:rgba(255,255,255,.7)}
+.add-body{padding:16px;flex:1;overflow-y:auto}
+.sp-w{display:flex;gap:6px;margin:4px 0}
+.sp{font-size:24px;cursor:pointer;color:#ddd}
+.sp.on{color:#F59E0B}
+/* PROFILE */
+.prof-top{background:var(--g);padding:30px 16px 48px;text-align:center}
+.av-lg{width:72px;height:72px;border-radius:50%;background:var(--y);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:24px;font-weight:800;color:#7a5c00;border:3px solid #fff}
+.prof-nm{font-size:18px;font-weight:700;color:#fff}
+.prof-si{font-size:11px;color:rgba(255,255,255,.7);margin-top:4px}
+.prof-body{padding:14px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.stat{text-align:center;background:var(--bg2);border-radius:10px;padding:13px}
+.stat-n{font-size:20px;font-weight:800;color:var(--text)}
+.stat-l{font-size:9px;color:var(--muted);margin-top:2px}
+.pmenu{display:flex;flex-direction:column;gap:8px}
+.pmi{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;background:var(--bg2);border-radius:10px;cursor:pointer}
+.pmi-l{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text);font-weight:500}
+.logout{width:100%;padding:13px;background:none;border:1.5px solid var(--red);color:var(--red);border-radius:12px;font-size:14px;cursor:pointer;margin-top:8px;font-weight:600}
+.gbanner{background:var(--y3);border:1.5px solid var(--y);border-radius:10px;padding:10px 14px;margin:10px 14px 0;display:flex;align-items:center;gap:10px}
+.gb-txt{font-size:11px;color:#7a5c00;flex:1;line-height:1.5}
+.gb-btn{background:var(--g);color:#fff;border:none;border-radius:8px;padding:6px 11px;font-size:10px;cursor:pointer;white-space:nowrap;font-weight:700}
+/* MODALS */
+.mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:100;align-items:flex-end;justify-content:center}
+.mbg.on{display:flex}
+.mbox{background:var(--bg);border-radius:20px 20px 0 0;width:100%;max-width:430px;padding:20px 18px 40px;max-height:88vh;overflow-y:auto}
+.mhandle{width:38px;height:4px;background:var(--bd);border-radius:2px;margin:0 auto 18px}
+.mt{font-size:16px;font-weight:700;margin-bottom:16px;color:var(--text)}
+.mcancel{width:100%;padding:12px;background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;margin-top:6px}
+/* TOAST */
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1}
+.share-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px;color:#fff;margin-bottom:10px}
+.rules-box{background:#fff3cd;border:1px solid #ffc107;border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:11px;color:#856404;line-height:1.6}
 </style>
 </head>
 <body>
@@ -173,7 +188,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 <!-- LOADING -->
 <div class="loading" id="loading">
   <div class="loading-logo">MBOLO</div>
-  <div class="loading-spinner"></div>
+  <div class="spinner"></div>
 </div>
 
 <!-- SPLASH -->
@@ -184,11 +199,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     <div class="logo-sub">Guide de Libreville</div>
     <div class="splash-dots"><div class="sdot y"></div><div class="sdot"></div><div class="sdot y"></div><div class="sdot"></div><div class="sdot y"></div></div>
     <div style="width:100%">
-      <button class="btn-y" onclick="go(&quot;s-register&quot;)">Créer un compte</button>
-      <button class="btn-wh" onclick="go(&quot;s-login&quot;)">Se connecter</button>
-      <button class="btn-ghost" onclick="goGuest()">Parcourir sans compte &#8594;</button>
+      <button class="btn-y" id="btn-register">Créer un compte</button>
+      <button class="btn-wh" id="btn-login">Se connecter</button>
+      <button class="btn-ghost" id="btn-guest">Parcourir sans compte →</button>
     </div>
-    <div class="splash-foot">&#127468;&#127462; Fait avec fierté pour Libreville</div>
+    <div class="splash-foot">🇬🇦 Fait avec fierté pour Libreville</div>
   </div>
 </div>
 
@@ -196,18 +211,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 <div class="screen" id="s-login">
   <div class="stripe"><div></div><div></div><div></div></div>
   <div class="auth-top">
-    <button class="auth-back" onclick="go(&quot;s-splash&quot;)">&#8592; Retour</button>
+    <button class="auth-back" id="login-back">← Retour</button>
     <div class="auth-h">Connexion</div>
-    <div class="auth-s">Bon retour sur MBOLO &#127468;&#127462;</div>
+    <div class="auth-s">Bon retour sur MBOLO 🇬🇦</div>
   </div>
   <div class="auth-body">
     <div class="auth-err" id="login-err"></div>
     <div class="fg"><label>Email</label><input type="email" placeholder="votre@email.com" id="li-email"/></div>
     <div class="fg"><label>Mot de passe</label><input type="password" placeholder="••••••••" id="li-pwd"/></div>
-    <button class="btn-main" onclick="doLogin()">Se connecter</button>
+    <button class="btn-main" id="btn-do-login">Se connecter</button>
     <div class="divider">ou</div>
-    <div class="alink">Pas de compte ? <span onclick="go(&quot;s-register&quot;)">Créer un compte</span></div>
-    <div class="alink" style="margin-top:8px"><span onclick="goGuest()">Continuer sans compte &#8594;</span></div>
+    <div class="alink">Pas de compte ? <span id="link-to-register">Créer un compte</span></div>
+    <div class="alink" style="margin-top:8px"><span id="link-guest-login">Continuer sans compte →</span></div>
   </div>
 </div>
 
@@ -215,7 +230,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 <div class="screen" id="s-register">
   <div class="stripe"><div></div><div></div><div></div></div>
   <div class="auth-top">
-    <button class="auth-back" onclick="go(&quot;s-splash&quot;)">&#8592; Retour</button>
+    <button class="auth-back" id="register-back">← Retour</button>
     <div class="auth-h">Créer un compte</div>
     <div class="auth-s">Rejoignez la communauté MBOLO</div>
   </div>
@@ -224,9 +239,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     <div class="fg"><label>Prénom et Nom</label><input type="text" placeholder="ex: Amina Ngoubili" id="rg-name"/></div>
     <div class="fg"><label>Email</label><input type="email" placeholder="votre@email.com" id="rg-email"/></div>
     <div class="fg"><label>Mot de passe</label><input type="password" placeholder="Min. 6 caractères" id="rg-pwd"/></div>
-    <button class="btn-main yellow" onclick="doRegister()">Créer mon compte</button>
-    <div class="alink" style="margin-top:12px">Déjà membre ? <span onclick="go(&quot;s-login&quot;)">Se connecter</span></div>
-    <div class="alink" style="margin-top:8px"><span onclick="goGuest()">Continuer sans compte &#8594;</span></div>
+    <button class="btn-main yellow" id="btn-do-register">Créer mon compte</button>
+    <div class="alink" style="margin-top:12px">Déjà membre ? <span id="link-to-login">Se connecter</span></div>
+    <div class="alink" style="margin-top:8px"><span id="link-guest-reg">Continuer sans compte →</span></div>
   </div>
 </div>
 
@@ -234,30 +249,30 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 <div class="screen" id="s-main">
   <div class="scroll" id="mainScroll"></div>
   <div class="tabbar">
-    <button class="tab on" id="tab-home" onclick="switchTab(&quot;home&quot;)"><span class="ti">&#127968;</span><span class="tl">Accueil</span></button>
-    <button class="tab" id="tab-bar" onclick="switchTab(&quot;bar&quot;)"><span class="ti">&#127865;</span><span class="tl">Bar</span></button>
-    <button class="tab" id="tab-actu" onclick="switchTab(&quot;actu&quot;)"><span class="ti">&#128240;</span><span class="tl">Actualités</span></button>
-    <button class="tab" id="tab-add" onclick="switchTab(&quot;add&quot;)"><span class="ti">&#43;</span><span class="tl">Ajouter</span></button>
-    <button class="tab" id="tab-prof" onclick="switchTab(&quot;prof&quot;)"><span class="ti">&#128100;</span><span class="tl">Profil</span></button>
+    <button class="tab on" id="tab-home" data-tab="home"><span class="ti">🏠</span><span class="tl">Accueil</span></button>
+    <button class="tab" id="tab-bar" data-tab="bar"><span class="ti">🍹</span><span class="tl">Bar</span></button>
+    <button class="tab" id="tab-actu" data-tab="actu"><span class="ti">📰</span><span class="tl">Actualités</span></button>
+    <button class="tab" id="tab-add" data-tab="add"><span class="ti">➕</span><span class="tl">Ajouter</span></button>
+    <button class="tab" id="tab-prof" data-tab="prof"><span class="ti">👤</span><span class="tl">Profil</span></button>
   </div>
 </div>
 
 <!-- DETAIL -->
 <div class="screen" id="s-detail">
-  <div class="det-top"><button class="det-back" onclick="goBack()">&#8592; Retour</button></div>
+  <div class="det-top"><button class="det-back" id="det-back-btn">← Retour</button></div>
   <div class="det-sc">
     <div id="d-cover"></div>
     <div class="det-nm" id="d-nm"></div>
     <div class="det-ct" id="d-ct"></div>
     <div class="det-st" id="d-st"></div>
     <div class="det-rc" id="d-rc"></div>
-    <div class="infor"><span>&#128205;</span><span id="d-ad"></span></div>
-    <div class="infor"><span>&#128336;</span><span id="d-hr"></span></div>
-    <div class="infor"><span>&#128222;</span><span id="d-ph"></span></div>
+    <div class="infor"><span>📍</span><span id="d-ad"></span></div>
+    <div class="infor"><span>🕐</span><span id="d-hr"></span></div>
+    <div class="infor"><span>📞</span><span id="d-ph"></span></div>
     <div class="act-row">
-      <button class="act-b yellow" onclick="openReview()">&#9733; Avis</button>
-      <button class="act-b" onclick="sharePlace()">&#8599; Partager</button>
-      <button class="act-b green" onclick="navPlace()">&#128506; Y aller</button>
+      <button class="act-b yellow" id="btn-avis">★ Avis</button>
+      <button class="act-b" id="btn-share">↗ Partager</button>
+      <button class="act-b green" id="btn-nav">🗺 Y aller</button>
     </div>
     <div style="padding:0 14px;font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px">Photos</div>
     <div class="phg" id="d-photos"></div>
@@ -272,27 +287,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
   <div class="mbox">
     <div class="mhandle"></div>
     <div class="mt">Laisser un avis</div>
-    <div style="background:#fff3cd;border:1px solid #ffc107;border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:11px;color:#856404;line-height:1.6;">
-      &#9888; <strong>Règles MBOLO</strong> — Il est formellement interdit de proférer des injures, des menaces ou tout propos irrespectueux. Tout avis inapproprié sera supprimé.
+    <div class="rules-box">
+      ⚠️ <strong>Règles MBOLO</strong> — Il est formellement interdit de proférer des injures, menaces ou propos irrespectueux. Tout avis inapproprié sera supprimé.
     </div>
     <div class="fg"><label>Note *</label>
       <div class="sp-w" id="revStars">
-        <span class="sp" onclick="setStar(1)">&#9733;</span>
-        <span class="sp" onclick="setStar(2)">&#9733;</span>
-        <span class="sp" onclick="setStar(3)">&#9733;</span>
-        <span class="sp" onclick="setStar(4)">&#9733;</span>
-        <span class="sp" onclick="setStar(5)">&#9733;</span>
+        <span class="sp" data-star="1">★</span>
+        <span class="sp" data-star="2">★</span>
+        <span class="sp" data-star="3">★</span>
+        <span class="sp" data-star="4">★</span>
+        <span class="sp" data-star="5">★</span>
       </div>
     </div>
-    <div class="fg"><label>Commentaire *</label>
-      <textarea id="revTxt" rows="4" placeholder="Ambiance, service, qualité, prix..." oninput="updateCharCount()"></textarea>
+    <div class="fg">
+      <label>Commentaire *</label>
+      <textarea id="revTxt" rows="4" placeholder="Ambiance, service, qualité, prix..."></textarea>
       <div id="rev-char" style="font-size:10px;color:#999;text-align:right;margin-top:3px">0 / 500</div>
     </div>
-    <div class="fg"><label>Prénom</label>
-      <input type="text" id="revNom" placeholder="Votre prénom"/>
-    </div>
-    <button class="btn-main" onclick="submitReview()">Publier mon avis</button>
-    <button class="mcancel" onclick="closeModal('reviewModal')">Annuler</button>
+    <div class="fg"><label>Prénom</label><input type="text" id="revNom" placeholder="Votre prénom"/></div>
+    <button class="btn-main" id="btn-submit-review">Publier mon avis</button>
+    <button class="mcancel" id="btn-cancel-review">Annuler</button>
   </div>
 </div>
 
@@ -301,19 +315,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
   <div class="mbox">
     <div class="mhandle"></div>
     <div class="mt" id="share-title">Partager</div>
-    <a id="share-wa" href="#" target="_blank" class="share-btn" style="background:#25D366">&#128241; WhatsApp</a>
-    <a id="share-fb" href="#" target="_blank" class="share-btn" style="background:#1877F2">&#128104; Facebook</a>
-    <button onclick="copyShareLink()" class="act-b" style="width:100%;margin-bottom:10px">&#128279; Copier le lien</button>
-    <button class="mcancel" onclick="closeModal('shareModal')">Annuler</button>
+    <a id="share-wa" href="#" target="_blank" class="share-btn" style="background:#25D366">📱 WhatsApp</a>
+    <a id="share-fb" href="#" target="_blank" class="share-btn" style="background:#1877F2">📘 Facebook</a>
+    <button class="act-b" id="btn-copy-link" style="width:100%;margin-bottom:10px">🔗 Copier le lien</button>
+    <button class="mcancel" id="btn-cancel-share">Annuler</button>
   </div>
 </div>
 
-<!-- Firebase SDK -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, getDocs, addDoc, updateDoc, doc, query, orderBy, onSnapshot, serverTimestamp, increment } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, addDoc, updateDoc, doc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
 
 const firebaseConfig = {
   apiKey: "AIzaSyBLG3d6gNyEbcRHv4-vU01tUDp-c1kzvxo",
@@ -324,47 +336,65 @@ const firebaseConfig = {
   appId: "1:1079636501599:web:8b8ed3fa9ce4a1f875a7ea"
 };
 
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
-
+const fbApp = initializeApp(firebaseConfig);
+const db = getFirestore(fbApp);
+const auth = getAuth(fbApp);
 const SITE_URL = "https://barttoni52-cloud.github.io/mbolo/";
 
-// ── STATE ──────────────────────────────────────────────────────────────────
+// STATE
 let currentUser = null;
 let isGuest = false;
 let currentPlaceId = null;
 let currentPlaceData = null;
 let revStar = 0;
-let userPlaces = 0;
 let userReviews = 0;
+let userPlaces = 0;
 let currentCat = "Tous";
 let allPlaces = [];
 
 const CATS = [
-  {l:"Tous",i:"&#128506;"},{l:"Restaurant",i:"&#127869;"},{l:"Bar",i:"&#127865;"},
-  {l:"Hotel",i:"&#127976;"},{l:"Shopping",i:"&#128717;"},{l:"Sante",i:"&#127973;"},{l:"Loisirs",i:"&#127754;"}
+  {l:"Tous",i:"🗺️"},{l:"Restaurant",i:"🍽️"},{l:"Bar",i:"🍹"},
+  {l:"Hotel",i:"🏨"},{l:"Shopping",i:"🛍️"},{l:"Sante",i:"🏥"},{l:"Loisirs",i:"🌊"}
 ];
 
 const ACTUS = [
-  {id:1,img:"&#127925;",bg:"#E1F5EE",tag:"Evenement",title:"MBOLO est lance !",txt:"Bars, restaurants, hotels : retrouvez les meilleures adresses de Libreville. Notez et partagez vos decouvertes !",date:"26 avril 2026"},
-  {id:2,img:"&#127468;&#127462;",bg:"#fff8d6",tag:"Communaute",title:"Rejoignez MBOLO",txt:"Creez votre compte pour noter les etablissements et contribuer au guide de Libreville.",date:"26 avril 2026"},
-  {id:3,img:"&#127869;",bg:"#e8f0fb",tag:"Quartier",title:"Les adresses de Glass",txt:"Quartier Glass : Le Lokua, La Piazza, Le QG vous attendent avec des adresses incontournables.",date:"26 avril 2026"},
+  {img:"🎵",bg:"#E1F5EE",tag:"Lancement",title:"MBOLO est lancé !",txt:"Bars, restaurants, hôtels : retrouvez les meilleures adresses de Libreville.",date:"26 avril 2026"},
+  {img:"🇬🇦",bg:"#fff8d6",tag:"Communauté",title:"Rejoignez MBOLO",txt:"Créez un compte pour noter et contribuer au guide de Libreville.",date:"26 avril 2026"},
+  {img:"🍽️",bg:"#e8f0fb",tag:"Quartier",title:"Les adresses de Glass",txt:"Quartier Glass : Le Lokua, La Piazza, Le QG vous attendent.",date:"26 avril 2026"},
 ];
 
-// ── HELPERS ────────────────────────────────────────────────────────────────
-function stH(n){if(!n||n===0)return "&#9734;&#9734;&#9734;&#9734;&#9734;";var s="";for(var i=0;i<5;i++)s+=i<Math.round(n)?"&#9733;":"&#9734;";return s;}
-function toast(msg){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show");},2500);}
-function go(id){document.querySelectorAll(".screen").forEach(function(s){s.classList.remove("on");});document.getElementById(id).classList.add("on");}
-function goBack(){go("s-main");}
-function closeModal(id){document.getElementById(id).classList.remove("on");}
-function updateCharCount(){var txt=document.getElementById("revTxt");var el=document.getElementById("rev-char");if(txt&&el){var len=txt.value.length;el.textContent=len+" / 500";el.style.color=len>450?"#E24B4A":"#999";}}
+// HELPERS
+function stH(n) {
+  if (!n || n === 0) return "☆☆☆☆☆";
+  return "★".repeat(Math.round(n)) + "☆".repeat(5 - Math.round(n));
+}
 
-// ── AUTH ───────────────────────────────────────────────────────────────────
-onAuthStateChanged(auth, function(user){
-  document.getElementById("loading").style.display = "none";
-  if(user){
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2500);
+}
+
+function go(id) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("on"));
+  document.getElementById(id).classList.add("on");
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove("on");
+}
+
+function hideLoading() {
+  const el = document.getElementById("loading");
+  el.style.opacity = "0";
+  setTimeout(() => el.style.display = "none", 400);
+}
+
+// AUTH STATE
+onAuthStateChanged(auth, user => {
+  hideLoading();
+  if (user) {
     currentUser = {uid: user.uid, name: user.displayName || user.email.split("@")[0], email: user.email, guest: false};
     isGuest = false;
     go("s-main");
@@ -374,350 +404,517 @@ onAuthStateChanged(auth, function(user){
   }
 });
 
-async function doLogin(){
-  var email = document.getElementById("li-email").value.trim();
-  var pwd = document.getElementById("li-pwd").value;
-  var err = document.getElementById("login-err");
+// EVENTS - SPLASH
+document.getElementById("btn-register").onclick = () => go("s-register");
+document.getElementById("btn-login").onclick = () => go("s-login");
+document.getElementById("btn-guest").onclick = () => {
+  isGuest = true;
+  currentUser = {name: "Visiteur", guest: true};
+  go("s-main");
+  switchTab("home");
+};
+
+// EVENTS - LOGIN
+document.getElementById("login-back").onclick = () => go("s-splash");
+document.getElementById("link-to-register").onclick = () => go("s-register");
+document.getElementById("link-guest-login").onclick = () => {
+  isGuest = true;
+  currentUser = {name: "Visiteur", guest: true};
+  go("s-main");
+  switchTab("home");
+};
+document.getElementById("btn-do-login").onclick = async () => {
+  const email = document.getElementById("li-email").value.trim();
+  const pwd = document.getElementById("li-pwd").value;
+  const err = document.getElementById("login-err");
   err.style.display = "none";
-  if(!email || !pwd){err.textContent="Email et mot de passe requis.";err.style.display="block";return;}
-  try{
+  if (!email || !pwd) { err.textContent = "Email et mot de passe requis."; err.style.display = "block"; return; }
+  try {
     await signInWithEmailAndPassword(auth, email, pwd);
-  }catch(e){
+  } catch(e) {
     err.textContent = "Email ou mot de passe incorrect.";
     err.style.display = "block";
   }
-}
+};
 
-async function doRegister(){
-  var name = document.getElementById("rg-name").value.trim();
-  var email = document.getElementById("rg-email").value.trim();
-  var pwd = document.getElementById("rg-pwd").value;
-  var err = document.getElementById("reg-err");
-  err.style.display = "none";
-  if(!name||!email||!pwd){err.textContent="Tous les champs sont requis.";err.style.display="block";return;}
-  if(pwd.length<6){err.textContent="Le mot de passe doit faire au moins 6 caracteres.";err.style.display="block";return;}
-  try{
-    var cred = await createUserWithEmailAndPassword(auth, email, pwd);
-    await addDoc(collection(db,"membres"),{nom:name,email:email,uid:cred.user.uid,date:serverTimestamp()});
-    toast("Bienvenue sur MBOLO, "+name+" !");
-  }catch(e){
-    err.textContent = e.code==="auth/email-already-in-use"?"Cet email est deja utilise.":"Erreur : "+e.message;
-    err.style.display = "block";
-  }
-}
-
-function goGuest(){
+// EVENTS - REGISTER
+document.getElementById("register-back").onclick = () => go("s-splash");
+document.getElementById("link-to-login").onclick = () => go("s-login");
+document.getElementById("link-guest-reg").onclick = () => {
   isGuest = true;
-  currentUser = {name:"Visiteur", guest:true};
+  currentUser = {name: "Visiteur", guest: true};
   go("s-main");
   switchTab("home");
+};
+document.getElementById("btn-do-register").onclick = async () => {
+  const name = document.getElementById("rg-name").value.trim();
+  const email = document.getElementById("rg-email").value.trim();
+  const pwd = document.getElementById("rg-pwd").value;
+  const err = document.getElementById("reg-err");
+  err.style.display = "none";
+  if (!name || !email || !pwd) { err.textContent = "Tous les champs sont requis."; err.style.display = "block"; return; }
+  if (pwd.length < 6) { err.textContent = "Mot de passe trop court (min. 6 caractères)."; err.style.display = "block"; return; }
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, email, pwd);
+    await addDoc(collection(db, "membres"), {nom: name, email, uid: cred.user.uid, date: serverTimestamp()});
+    toast(`Bienvenue sur MBOLO, ${name} ! 🇬🇦`);
+  } catch(e) {
+    err.textContent = e.code === "auth/email-already-in-use" ? "Email déjà utilisé." : "Erreur : " + e.message;
+    err.style.display = "block";
+  }
+};
+
+// EVENTS - DETAIL
+document.getElementById("det-back-btn").onclick = () => go("s-main");
+document.getElementById("btn-avis").onclick = openReview;
+document.getElementById("btn-share").onclick = sharePlace;
+document.getElementById("btn-nav").onclick = navPlace;
+
+// EVENTS - REVIEW MODAL
+document.getElementById("btn-cancel-review").onclick = () => closeModal("reviewModal");
+document.getElementById("btn-submit-review").onclick = submitReview;
+document.getElementById("revTxt").oninput = function() {
+  const len = this.value.length;
+  const el = document.getElementById("rev-char");
+  el.textContent = `${len} / 500`;
+  el.style.color = len > 450 ? "#E24B4A" : "#999";
+};
+document.querySelectorAll("#revStars .sp").forEach(sp => {
+  sp.onclick = () => {
+    revStar = parseInt(sp.dataset.star);
+    document.querySelectorAll("#revStars .sp").forEach((s, i) => s.classList.toggle("on", i < revStar));
+  };
+});
+
+// EVENTS - SHARE MODAL
+document.getElementById("btn-cancel-share").onclick = () => closeModal("shareModal");
+document.getElementById("btn-copy-link").onclick = () => {
+  const url = `${SITE_URL}?p=${currentPlaceId}`;
+  navigator.clipboard.writeText(url).then(() => {
+    toast("🔗 Lien copié !");
+    closeModal("shareModal");
+  }).catch(() => toast(url));
+};
+
+// EVENTS - TABBAR
+document.querySelectorAll(".tab").forEach(tab => {
+  tab.onclick = () => switchTab(tab.dataset.tab);
+});
+
+// TABS
+function switchTab(t) {
+  document.querySelectorAll(".tab").forEach(x => x.classList.remove("on"));
+  const el = document.getElementById(`tab-${t}`);
+  if (el) el.classList.add("on");
+  const map = {home: renderHome, bar: renderBar, actu: renderActu, add: renderAdd, prof: renderProf};
+  if (map[t]) map[t]();
 }
 
-async function logout(){
-  if(!confirm("Se deconnecter ?"))return;
-  await signOut(auth);
-  isGuest = false;
-  currentUser = null;
-}
-
-// ── TABS ───────────────────────────────────────────────────────────────────
-function switchTab(t){
-  document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("on");});
-  var el = document.getElementById("tab-"+t);
-  if(el) el.classList.add("on");
-  var map = {home:renderHome,bar:renderBar,actu:renderActu,add:renderAdd,prof:renderProf};
-  if(map[t]) map[t]();
-}
-
-// ── LOAD PLACES FROM FIREBASE ──────────────────────────────────────────────
-async function loadPlaces(){
-  var snap = await getDocs(collection(db,"places"));
+// LOAD PLACES
+async function loadPlaces() {
+  const snap = await getDocs(collection(db, "places"));
   allPlaces = [];
-  snap.forEach(function(d){allPlaces.push({...d.data(), fbId:d.id});});
+  snap.forEach(d => allPlaces.push({...d.data(), fbId: d.id}));
   return allPlaces;
 }
 
-// ── HOME ───────────────────────────────────────────────────────────────────
-async function renderHome(){
-  var un = currentUser ? currentUser.name : "Visiteur";
-  var initials = un.substring(0,2).toUpperCase();
-  document.getElementById("mainScroll").innerHTML =
-    (isGuest ? '<div class="gbanner"><span style="font-size:18px">&#127468;&#127462;</span><div class="gb-txt">Naviguez en visiteur. Creez un compte pour publier.</div><button class="gb-btn" onclick="go(\'s-register\')">Rejoindre</button></div>' : "") +
-    '<div class="hdr"><div class="hdr-row"><div class="hdr-logo">MBOLO</div><div class="hdr-flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div></div>' +
-    '<div class="hdr-loc">&#128205; Libreville, Gabon</div>' +
-    '<div class="uchip"><div class="av-sm">'+initials+'</div><span>'+un+'</span></div>' +
-    '<div class="sbox"><span style="font-size:15px;color:#bbb">&#128269;</span><input type="text" placeholder="Restaurant, bar, hotel..." id="searchInput" oninput="filterPlaces()"/></div></div>' +
-    '<div class="cats" id="catStrip"></div>' +
-    '<div class="sh"><span class="sh-t">Actualites</span><button class="see-all" onclick="switchTab(&quot;actu&quot;)">Tout voir</button></div>' +
-    '<div class="nstrip">' + ACTUS.slice(0,3).map(function(a){return '<div class="nc" onclick="switchTab(&quot;actu&quot;)"><div class="nc-img" style="background:'+a.bg+'">'+a.img+'</div><div class="nc-b"><div class="nc-tag">'+a.tag+'</div><div class="nc-t">'+a.title+'</div></div></div>';}).join("") + '</div>' +
-    '<div class="sh"><span class="sh-t" id="places-count">Etablissements</span></div>' +
-    '<div class="plist" id="placeList"></div>' +
-    '<div style="height:88px"></div>';
+// RENDER HOME
+async function renderHome() {
+  const un = currentUser ? currentUser.name : "Visiteur";
+  const initials = un.substring(0, 2).toUpperCase();
+  const ms = document.getElementById("mainScroll");
+
+  ms.innerHTML = `
+    ${isGuest ? `<div class="gbanner"><span style="font-size:18px">🇬🇦</span><div class="gb-txt">Naviguez en visiteur. Créez un compte pour publier.</div><button class="gb-btn" id="gbanner-btn">Rejoindre</button></div>` : ""}
+    <div class="hdr">
+      <div class="hdr-row">
+        <div class="hdr-logo">MBOLO</div>
+        <div class="hdr-flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div>
+      </div>
+      <div class="hdr-loc">📍 Libreville, Gabon</div>
+      <div class="uchip"><div class="av-sm">${initials}</div><span>${un}</span></div>
+      <div class="sbox">
+        <span style="font-size:15px;color:#bbb">🔍</span>
+        <input type="text" placeholder="Restaurant, bar, hôtel..." id="searchInput"/>
+      </div>
+    </div>
+    <div class="cats" id="catStrip"></div>
+    <div class="sh"><span class="sh-t">Actualités</span><button class="see-all" id="see-actus">Tout voir</button></div>
+    <div class="nstrip" id="nstrip"></div>
+    <div class="sh"><span class="sh-t" id="places-count">Établissements</span></div>
+    <div class="plist" id="placeList"></div>
+    <div style="height:88px"></div>
+  `;
+
+  // Events inside rendered HTML
+  const gbBtn = document.getElementById("gbanner-btn");
+  if (gbBtn) gbBtn.onclick = () => go("s-register");
+  document.getElementById("see-actus").onclick = () => switchTab("actu");
+  document.getElementById("searchInput").oninput = filterPlaces;
+
+  // Actus strip
+  const nstrip = document.getElementById("nstrip");
+  ACTUS.forEach(a => {
+    const nc = document.createElement("div");
+    nc.className = "nc";
+    nc.onclick = () => switchTab("actu");
+    nc.innerHTML = `<div class="nc-img" style="background:${a.bg}">${a.img}</div><div class="nc-b"><div class="nc-tag">${a.tag}</div><div class="nc-t">${a.title}</div></div>`;
+    nstrip.appendChild(nc);
+  });
 
   renderCats();
   await loadPlaces();
   renderPlacesList(allPlaces);
 }
 
-function renderCats(){
-  var s = document.getElementById("catStrip");
-  if(!s)return;
-  s.innerHTML = CATS.map(function(c){
-    return '<div class="cat'+(c.l===currentCat?" on":"")+'" onclick="filterCat(''+c.l+'')">'+c.i+" "+c.l+"</div>";
-  }).join("");
+function renderCats() {
+  const s = document.getElementById("catStrip");
+  if (!s) return;
+  s.innerHTML = "";
+  CATS.forEach(c => {
+    const div = document.createElement("div");
+    div.className = "cat" + (c.l === currentCat ? " on" : "");
+    div.textContent = c.i + " " + c.l;
+    div.onclick = () => { currentCat = c.l; renderCats(); filterPlaces(); };
+    s.appendChild(div);
+  });
 }
 
-function filterCat(cat){currentCat=cat;renderCats();filterPlaces();}
-
-function filterPlaces(){
-  var q = (document.getElementById("searchInput")||{}).value||"";
-  var filtered = allPlaces.filter(function(p){
-    if(p.status==="suspended")return false;
-    var mc = currentCat==="Tous" || p.cat===currentCat;
-    var mq = !q || p.name.toLowerCase().includes(q.toLowerCase()) || (p.quartier||"").toLowerCase().includes(q.toLowerCase());
+function filterPlaces() {
+  const q = (document.getElementById("searchInput") || {}).value || "";
+  const filtered = allPlaces.filter(p => {
+    if (p.status === "suspended") return false;
+    const mc = currentCat === "Tous" || p.cat === currentCat;
+    const mq = !q || p.name.toLowerCase().includes(q.toLowerCase()) || (p.quartier || "").toLowerCase().includes(q.toLowerCase());
     return mc && mq;
   });
   renderPlacesList(filtered);
 }
 
-function renderPlacesList(places){
-  var list = document.getElementById("placeList");
-  if(!list)return;
-  var count = document.getElementById("places-count");
-  if(count) count.textContent = "Etablissements ("+places.filter(function(p){return p.status==="approved";}).length+")";
-  var approved = places.filter(function(p){return p.status==="approved";});
-  if(!approved.length){list.innerHTML='<div style="text-align:center;padding:28px;color:var(--muted);font-size:13px">Aucun resultat</div>';return;}
-  list.innerHTML = approved.map(function(p){
-    var thumb = p.photos&&p.photos.length ? '<img src="'+p.photos[0]+'" style="width:76px;height:76px;object-fit:cover;" onerror="this.parentElement.innerHTML=''+p.em+''">' : p.em;
-    return '<div class="pc" onclick="openPlace(''+p.fbId+'')">' +
-      '<div class="pc-th">'+thumb+'</div>' +
-      '<div class="pc-inf"><div class="pc-nm">'+p.name+'</div>' +
-      '<div class="pc-ct">'+p.cat+' &middot; '+(p.quartier||"")+'</div>' +
-      '<div class="pc-mt">'+(p.rating>0?'<span class="stars">'+stH(p.rating)+'</span><span class="sct">'+p.rating+' ('+p.reviews+')</span>':'<span class="sct">Pas encore note</span>')+'</div>' +
-      '<div class="pc-addr">&#128205; '+p.addr+'</div></div></div>';
-  }).join("");
+function renderPlacesList(places) {
+  const list = document.getElementById("placeList");
+  if (!list) return;
+  const countEl = document.getElementById("places-count");
+  const approved = places.filter(p => p.status === "approved");
+  if (countEl) countEl.textContent = `Établissements (${approved.length})`;
+  list.innerHTML = "";
+  if (!approved.length) {
+    list.innerHTML = `<div style="text-align:center;padding:28px;color:var(--muted);font-size:13px">Aucun résultat</div>`;
+    return;
+  }
+  approved.forEach(p => {
+    const pc = document.createElement("div");
+    pc.className = "pc";
+    pc.onclick = () => openPlace(p.fbId);
+    const hasPhoto = p.photos && p.photos.length;
+    const thumb = hasPhoto
+      ? `<img src="${p.photos[0]}" style="width:76px;height:76px;object-fit:cover;" onerror="this.parentElement.innerHTML='${p.em}'">`
+      : p.em;
+    const ratingHtml = p.rating > 0
+      ? `<span class="stars">${stH(p.rating)}</span><span class="sct">${p.rating} (${p.reviews})</span>`
+      : `<span class="sct">Pas encore noté</span>`;
+    pc.innerHTML = `
+      <div class="pc-th">${thumb}</div>
+      <div class="pc-inf">
+        <div class="pc-nm">${p.name}</div>
+        <div class="pc-ct">${p.cat} · ${p.quartier || ""}</div>
+        <div class="pc-mt">${ratingHtml}</div>
+        <div class="pc-addr">📍 ${p.addr}</div>
+      </div>`;
+    list.appendChild(pc);
+  });
 }
 
-// ── DETAIL ─────────────────────────────────────────────────────────────────
-async function openPlace(fbId){
-  var p = allPlaces.find(function(x){return x.fbId===fbId;});
-  if(!p)return;
+// OPEN PLACE
+async function openPlace(fbId) {
+  const p = allPlaces.find(x => x.fbId === fbId);
+  if (!p) return;
   currentPlaceId = fbId;
   currentPlaceData = p;
 
-  var cover = document.getElementById("d-cover");
-  if(p.photos&&p.photos.length){
-    cover.innerHTML = '<img class="det-cover" src="'+p.photos[0]+'" onerror="this.parentElement.innerHTML='<div class=det-cover-em>'+p.em+'</div>'">';
-  }else{
-    cover.innerHTML = '<div class="det-cover-em">'+p.em+'</div>';
+  const cover = document.getElementById("d-cover");
+  if (p.photos && p.photos.length) {
+    cover.innerHTML = `<img class="det-cover" src="${p.photos[0]}" onerror="this.parentElement.innerHTML='<div class=det-cover-em>${p.em}</div>'">`;
+  } else {
+    cover.innerHTML = `<div class="det-cover-em">${p.em}</div>`;
   }
+
   document.getElementById("d-nm").textContent = p.name;
-  document.getElementById("d-ct").textContent = p.cat+" · "+(p.quartier||"");
-  document.getElementById("d-st").innerHTML = p.rating>0 ? stH(p.rating)+" "+p.rating : "Pas encore note";
-  document.getElementById("d-rc").textContent = (p.reviews||0)+" avis";
+  document.getElementById("d-ct").textContent = `${p.cat} · ${p.quartier || ""}`;
+  document.getElementById("d-st").innerHTML = p.rating > 0 ? stH(p.rating) + " " + p.rating : "Pas encore noté";
+  document.getElementById("d-rc").textContent = (p.reviews || 0) + " avis";
   document.getElementById("d-ad").textContent = p.addr;
-  document.getElementById("d-hr").textContent = p.hours||"—";
-  document.getElementById("d-ph").textContent = p.phone||"—";
+  document.getElementById("d-hr").textContent = p.hours || "—";
+  document.getElementById("d-ph").textContent = p.phone || "—";
 
-  // Photos
-  var phEl = document.getElementById("d-photos");
-  if(p.photos&&p.photos.length){
-    phEl.innerHTML = p.photos.map(function(url){
-      return '<div class="phi"><img src="'+url+'" onerror="this.parentElement.innerHTML='<div class=phi-em>&#128247;</div>'"></div>';
-    }).join("");
-  }else{
-    phEl.innerHTML = '<div style="grid-column:1/-1;padding:16px;text-align:center;color:#999;font-size:12px">&#128247; Photos bientot disponibles</div>';
+  const phEl = document.getElementById("d-photos");
+  if (p.photos && p.photos.length) {
+    phEl.innerHTML = "";
+    p.photos.forEach(url => {
+      const div = document.createElement("div");
+      div.className = "phi";
+      div.innerHTML = `<img src="${url}" onerror="this.parentElement.innerHTML='<div class=phi-em>📷</div>'">`;
+      phEl.appendChild(div);
+    });
+  } else {
+    phEl.innerHTML = `<div style="grid-column:1/-1;padding:16px;text-align:center;color:#999;font-size:12px">📷 Photos bientôt disponibles</div>`;
   }
 
-  // Load reviews from Firebase
   await loadReviews(fbId);
   go("s-detail");
 }
 
-async function loadReviews(placeId){
-  var el = document.getElementById("d-reviews");
-  el.innerHTML = '<div style="padding:14px;font-size:12px;color:#999">Chargement des avis...</div>';
-  try{
-    var q2 = query(collection(db,"places",placeId,"avis"),orderBy("date","desc"));
-    var snap = await getDocs(q2);
-    var avis = [];
-    snap.forEach(function(d){avis.push({...d.data(),id:d.id});});
-    if(!avis.length){
-      el.innerHTML = '<div style="padding:14px;font-size:12px;color:var(--muted)">Aucun avis pour le moment. Soyez le premier</div>';
-    }else{
-      el.innerHTML = avis.map(function(a){
-        return '<div class="rv"><div class="rv-header"><div class="rv-u">'+(a.user||"Anonyme")+'</div></div>' +
-          '<div class="rv-s">'+stH(a.stars)+'</div>' +
-          '<div class="rv-t">'+a.txt+'</div>' +
-          (a.dateStr?'<div class="rv-date">&#128197; '+a.dateStr+'</div>':"") +
-          '</div>';
-      }).join("");
+async function loadReviews(placeId) {
+  const el = document.getElementById("d-reviews");
+  el.innerHTML = `<div style="padding:14px;font-size:12px;color:#999">Chargement...</div>`;
+  try {
+    const q2 = query(collection(db, "places", placeId, "avis"), orderBy("date", "desc"));
+    const snap = await getDocs(q2);
+    const avis = [];
+    snap.forEach(d => avis.push({...d.data(), id: d.id}));
+    if (!avis.length) {
+      el.innerHTML = `<div style="padding:14px;font-size:12px;color:var(--muted)">Aucun avis pour le moment. Soyez le premier !</div>`;
+    } else {
+      el.innerHTML = "";
+      avis.forEach(a => {
+        const div = document.createElement("div");
+        div.className = "rv";
+        const dateHtml = a.dateStr ? '<div class="rv-date">📅 ' + a.dateStr + '</div>' : '';
+        div.innerHTML = '<div class="rv-u">' + (a.user||'Anonyme') + '</div><div class="rv-s">' + stH(a.stars) + '</div><div class="rv-t">' + a.txt + '</div>' + dateHtml;
+        el.appendChild(div);
+      });
     }
-  }catch(e){
-    el.innerHTML = '<div style="padding:14px;font-size:12px;color:#999">Impossible de charger les avis.</div>';
+  } catch(e) {
+    el.innerHTML = `<div style="padding:14px;font-size:12px;color:#999">Impossible de charger les avis.</div>`;
   }
 }
 
-// ── REVIEW ─────────────────────────────────────────────────────────────────
-function openReview(){
-  if(isGuest){if(confirm("Creez un compte pour publier un avis."))go("s-register");return;}
-  revStar=0;
-  document.getElementById("revTxt").value="";
-  document.getElementById("revNom").value="";
-  document.getElementById("rev-char").textContent="0 / 500";
-  document.querySelectorAll("#revStars .sp").forEach(function(s){s.classList.remove("on");});
+// REVIEW
+function openReview() {
+  if (isGuest) { if (confirm("Créez un compte pour publier un avis.")) go("s-register"); return; }
+  revStar = 0;
+  document.getElementById("revTxt").value = "";
+  document.getElementById("revNom").value = "";
+  document.getElementById("rev-char").textContent = "0 / 500";
+  document.querySelectorAll("#revStars .sp").forEach(s => s.classList.remove("on"));
   document.getElementById("reviewModal").classList.add("on");
 }
 
-function setStar(n){revStar=n;document.querySelectorAll("#revStars .sp").forEach(function(s,i){s.classList.toggle("on",i<n);});}
-
-async function submitReview(){
-  var txt = document.getElementById("revTxt").value.trim();
-  var nom = document.getElementById("revNom").value.trim();
-  if(!txt||!revStar){alert("Note et commentaire requis.");return;}
-  if(txt.length>500){alert("Max 500 caracteres.");return;}
-  var now = new Date();
-  var dateStr = now.toLocaleDateString("fr-FR",{day:"2-digit",month:"long",year:"numeric"});
-  var avisNom = nom || (currentUser&&!currentUser.guest?currentUser.name:"Anonyme");
-  try{
-    await addDoc(collection(db,"places",currentPlaceId,"avis"),{
-      user:avisNom, stars:revStar, txt:txt, dateStr:dateStr,
-      date:serverTimestamp(), uid:currentUser?currentUser.uid:null
+async function submitReview() {
+  const txt = document.getElementById("revTxt").value.trim();
+  const nom = document.getElementById("revNom").value.trim();
+  if (!txt || !revStar) { alert("Note et commentaire requis."); return; }
+  if (txt.length > 500) { alert("Maximum 500 caractères."); return; }
+  const now = new Date();
+  const dateStr = now.toLocaleDateString("fr-FR", {day: "2-digit", month: "long", year: "numeric"});
+  const avisNom = nom || (currentUser && !currentUser.guest ? currentUser.name : "Anonyme");
+  try {
+    await addDoc(collection(db, "places", currentPlaceId, "avis"), {
+      user: avisNom, stars: revStar, txt, dateStr, date: serverTimestamp(),
+      uid: currentUser ? currentUser.uid : null
     });
-    // Update rating
-    var snap = await getDocs(collection(db,"places",currentPlaceId,"avis"));
-    var total=0,count=0;
-    snap.forEach(function(d){total+=d.data().stars;count++;});
-    var newRating = Math.round(total/count*10)/10;
-    await updateDoc(doc(db,"places",currentPlaceId),{rating:newRating,reviews:count});
-    // Update local
-    if(currentPlaceData){currentPlaceData.rating=newRating;currentPlaceData.reviews=count;}
-    revStar=0;
+    const snap = await getDocs(collection(db, "places", currentPlaceId, "avis"));
+    let total = 0, count = 0;
+    snap.forEach(d => { total += d.data().stars; count++; });
+    const newRating = Math.round(total / count * 10) / 10;
+    await updateDoc(doc(db, "places", currentPlaceId), {rating: newRating, reviews: count});
+    if (currentPlaceData) { currentPlaceData.rating = newRating; currentPlaceData.reviews = count; }
+    revStar = 0;
     closeModal("reviewModal");
     await loadReviews(currentPlaceId);
-    toast("Avis publie ! Merci &#128079;");
+    toast("✅ Avis publié ! Merci 👏");
     userReviews++;
-  }catch(e){
-    toast("Erreur : "+e.message);
+  } catch(e) {
+    toast("Erreur : " + e.message);
   }
 }
 
-// ── NAV + SHARE ────────────────────────────────────────────────────────────
-function navPlace(){
-  var p = currentPlaceData;
-  if(!p)return;
-  var url = p.placeId ? "https://www.google.com/maps/place/?q=place_id:"+p.placeId : "https://www.google.com/maps/search/"+encodeURIComponent(p.name+" Libreville Gabon");
-  window.open(url,"_blank");
-}
-
-function sharePlace(){
-  var p = currentPlaceData;
-  if(!p)return;
-  var url = SITE_URL+"?p="+currentPlaceId;
-  var txt = p.name+" — "+p.cat+" a Libreville\n"+p.addr+"\n\nDecouvert sur MBOLO : "+url;
-  if(navigator.share){navigator.share({title:p.name,url:url}).catch(function(){});return;}
-  document.getElementById("share-title").textContent = "Partager — "+p.name;
-  document.getElementById("share-wa").href = "https://wa.me/?text="+encodeURIComponent(txt);
-  document.getElementById("share-fb").href = "https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(url);
+// SHARE
+function sharePlace() {
+  const p = currentPlaceData;
+  if (!p) return;
+  const url = `${SITE_URL}?p=${currentPlaceId}`;
+  const txt = `${p.name} — ${p.cat} à Libreville\n${p.addr}\n\nDécouvert sur MBOLO : ${url}`;
+  if (navigator.share) { navigator.share({title: p.name, url}).catch(() => {}); return; }
+  document.getElementById("share-title").textContent = "Partager — " + p.name;
+  document.getElementById("share-wa").href = "https://wa.me/?text=" + encodeURIComponent(txt);
+  document.getElementById("share-fb").href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url);
   document.getElementById("shareModal").classList.add("on");
 }
 
-function copyShareLink(){
-  var url = SITE_URL+"?p="+currentPlaceId;
-  navigator.clipboard.writeText(url).then(function(){toast("Lien copie !");closeModal("shareModal");}).catch(function(){toast(url);});
+// NAV
+function navPlace() {
+  const p = currentPlaceData;
+  if (!p) return;
+  const url = p.placeId
+    ? `https://www.google.com/maps/place/?q=place_id:${p.placeId}`
+    : `https://www.google.com/maps/search/${encodeURIComponent(p.name + " Libreville Gabon")}`;
+  window.open(url, "_blank");
 }
 
-// ── BAR ────────────────────────────────────────────────────────────────────
-async function renderBar(){
+// BAR TAB
+async function renderBar() {
   await loadPlaces();
-  var bars = allPlaces.filter(function(p){return p.cat==="Bar"&&p.status==="approved";});
-  document.getElementById("mainScroll").innerHTML =
-    '<div class="bar-hero"><div class="bar-t">Bars &#127865;</div><div class="bar-s">Tous les bars de Libreville</div><div class="bar-bdg">'+bars.length+' bars references</div></div>' +
-    '<div class="sh"><span class="sh-t">Bars populaires</span></div>' +
-    '<div class="plist">'+bars.map(function(p){
-      var thumb = p.photos&&p.photos.length ? '<img src="'+p.photos[0]+'" style="width:76px;height:76px;object-fit:cover;" onerror="this.parentElement.innerHTML=''+p.em+''">' : p.em;
-      return '<div class="pc" onclick="openPlace(''+p.fbId+'')">' +
-        '<div class="pc-th" style="background:#e8f0fb">'+thumb+'</div>' +
-        '<div class="pc-inf"><div class="pc-nm">'+p.name+'</div>' +
-        '<div class="pc-ct">'+p.addr+'</div>' +
-        '<div class="pc-mt">'+(p.rating>0?'<span class="stars">'+stH(p.rating)+'</span><span class="sct">'+p.rating+'</span>':'<span class="sct">Pas encore note</span>')+'</div>' +
-        '<div class="pc-addr">&#128336; '+p.hours+'</div></div></div>';
-    }).join("")+'</div><div style="height:88px"></div>';
+  const bars = allPlaces.filter(p => p.cat === "Bar" && p.status === "approved");
+  const ms = document.getElementById("mainScroll");
+  ms.innerHTML = `
+    <div class="bar-hero">
+      <div class="bar-t">Bars 🍹</div>
+      <div class="bar-s">Tous les bars de Libreville</div>
+      <div class="bar-bdg">${bars.length} bars référencés</div>
+    </div>
+    <div class="sh"><span class="sh-t">Bars populaires</span></div>
+    <div class="plist" id="bar-list"></div>
+    <div style="height:88px"></div>`;
+  const list = document.getElementById("bar-list");
+  bars.forEach(p => {
+    const pc = document.createElement("div");
+    pc.className = "pc";
+    pc.onclick = () => openPlace(p.fbId);
+    const thumb = (p.photos && p.photos.length)
+      ? `<img src="${p.photos[0]}" style="width:76px;height:76px;object-fit:cover;" onerror="this.parentElement.innerHTML='${p.em}'">`
+      : p.em;
+    const ratingHtml = p.rating > 0
+      ? `<span class="stars">${stH(p.rating)}</span><span class="sct">${p.rating}</span>`
+      : `<span class="sct">Pas encore noté</span>`;
+    pc.innerHTML = `
+      <div class="pc-th" style="background:#e8f0fb">${thumb}</div>
+      <div class="pc-inf">
+        <div class="pc-nm">${p.name}</div>
+        <div class="pc-ct">${p.addr}</div>
+        <div class="pc-mt">${ratingHtml}</div>
+        <div class="pc-addr">🕐 ${p.hours || "—"}</div>
+      </div>`;
+    list.appendChild(pc);
+  });
 }
 
-// ── ACTUS ──────────────────────────────────────────────────────────────────
-function renderActu(){
-  document.getElementById("mainScroll").innerHTML =
-    '<div class="hdr" style="padding-bottom:18px"><div class="hdr-row"><div class="hdr-logo">Actualites &#128240;</div><div class="hdr-flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div></div><div class="hdr-loc">&#128205; Libreville, Gabon</div></div>' +
-    '<div style="padding:12px 14px 0">' +
-    ACTUS.map(function(a){
-      return '<div class="ac-card"><div class="ac-img" style="background:'+a.bg+'">'+a.img+'</div><div class="ac-body"><div class="ac-tag">'+a.tag+'</div><div class="ac-title">'+a.title+'</div><div class="ac-txt">'+a.txt+'</div><div class="ac-date">&#128197; '+a.date+'</div></div></div>';
-    }).join("")+"</div><div style='height:88px'></div>";
+// ACTUS TAB
+function renderActu() {
+  const ms = document.getElementById("mainScroll");
+  ms.innerHTML = `
+    <div class="hdr" style="padding-bottom:18px">
+      <div class="hdr-row">
+        <div class="hdr-logo">Actualités 📰</div>
+        <div class="hdr-flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div>
+      </div>
+      <div class="hdr-loc">📍 Libreville, Gabon</div>
+    </div>
+    <div style="padding:12px 14px 0" id="actu-list"></div>
+    <div style="height:88px"></div>`;
+  const list = document.getElementById("actu-list");
+  ACTUS.forEach(a => {
+    const card = document.createElement("div");
+    card.className = "ac-card";
+    card.innerHTML = `
+      <div class="ac-img" style="background:${a.bg}">${a.img}</div>
+      <div class="ac-body">
+        <div class="ac-tag">${a.tag}</div>
+        <div class="ac-title">${a.title}</div>
+        <div class="ac-txt">${a.txt}</div>
+        <div class="ac-date">📅 ${a.date}</div>
+      </div>`;
+    list.appendChild(card);
+  });
 }
 
-// ── ADD ────────────────────────────────────────────────────────────────────
-function renderAdd(){
-  if(isGuest){
-    document.getElementById("mainScroll").innerHTML = '<div style="text-align:center;padding:70px 24px"><div style="font-size:48px;margin-bottom:16px">&#128274;</div><div style="font-size:17px;font-weight:700;margin-bottom:8px">Connexion requise</div><div style="font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.6">Creez un compte gratuit pour ajouter des etablissements.</div><button class="btn-main" style="max-width:270px;margin:0 auto;display:block" onclick="go(&quot;s-register&quot;)">Creer un compte</button><div class="alink" style="margin-top:12px"><span onclick="go(&quot;s-login&quot;)">J'ai deja un compte</span></div></div><div style="height:88px"></div>';
+// ADD TAB
+function renderAdd() {
+  const ms = document.getElementById("mainScroll");
+  if (isGuest) {
+    ms.innerHTML = `
+      <div style="text-align:center;padding:70px 24px">
+        <div style="font-size:48px;margin-bottom:16px">🔒</div>
+        <div style="font-size:17px;font-weight:700;margin-bottom:8px">Connexion requise</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.6">Créez un compte gratuit pour ajouter des établissements.</div>
+        <button class="btn-main" style="max-width:270px;margin:0 auto;display:block" id="add-guest-register">Créer un compte gratuit</button>
+        <div class="alink" style="margin-top:12px"><span id="add-guest-login">J ai déjà un compte</span></div>
+      </div>
+      <div style="height:88px"></div>`;
+    document.getElementById("add-guest-register").onclick = () => go("s-register");
+    document.getElementById("add-guest-login").onclick = () => go("s-login");
     return;
   }
-  document.getElementById("mainScroll").innerHTML =
-    '<div class="add-top"><div class="add-t">Ajouter un lieu</div><div class="add-s">Partagez une adresse avec la communaute</div></div>' +
-    '<div class="stripe"><div></div><div></div><div></div></div>' +
-    '<div class="add-body">' +
-    '<div style="background:#fff8d6;border:1px solid #fcd116;border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:#7a5c00">&#8505;&#65039; Votre etablissement sera soumis a validation avant apparition.</div>' +
-    '<div class="fg"><label>Nom *</label><input type="text" id="newName" placeholder="Ex: Restaurant Le Perroquet"/></div>' +
-    '<div class="fg"><label>Categorie *</label><select id="newCat"><option>Restaurant</option><option>Bar</option><option>Hotel</option><option>Shopping</option><option>Sante</option><option>Loisirs</option><option>Autre</option></select></div>' +
-    '<div class="fg"><label>Quartier *</label><input type="text" id="newQrt" placeholder="Ex: Plateau, Louis, Akanda..."/></div>' +
-    '<div class="fg"><label>Adresse *</label><input type="text" id="newAddr" placeholder="Ex: Face au marche Mont-Bouet"/></div>' +
-    '<div class="fg"><label>Telephone</label><input type="tel" id="newPhone" placeholder="+241 06 ..."/></div>' +
-    '<div class="fg"><label>Horaires</label><input type="text" id="newHours" placeholder="Ex: Lun-Sam 08h-22h"/></div>' +
-    '<button class="btn-main yellow" onclick="submitPlace()">Soumettre pour validation</button>' +
-    '</div><div style="height:88px"></div>';
+  ms.innerHTML = `
+    <div class="add-top"><div class="add-t">Ajouter un lieu</div><div class="add-s">Partagez une adresse avec la communauté</div></div>
+    <div class="stripe"><div></div><div></div><div></div></div>
+    <div class="add-body">
+      <div style="background:#fff8d6;border:1px solid #fcd116;border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:#7a5c00">
+        ℹ️ Votre établissement sera soumis à validation avant d'apparaître.
+      </div>
+      <div class="fg"><label>Nom *</label><input type="text" id="newName" placeholder="Ex: Restaurant Le Perroquet"/></div>
+      <div class="fg"><label>Catégorie *</label>
+        <select id="newCat">
+          <option>Restaurant</option><option>Bar</option><option>Hotel</option>
+          <option>Shopping</option><option>Sante</option><option>Loisirs</option><option>Autre</option>
+        </select>
+      </div>
+      <div class="fg"><label>Quartier *</label><input type="text" id="newQrt" placeholder="Ex: Plateau, Louis, Akanda..."/></div>
+      <div class="fg"><label>Adresse *</label><input type="text" id="newAddr" placeholder="Ex: Face au marché Mont-Bouet"/></div>
+      <div class="fg"><label>Téléphone</label><input type="tel" id="newPhone" placeholder="+241 06 ..."/></div>
+      <div class="fg"><label>Horaires</label><input type="text" id="newHours" placeholder="Ex: Lun-Sam 08h-22h"/></div>
+      <button class="btn-main yellow" id="btn-submit-place">Soumettre pour validation</button>
+    </div>
+    <div style="height:88px"></div>`;
+  document.getElementById("btn-submit-place").onclick = submitPlace;
 }
 
-async function submitPlace(){
-  var name = (document.getElementById("newName")||{}).value||"";
-  var addr = (document.getElementById("newAddr")||{}).value||"";
-  var qrt = (document.getElementById("newQrt")||{}).value||"";
-  var cat = (document.getElementById("newCat")||{}).value||"Restaurant";
-  if(!name.trim()||!addr.trim()||!qrt.trim()){alert("Nom, quartier et adresse sont requis.");return;}
-  var icons = {Restaurant:"&#127869;",Bar:"&#127865;",Hotel:"&#127976;",Shopping:"&#128717;",Sante:"&#127973;",Loisirs:"&#127754;",Autre:"&#128205;"};
-  try{
-    await addDoc(collection(db,"places"),{
-      em:icons[cat]||"&#128205;",name:name.trim(),cat:cat,quartier:qrt.trim(),addr:addr.trim(),
-      phone:(document.getElementById("newPhone")||{}).value||"",
-      hours:(document.getElementById("newHours")||{}).value||"",
-      rating:0,reviews:0,open:true,status:"pending",photos:[],placeId:"",
-      submittedBy:currentUser?currentUser.name:"",submittedAt:serverTimestamp()
+async function submitPlace() {
+  const name = (document.getElementById("newName") || {}).value || "";
+  const addr = (document.getElementById("newAddr") || {}).value || "";
+  const qrt = (document.getElementById("newQrt") || {}).value || "";
+  const cat = (document.getElementById("newCat") || {}).value || "Restaurant";
+  if (!name.trim() || !addr.trim() || !qrt.trim()) { alert("Nom, quartier et adresse sont requis."); return; }
+  const icons = {Restaurant: "🍽️", Bar: "🍹", Hotel: "🏨", Shopping: "🛍️", Sante: "🏥", Loisirs: "🌊", Autre: "📍"};
+  try {
+    await addDoc(collection(db, "places"), {
+      em: icons[cat] || "📍", name: name.trim(), cat, quartier: qrt.trim(), addr: addr.trim(),
+      phone: (document.getElementById("newPhone") || {}).value || "",
+      hours: (document.getElementById("newHours") || {}).value || "",
+      rating: 0, reviews: 0, open: true, status: "pending", photos: [], placeId: "",
+      submittedBy: currentUser ? currentUser.name : "", submittedAt: serverTimestamp()
     });
     userPlaces++;
-    toast("Soumis ! En attente de validation.");
+    toast("✅ Soumis ! En attente de validation.");
     switchTab("home");
-  }catch(e){toast("Erreur : "+e.message);}
+  } catch(e) { toast("Erreur : " + e.message); }
 }
 
-// ── PROFIL ─────────────────────────────────────────────────────────────────
-function renderProf(){
-  var un = currentUser?currentUser.name:"Visiteur";
-  var initials = un.substring(0,2).toUpperCase();
-  document.getElementById("mainScroll").innerHTML =
-    '<div class="prof-top"><div class="av-lg">'+initials+'</div><div class="prof-nm">'+un+'</div><div class="prof-si">'+(isGuest?"Mode visiteur":"Membre MBOLO &#127468;&#127462;")+'</div></div>' +
-    '<div class="stripe"><div></div><div></div><div></div></div>' +
-    '<div class="prof-body">' +
-    '<div class="stats"><div class="stat"><div class="stat-n">'+userPlaces+'</div><div class="stat-l">Ajoutes</div></div><div class="stat"><div class="stat-n">'+userReviews+'</div><div class="stat-l">Avis</div></div><div class="stat"><div class="stat-n">&#127468;&#127462;</div><div class="stat-l">Libreville</div></div></div>' +
-    (isGuest ? '<div style="background:var(--y3);border:1.5px solid var(--y);border-radius:12px;padding:16px;text-align:center;margin-bottom:16px"><div style="font-size:14px;font-weight:700;color:#7a5c00;margin-bottom:6px">Rejoignez MBOLO &#127468;&#127462;</div><button class="btn-main" style="max-width:200px;margin:0 auto;display:block" onclick="go(&quot;s-register&quot;)">Creer un compte</button></div>' :
-    '<div class="pmenu"><div class="pmi"><div class="pmi-l"><span>&#128247;</span>Mes avis publies</div><span style="color:var(--muted)">&#8250;</span></div><div class="pmi"><div class="pmi-l"><span>&#128205;</span>Mes lieux ajoutes</div><span style="color:var(--muted)">&#8250;</span></div><button class="logout" onclick="logout()">Se deconnecter</button></div>') +
-    '</div><div style="height:88px"></div>';
+// PROFILE TAB
+function renderProf() {
+  const un = currentUser ? currentUser.name : "Visiteur";
+  const initials = un.substring(0, 2).toUpperCase();
+  const ms = document.getElementById("mainScroll");
+  ms.innerHTML = `
+    <div class="prof-top">
+      <div class="av-lg">${initials}</div>
+      <div class="prof-nm">${un}</div>
+      <div class="prof-si">${isGuest ? "Mode visiteur" : "Membre MBOLO 🇬🇦"}</div>
+    </div>
+    <div class="stripe"><div></div><div></div><div></div></div>
+    <div class="prof-body">
+      <div class="stats">
+        <div class="stat"><div class="stat-n">${userPlaces}</div><div class="stat-l">Ajoutés</div></div>
+        <div class="stat"><div class="stat-n">${userReviews}</div><div class="stat-l">Avis</div></div>
+        <div class="stat"><div class="stat-n">🇬🇦</div><div class="stat-l">Libreville</div></div>
+      </div>
+      <div id="prof-dynamic-content"></div>
+    </div>
+    <div style="height:88px"></div>`;
+
+  const dynEl = document.getElementById("prof-dynamic-content");
+  if (isGuest) {
+    dynEl.innerHTML = '<div style="background:var(--y3);border:1.5px solid var(--y);border-radius:12px;padding:16px;text-align:center;margin-bottom:16px"><div style="font-size:14px;font-weight:700;color:#7a5c00;margin-bottom:6px">Rejoignez MBOLO</div><button class="btn-main" style="max-width:200px;margin:0 auto;display:block" id="prof-register-btn">Creer un compte</button></div>';
+    document.getElementById("prof-register-btn").onclick = () => go("s-register");
+  } else {
+    dynEl.innerHTML = '<div class="pmenu"><div class="pmi"><div class="pmi-l"><span>📷</span>Mes avis publies</div><span style="color:var(--muted)">›</span></div><div class="pmi"><div class="pmi-l"><span>📍</span>Mes lieux ajoutes</div><span style="color:var(--muted)">›</span></div><button class="logout" id="btn-logout">Se deconnecter</button></div>';
+    document.getElementById("btn-logout").onclick = async () => {
+      if (!confirm("Se deconnecter ?")) return;
+      await signOut(auth);
+      isGuest = false; currentUser = null;
+    };
+  }
 }
-
-// ── EXPOSE GLOBAL ──────────────────────────────────────────────────────────
-window.go=go;window.goBack=goBack;window.goGuest=goGuest;window.doLogin=doLogin;window.doRegister=doRegister;
-window.logout=logout;window.switchTab=switchTab;window.filterCat=filterCat;window.filterPlaces=filterPlaces;
-window.openPlace=openPlace;window.openReview=openReview;window.setStar=setStar;window.submitReview=submitReview;
-window.submitPlace=submitPlace;window.navPlace=navPlace;window.sharePlace=sharePlace;window.copyShareLink=copyShareLink;
-window.closeModal=closeModal;window.updateCharCount=updateCharCount;
-
 </script>
 </body>
 </html>
