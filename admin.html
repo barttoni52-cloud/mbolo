@@ -156,6 +156,9 @@ tr:hover td{background:#fafafa;}
     <div class="sb-header">
       <div class="sb-logo">MBO<span>LO</span></div>
       <div class="sb-sub">Administration</div>
+      <a href="index.html" style="display:flex;align-items:center;gap:6px;margin-top:12px;background:rgba(252,209,22,0.15);border:1px solid rgba(252,209,22,0.3);border-radius:8px;padding:7px 12px;text-decoration:none;color:#fcd116;font-size:12px;font-weight:600;">
+        ← Retour à MBOLO
+      </a>
     </div>
     <div class="sb-nav">
       <div class="sb-item on" onclick="showPage('dashboard')"><span class="sb-ic">📊</span>Tableau de bord</div>
@@ -275,6 +278,17 @@ tr:hover td{background:#fafafa;}
         <div class="setting-row"><div class="setting-label">Version MBOLO</div><div style="font-size:13px;font-weight:700;color:#009e60">v1.0.0</div></div>
         <div class="setting-row"><div class="setting-label">Dernière mise à jour</div><div style="font-size:13px;color:#666">26 avril 2026</div></div>
         <div class="setting-row"><div class="setting-label">Hébergement</div><div style="font-size:13px;color:#666">GitHub Pages</div></div>
+      </div>
+      <div class="settings-card">
+        <div class="settings-title">🧹 Maintenance des données</div>
+        <div class="setting-row">
+          <div><div class="setting-label">Réinitialiser les données de démo</div><div class="setting-desc">Supprime les anciennes données de cache et force le rechargement des 76 établissements réels</div></div>
+          <button class="btn-sm btn-approve" onclick="resetDemoData()">Réinitialiser</button>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-label">Vider tout le cache local</div><div class="setting-desc">Supprime toutes les données stockées localement (avis, membres, établissements)</div></div>
+          <button class="btn-sm btn-reject" onclick="clearAllData()">Vider le cache</button>
+        </div>
       </div>
     </div>
 
@@ -550,6 +564,20 @@ function toggleSetting(name){
 document.addEventListener('DOMContentLoaded', function(){
   document.getElementById('loginPwd').focus();
 });
+
+function resetDemoData(){
+  if(!confirm('Réinitialiser les données de démo ? Les avis et membres seront conservés.'))return;
+  localStorage.removeItem('mbolo_places');
+  localStorage.removeItem('_mv');
+  notif('✅ Cache réinitialisé ! Rechargez MBOLO pour voir les 76 établissements réels.');
+}
+function clearAllData(){
+  if(!confirm('⚠️ ATTENTION : Cela supprimera TOUS les avis, membres et établissements. Continuer ?'))return;
+  localStorage.clear();
+  notif('Cache vidé. Rechargez la page.');
+  setTimeout(function(){location.reload();},2000);
+}
+
 </script>
 </body>
 </html>
