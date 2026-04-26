@@ -192,6 +192,61 @@ tr:hover td{background:#fafafa}
       </div>
     </div>
 
+    <div class="page" id="page-actus">
+      <div class="page-title">Actualités</div>
+      <div class="page-sub">Gérez les actualités affichées dans MBOLO</div>
+      
+      <!-- Form to add actu -->
+      <div class="table-card" style="margin-bottom:20px">
+        <div class="table-header"><div class="table-title">➕ Nouvelle actualité</div></div>
+        <div style="padding:20px;display:flex;flex-direction:column;gap:12px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div>
+              <label style="font-size:11px;font-weight:700;color:#666;display:block;margin-bottom:4px">TITRE *</label>
+              <input type="text" id="actu-title" placeholder="Ex: Nouveau bar ouvert à Glass !" style="width:100%;padding:10px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:13px;outline:none"/>
+            </div>
+            <div>
+              <label style="font-size:11px;font-weight:700;color:#666;display:block;margin-bottom:4px">TAG</label>
+              <select id="actu-tag" style="width:100%;padding:10px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:13px;outline:none">
+                <option>Nouveau lieu</option>
+                <option>Événement</option>
+                <option>Actualité</option>
+                <option>Promotion</option>
+                <option>Communauté</option>
+                <option>Quartier</option>
+                <option>Weekend</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:700;color:#666;display:block;margin-bottom:4px">TEXTE *</label>
+            <textarea id="actu-txt" rows="3" placeholder="Décrivez l'actualité..." style="width:100%;padding:10px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:13px;outline:none;font-family:inherit;resize:vertical"></textarea>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+            <div>
+              <label style="font-size:11px;font-weight:700;color:#666;display:block;margin-bottom:4px">EMOJI</label>
+              <input type="text" id="actu-img" placeholder="🎉" value="📰" style="width:100%;padding:10px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:16px;outline:none;text-align:center"/>
+            </div>
+            <div>
+              <label style="font-size:11px;font-weight:700;color:#666;display:block;margin-bottom:4px">COULEUR BG</label>
+              <input type="color" id="actu-bg" value="#E1F5EE" style="width:100%;padding:4px;border:1.5px solid #e0e0e0;border-radius:8px;height:40px;cursor:pointer"/>
+            </div>
+            <div>
+              <label style="font-size:11px;font-weight:700;color:#666;display:block;margin-bottom:4px">URL (optionnel)</label>
+              <input type="text" id="actu-url" placeholder="https://..." style="width:100%;padding:10px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:13px;outline:none"/>
+            </div>
+          </div>
+          <button class="btn-primary" id="btnAddActu" style="align-self:flex-start;padding:10px 24px">📰 Publier l'actualité</button>
+        </div>
+      </div>
+
+      <!-- List of actus -->
+      <div class="table-card">
+        <div class="table-header"><div class="table-title">Actualités publiées</div><div class="table-count" id="actusCount">0</div></div>
+        <div id="actusList"></div>
+      </div>
+    </div>
+
     <div class="page" id="page-members">
       <div class="page-title">Membres</div>
       <div class="page-sub">Utilisateurs inscrits sur MBOLO</div>
@@ -308,7 +363,7 @@ function showPage(name) {
   document.querySelectorAll(".sb-item").forEach(i => i.classList.remove("on"));
   const si = document.getElementById("si-" + name);
   if (si) si.classList.add("on");
-  const renders = {dashboard: renderDashboard, pending: renderPending, places: renderPlaces, reviews: renderReviews, reports: renderReports, members: renderMembers};
+  const renders = {dashboard: renderDashboard, pending: renderPending, places: renderPlaces, reviews: renderReviews, reports: renderReports, actus: renderActus, members: renderMembers};
   if (renders[name]) renders[name]();
 }
 
@@ -319,6 +374,7 @@ const navItems = [
   {id:"places",icon:"📍",label:"Établissements"},
   {id:"reviews",icon:"💬",label:"Avis"},
   {id:"reports",icon:"🚨",label:"Signalements",badge:"badge-reports"},
+  {id:"actus",icon:"📰",label:"Actualités"},
   {id:"members",icon:"👥",label:"Membres"},
 ];
 const nav = document.getElementById("sideNav");
@@ -457,7 +513,27 @@ async function renderPending() {
 
 async function approvePlace(fbId, name) {
   await updateDoc(doc(db, "places", fbId), {status: "approved"});
-  notif("✅ " + name + " approuvé !");
+  // Auto-create actu
+  try {
+    const placeData = (await getDocs(collection(db,"places"))).docs.find(d=>d.id===fbId);
+    const cat = placeData ? placeData.data().cat : "Établissement";
+    const quartier = placeData ? placeData.data().quartier : "";
+    const icons = {Restaurant:"🍽️",Bar:"🍺",Hotel:"🏨",Shopping:"🛍️",Sante:"🏥",Loisirs:"🌊"};
+    const bgs = {Restaurant:"#e8f0fb",Bar:"#fce7f3",Hotel:"#E1F5EE",Shopping:"#fff8d6",Sante:"#fee2e2",Loisirs:"#f0faf5"};
+    const now = new Date();
+    await addDoc(collection(db,"actus"),{
+      title: "Nouveau " + cat.toLowerCase() + " : " + name,
+      txt: name + " vient d'être ajouté sur MBOLO" + (quartier?" au quartier "+quartier:"") + ". Découvrez cet établissement et laissez votre avis !",
+      tag: "Nouveau lieu",
+      img: icons[cat]||"📍",
+      bg: bgs[cat]||"#E1F5EE",
+      date: now.toLocaleDateString("fr-FR",{day:"2-digit",month:"long",year:"numeric"}),
+      dateTs: serverTimestamp(),
+      placeId: fbId,
+      auto: true
+    });
+  } catch(e) {}
+  notif("✅ " + name + " approuvé et actu créée !");
   renderPending(); renderDashboard();
 }
 async function rejectPlace(fbId, name) {
@@ -702,6 +778,69 @@ document.getElementById("savePhotosBtn").onclick = async () => {
   } catch(e) { notif("Erreur : " + e.message); }
   loading(false);
 };
+
+async function renderActus() {
+  loading(true);
+  try {
+    const snap = await getDocs(query(collection(db,"actus"), orderBy("dateTs","desc")));
+    const actus = []; snap.forEach(d => actus.push(Object.assign({},d.data(),{id:d.id})));
+    const countEl = document.getElementById("actusCount");
+    if(countEl) countEl.textContent = actus.length + " actualités";
+    const list = document.getElementById("actusList"); list.innerHTML = "";
+    if(!actus.length){
+      list.innerHTML = "<div class='empty'><div class='icon'>📰</div>Aucune actualité publiée</div>";
+      loading(false); return;
+    }
+    actus.forEach(a => {
+      const row = document.createElement("div");
+      row.style.cssText = "display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid #f0f0f0";
+      const icon = document.createElement("div");
+      icon.style.cssText = "width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;background:" + (a.bg||"#E1F5EE");
+      icon.textContent = a.img||"📰";
+      const info = document.createElement("div"); info.style.flex = "1";
+      info.innerHTML = "<div style='font-size:13px;font-weight:700;color:#1a1a1a'>" + a.title + "</div>" +
+        "<div style='font-size:11px;color:#666;margin-top:2px'>" + (a.txt||"").substring(0,80) + (a.txt&&a.txt.length>80?"...":"") + "</div>" +
+        "<div style='font-size:10px;color:#999;margin-top:4px'><span style='background:#e0e0e0;padding:1px 6px;border-radius:10px;margin-right:6px'>" + (a.tag||"Actualité") + "</span>" + (a.date||"") + (a.auto?" · Générée automatiquement":"") + "</div>";
+      const del = document.createElement("button"); del.className="btn-sm btn-delete"; del.textContent="🗑️";
+      del.onclick = () => deleteActu(a.id);
+      row.appendChild(icon); row.appendChild(info); row.appendChild(del);
+      list.appendChild(row);
+    });
+  } catch(e) { notif("Erreur : " + e.message); }
+  loading(false);
+}
+
+async function deleteActu(id) {
+  if(!confirm("Supprimer cette actualité ?")) return;
+  await deleteDoc(doc(db,"actus",id));
+  notif("Actualité supprimée."); renderActus();
+}
+
+document.getElementById("btnAddActu").onclick = async () => {
+  const title = document.getElementById("actu-title").value.trim();
+  const txt = document.getElementById("actu-txt").value.trim();
+  if(!title||!txt){notif("Titre et texte requis.");return;}
+  const now = new Date();
+  loading(true);
+  try{
+    await addDoc(collection(db,"actus"),{
+      title, txt,
+      tag: document.getElementById("actu-tag").value,
+      img: document.getElementById("actu-img").value||"📰",
+      bg: document.getElementById("actu-bg").value||"#E1F5EE",
+      url: document.getElementById("actu-url").value.trim()||null,
+      date: now.toLocaleDateString("fr-FR",{day:"2-digit",month:"long",year:"numeric"}),
+      dateTs: serverTimestamp(),
+      auto: false
+    });
+    document.getElementById("actu-title").value="";
+    document.getElementById("actu-txt").value="";
+    document.getElementById("actu-url").value="";
+    notif("✅ Actualité publiée !"); renderActus();
+  }catch(e){notif("Erreur : "+e.message);}
+  loading(false);
+};
+
 </script>
 </body>
 </html>
