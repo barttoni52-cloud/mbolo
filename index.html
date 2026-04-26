@@ -184,8 +184,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     <div class="logo-sub">Guide de Libreville</div>
     <div class="splash-dots"><div class="sdot y"></div><div class="sdot"></div><div class="sdot y"></div><div class="sdot"></div><div class="sdot y"></div></div>
     <div style="width:100%">
-      <button class="btn-y" onclick="go('s-register')">Créer un compte</button>
-      <button class="btn-wh" onclick="go('s-login')">Se connecter</button>
+      <button class="btn-y" onclick="go(&quot;s-register&quot;)">Créer un compte</button>
+      <button class="btn-wh" onclick="go(&quot;s-login&quot;)">Se connecter</button>
       <button class="btn-ghost" onclick="goGuest()">Parcourir sans compte &#8594;</button>
     </div>
     <div class="splash-foot">&#127468;&#127462; Fait avec fierté pour Libreville</div>
@@ -196,7 +196,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 <div class="screen" id="s-login">
   <div class="stripe"><div></div><div></div><div></div></div>
   <div class="auth-top">
-    <button class="auth-back" onclick="go('s-splash')">&#8592; Retour</button>
+    <button class="auth-back" onclick="go(&quot;s-splash&quot;)">&#8592; Retour</button>
     <div class="auth-h">Connexion</div>
     <div class="auth-s">Bon retour sur MBOLO &#127468;&#127462;</div>
   </div>
@@ -206,7 +206,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     <div class="fg"><label>Mot de passe</label><input type="password" placeholder="••••••••" id="li-pwd"/></div>
     <button class="btn-main" onclick="doLogin()">Se connecter</button>
     <div class="divider">ou</div>
-    <div class="alink">Pas de compte ? <span onclick="go('s-register')">Créer un compte</span></div>
+    <div class="alink">Pas de compte ? <span onclick="go(&quot;s-register&quot;)">Créer un compte</span></div>
     <div class="alink" style="margin-top:8px"><span onclick="goGuest()">Continuer sans compte &#8594;</span></div>
   </div>
 </div>
@@ -215,7 +215,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 <div class="screen" id="s-register">
   <div class="stripe"><div></div><div></div><div></div></div>
   <div class="auth-top">
-    <button class="auth-back" onclick="go('s-splash')">&#8592; Retour</button>
+    <button class="auth-back" onclick="go(&quot;s-splash&quot;)">&#8592; Retour</button>
     <div class="auth-h">Créer un compte</div>
     <div class="auth-s">Rejoignez la communauté MBOLO</div>
   </div>
@@ -225,7 +225,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     <div class="fg"><label>Email</label><input type="email" placeholder="votre@email.com" id="rg-email"/></div>
     <div class="fg"><label>Mot de passe</label><input type="password" placeholder="Min. 6 caractères" id="rg-pwd"/></div>
     <button class="btn-main yellow" onclick="doRegister()">Créer mon compte</button>
-    <div class="alink" style="margin-top:12px">Déjà membre ? <span onclick="go('s-login')">Se connecter</span></div>
+    <div class="alink" style="margin-top:12px">Déjà membre ? <span onclick="go(&quot;s-login&quot;)">Se connecter</span></div>
     <div class="alink" style="margin-top:8px"><span onclick="goGuest()">Continuer sans compte &#8594;</span></div>
   </div>
 </div>
@@ -234,11 +234,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 <div class="screen" id="s-main">
   <div class="scroll" id="mainScroll"></div>
   <div class="tabbar">
-    <button class="tab on" id="tab-home" onclick="switchTab('home')"><span class="ti">&#127968;</span><span class="tl">Accueil</span></button>
-    <button class="tab" id="tab-bar" onclick="switchTab('bar')"><span class="ti">&#127865;</span><span class="tl">Bar</span></button>
-    <button class="tab" id="tab-actu" onclick="switchTab('actu')"><span class="ti">&#128240;</span><span class="tl">Actualités</span></button>
-    <button class="tab" id="tab-add" onclick="switchTab('add')"><span class="ti">&#43;</span><span class="tl">Ajouter</span></button>
-    <button class="tab" id="tab-prof" onclick="switchTab('prof')"><span class="ti">&#128100;</span><span class="tl">Profil</span></button>
+    <button class="tab on" id="tab-home" onclick="switchTab(&quot;home&quot;)"><span class="ti">&#127968;</span><span class="tl">Accueil</span></button>
+    <button class="tab" id="tab-bar" onclick="switchTab(&quot;bar&quot;)"><span class="ti">&#127865;</span><span class="tl">Bar</span></button>
+    <button class="tab" id="tab-actu" onclick="switchTab(&quot;actu&quot;)"><span class="ti">&#128240;</span><span class="tl">Actualités</span></button>
+    <button class="tab" id="tab-add" onclick="switchTab(&quot;add&quot;)"><span class="ti">&#43;</span><span class="tl">Ajouter</span></button>
+    <button class="tab" id="tab-prof" onclick="switchTab(&quot;prof&quot;)"><span class="ti">&#128100;</span><span class="tl">Profil</span></button>
   </div>
 </div>
 
@@ -448,8 +448,8 @@ async function renderHome(){
     '<div class="uchip"><div class="av-sm">'+initials+'</div><span>'+un+'</span></div>' +
     '<div class="sbox"><span style="font-size:15px;color:#bbb">&#128269;</span><input type="text" placeholder="Restaurant, bar, hotel..." id="searchInput" oninput="filterPlaces()"/></div></div>' +
     '<div class="cats" id="catStrip"></div>' +
-    '<div class="sh"><span class="sh-t">Actualites</span><button class="see-all" onclick="switchTab('actu')">Tout voir</button></div>' +
-    '<div class="nstrip">' + ACTUS.slice(0,3).map(function(a){return '<div class="nc" onclick="switchTab('actu')"><div class="nc-img" style="background:'+a.bg+'">'+a.img+'</div><div class="nc-b"><div class="nc-tag">'+a.tag+'</div><div class="nc-t">'+a.title+'</div></div></div>';}).join("") + '</div>' +
+    '<div class="sh"><span class="sh-t">Actualites</span><button class="see-all" onclick="switchTab(&quot;actu&quot;)">Tout voir</button></div>' +
+    '<div class="nstrip">' + ACTUS.slice(0,3).map(function(a){return '<div class="nc" onclick="switchTab(&quot;actu&quot;)"><div class="nc-img" style="background:'+a.bg+'">'+a.img+'</div><div class="nc-b"><div class="nc-tag">'+a.tag+'</div><div class="nc-t">'+a.title+'</div></div></div>';}).join("") + '</div>' +
     '<div class="sh"><span class="sh-t" id="places-count">Etablissements</span></div>' +
     '<div class="plist" id="placeList"></div>' +
     '<div style="height:88px"></div>';
@@ -658,7 +658,7 @@ function renderActu(){
 // ── ADD ────────────────────────────────────────────────────────────────────
 function renderAdd(){
   if(isGuest){
-    document.getElementById("mainScroll").innerHTML = '<div style="text-align:center;padding:70px 24px"><div style="font-size:48px;margin-bottom:16px">&#128274;</div><div style="font-size:17px;font-weight:700;margin-bottom:8px">Connexion requise</div><div style="font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.6">Creez un compte gratuit pour ajouter des etablissements.</div><button class="btn-main" style="max-width:270px;margin:0 auto;display:block" onclick="go('s-register')">Creer un compte</button><div class="alink" style="margin-top:12px"><span onclick="go('s-login')">J'ai deja un compte</span></div></div><div style="height:88px"></div>';
+    document.getElementById("mainScroll").innerHTML = '<div style="text-align:center;padding:70px 24px"><div style="font-size:48px;margin-bottom:16px">&#128274;</div><div style="font-size:17px;font-weight:700;margin-bottom:8px">Connexion requise</div><div style="font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.6">Creez un compte gratuit pour ajouter des etablissements.</div><button class="btn-main" style="max-width:270px;margin:0 auto;display:block" onclick="go(&quot;s-register&quot;)">Creer un compte</button><div class="alink" style="margin-top:12px"><span onclick="go(&quot;s-login&quot;)">J'ai deja un compte</span></div></div><div style="height:88px"></div>';
     return;
   }
   document.getElementById("mainScroll").innerHTML =
@@ -706,7 +706,7 @@ function renderProf(){
     '<div class="stripe"><div></div><div></div><div></div></div>' +
     '<div class="prof-body">' +
     '<div class="stats"><div class="stat"><div class="stat-n">'+userPlaces+'</div><div class="stat-l">Ajoutes</div></div><div class="stat"><div class="stat-n">'+userReviews+'</div><div class="stat-l">Avis</div></div><div class="stat"><div class="stat-n">&#127468;&#127462;</div><div class="stat-l">Libreville</div></div></div>' +
-    (isGuest ? '<div style="background:var(--y3);border:1.5px solid var(--y);border-radius:12px;padding:16px;text-align:center;margin-bottom:16px"><div style="font-size:14px;font-weight:700;color:#7a5c00;margin-bottom:6px">Rejoignez MBOLO &#127468;&#127462;</div><button class="btn-main" style="max-width:200px;margin:0 auto;display:block" onclick="go('s-register')">Creer un compte</button></div>' :
+    (isGuest ? '<div style="background:var(--y3);border:1.5px solid var(--y);border-radius:12px;padding:16px;text-align:center;margin-bottom:16px"><div style="font-size:14px;font-weight:700;color:#7a5c00;margin-bottom:6px">Rejoignez MBOLO &#127468;&#127462;</div><button class="btn-main" style="max-width:200px;margin:0 auto;display:block" onclick="go(&quot;s-register&quot;)">Creer un compte</button></div>' :
     '<div class="pmenu"><div class="pmi"><div class="pmi-l"><span>&#128247;</span>Mes avis publies</div><span style="color:var(--muted)">&#8250;</span></div><div class="pmi"><div class="pmi-l"><span>&#128205;</span>Mes lieux ajoutes</div><span style="color:var(--muted)">&#8250;</span></div><button class="logout" onclick="logout()">Se deconnecter</button></div>') +
     '</div><div style="height:88px"></div>';
 }
