@@ -379,10 +379,9 @@ const CATS = [
   {l:"Tous",i:"🗺️"},{l:"Restaurant",i:"🍽️"},{l:"Bar",i:"🍹"},
   {l:"Hotel",i:"🏨"},{l:"Shopping",i:"🛍️"},{l:"Sante",i:"🏥"},{l:"Loisirs",i:"🌊"}
 ];
-const ACTUS = [
-  {img:"🎵",bg:"#E1F5EE",tag:"Lancement",title:"MBOLO est lancé !",txt:"Bars, restaurants, hôtels : retrouvez les meilleures adresses de Libreville.",date:"26 avril 2026"},
+let ACTUS = [
+  {img:"🎉",bg:"#E1F5EE",tag:"Lancement",title:"MBOLO est lancé !",txt:"Bars, restaurants, hôtels : retrouvez les meilleures adresses de Libreville.",date:"26 avril 2026"},
   {img:"🇬🇦",bg:"#fff8d6",tag:"Communauté",title:"Rejoignez MBOLO",txt:"Créez un compte pour noter et contribuer au guide de Libreville.",date:"26 avril 2026"},
-  {img:"🍽️",bg:"#e8f0fb",tag:"Quartier",title:"Les adresses de Glass",txt:"Quartier Glass : Le Lokua, La Piazza, Le QG vous attendent.",date:"26 avril 2026"},
 ];
 
 function stH(n){if(!n||n===0)return "☆☆☆☆☆";return "★".repeat(Math.round(n))+"☆".repeat(5-Math.round(n))}
@@ -461,6 +460,17 @@ function switchTab(t) {
 // PLACES
 async function loadPlaces(){const snap=await getDocs(collection(db,"places"));allPlaces=[];snap.forEach(d=>allPlaces.push({...d.data(),fbId:d.id}));return allPlaces;}
 
+async function loadActus(){
+  try{
+    const snap=await getDocs(query(collection(db,"actus"),orderBy("date","desc")));
+    if(snap.size>0){
+      ACTUS=[];
+      snap.forEach(d=>{const a=d.data();ACTUS.push({...a,fbId:d.id});});
+    }
+  }catch(e){}
+  return ACTUS;
+}
+
 async function renderHome() {
   const un=currentUser?currentUser.name:"Visiteur", initials=un.substring(0,2).toUpperCase();
   const ms=document.getElementById("mainScroll");
@@ -485,7 +495,19 @@ async function renderHome() {
   document.getElementById("searchInput").oninput=filterPlaces;
   const nstrip=document.getElementById("nstrip");
   ACTUS.forEach(a=>{const nc=document.createElement("div");nc.className="nc";nc.onclick=()=>switchTab("actu");nc.innerHTML=`<div class="nc-img" style="background:${a.bg}">${a.img}</div><div class="nc-b"><div class="nc-tag">${a.tag}</div><div class="nc-t">${a.title}</div></div>`;nstrip.appendChild(nc);});
-  renderCats(); await loadPlaces(); renderPlacesList(allPlaces);
+  renderCats(); 
+  await Promise.all([loadPlaces(), loadActus()]);
+  // Update actus strip
+  const nstrip2=document.getElementById("nstrip");
+  if(nstrip2){
+    nstrip2.innerHTML="";
+    ACTUS.slice(0,4).forEach(a=>{
+      const nc=document.createElement("div");nc.className="nc";nc.onclick=()=>switchTab("actu");
+      nc.innerHTML=`<div class="nc-img" style="background:${a.bg||"#E1F5EE"}">${a.img||"📰"}</div><div class="nc-b"><div class="nc-tag">${a.tag||"Actualité"}</div><div class="nc-t">${a.title}</div></div>`;
+      nstrip2.appendChild(nc);
+    });
+  }
+  renderPlacesList(allPlaces);
 }
 
 function renderCats(){const s=document.getElementById("catStrip");if(!s)return;s.innerHTML="";CATS.forEach(c=>{const div=document.createElement("div");div.className="cat"+(c.l===currentCat?" on":"");div.textContent=c.i+" "+c.l;div.onclick=()=>{currentCat=c.l;renderCats();filterPlaces();};s.appendChild(div);});}
@@ -668,11 +690,18 @@ async function renderBar(){
 }
 
 // ACTUS TAB
-function renderActu(){
+async function renderActu(){
   const ms=document.getElementById("mainScroll");
-  ms.innerHTML=`<div class="hdr" style="padding-bottom:18px"><div class="hdr-row"><div class="hdr-logo">Actualités 📰</div><div class="hdr-flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div></div><div class="hdr-loc">📍 Libreville, Gabon</div></div><div style="padding:12px 14px 0" id="actu-list"></div><div style="height:88px"></div>`;
+  ms.innerHTML=`<div class="hdr" style="padding-bottom:18px"><div class="hdr-row"><div class="hdr-logo">Actualités 📰</div><div class="hdr-flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div></div><div class="hdr-loc">📍 Libreville, Gabon</div></div><div style="padding:12px 14px 0;font-size:12px;color:#999;text-align:center" id="actu-loading">Chargement...</div><div style="padding:0 14px" id="actu-list"></div><div style="height:88px"></div>`;
+  await loadActus();
+  document.getElementById("actu-loading").style.display="none";
   const list=document.getElementById("actu-list");
-  ACTUS.forEach(a=>{const card=document.createElement("div");card.className="ac-card";card.innerHTML=`<div class="ac-img" style="background:${a.bg}">${a.img}</div><div class="ac-body"><div class="ac-tag">${a.tag}</div><div class="ac-title">${a.title}</div><div class="ac-txt">${a.txt}</div><div class="ac-date">📅 ${a.date}</div></div>`;list.appendChild(card);});
+  if(!ACTUS.length){list.innerHTML='<div style="text-align:center;padding:28px;color:var(--muted)">Aucune actualité pour le moment.</div>';return;}
+  ACTUS.forEach(a=>{
+    const card=document.createElement("div");card.className="ac-card";
+    card.innerHTML=`<div class="ac-img" style="background:${a.bg||"#E1F5EE"}">${a.img||"📰"}</div><div class="ac-body"><div class="ac-tag">${a.tag||"Actualité"}</div><div class="ac-title">${a.title}</div><div class="ac-txt">${a.txt}</div><div class="ac-date">📅 ${a.date||""}</div></div>`;
+    list.appendChild(card);
+  });
 }
 
 // ADD TAB
