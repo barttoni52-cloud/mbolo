@@ -3,97 +3,102 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MBOLO — Administration</title>
+<title>MBOLO Admin</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f0f2f5;color:#1a1a1a;}
-:root{--g:#009e60;--y:#fcd116;--b:#3a75c4;--red:#E24B4A;--bd:#e0e0e0;--bg:#fff;--bg2:#f5f5f5;--muted:#666;}
-.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#009e60,#007a4a);}
-.login-card{background:#fff;border-radius:20px;padding:40px 32px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,0.2);}
-.login-logo{text-align:center;margin-bottom:24px;}
-.login-logo .logo{font-size:32px;font-weight:800;color:#009e60;}
-.login-logo .sub{font-size:12px;color:#666;margin-top:4px;}
-.login-flag{display:flex;width:36px;height:24px;border-radius:4px;overflow:hidden;margin:0 auto 12px;}
-.login-flag div{flex:1;}
-.fg{margin-bottom:16px;}
-.fg label{font-size:11px;color:#666;display:block;margin-bottom:5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
-.fg input{width:100%;padding:12px 14px;border:1.5px solid #e0e0e0;border-radius:10px;font-size:14px;outline:none;transition:border .15s;}
-.fg input:focus{border-color:#009e60;}
-.pwd-wrap{position:relative;}
-.pwd-wrap input{padding-right:44px;}
-.pwd-eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;}
-.btn-login{width:100%;padding:14px;background:#009e60;color:#fff;font-size:15px;font-weight:700;border:none;border-radius:12px;cursor:pointer;margin-top:8px;}
-.login-err{color:#E24B4A;font-size:13px;text-align:center;margin-top:10px;display:none;}
-.login-back{text-align:center;margin-top:16px;font-size:13px;color:#666;}
-.login-back a{color:#009e60;text-decoration:none;font-weight:600;}
-#adminApp{display:none;}
-.sidebar{position:fixed;top:0;left:0;width:240px;height:100vh;background:#1a1a2e;overflow-y:auto;z-index:100;display:flex;flex-direction:column;}
-.sb-header{padding:20px 16px;border-bottom:1px solid rgba(255,255,255,0.1);}
-.sb-logo{font-size:20px;font-weight:800;color:#fff;}
-.sb-logo span{color:#fcd116;}
-.sb-sub{font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px;}
-.sb-back{display:flex;align-items:center;gap:6px;margin-top:12px;background:rgba(252,209,22,0.15);border:1px solid rgba(252,209,22,0.3);border-radius:8px;padding:7px 12px;text-decoration:none;color:#fcd116;font-size:12px;font-weight:600;}
-.sb-nav{padding:12px 0;flex:1;}
-.sb-item{display:flex;align-items:center;gap:10px;padding:11px 20px;color:rgba(255,255,255,0.7);cursor:pointer;font-size:13px;font-weight:500;border-left:3px solid transparent;transition:all .15s;}
-.sb-item:hover{background:rgba(255,255,255,0.05);color:#fff;}
-.sb-item.on{background:rgba(0,158,96,0.2);color:#009e60;border-left-color:#009e60;}
-.sb-badge{margin-left:auto;background:#E24B4A;color:#fff;font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700;}
-.sb-footer{padding:16px;border-top:1px solid rgba(255,255,255,0.1);}
-.btn-logout{width:100%;padding:10px;background:rgba(226,75,74,0.15);color:#E24B4A;border:1px solid rgba(226,75,74,0.3);border-radius:8px;font-size:13px;cursor:pointer;font-weight:600;}
-.main{margin-left:240px;padding:24px;min-height:100vh;}
-.page{display:none;}
-.page.on{display:block;}
-.page-title{font-size:22px;font-weight:700;margin-bottom:4px;}
-.page-sub{font-size:13px;color:#666;margin-bottom:24px;}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;}
-.stat-card{background:#fff;border-radius:14px;padding:20px;border:1px solid #e0e0e0;}
-.stat-val{font-size:32px;font-weight:800;margin-bottom:4px;}
-.stat-label{font-size:12px;color:#666;font-weight:500;}
-.table-card{background:#fff;border-radius:14px;border:1px solid #e0e0e0;overflow:hidden;margin-bottom:20px;}
-.table-header{padding:16px 20px;border-bottom:1px solid #e0e0e0;display:flex;justify-content:space-between;align-items:center;}
-.table-title{font-size:14px;font-weight:700;}
-.table-count{font-size:12px;color:#666;background:#f5f5f5;padding:3px 10px;border-radius:20px;}
-table{width:100%;border-collapse:collapse;}
-th{padding:11px 16px;text-align:left;font-size:11px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid #e0e0e0;background:#fafafa;}
-td{padding:12px 16px;font-size:13px;border-bottom:1px solid #f0f0f0;vertical-align:middle;}
-tr:last-child td{border-bottom:none;}
-tr:hover td{background:#fafafa;}
-.badge{display:inline-block;font-size:10px;padding:3px 9px;border-radius:20px;font-weight:700;}
-.badge-pending{background:#fff3cd;color:#856404;}
-.badge-approved{background:#d1fae5;color:#065f46;}
-.badge-hotel{background:#dbeafe;color:#1e40af;}
-.badge-resto{background:#dcfce7;color:#166534;}
-.badge-bar{background:#fce7f3;color:#9d174d;}
-.btn-sm{padding:5px 12px;border-radius:7px;font-size:11px;font-weight:700;border:none;cursor:pointer;}
-.btn-approve{background:#009e60;color:#fff;}
-.btn-reject{background:#fee2e2;color:#E24B4A;}
-.btn-delete{background:#fee2e2;color:#E24B4A;}
-.btn-primary{background:#009e60;color:#fff;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:700;border:none;cursor:pointer;}
-.empty{text-align:center;padding:40px;color:#999;}
-.empty .icon{font-size:36px;margin-bottom:12px;}
-.notif{position:fixed;bottom:24px;right:24px;background:#1a1a1a;color:#fff;padding:12px 20px;border-radius:12px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;}
-.notif.show{opacity:1;}
-.loading-overlay{position:fixed;inset:0;background:rgba(255,255,255,0.8);display:flex;align-items:center;justify-content:center;z-index:500;display:none;}
-.spinner{width:32px;height:32px;border:3px solid #e0e0e0;border-top-color:#009e60;border-radius:50%;animation:spin 0.8s linear infinite;}
-@keyframes spin{to{transform:rotate(360deg);}}
-
-.photo-grid{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0;}
-.photo-thumb{width:80px;height:80px;object-fit:cover;border-radius:8px;border:1px solid #e0e0e0;}
-.photo-del{position:absolute;top:2px;right:2px;background:#E24B4A;color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size:10px;cursor:pointer;line-height:18px;text-align:center;}
-.photo-wrap{position:relative;display:inline-block;}
-.upload-zone{border:2px dashed #e0e0e0;border-radius:10px;padding:16px;text-align:center;cursor:pointer;transition:.2s;margin-bottom:8px;}
-.upload-zone:hover{border-color:#009e60;background:#f0faf5;}
-.upload-zone input{display:none;}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center;}
-.modal-overlay.on{display:flex;}
-.modal-box{background:#fff;border-radius:16px;padding:24px;width:90%;max-width:500px;max-height:80vh;overflow-y:auto;}
-.modal-title{font-size:16px;font-weight:700;margin-bottom:16px;}
-.url-input{width:100%;padding:10px 14px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:13px;outline:none;margin-bottom:8px;}
-.url-input:focus{border-color:#009e60;}
-.tab-btns{display:flex;gap:8px;margin-bottom:16px;}
-.tab-btn{flex:1;padding:8px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;background:#fff;color:#666;}
-.tab-btn.on{background:#009e60;color:#fff;border-color:#009e60;}
-
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f0f2f5;color:#1a1a1a}
+:root{--g:#009e60;--y:#fcd116;--red:#E24B4A;--bd:#e0e0e0;--bg:#fff;--bg2:#f5f5f5;--muted:#666}
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#009e60,#007a4a)}
+.login-card{background:#fff;border-radius:20px;padding:40px 32px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.login-logo{text-align:center;margin-bottom:24px}
+.login-flag{display:flex;width:36px;height:24px;border-radius:4px;overflow:hidden;margin:0 auto 12px}
+.login-flag div{flex:1}
+.logo-txt{font-size:32px;font-weight:800;color:#009e60}
+.logo-sub{font-size:12px;color:#666;margin-top:4px}
+.fg{margin-bottom:16px}
+.fg label{font-size:11px;color:#666;display:block;margin-bottom:5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.fg input{width:100%;padding:12px 14px;border:1.5px solid #e0e0e0;border-radius:10px;font-size:14px;outline:none}
+.fg input:focus{border-color:#009e60}
+.pwd-wrap{position:relative}
+.pwd-wrap input{padding-right:44px}
+.pwd-eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px}
+.btn-login{width:100%;padding:14px;background:#009e60;color:#fff;font-size:15px;font-weight:700;border:none;border-radius:12px;cursor:pointer;margin-top:8px}
+.login-err{color:#E24B4A;font-size:13px;text-align:center;margin-top:10px;display:none}
+.login-back{text-align:center;margin-top:16px;font-size:13px;color:#666}
+.login-back a{color:#009e60;text-decoration:none;font-weight:600}
+#adminApp{display:none}
+.sidebar{position:fixed;top:0;left:0;width:240px;height:100vh;background:#1a1a2e;overflow-y:auto;z-index:100;display:flex;flex-direction:column}
+.sb-header{padding:20px 16px;border-bottom:1px solid rgba(255,255,255,.1)}
+.sb-logo{font-size:20px;font-weight:800;color:#fff}
+.sb-logo span{color:#fcd116}
+.sb-sub{font-size:11px;color:rgba(255,255,255,.5);margin-top:2px}
+.sb-back{display:flex;align-items:center;gap:6px;margin-top:12px;background:rgba(252,209,22,.15);border:1px solid rgba(252,209,22,.3);border-radius:8px;padding:7px 12px;text-decoration:none;color:#fcd116;font-size:12px;font-weight:600}
+.sb-nav{padding:12px 0;flex:1}
+.sb-item{display:flex;align-items:center;gap:10px;padding:11px 20px;color:rgba(255,255,255,.7);cursor:pointer;font-size:13px;font-weight:500;border-left:3px solid transparent;transition:all .15s}
+.sb-item:hover{background:rgba(255,255,255,.05);color:#fff}
+.sb-item.on{background:rgba(0,158,96,.2);color:#009e60;border-left-color:#009e60}
+.sb-badge{margin-left:auto;background:#E24B4A;color:#fff;font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700}
+.sb-footer{padding:16px;border-top:1px solid rgba(255,255,255,.1)}
+.btn-logout{width:100%;padding:10px;background:rgba(226,75,74,.15);color:#E24B4A;border:1px solid rgba(226,75,74,.3);border-radius:8px;font-size:13px;cursor:pointer;font-weight:600}
+.main{margin-left:240px;padding:24px;min-height:100vh}
+.page{display:none}
+.page.on{display:block}
+.page-title{font-size:22px;font-weight:700;margin-bottom:4px}
+.page-sub{font-size:13px;color:#666;margin-bottom:24px}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.stat-card{background:#fff;border-radius:14px;padding:20px;border:1px solid #e0e0e0}
+.stat-val{font-size:32px;font-weight:800;margin-bottom:4px}
+.stat-label{font-size:12px;color:#666;font-weight:500}
+.table-card{background:#fff;border-radius:14px;border:1px solid #e0e0e0;overflow:hidden;margin-bottom:20px}
+.table-header{padding:16px 20px;border-bottom:1px solid #e0e0e0;display:flex;justify-content:space-between;align-items:center}
+.table-title{font-size:14px;font-weight:700}
+.table-count{font-size:12px;color:#666;background:#f5f5f5;padding:3px 10px;border-radius:20px}
+table{width:100%;border-collapse:collapse}
+th{padding:11px 16px;text-align:left;font-size:11px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid #e0e0e0;background:#fafafa}
+td{padding:12px 16px;font-size:13px;border-bottom:1px solid #f0f0f0;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#fafafa}
+.badge-pending{background:#fff3cd;color:#856404;font-size:10px;padding:3px 9px;border-radius:20px;font-weight:700;display:inline-block}
+.badge-approved{background:#d1fae5;color:#065f46;font-size:10px;padding:3px 9px;border-radius:20px;font-weight:700;display:inline-block}
+.badge-resolved{background:#d1fae5;color:#065f46;font-size:10px;padding:3px 9px;border-radius:20px;font-weight:700;display:inline-block}
+.btn-sm{padding:5px 12px;border-radius:7px;font-size:11px;font-weight:700;border:none;cursor:pointer;margin-right:4px}
+.btn-approve{background:#009e60;color:#fff}
+.btn-reject{background:#fee2e2;color:#E24B4A}
+.btn-delete{background:#fee2e2;color:#E24B4A}
+.btn-primary{background:#009e60;color:#fff;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:700;border:none;cursor:pointer}
+.empty{text-align:center;padding:40px;color:#999}
+.empty .icon{font-size:36px;margin-bottom:12px}
+.notif{position:fixed;bottom:24px;right:24px;background:#1a1a1a;color:#fff;padding:12px 20px;border-radius:12px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none}
+.notif.show{opacity:1}
+.loading-overlay{position:fixed;inset:0;background:rgba(255,255,255,.8);display:none;align-items:center;justify-content:center;z-index:500}
+.loading-overlay.on{display:flex}
+.spinner{width:32px;height:32px;border:3px solid #e0e0e0;border-top-color:#009e60;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pend-card{background:#fff;border:1px solid #e0e0e0;border-radius:14px;overflow:hidden;margin-bottom:16px}
+.pend-hdr{padding:16px 20px;border-bottom:1px solid #e0e0e0;display:flex;justify-content:space-between;align-items:center}
+.pend-title{font-size:14px;font-weight:700}
+.pend-sub{font-size:12px;color:#666;margin-top:2px}
+.pend-rows{padding:0}
+.pend-row{display:flex;padding:10px 20px;border-bottom:1px solid #f0f0f0;font-size:13px}
+.pend-row:last-child{border-bottom:none}
+.pend-lbl{width:140px;color:#666;font-size:12px;flex-shrink:0}
+.pend-val{flex:1}
+.pend-btns{padding:16px 20px;display:flex;gap:10px}
+.photo-grid{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.photo-wrap{position:relative;display:inline-block}
+.photo-thumb{width:80px;height:80px;object-fit:cover;border-radius:8px;border:1px solid #e0e0e0}
+.photo-del{position:absolute;top:-4px;right:-4px;background:#E24B4A;color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size:11px;cursor:pointer;line-height:18px;text-align:center;padding:0}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center}
+.overlay.on{display:flex}
+.modal-box{background:#fff;border-radius:16px;padding:24px;width:90%;max-width:500px;max-height:80vh;overflow-y:auto}
+.modal-title{font-size:16px;font-weight:700;margin-bottom:16px}
+.upload-zone{border:2px dashed #e0e0e0;border-radius:10px;padding:20px;text-align:center;cursor:pointer;margin-bottom:8px;background:#f5f5f5}
+.upload-zone:hover{border-color:#009e60;background:#f0faf5}
+.tab-btns{display:flex;gap:8px;margin-bottom:16px}
+.tab-btn{flex:1;padding:8px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;background:#fff;color:#666}
+.tab-btn.on{background:#009e60;color:#fff;border-color:#009e60}
+.url-inp{width:100%;padding:10px 14px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:13px;outline:none;margin-bottom:8px}
+.url-inp:focus{border-color:#009e60}
 </style>
 </head>
 <body>
@@ -101,20 +106,24 @@ tr:hover td{background:#fafafa;}
 <div id="loginPage" class="login-wrap">
   <div class="login-card">
     <div class="login-logo">
-      <div class="login-flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div>
-      <div class="logo">MBOLO</div>
-      <div class="sub">&#9881;&#65039; Interface Administrateur</div>
+      <div class="login-flag">
+        <div style="background:#009e60"></div>
+        <div style="background:#fcd116"></div>
+        <div style="background:#3a75c4"></div>
+      </div>
+      <div class="logo-txt">MBOLO</div>
+      <div class="logo-sub">⚙️ Interface Administrateur</div>
     </div>
     <div class="fg">
       <label>Mot de passe admin</label>
       <div class="pwd-wrap">
-        <input type="password" id="loginPwd" placeholder="••••••••" onkeydown="if(event.key==='Enter')doAdminLogin()"/>
-        <button class="pwd-eye" onclick="togglePwd()" id="eyeBtn">&#128065;</button>
+        <input type="password" id="loginPwd" placeholder="••••••••"/>
+        <button class="pwd-eye" id="eyeBtn">👁</button>
       </div>
     </div>
-    <button class="btn-login" onclick="doAdminLogin()">Acceder au tableau de bord</button>
-    <div class="login-err" id="loginErr">Code incorrect. Reessayez.</div>
-    <div class="login-back"><a href="index.html">&#8592; Retour a MBOLO</a></div>
+    <button class="btn-login" id="btnAdminLogin">Accéder au tableau de bord</button>
+    <div class="login-err" id="loginErr">Code incorrect. Réessayez.</div>
+    <div class="login-back"><a href="index.html">← Retour à MBOLO</a></div>
   </div>
 </div>
 
@@ -126,78 +135,108 @@ tr:hover td{background:#fafafa;}
     <div class="sb-header">
       <div class="sb-logo">MBO<span>LO</span></div>
       <div class="sb-sub">Administration</div>
-      <a href="index.html" class="sb-back">&#8592; Retour a MBOLO</a>
+      <a href="index.html" class="sb-back">← Retour à MBOLO</a>
     </div>
-    <div class="sb-nav">
-      <div class="sb-item on" onclick="showPage('dashboard')">&#128202; Tableau de bord</div>
-      <div class="sb-item" onclick="showPage('pending')" id="sb-pending">&#128203; Demandes <span class="sb-badge" id="badge-pending">0</span></div>
-      <div class="sb-item" onclick="showPage('places')">&#128205; Etablissements</div>
-      <div class="sb-item" onclick="showPage('reviews')">&#128172; Avis</div>
-      <div class="sb-item" onclick="showPage('members')">&#128101; Membres</div>
-    </div>
+    <div class="sb-nav" id="sideNav"></div>
     <div class="sb-footer">
-      <button class="btn-logout" onclick="adminLogout()">&#128682; Se deconnecter</button>
+      <button class="btn-logout" id="btnLogout">🚪 Se déconnecter</button>
     </div>
   </div>
 
   <div class="main">
     <div class="page on" id="page-dashboard">
       <div class="page-title">Tableau de bord</div>
-      <div class="page-sub" id="dash-date"></div>
+      <div class="page-sub" id="dashDate"></div>
       <div class="stats-grid">
-        <div class="stat-card"><div class="stat-val" style="color:#009e60" id="s-total">—</div><div class="stat-label">Etablissements</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:#009e60" id="s-total">—</div><div class="stat-label">Établissements</div></div>
         <div class="stat-card"><div class="stat-val" style="color:#3a75c4" id="s-members">—</div><div class="stat-label">Membres</div></div>
         <div class="stat-card"><div class="stat-val" style="color:#fcd116" id="s-pending">—</div><div class="stat-label">En attente</div></div>
-        <div class="stat-card"><div class="stat-val" style="color:#E24B4A" id="s-reviews">—</div><div class="stat-label">Avis totaux</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:#E24B4A" id="s-reports">—</div><div class="stat-label">Signalements</div></div>
       </div>
       <div class="table-card">
-        <div class="table-header"><div class="table-title">Dernieres demandes</div><button class="btn-primary" onclick="showPage('pending')">Voir tout</button></div>
-        <div id="dash-pending"></div>
+        <div class="table-header"><div class="table-title">Dernières demandes</div><button class="btn-primary" id="dashSeePending">Voir tout</button></div>
+        <div id="dashPendingList"></div>
       </div>
     </div>
 
     <div class="page" id="page-pending">
       <div class="page-title">Demandes en attente</div>
-      <div class="page-sub">Validez ou refusez les etablissements soumis</div>
-      <div id="pending-list"></div>
+      <div class="page-sub">Validez ou refusez les établissements soumis</div>
+      <div id="pendingList"></div>
     </div>
 
     <div class="page" id="page-places">
-      <div class="page-title">Etablissements</div>
-      <div class="page-sub">Tous les etablissements approuves</div>
+      <div class="page-title">Établissements</div>
+      <div class="page-sub">Tous les établissements approuvés</div>
       <div class="table-card">
-        <div class="table-header"><div class="table-title">Liste</div><div class="table-count" id="places-count">0</div></div>
-        <div id="places-table"></div>
+        <div class="table-header"><div class="table-title">Liste</div><div class="table-count" id="placesCount">0</div></div>
+        <div style="overflow-x:auto"><table><thead><tr><th>Nom</th><th>Catégorie</th><th>Quartier</th><th>Avis</th><th>Note</th><th>Photos</th><th>Actions</th></tr></thead><tbody id="placesTbody"></tbody></table></div>
       </div>
     </div>
 
     <div class="page" id="page-reviews">
       <div class="page-title">Avis et Commentaires</div>
-      <div class="page-sub">Moderez les commentaires des utilisateurs</div>
-      <div id="reviews-list"></div>
+      <div class="page-sub">Modérez les commentaires des utilisateurs</div>
+      <div class="table-card">
+        <div class="table-header"><div class="table-title">Tous les avis</div><div class="table-count" id="reviewsCount">0</div></div>
+        <div style="overflow-x:auto"><table><thead><tr><th>Établissement</th><th>Auteur</th><th>Note</th><th>Commentaire</th><th>Date</th><th>Action</th></tr></thead><tbody id="reviewsTbody"></tbody></table></div>
+      </div>
     </div>
 
     <div class="page" id="page-reports">
-      <div class="page-title">Signalements</div>
+      <div class="page-title">🚨 Signalements</div>
       <div class="page-sub">Contenus signalés par les utilisateurs</div>
-      <div id="reports-list"></div>
+      <div class="table-card">
+        <div class="table-header"><div class="table-title">Signalements</div><div class="table-count" id="reportsCount">0</div></div>
+        <div style="overflow-x:auto"><table><thead><tr><th>Type</th><th>Raison</th><th>Détails</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="reportsTbody"></tbody></table></div>
+      </div>
     </div>
 
     <div class="page" id="page-members">
       <div class="page-title">Membres</div>
       <div class="page-sub">Utilisateurs inscrits sur MBOLO</div>
       <div class="table-card">
-        <div class="table-header"><div class="table-title">Liste des membres</div><div class="table-count" id="members-count">0</div></div>
-        <div id="members-table"></div>
+        <div class="table-header"><div class="table-title">Liste des membres</div><div class="table-count" id="membersCount">0</div></div>
+        <div style="overflow-x:auto"><table><thead><tr><th>Nom</th><th>Email</th><th>Date inscription</th></tr></thead><tbody id="membersTbody"></tbody></table></div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHOTO MODAL -->
+<div class="overlay" id="photoModal">
+  <div class="modal-box">
+    <div class="modal-title" id="photoModalTitle">Gérer les photos</div>
+    <div style="font-size:12px;font-weight:700;color:#666;margin-bottom:8px">PHOTOS ACTUELLES</div>
+    <div class="photo-grid" id="currentPhotosGrid"></div>
+    <div style="font-size:12px;font-weight:700;color:#666;margin:12px 0 8px">AJOUTER DES PHOTOS</div>
+    <div class="tab-btns">
+      <button class="tab-btn on" id="tabUploadBtn">📤 Télécharger</button>
+      <button class="tab-btn" id="tabUrlBtn">🔗 Par URL</button>
+    </div>
+    <div id="uploadTab">
+      <div class="upload-zone" id="uploadZone">
+        <input type="file" id="photoFileInput" accept="image/*" multiple style="display:none"/>
+        <div style="font-size:32px;margin-bottom:8px">📷</div>
+        <div style="font-size:13px;font-weight:600;color:#333">Cliquez pour choisir des photos</div>
+        <div style="font-size:11px;color:#999;margin-top:4px">JPG, PNG — max 10MB</div>
+      </div>
+      <div id="uploadProgress" style="display:none;font-size:12px;color:#009e60;padding:8px">⏳ Upload en cours...</div>
+    </div>
+    <div id="urlTab" style="display:none">
+      <input type="text" class="url-inp" id="photoUrlInput" placeholder="https://exemple.com/photo.jpg"/>
+      <button class="btn-primary" id="addUrlBtn" style="width:100%;margin-bottom:8px">Ajouter cette URL</button>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:16px">
+      <button class="btn-primary" id="savePhotosBtn" style="flex:1">✅ Sauvegarder</button>
+      <button class="btn-sm btn-reject" id="closePhotoModalBtn" style="padding:10px 20px">Annuler</button>
     </div>
   </div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, updateDoc, deleteDoc, query, orderBy, getCountFromServer } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
+import { getFirestore, collection, getDocs, doc, updateDoc, deleteDoc, addDoc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBLG3d6gNyEbcRHv4-vU01tUDp-c1kzvxo",
@@ -208,434 +247,461 @@ const firebaseConfig = {
   appId: "1:1079636501599:web:8b8ed3fa9ce4a1f875a7ea"
 };
 
+const CLOUDINARY_CLOUD = "djngux5fk";
+const CLOUDINARY_PRESET = "mbolo_upload";
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+const fbApp = initializeApp(firebaseConfig);
+const db = getFirestore(fbApp);
 
-function simpleHash(str){var h=0;for(var i=0;i<str.length;i++){h=((h<<5)-h)+str.charCodeAt(i);h|=0;}return h.toString(16);}
-var STORED_HASH = localStorage.getItem("mbolo_admin_hash") || simpleHash("mbolo2025");
+// AUTH
+function simpleHash(str) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) { h = ((h << 5) - h) + str.charCodeAt(i); h |= 0; }
+  return h.toString(16);
+}
+let STORED_HASH = localStorage.getItem("mbolo_admin_hash") || simpleHash("mbolo2025");
 
-function togglePwd(){var i=document.getElementById("loginPwd");var b=document.getElementById("eyeBtn");if(i.type==="password"){i.type="text";b.textContent="&#128584;";}else{i.type="password";b.textContent="&#128065;";}}
-window.togglePwd=togglePwd;
+document.getElementById("eyeBtn").onclick = () => {
+  const inp = document.getElementById("loginPwd");
+  const btn = document.getElementById("eyeBtn");
+  if (inp.type === "password") { inp.type = "text"; btn.textContent = "🙈"; }
+  else { inp.type = "password"; btn.textContent = "👁"; }
+};
 
-function doAdminLogin(){
-  var pwd=document.getElementById("loginPwd").value;
-  var err=document.getElementById("loginErr");
-  if(simpleHash(pwd)===STORED_HASH){
-    document.getElementById("loginPage").style.display="none";
-    document.getElementById("adminApp").style.display="block";
-    err.style.display="none";
+document.getElementById("loginPwd").onkeydown = (e) => { if (e.key === "Enter") doLogin(); };
+document.getElementById("btnAdminLogin").onclick = doLogin;
+
+function doLogin() {
+  const pwd = document.getElementById("loginPwd").value;
+  const err = document.getElementById("loginErr");
+  if (simpleHash(pwd) === STORED_HASH) {
+    document.getElementById("loginPage").style.display = "none";
+    document.getElementById("adminApp").style.display = "block";
+    err.style.display = "none";
     initAdmin();
-  }else{err.style.display="block";document.getElementById("loginPwd").value="";}
+  } else {
+    err.style.display = "block";
+    document.getElementById("loginPwd").value = "";
+  }
 }
-window.doAdminLogin=doAdminLogin;
 
-function adminLogout(){if(!confirm("Se deconnecter ?"))return;document.getElementById("adminApp").style.display="none";document.getElementById("loginPage").style.display="flex";document.getElementById("loginPwd").value="";}
-window.adminLogout=adminLogout;
+document.getElementById("btnLogout").onclick = () => {
+  if (!confirm("Se déconnecter ?")) return;
+  document.getElementById("adminApp").style.display = "none";
+  document.getElementById("loginPage").style.display = "flex";
+  document.getElementById("loginPwd").value = "";
+};
 
-function notif(msg){var el=document.getElementById("notif");el.textContent=msg;el.classList.add("show");setTimeout(function(){el.classList.remove("show");},3000);}
-function loading(show){document.getElementById("loadingOverlay").style.display=show?"flex":"none";}
-
-function showPage(name){
-  document.querySelectorAll(".page").forEach(function(p){p.classList.remove("on");});
-  document.querySelectorAll(".sb-item").forEach(function(i){i.classList.remove("on");});
-  document.getElementById("page-"+name).classList.add("on");
-  var items=document.querySelectorAll(".sb-item");
-  var map={dashboard:0,pending:1,places:2,reviews:3,members:4,reports:5,settings:6};
-  if(map[name]!==undefined)items[map[name]].classList.add("on");
-  var renders={dashboard:renderDashboard,pending:renderPending,places:renderPlaces,reviews:renderReviews,members:renderMembers,reports:renderReports};
-  if(renders[name])renders[name]();
+// HELPERS
+function notif(msg) {
+  const el = document.getElementById("notif");
+  el.textContent = msg; el.classList.add("show");
+  setTimeout(() => el.classList.remove("show"), 3000);
 }
-window.showPage=showPage;
+function loading(show) {
+  document.getElementById("loadingOverlay").classList.toggle("on", show);
+}
+function showPage(name) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("on"));
+  const pg = document.getElementById("page-" + name);
+  if (pg) pg.classList.add("on");
+  document.querySelectorAll(".sb-item").forEach(i => i.classList.remove("on"));
+  const si = document.getElementById("si-" + name);
+  if (si) si.classList.add("on");
+  const renders = {dashboard: renderDashboard, pending: renderPending, places: renderPlaces, reviews: renderReviews, reports: renderReports, members: renderMembers};
+  if (renders[name]) renders[name]();
+}
 
-async function initAdmin(){
-  var now=new Date();
-  document.getElementById("dash-date").textContent="Bienvenue — "+now.toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+// SIDEBAR
+const navItems = [
+  {id:"dashboard",icon:"📊",label:"Tableau de bord"},
+  {id:"pending",icon:"📋",label:"Demandes",badge:"badge-pending"},
+  {id:"places",icon:"📍",label:"Établissements"},
+  {id:"reviews",icon:"💬",label:"Avis"},
+  {id:"reports",icon:"🚨",label:"Signalements",badge:"badge-reports"},
+  {id:"members",icon:"👥",label:"Membres"},
+];
+const nav = document.getElementById("sideNav");
+navItems.forEach(item => {
+  const div = document.createElement("div");
+  div.className = "sb-item"; div.id = "si-" + item.id;
+  div.innerHTML = item.icon + " " + item.label;
+  if (item.badge) {
+    const badge = document.createElement("span");
+    badge.className = "sb-badge"; badge.id = item.badge; badge.style.display = "none";
+    div.appendChild(badge);
+  }
+  div.onclick = () => showPage(item.id);
+  nav.appendChild(div);
+});
+
+document.getElementById("dashSeePending").onclick = () => showPage("pending");
+
+// INIT
+async function initAdmin() {
+  const now = new Date();
+  document.getElementById("dashDate").textContent = "Bienvenue — " + now.toLocaleDateString("fr-FR", {weekday:"long",day:"numeric",month:"long",year:"numeric"});
+  document.getElementById("si-dashboard").classList.add("on");
   await renderDashboard();
 }
 
-async function renderDashboard(){
+// DASHBOARD
+async function renderDashboard() {
   loading(true);
-  try{
-    var placesSnap=await getDocs(collection(db,"places"));
-    var places=[];placesSnap.forEach(function(d){places.push({...d.data(),fbId:d.id});});
-    var membersSnap=await getDocs(collection(db,"membres"));
-    var pending=places.filter(function(p){return p.status==="pending";});
-    var approved=places.filter(function(p){return p.status==="approved";});
+  try {
+    const placesSnap = await getDocs(collection(db, "places"));
+    const places = []; placesSnap.forEach(d => places.push(Object.assign({}, d.data(), {fbId: d.id})));
+    const membersSnap = await getDocs(collection(db, "membres"));
+    const reportsSnap = await getDocs(collection(db, "signalements"));
+    const pending = places.filter(p => p.status === "pending");
+    const approved = places.filter(p => p.status === "approved");
+    let totalReviews = 0;
+    places.forEach(p => { totalReviews += (p.reviews || 0); });
+    let pendingReports = 0;
+    reportsSnap.forEach(d => { if (d.data().status === "pending") pendingReports++; });
 
-    // Count all reviews
-    var totalReviews=0;
-    for(var i=0;i<places.length;i++){totalReviews+=(places[i].reviews||0);}
+    document.getElementById("s-total").textContent = approved.length;
+    document.getElementById("s-members").textContent = membersSnap.size;
+    document.getElementById("s-pending").textContent = pending.length;
+    document.getElementById("s-reports").textContent = pendingReports;
 
-    document.getElementById("s-total").textContent=approved.length;
-    document.getElementById("s-members").textContent=membersSnap.size;
-    document.getElementById("s-pending").textContent=pending.length;
-    document.getElementById("s-reviews").textContent=totalReviews;
-    document.getElementById("badge-pending").textContent=pending.length;
-    // Load reports count
-    try{
-      var repSnap=await getDocs(collection(db,"signalements"));
-      var pendingRep=0;repSnap.forEach(function(d){if(d.data().status==="pending")pendingRep++;});
-      if(pendingRep>0){document.getElementById("badge-reports").textContent=pendingRep;document.getElementById("badge-reports").style.display="inline";}
-    }catch(e){}
+    // Badges
+    const pb = document.getElementById("badge-pending");
+    if (pb) { pb.textContent = pending.length; pb.style.display = pending.length > 0 ? "inline" : "none"; }
+    const rb = document.getElementById("badge-reports");
+    if (rb) { rb.textContent = pendingReports; rb.style.display = pendingReports > 0 ? "inline" : "none"; }
 
-    var dp=document.getElementById("dash-pending");
-    if(!pending.length){dp.innerHTML='<div class="empty"><div class="icon">&#9989;</div>Aucune demande en attente</div>';}
-    else{
-      var rows=pending.slice(0,5).map(function(p){
-        var tr=document.createElement('tr');
-        tr.innerHTML='<td><strong>'+p.name+'</strong></td><td>'+p.cat+'</td><td>'+p.quartier+'</td><td></td>';
-        var td=tr.cells[3];
-        var btnA=document.createElement('button');btnA.className='btn-sm btn-approve';btnA.textContent='✅ Valider';
-        btnA.onclick=function(){approvePlace(p.fbId,p.name);};
-        var btnR=document.createElement('button');btnR.className='btn-sm btn-reject';btnR.textContent='❌ Refuser';btnR.style.marginLeft='4px';
-        btnR.onclick=function(){rejectPlace(p.fbId,p.name);};
-        td.appendChild(btnA);td.appendChild(btnR);
-        return tr.outerHTML;
-      }).join('');
-      dp.innerHTML='<table><thead><tr><th>Etablissement</th><th>Categorie</th><th>Quartier</th><th>Actions</th></tr></thead><tbody>'+rows+'</tbody></table>';
+    // Dash pending list
+    const dpl = document.getElementById("dashPendingList");
+    dpl.innerHTML = "";
+    if (!pending.length) {
+      dpl.innerHTML = "<div class='empty'><div class='icon'>✅</div>Aucune demande en attente</div>";
+    } else {
+      const tbl = document.createElement("table");
+      const thead = document.createElement("thead");
+      thead.innerHTML = "<tr><th>Établissement</th><th>Catégorie</th><th>Quartier</th><th>Actions</th></tr>";
+      tbl.appendChild(thead);
+      const tbody = document.createElement("tbody");
+      pending.slice(0, 5).forEach(p => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = "<td><strong>" + p.name + "</strong></td><td>" + p.cat + "</td><td>" + (p.quartier||"") + "</td><td></td>";
+        const td = tr.cells[3];
+        const ba = document.createElement("button"); ba.className = "btn-sm btn-approve"; ba.textContent = "✅ Valider";
+        const br = document.createElement("button"); br.className = "btn-sm btn-reject"; br.textContent = "❌ Refuser";
+        ba.onclick = () => approvePlace(p.fbId, p.name);
+        br.onclick = () => rejectPlace(p.fbId, p.name);
+        td.appendChild(ba); td.appendChild(br);
+        tbody.appendChild(tr);
+      });
+      tbl.appendChild(tbody);
+      dpl.appendChild(tbl);
     }
-  }catch(e){notif("Erreur : "+e.message);}
+  } catch(e) { notif("Erreur : " + e.message); }
   loading(false);
 }
 
-async function renderPending(){
+// PENDING
+async function renderPending() {
   loading(true);
-  var snap=await getDocs(collection(db,"places"));
-  var pending=[];snap.forEach(function(d){var data=d.data();if(data.status==="pending")pending.push(Object.assign({},data,{fbId:d.id}));});
-  var el=document.getElementById("pending-list");
-  if(!pending.length){el.innerHTML='<div class="empty"><div class="icon">&#127881;</div>Aucune demande en attente !</div>';loading(false);return;}
-  var pendingPlaces=pending;
-  el.innerHTML="";
-  pending.forEach(function(p){
-    var card=document.createElement("div");
-    card.className="table-card";
-    card.style.marginBottom="16px";
-    var header='<div class="table-header"><div><div class="table-title">'+p.name+'</div><div style="font-size:12px;color:#666;margin-top:2px">'+p.cat+' &middot; '+p.quartier+'</div></div><span class="badge badge-pending">En attente</span></div>';
-    var submittedRow=p.submittedBy?"<tr><td style='color:#666;font-size:12px'>&#128100; Soumis par</td><td>"+p.submittedBy+"</td></tr>":"";
-    var rows="<table><tbody><tr><td style='width:140px;color:#666;font-size:12px'>&#128205; Adresse</td><td>"+p.addr+"</td></tr><tr><td style='color:#666;font-size:12px'>&#128222; Tel</td><td>"+(p.phone||"Non renseigne")+"</td></tr><tr><td style='color:#666;font-size:12px'>&#128336; Horaires</td><td>"+(p.hours||"Non renseignes")+"</td></tr>"+submittedRow+"</tbody></table>";
-    var btnDiv='<div style="padding:16px;display:flex;gap:10px" id="btn-pend-'+p.fbId+'"></div>';
-    card.innerHTML=header+rows+btnDiv;
-    el.appendChild(card);
-    var bd=document.getElementById("btn-pend-"+p.fbId);
-    var ba=document.createElement("button");ba.className="btn-primary";ba.textContent="✅ Valider";
-    ba.onclick=(function(pid,pname){return function(){approvePlace(pid,pname);};})(p.fbId,p.name);
-    var br=document.createElement("button");br.className="btn-sm btn-reject";br.style.padding="10px 16px";br.textContent="❌ Refuser";
-    br.onclick=(function(pid,pname){return function(){rejectPlace(pid,pname);};})(p.fbId,p.name);
-    bd.appendChild(ba);bd.appendChild(br);
-  });
-  loading(false);
-}
-window.approvePlace=async function(fbId,name){
-  await updateDoc(doc(db,"places",fbId),{status:"approved"});
-  notif("&#9989; "+name+" approuve !");
-  renderPending();renderDashboard();
-};
-window.rejectPlace=async function(fbId,name){
-  if(!confirm("Refuser et supprimer "+name+" ?"))return;
-  await deleteDoc(doc(db,"places",fbId));
-  notif(name+" refuse et supprime.");
-  renderPending();renderDashboard();
-};
-
-async function renderPlaces(){
-  loading(true);
-  var snap=await getDocs(collection(db,"places"));
-  var places=[];snap.forEach(function(d){var data=d.data();if(data.status==="approved")places.push({...data,fbId:d.id});});
-  document.getElementById("places-count").textContent=places.length+" etablissements";
-  var el=document.getElementById("places-table");
-  if(!places.length){el.innerHTML='<div class="empty"><div class="icon">&#128205;</div>Aucun etablissement</div>';loading(false);return;}
-  var table2=document.createElement("table");
-  table2.innerHTML="<thead><tr><th>Nom</th><th>Cat.</th><th>Quartier</th><th>Avis</th><th>Note</th><th>Photos</th><th>Actions</th></tr></thead><tbody id='pl-tbody'></tbody>";
-  el.appendChild(table2);
-  var tb=document.getElementById("pl-tbody");
-  places.forEach(function(p){
-    var tr=document.createElement("tr");
-    tr.innerHTML="<td><strong>"+p.name+"</strong></td><td>"+p.cat+"</td><td>"+p.quartier+"</td><td style='text-align:center'>"+(p.reviews||0)+"</td><td style='color:#F59E0B'>"+(p.rating>0?p.rating+"/5":"—")+"</td><td></td><td></td>";
-    var ptd=tr.cells[5];
-    var bp=document.createElement("button");bp.className="btn-sm btn-approve";bp.textContent="📷 "+((p.photos||[]).length);
-    bp.onclick=(function(id,nm,ph){return function(){openPhotoModal(id,nm,ph);};})(p.fbId,p.name,p.photos||[]);
-    ptd.appendChild(bp);
-    var atd=tr.cells[6];
-    var bs=document.createElement("button");bs.className="btn-sm btn-reject";bs.textContent="🚫 Suspendre";
-    bs.onclick=(function(id,nm){return function(){suspendPlace(id,nm);};})(p.fbId,p.name);
-    atd.appendChild(bs);
-    tb.appendChild(tr);
-  });
-    loading(false);
-}
-window.suspendPlace=async function(fbId,name){
-  if(!confirm("Suspendre "+name+" ?"))return;
-  await updateDoc(doc(db,"places",fbId),{status:"suspended"});
-  notif(name+" suspendu.");renderPlaces();
-};
-
-async function renderReviews(){
-  loading(true);
-  var snap=await getDocs(collection(db,"places"));
-  var places=[];snap.forEach(function(d){places.push({...d.data(),fbId:d.id});});
-  var allAvis=[];
-  for(var i=0;i<places.length;i++){
-    var avisSnap=await getDocs(collection(db,"places",places[i].fbId,"avis"));
-    avisSnap.forEach(function(d){allAvis.push({...d.data(),id:d.id,placeId:places[i].fbId,placeName:places[i].name});});
+  const snap = await getDocs(collection(db, "places"));
+  const pending = [];
+  snap.forEach(d => { const data = d.data(); if (data.status === "pending") pending.push(Object.assign({}, data, {fbId: d.id})); });
+  const el = document.getElementById("pendingList"); el.innerHTML = "";
+  if (!pending.length) {
+    el.innerHTML = "<div class='empty'><div class='icon'>🎉</div>Aucune demande en attente !</div>";
+    loading(false); return;
   }
-  var el=document.getElementById("reviews-list");
-  if(!allAvis.length){el.innerHTML='<div class="empty"><div class="icon">&#128172;</div>Aucun avis</div>';loading(false);return;}
-  var card=document.createElement("div");card.className="table-card";
-  card.innerHTML='<div class="table-header"><div class="table-title">Tous les avis</div><div class="table-count">'+allAvis.length+' avis</div></div><table><thead><tr><th>Etablissement</th><th>Auteur</th><th>Note</th><th>Commentaire</th><th>Date</th><th>Action</th></tr></thead><tbody id="reviews-tbody"></tbody></table>';
-  el.appendChild(card);
-  var tbody=document.getElementById("reviews-tbody");
-  allAvis.forEach(function(a){
-    var tr=document.createElement("tr");
-    var stars="";for(var s=0;s<a.stars;s++)stars+="&#9733;";
-    tr.innerHTML="<td><strong>"+a.placeName+"</strong></td><td>"+a.user+"</td><td style='color:#F59E0B'>"+stars+"</td><td style='max-width:200px;font-size:12px'>"+a.txt.substring(0,60)+(a.txt.length>60?"...":"")+"</td><td style='font-size:11px;color:#999'>"+(a.dateStr||"—")+"</td><td></td>";
-    var btn=document.createElement("button");btn.className="btn-sm btn-delete";btn.textContent="🗑️ Suppr.";
-    btn.onclick=(function(pid,aid){return function(){deleteAvis(pid,aid);};})(a.placeId,a.id);
-    tr.cells[5].appendChild(btn);
+  pending.forEach(p => {
+    const card = document.createElement("div"); card.className = "pend-card";
+    const hdr = document.createElement("div"); hdr.className = "pend-hdr";
+    hdr.innerHTML = "<div><div class='pend-title'>" + p.name + "</div><div class='pend-sub'>" + p.cat + " · " + (p.quartier||"") + "</div></div><span class='badge-pending'>En attente</span>";
+    const rows = document.createElement("div"); rows.className = "pend-rows";
+
+    const rowData = [
+      ["📍 Adresse", p.addr || "—"],
+      ["📞 Téléphone", p.phone || "Non renseigné"],
+      ["🕐 Horaires", p.hours || "Non renseignés"],
+    ];
+    if (p.submittedBy) rowData.push(["👤 Soumis par", p.submittedBy]);
+    rowData.forEach(r => {
+      const row = document.createElement("div"); row.className = "pend-row";
+      row.innerHTML = "<div class='pend-lbl'>" + r[0] + "</div><div class='pend-val'>" + r[1] + "</div>";
+      rows.appendChild(row);
+    });
+
+    // Photos preview
+    if (p.photos && p.photos.length) {
+      const phRow = document.createElement("div"); phRow.className = "pend-row";
+      phRow.innerHTML = "<div class='pend-lbl'>📷 Photos</div>";
+      const phVal = document.createElement("div"); phVal.className = "pend-val";
+      const pg = document.createElement("div"); pg.className = "photo-grid";
+      p.photos.forEach(url => {
+        const img = document.createElement("img"); img.src = url; img.className = "photo-thumb";
+        img.onerror = () => img.style.display = "none";
+        pg.appendChild(img);
+      });
+      phVal.appendChild(pg); phRow.appendChild(phVal); rows.appendChild(phRow);
+    }
+
+    const btns = document.createElement("div"); btns.className = "pend-btns";
+    const ba = document.createElement("button"); ba.className = "btn-primary"; ba.textContent = "✅ Valider l'établissement";
+    const br = document.createElement("button"); br.className = "btn-sm btn-reject"; br.style.padding = "10px 16px"; br.textContent = "❌ Refuser";
+    ba.onclick = () => approvePlace(p.fbId, p.name);
+    br.onclick = () => rejectPlace(p.fbId, p.name);
+    btns.appendChild(ba); btns.appendChild(br);
+    card.appendChild(hdr); card.appendChild(rows); card.appendChild(btns);
+    el.appendChild(card);
+  });
+  loading(false);
+}
+
+async function approvePlace(fbId, name) {
+  await updateDoc(doc(db, "places", fbId), {status: "approved"});
+  notif("✅ " + name + " approuvé !");
+  renderPending(); renderDashboard();
+}
+async function rejectPlace(fbId, name) {
+  if (!confirm("Refuser et supprimer " + name + " ?")) return;
+  await deleteDoc(doc(db, "places", fbId));
+  notif(name + " refusé et supprimé.");
+  renderPending(); renderDashboard();
+}
+
+// PLACES
+async function renderPlaces() {
+  loading(true);
+  const snap = await getDocs(collection(db, "places"));
+  const places = [];
+  snap.forEach(d => { const data = d.data(); if (data.status === "approved") places.push(Object.assign({}, data, {fbId: d.id})); });
+  const countEl = document.getElementById("placesCount");
+  if (countEl) countEl.textContent = places.length + " établissements";
+  const tbody = document.getElementById("placesTbody"); tbody.innerHTML = "";
+  places.forEach(p => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = "<td><strong>" + p.name + "</strong></td><td>" + p.cat + "</td><td>" + (p.quartier||"") + "</td><td style='text-align:center'>" + (p.reviews||0) + "</td><td style='color:#F59E0B'>" + (p.rating > 0 ? p.rating + "/5" : "—") + "</td><td></td><td></td>";
+    const photoTd = tr.cells[5];
+    const btnP = document.createElement("button"); btnP.className = "btn-sm btn-approve";
+    btnP.textContent = "📷 " + (p.photos||[]).length;
+    btnP.onclick = () => openPhotoModal(p.fbId, p.name, p.photos || []);
+    photoTd.appendChild(btnP);
+    const actionTd = tr.cells[6];
+    const btnS = document.createElement("button"); btnS.className = "btn-sm btn-reject"; btnS.textContent = "🚫 Suspendre";
+    btnS.onclick = () => suspendPlace(p.fbId, p.name);
+    actionTd.appendChild(btnS);
     tbody.appendChild(tr);
   });
   loading(false);
 }
-window.deleteAvis=async function(placeId,avisId){
-  if(!confirm("Supprimer cet avis ?"))return;
-  await deleteDoc(doc(db,"places",placeId,"avis",avisId));
-  var snap=await getDocs(collection(db,"places",placeId,"avis"));
-  var total=0,count=0;snap.forEach(function(d){total+=d.data().stars;count++;});
-  await updateDoc(doc(db,"places",placeId),{rating:count>0?Math.round(total/count*10)/10:0,reviews:count});
-  notif("Avis supprime.");renderReviews();
-};
 
-async function renderMembers(){
+async function suspendPlace(fbId, name) {
+  if (!confirm("Suspendre " + name + " ?")) return;
+  await updateDoc(doc(db, "places", fbId), {status: "suspended"});
+  notif(name + " suspendu."); renderPlaces();
+}
+
+// REVIEWS
+async function renderReviews() {
   loading(true);
-  var snap=await getDocs(collection(db,"membres"));
-  var members=[];snap.forEach(function(d){members.push(d.data());});
-  document.getElementById("members-count").textContent=members.length+" membres";
-  var el=document.getElementById("members-table");
-  if(!members.length){el.innerHTML='<div class="empty"><div class="icon">&#128101;</div>Aucun membre inscrit</div>';loading(false);return;}
-  el.innerHTML='<table><thead><tr><th>Nom</th><th>Email</th><th>Date inscription</th></tr></thead><tbody>'+
-  members.map(function(m){return '<tr><td><strong>'+m.nom+'</strong></td><td>'+m.email+'</td><td style="color:#666">'+(m.date?.toDate?m.date.toDate().toLocaleDateString("fr-FR"):"—")+'</td></tr>';}).join("")+'</tbody></table>';
+  const snap = await getDocs(collection(db, "places"));
+  const places = []; snap.forEach(d => places.push(Object.assign({}, d.data(), {fbId: d.id})));
+  const allAvis = [];
+  for (const p of places) {
+    const avisSnap = await getDocs(collection(db, "places", p.fbId, "avis"));
+    avisSnap.forEach(d => allAvis.push(Object.assign({}, d.data(), {id: d.id, placeId: p.fbId, placeName: p.name})));
+  }
+  const countEl = document.getElementById("reviewsCount");
+  if (countEl) countEl.textContent = allAvis.length + " avis";
+  const tbody = document.getElementById("reviewsTbody"); tbody.innerHTML = "";
+  if (!allAvis.length) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = "<td colspan='6' style='text-align:center;padding:24px;color:#999'>Aucun avis pour le moment</td>";
+    tbody.appendChild(tr);
+    loading(false); return;
+  }
+  allAvis.forEach(a => {
+    const tr = document.createElement("tr");
+    let stars = "";
+    for (let s = 0; s < (a.stars||0); s++) stars += "★";
+    tr.innerHTML = "<td><strong>" + a.placeName + "</strong></td><td>" + (a.user||"Anonyme") + "</td><td style='color:#F59E0B'>" + stars + "</td><td style='max-width:200px;font-size:12px'>" + (a.txt||"").substring(0,60) + ((a.txt||"").length>60?"...":"") + "</td><td style='font-size:11px;color:#999'>" + (a.dateStr||"—") + "</td><td></td>";
+    const td = tr.cells[5];
+    const btn = document.createElement("button"); btn.className = "btn-sm btn-delete"; btn.textContent = "🗑️ Supprimer";
+    btn.onclick = () => deleteAvis(a.placeId, a.id);
+    td.appendChild(btn);
+    tbody.appendChild(tr);
+  });
   loading(false);
 }
 
-document.addEventListener("DOMContentLoaded",function(){
-  document.getElementById("loginPwd").focus();
-});
+async function deleteAvis(placeId, avisId) {
+  if (!confirm("Supprimer cet avis ?")) return;
+  loading(true);
+  await deleteDoc(doc(db, "places", placeId, "avis", avisId));
+  const snap = await getDocs(collection(db, "places", placeId, "avis"));
+  let total = 0, count = 0;
+  snap.forEach(d => { total += d.data().stars; count++; });
+  await updateDoc(doc(db, "places", placeId), {rating: count > 0 ? Math.round(total/count*10)/10 : 0, reviews: count});
+  notif("Avis supprimé."); renderReviews(); loading(false);
+}
 
+// REPORTS
+async function renderReports() {
+  loading(true);
+  const snap = await getDocs(collection(db, "signalements"));
+  const reports = []; snap.forEach(d => reports.push(Object.assign({}, d.data(), {id: d.id})));
+  const countEl = document.getElementById("reportsCount");
+  if (countEl) countEl.textContent = reports.length + " signalements";
+  const tbody = document.getElementById("reportsTbody"); tbody.innerHTML = "";
+  const reasonLabels = {photo_choquante:"Photo choquante",injures:"Injures/menaces",faux_avis:"Faux avis",contenu_inapproprie:"Contenu inapproprié",autre:"Autre"};
+  if (!reports.length) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = "<td colspan='5' style='text-align:center;padding:24px;color:#999'>✅ Aucun signalement</td>";
+    tbody.appendChild(tr); loading(false); return;
+  }
+  reports.forEach(r => {
+    const tr = document.createElement("tr");
+    const statusBadge = r.status === "pending" ? "<span class='badge-pending'>En attente</span>" : "<span class='badge-resolved'>Traité</span>";
+    tr.innerHTML = "<td>" + (r.type||"—") + "</td><td>" + (reasonLabels[r.reason]||r.reason||"—") + "</td><td style='max-width:150px;font-size:11px'>" + (r.details||"—") + "</td><td>" + statusBadge + "</td><td></td>";
+    const td = tr.cells[4];
+    if (r.status === "pending") {
+      const bR = document.createElement("button"); bR.className = "btn-sm btn-approve"; bR.textContent = "✅ Traiter";
+      bR.onclick = () => resolveReport(r.id, r.placeId, r.contentId, r.type);
+      const bI = document.createElement("button"); bI.className = "btn-sm btn-reject"; bI.textContent = "Ignorer";
+      bI.onclick = () => dismissReport(r.id);
+      td.appendChild(bR); td.appendChild(bI);
+    }
+    tbody.appendChild(tr);
+  });
+  loading(false);
+}
 
-// ── PHOTO MANAGEMENT ──────────────────────────────────────────────────────────
-const CLOUDINARY_CLOUD = 'djngux5fk';
-const CLOUDINARY_PRESET = 'mbolo_upload';
+async function resolveReport(reportId, placeId, contentId, type) {
+  if (!confirm("Supprimer le contenu signalé ?")) return;
+  loading(true);
+  try {
+    if (type === "avis" && placeId && contentId) {
+      await deleteDoc(doc(db, "places", placeId, "avis", contentId));
+      const snap = await getDocs(collection(db, "places", placeId, "avis"));
+      let total = 0, count = 0;
+      snap.forEach(d => { total += d.data().stars; count++; });
+      await updateDoc(doc(db, "places", placeId), {rating: count>0?Math.round(total/count*10)/10:0, reviews: count});
+    }
+    await updateDoc(doc(db, "signalements", reportId), {status: "resolved"});
+    notif("✅ Contenu supprimé !"); renderReports();
+  } catch(e) { notif("Erreur : " + e.message); }
+  loading(false);
+}
+
+async function dismissReport(reportId) {
+  await updateDoc(doc(db, "signalements", reportId), {status: "dismissed"});
+  notif("Signalement ignoré."); renderReports();
+}
+
+// MEMBERS
+async function renderMembers() {
+  loading(true);
+  const snap = await getDocs(collection(db, "membres"));
+  const members = []; snap.forEach(d => members.push(d.data()));
+  const countEl = document.getElementById("membersCount");
+  if (countEl) countEl.textContent = members.length + " membres";
+  const tbody = document.getElementById("membersTbody"); tbody.innerHTML = "";
+  if (!members.length) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = "<td colspan='3' style='text-align:center;padding:24px;color:#999'>👥 Aucun membre inscrit</td>";
+    tbody.appendChild(tr); loading(false); return;
+  }
+  members.forEach(m => {
+    const tr = document.createElement("tr");
+    let dateStr = "—";
+    try { if (m.date && m.date.toDate) dateStr = m.date.toDate().toLocaleDateString("fr-FR"); } catch(e) {}
+    tr.innerHTML = "<td><strong>" + (m.nom||"—") + "</strong></td><td>" + (m.email||"—") + "</td><td style='color:#666'>" + dateStr + "</td>";
+    tbody.appendChild(tr);
+  });
+  loading(false);
+}
+
+// PHOTO MODAL
 let currentPhotoPlaceId = null;
-let currentPhotoPlaceName = null;
 let currentPhotos = [];
 
-function switchPhotoTab(tab) {
-  document.getElementById('upload-tab').style.display = tab === 'upload' ? 'block' : 'none';
-  document.getElementById('url-tab').style.display = tab === 'url' ? 'block' : 'none';
-  document.getElementById('tab-upload').classList.toggle('on', tab === 'upload');
-  document.getElementById('tab-url').classList.toggle('on', tab === 'url');
-}
-window.switchPhotoTab = switchPhotoTab;
-
-async function openPhotoModal(placeId, placeName, photos) {
+function openPhotoModal(placeId, placeName, photos) {
   currentPhotoPlaceId = placeId;
-  currentPhotoPlaceName = placeName;
   currentPhotos = [...(photos || [])];
-  document.getElementById('photo-modal-title').textContent = 'Photos — ' + placeName;
-  document.getElementById('photo-url-input').value = '';
-  document.getElementById('url-preview').style.display = 'none';
+  document.getElementById("photoModalTitle").textContent = "Photos — " + placeName;
+  document.getElementById("photoUrlInput").value = "";
   renderCurrentPhotos();
-  switchPhotoTab('upload');
-  document.getElementById('photoModal').classList.add('on');
+  switchPhotoTab("upload");
+  document.getElementById("photoModal").classList.add("on");
 }
-window.openPhotoModal = openPhotoModal;
 
 function renderCurrentPhotos() {
-  const grid = document.getElementById('current-photos-grid');
+  const grid = document.getElementById("currentPhotosGrid"); grid.innerHTML = "";
   if (!currentPhotos.length) {
-    grid.innerHTML = '<div style="font-size:12px;color:#999;padding:8px 0;">Aucune photo pour le moment</div>';
+    grid.innerHTML = "<div style='font-size:12px;color:#999;padding:8px 0'>Aucune photo pour le moment</div>";
     return;
   }
-  grid.innerHTML = currentPhotos.map((url, i) => `
-    <div class="photo-wrap">
-      <img src="${url}" class="photo-thumb" onerror="this.src=''">
-      <button class="photo-del" onclick="removePhoto(${i})">×</button>
-    </div>`).join('');
+  currentPhotos.forEach((url, i) => {
+    const wrap = document.createElement("div"); wrap.className = "photo-wrap";
+    const img = document.createElement("img"); img.src = url; img.className = "photo-thumb";
+    img.onerror = () => img.style.display = "none";
+    const del = document.createElement("button"); del.className = "photo-del"; del.textContent = "×";
+    del.onclick = () => { currentPhotos.splice(i, 1); renderCurrentPhotos(); };
+    wrap.appendChild(img); wrap.appendChild(del); grid.appendChild(wrap);
+  });
 }
 
-function removePhoto(idx) {
-  currentPhotos.splice(idx, 1);
-  renderCurrentPhotos();
+function switchPhotoTab(tab) {
+  document.getElementById("uploadTab").style.display = tab === "upload" ? "block" : "none";
+  document.getElementById("urlTab").style.display = tab === "url" ? "block" : "none";
+  document.getElementById("tabUploadBtn").classList.toggle("on", tab === "upload");
+  document.getElementById("tabUrlBtn").classList.toggle("on", tab === "url");
 }
-window.removePhoto = removePhoto;
 
-async function handleFileUpload(event) {
-  const files = Array.from(event.target.files);
-  if (!files.length) return;
-  const progress = document.getElementById('upload-progress');
-  progress.style.display = 'block';
+document.getElementById("tabUploadBtn").onclick = () => switchPhotoTab("upload");
+document.getElementById("tabUrlBtn").onclick = () => switchPhotoTab("url");
+document.getElementById("uploadZone").onclick = () => document.getElementById("photoFileInput").click();
+document.getElementById("closePhotoModalBtn").onclick = () => { document.getElementById("photoModal").classList.remove("on"); };
+document.getElementById("photoModal").onclick = (e) => { if (e.target === document.getElementById("photoModal")) document.getElementById("photoModal").classList.remove("on"); };
+
+document.getElementById("photoFileInput").onchange = async function() {
+  const files = Array.from(this.files);
+  const prog = document.getElementById("uploadProgress"); prog.style.display = "block";
   for (const file of files) {
-    if (file.size > 10 * 1024 * 1024) { notif('Fichier trop lourd : ' + file.name); continue; }
+    if (file.size > 10 * 1024 * 1024) { notif("Fichier trop lourd : " + file.name); continue; }
     try {
       const formData = new FormData();
-      formData.append('file', file);
-      formData.append('upload_preset', CLOUDINARY_PRESET);
-      formData.append('folder', 'mbolo');
-      progress.textContent = '⏳ Upload de ' + file.name + '...';
-      const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, {
-        method: 'POST', body: formData
-      });
+      formData.append("file", file);
+      formData.append("upload_preset", CLOUDINARY_PRESET);
+      formData.append("folder", "mbolo");
+      prog.textContent = "⏳ Upload de " + file.name + "...";
+      const res = await fetch("https://api.cloudinary.com/v1_1/" + CLOUDINARY_CLOUD + "/image/upload", {method:"POST",body:formData});
       const data = await res.json();
-      if (data.secure_url) {
-        currentPhotos.push(data.secure_url);
-        renderCurrentPhotos();
-        notif('✅ Photo uploadée !');
-      } else {
-        notif('Erreur upload : ' + (data.error?.message || 'Inconnu'));
-      }
-    } catch(e) { notif('Erreur : ' + e.message); }
+      if (data.secure_url) { currentPhotos.push(data.secure_url); renderCurrentPhotos(); notif("✅ Photo uploadée !"); }
+      else notif("Erreur : " + (data.error ? data.error.message : "Inconnu"));
+    } catch(e) { notif("Erreur : " + e.message); }
   }
-  progress.style.display = 'none';
-  event.target.value = '';
-}
-window.handleFileUpload = handleFileUpload;
+  prog.style.display = "none"; prog.textContent = "⏳ Upload en cours..."; this.value = "";
+};
 
-function addPhotoByUrl() {
-  const url = document.getElementById('photo-url-input').value.trim();
-  if (!url) { notif('Entrez une URL valide.'); return; }
+document.getElementById("addUrlBtn").onclick = () => {
+  const url = document.getElementById("photoUrlInput").value.trim();
+  if (!url) { notif("Entrez une URL valide."); return; }
   currentPhotos.push(url);
   renderCurrentPhotos();
-  document.getElementById('photo-url-input').value = '';
-  document.getElementById('url-preview').style.display = 'none';
-  notif('Photo ajoutée !');
-}
-window.addPhotoByUrl = addPhotoByUrl;
+  document.getElementById("photoUrlInput").value = "";
+  notif("Photo ajoutée !");
+};
 
-document.getElementById('photo-url-input').addEventListener('input', function() {
-  const url = this.value.trim();
-  const preview = document.getElementById('url-preview');
-  const img = document.getElementById('url-preview-img');
-  if (url.startsWith('http')) {
-    img.src = url;
-    preview.style.display = 'block';
-  } else {
-    preview.style.display = 'none';
-  }
-});
-
-async function savePhotos() {
+document.getElementById("savePhotosBtn").onclick = async () => {
   if (!currentPhotoPlaceId) return;
   loading(true);
   try {
-    await updateDoc(doc(db, 'places', currentPhotoPlaceId), { photos: currentPhotos });
-    notif('✅ Photos sauvegardées !');
-    closePhotoModal();
+    await updateDoc(doc(db, "places", currentPhotoPlaceId), {photos: currentPhotos});
+    notif("✅ Photos sauvegardées !"); 
+    document.getElementById("photoModal").classList.remove("on");
     renderPlaces();
-  } catch(e) { notif('Erreur : ' + e.message); }
-  loading(false);
-}
-window.savePhotos = savePhotos;
-
-function closePhotoModal() {
-  document.getElementById('photoModal').classList.remove('on');
-  currentPhotoPlaceId = null;
-  currentPhotos = [];
-}
-window.closePhotoModal = closePhotoModal;
-
-// Close modal on outside click
-document.getElementById('photoModal').addEventListener('click', function(e) {
-  if (e.target === this) closePhotoModal();
-});
-
-
-async function renderReports(){
-  loading(true);
-  var snap=await getDocs(collection(db,"signalements"));
-  var reports=[];snap.forEach(function(d){reports.push({...d.data(),id:d.id});});
-  var pending=reports.filter(function(r){return r.status==="pending";});
-  document.getElementById("badge-reports").textContent=pending.length;
-  document.getElementById("badge-reports").style.display=pending.length>0?"inline":"none";
-  var el=document.getElementById("reports-list");
-  if(!reports.length){el.innerHTML='<div class="empty"><div class="icon">&#9989;</div>Aucun signalement pour le moment</div>';loading(false);return;}
-  var reasonLabels={photo_choquante:"Photo choquante",injures:"Injures/menaces",faux_avis:"Faux avis/spam",contenu_inapproprie:"Contenu inapproprié",autre:"Autre"};
-  el.innerHTML='<div class="table-card"><div class="table-header"><div class="table-title">Signalements</div><div class="table-count">'+reports.length+' total / '+pending.length+' en attente</div></div>'+
-  '<table><thead><tr><th>Type</th><th>Raison</th><th>Détails</th><th>Statut</th><th>Actions</th></tr></thead><tbody>'+
-  reports.map(function(r){
-    var statusBadge=r.status==="pending"?'<span class="badge badge-pending">En attente</span>':'<span class="badge badge-approved">Traité</span>';
-    return '<tr><td>'+r.type+'</td><td>'+(reasonLabels[r.reason]||r.reason)+'</td><td style="max-width:200px;font-size:11px">'+(r.details||"—")+'</td><td>'+statusBadge+'</td><td>'+
-      (r.status==="pending"?'<button class="btn-sm btn-approve" onclick="resolveReport(''+r.id+'',''+r.placeId+'',''+r.contentId+'',''+r.type+'')">&#9989; Traiter</button> <button class="btn-sm btn-reject" onclick="dismissReport(''+r.id+'')">Ignorer</button>':"—")+'</td></tr>';
-  }).join("")+'</tbody></table></div>';
-  loading(false);
-}
-window.resolveReport=async function(reportId,placeId,contentId,type){
-  if(!confirm("Supprimer le contenu signalé ?"))return;
-  loading(true);
-  try{
-    if(type==="avis"&&placeId&&contentId){
-      await deleteDoc(doc(db,"places",placeId,"avis",contentId));
-      var snap=await getDocs(collection(db,"places",placeId,"avis"));
-      var total=0,count=0;snap.forEach(function(d){total+=d.data().stars;count++;});
-      await updateDoc(doc(db,"places",placeId),{rating:count>0?Math.round(total/count*10)/10:0,reviews:count});
-    }
-    await updateDoc(doc(db,"signalements",reportId),{status:"resolved"});
-    notif("✅ Contenu supprimé et signalement traité.");renderReports();
-  }catch(e){notif("Erreur : "+e.message);}
+  } catch(e) { notif("Erreur : " + e.message); }
   loading(false);
 };
-window.dismissReport=async function(reportId){
-  await updateDoc(doc(db,"signalements",reportId),{status:"dismissed"});
-  notif("Signalement ignoré.");renderReports();
-};
-
 </script>
-
-<!-- PHOTO MODAL -->
-<div class="modal-overlay" id="photoModal">
-  <div class="modal-box">
-    <div class="modal-title" id="photo-modal-title">Gérer les photos</div>
-    
-    <!-- Current photos -->
-    <div style="margin-bottom:16px;">
-      <div style="font-size:12px;font-weight:700;color:#666;margin-bottom:8px;">PHOTOS ACTUELLES</div>
-      <div class="photo-grid" id="current-photos-grid"></div>
-    </div>
-
-    <!-- Add photos tabs -->
-    <div style="font-size:12px;font-weight:700;color:#666;margin-bottom:8px;">AJOUTER DES PHOTOS</div>
-    <div class="tab-btns">
-      <button class="tab-btn on" id="tab-upload" onclick="switchPhotoTab('upload')">📤 Télécharger</button>
-      <button class="tab-btn" id="tab-url" onclick="switchPhotoTab('url')">🔗 Par URL</button>
-    </div>
-
-    <!-- Upload tab -->
-    <div id="upload-tab">
-      <div class="upload-zone" onclick="document.getElementById('photo-file-input').click()">
-        <input type="file" id="photo-file-input" accept="image/*" multiple onchange="handleFileUpload(event)"/>
-        <div style="font-size:32px;margin-bottom:8px;">📷</div>
-        <div style="font-size:13px;font-weight:600;color:#333;">Cliquez ou glissez vos photos ici</div>
-        <div style="font-size:11px;color:#999;margin-top:4px;">JPG, PNG — max 10MB par photo</div>
-      </div>
-      <div id="upload-progress" style="display:none;padding:10px;background:#f0faf5;border-radius:8px;font-size:12px;color:#009e60;margin-bottom:8px;">
-        ⏳ Upload en cours...
-      </div>
-    </div>
-
-    <!-- URL tab -->
-    <div id="url-tab" style="display:none;">
-      <input type="text" class="url-input" id="photo-url-input" placeholder="https://exemple.com/photo.jpg"/>
-      <button class="btn-primary" onclick="addPhotoByUrl()" style="width:100%;margin-bottom:8px;">Ajouter cette photo</button>
-      <div id="url-preview" style="display:none;margin-bottom:8px;">
-        <img id="url-preview-img" style="width:100%;max-height:150px;object-fit:cover;border-radius:8px;" onerror="this.parentElement.style.display='none'"/>
-      </div>
-    </div>
-
-    <div style="display:flex;gap:8px;margin-top:16px;">
-      <button class="btn-primary" onclick="savePhotos()" style="flex:1;">✅ Sauvegarder</button>
-      <button class="btn-sm btn-reject" onclick="closePhotoModal()" style="padding:10px 20px;">Annuler</button>
-    </div>
-  </div>
-</div>
-
 </body>
 </html>
