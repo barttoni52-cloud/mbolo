@@ -1,274 +1,21 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="theme-color" content="#009e60">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="MBOLO">
-<title>MBOLO — Guide de Libreville</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f0f0f0;display:flex;justify-content:center;min-height:100vh;}
-:root{--g:#009e60;--g2:#007a4a;--g3:#e6f7ef;--y:#fcd116;--y2:#c9a800;--y3:#fffbdd;--b:#3a75c4;--b2:#0C447C;--b3:#e8f0fb;--text:#1a1a1a;--muted:#666;--bg:#fff;--bg2:#f5f5f5;--bd:#e0e0e0;--red:#E24B4A;}
-.app{width:100%;max-width:430px;background:var(--bg);min-height:100vh;display:flex;flex-direction:column;position:relative;}
-.screen{display:none;flex-direction:column;flex:1;min-height:100vh;}
-.screen.on{display:flex;}
-.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
-.splash{background:var(--g);flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 28px;min-height:100vh;}
-.flag{display:flex;width:60px;height:40px;border-radius:8px;overflow:hidden;margin-bottom:20px;border:2px solid rgba(255,255,255,0.3);}
-.flag div{flex:1;}
-.logo-big{font-size:56px;font-weight:800;color:#fff;letter-spacing:-2px;margin-bottom:4px;}
-.logo-sub{font-size:12px;color:rgba(255,255,255,0.7);letter-spacing:3px;text-transform:uppercase;margin-bottom:40px;}
-.splash-dots{display:flex;gap:6px;margin-bottom:40px;}
-.sdot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.3);}
-.sdot.y{background:var(--y);}
-.btn-y{width:100%;padding:16px;background:var(--y);color:#7a5c00;font-size:15px;font-weight:700;border:none;border-radius:14px;cursor:pointer;margin-bottom:10px;}
-.btn-wh{width:100%;padding:15px;background:rgba(255,255,255,0.15);color:#fff;font-size:14px;font-weight:500;border:1.5px solid rgba(255,255,255,0.35);border-radius:14px;cursor:pointer;margin-bottom:10px;}
-.btn-ghost{width:100%;padding:12px;background:transparent;color:rgba(255,255,255,0.65);font-size:13px;border:none;cursor:pointer;}
-.splash-foot{margin-top:24px;font-size:10px;color:rgba(255,255,255,0.4);}
-.auth-top{background:var(--g);padding:28px 20px 36px;}
-.auth-back{background:rgba(255,255,255,0.2);border:none;color:#fff;border-radius:8px;padding:7px 14px;font-size:12px;cursor:pointer;margin-bottom:16px;display:inline-block;}
-.auth-h{font-size:24px;font-weight:700;color:#fff;}
-.auth-s{font-size:12px;color:rgba(255,255,255,0.7);margin-top:4px;}
-.stripe{display:flex;height:5px;}
-.stripe div:nth-child(1){flex:1;background:#009e60;}
-.stripe div:nth-child(2){flex:1;background:#fcd116;}
-.stripe div:nth-child(3){flex:1;background:#3a75c4;}
-.auth-body{padding:24px 20px;flex:1;overflow-y:auto;}
-.fg{margin-bottom:16px;}
-.fg label{font-size:11px;color:var(--muted);display:block;margin-bottom:5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;}
-.fg input,.fg select,.fg textarea{width:100%;padding:12px 14px;border:1.5px solid var(--bd);border-radius:11px;font-size:14px;background:var(--bg2);color:var(--text);outline:none;font-family:inherit;transition:border-color .15s;}
-.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--g);}
-.btn-main{width:100%;padding:14px;background:var(--g);color:#fff;font-size:15px;font-weight:700;border:none;border-radius:12px;cursor:pointer;margin-top:8px;}
-.btn-main.yellow{background:var(--y);color:#7a5c00;}
-.alink{text-align:center;margin-top:14px;font-size:13px;color:var(--muted);}
-.alink span{color:var(--g);cursor:pointer;font-weight:600;}
-.divider{display:flex;align-items:center;gap:10px;margin:18px 0;color:var(--muted);font-size:12px;}
-.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--bd);}
-.motif{display:flex;justify-content:center;gap:5px;padding:14px 0;}
-.mb{width:5px;height:22px;border-radius:3px;}
-.hdr{background:var(--g);padding:16px 16px 52px;position:relative;overflow:hidden;}
-.hdr::before{content:'';position:absolute;top:-20px;right:-20px;width:110px;height:110px;border-radius:50%;background:rgba(255,255,255,0.06);}
-.hdr-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
-.hdr-logo{color:#fff;font-size:22px;font-weight:800;letter-spacing:-0.5px;}
-.hdr-flag{display:flex;height:20px;width:30px;border-radius:3px;overflow:hidden;}
-.hdr-flag div{flex:1;}
-.hdr-loc{font-size:11px;color:rgba(255,255,255,0.75);margin-bottom:12px;}
-.uchip{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);border-radius:20px;padding:5px 12px 5px 5px;margin-bottom:14px;}
-.av-sm{width:24px;height:24px;border-radius:50%;background:var(--y);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#7a5c00;}
-.uchip span{font-size:11px;color:#fff;}
-.sbox{background:#fff;border-radius:12px;display:flex;align-items:center;gap:8px;padding:10px 14px;position:relative;z-index:2;}
-.sbox input{border:none;outline:none;flex:1;font-size:13px;color:var(--text);background:transparent;}
-.sbox input::placeholder{color:#bbb;}
-.flt-btn{background:var(--g3);border:none;color:var(--g2);border-radius:8px;padding:6px 11px;cursor:pointer;font-size:12px;font-weight:700;}
-.cats{display:flex;gap:8px;overflow-x:auto;padding:14px 14px 0;scrollbar-width:none;}
-.cats::-webkit-scrollbar{display:none;}
-.cat{flex-shrink:0;padding:8px 13px;border-radius:20px;font-size:12px;cursor:pointer;border:1.5px solid var(--bd);background:var(--bg);color:var(--muted);display:flex;align-items:center;gap:5px;font-weight:500;}
-.cat.on{background:var(--y);color:#7a5c00;border-color:var(--y);}
-.sh{display:flex;justify-content:space-between;align-items:center;padding:16px 14px 8px;}
-.sh-t{font-size:14px;font-weight:700;color:var(--text);}
-.see-all{font-size:12px;color:var(--g);cursor:pointer;background:none;border:none;font-weight:600;}
-.nstrip{display:flex;gap:10px;overflow-x:auto;padding:0 14px;scrollbar-width:none;}
-.nstrip::-webkit-scrollbar{display:none;}
-.nc{flex-shrink:0;width:180px;border-radius:12px;overflow:hidden;border:1.5px solid var(--bd);background:var(--bg);cursor:pointer;}
-.nc-img{height:76px;display:flex;align-items:center;justify-content:center;font-size:28px;}
-.nc-b{padding:9px;}
-.nc-tag{font-size:9px;font-weight:700;color:#085041;background:#9FE1CB;padding:2px 6px;border-radius:20px;display:inline-block;margin-bottom:4px;text-transform:uppercase;letter-spacing:.3px;}
-.nc-t{font-size:11px;font-weight:600;color:var(--text);line-height:1.4;}
-.plist{padding:0 14px;display:flex;flex-direction:column;gap:10px;}
-.pc{background:var(--bg);border:1.5px solid var(--bd);border-radius:14px;overflow:hidden;cursor:pointer;display:flex;transition:.12s;}
-.pc:active{transform:scale(0.98);}
-.pc-th{width:76px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:28px;background:var(--bg2);}
-.pc-th img{width:76px;height:76px;object-fit:cover;}
-.pc-inf{padding:11px;flex:1;}
-.pc-nm{font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px;}
-.pc-ct{font-size:10px;color:var(--muted);margin-bottom:5px;}
-.pc-mt{display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
-.stars{color:#F59E0B;font-size:11px;}
-.sct{font-size:10px;color:var(--muted);}
-.badge{font-size:9px;padding:2px 7px;border-radius:20px;font-weight:700;}
-.badge.open{background:#EAF3DE;color:#3B6D11;}
-.badge.bar{background:var(--b3);color:var(--b2);}
-.badge.pending{background:#fff3cd;color:#856404;}
-.pc-addr{font-size:10px;color:var(--muted);margin-top:3px;}
-.tabbar{border-top:1.5px solid var(--bd);display:flex;background:var(--bg);padding-bottom:env(safe-area-inset-bottom,4px);}
-.tab{flex:1;padding:10px 0 6px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;border:none;background:none;}
-.ti{font-size:20px;}
-.tl{font-size:9px;color:var(--muted);font-weight:500;}
-.tab.on .tl{color:var(--g);}
-.det-top{background:var(--g);padding:16px 16px 18px;}
-.det-back{background:rgba(255,255,255,0.2);border:none;color:#fff;border-radius:8px;padding:7px 14px;font-size:12px;cursor:pointer;margin-bottom:10px;font-weight:600;}
-.det-sc{flex:1;overflow-y:auto;}
-.det-cover{width:100%;height:200px;object-fit:cover;display:block;background:var(--bg2);}
-.det-cover-em{height:200px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:64px;}
-.det-nm{font-size:20px;font-weight:700;color:var(--text);padding:14px 14px 3px;}
-.det-ct{font-size:13px;color:var(--muted);padding:0 14px 10px;}
-.det-st{font-size:18px;color:#F59E0B;padding:0 14px 2px;}
-.det-rc{font-size:12px;color:var(--muted);padding:0 14px 14px;}
-.infor{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);padding:4px 14px;}
-.infor span:first-child{font-size:15px;width:18px;}
-.act-row{display:flex;gap:8px;padding:12px 14px;}
-.act-b{flex:1;padding:10px;border:1.5px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--text);font-size:12px;cursor:pointer;text-align:center;font-weight:600;}
-.act-b.green{background:var(--g);color:#fff;border-color:var(--g);}
-.act-b.yellow{background:var(--y);color:#7a5c00;border-color:var(--y);}
-.phg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 14px 4px;}
-.phi{aspect-ratio:1;border-radius:10px;overflow:hidden;background:var(--bg2);}
-.phi img{width:100%;height:100%;object-fit:cover;}
-.phi-em{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px;}
-.rv{border-top:1px solid var(--bd);padding:12px 14px;}
-.rv-u{font-size:12px;font-weight:700;color:var(--text);margin-bottom:2px;}
-.rv-s{font-size:11px;color:#F59E0B;margin-bottom:4px;}
-.rv-t{font-size:12px;color:var(--muted);line-height:1.5;}
-.bar-hero{background:var(--b);padding:22px 16px 44px;position:relative;overflow:hidden;}
-.bar-t{font-size:22px;font-weight:700;color:#fff;margin-bottom:4px;}
-.bar-s{font-size:13px;color:rgba(255,255,255,0.7);}
-.bar-bdg{display:inline-block;background:var(--y);color:#7a5c00;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;margin-top:8px;}
-.bcats{display:flex;gap:8px;overflow-x:auto;padding:12px 14px 0;scrollbar-width:none;}
-.bcats::-webkit-scrollbar{display:none;}
-.bcat{flex-shrink:0;padding:7px 13px;border-radius:20px;font-size:11px;cursor:pointer;border:1.5px solid var(--bd);background:var(--bg);color:var(--muted);font-weight:500;}
-.bcat.on{background:var(--b);color:#fff;border-color:var(--b);}
-.ac-card{border:1.5px solid var(--bd);border-radius:14px;overflow:hidden;cursor:pointer;margin-bottom:10px;}
-.ac-img{height:110px;display:flex;align-items:center;justify-content:center;font-size:40px;}
-.ac-body{padding:14px;}
-.ac-tag{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;color:#085041;background:#9FE1CB;padding:2px 7px;border-radius:20px;display:inline-block;margin-bottom:6px;}
-.ac-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:5px;line-height:1.4;}
-.ac-txt{font-size:12px;color:var(--muted);line-height:1.6;}
-.ac-date{font-size:10px;color:var(--muted);margin-top:6px;}
-.add-top{background:var(--g);padding:22px 16px 28px;}
-.add-t{font-size:20px;font-weight:700;color:#fff;margin-bottom:4px;}
-.add-s{font-size:12px;color:rgba(255,255,255,0.7);}
-.add-body{padding:16px;flex:1;overflow-y:auto;}
-.sp-w{display:flex;gap:6px;margin:4px 0;}
-.sp{font-size:24px;cursor:pointer;color:#ddd;}
-.sp.on{color:#F59E0B;}
-.ph-btn{width:100%;padding:26px;border:1.5px dashed var(--bd);border-radius:10px;background:var(--bg2);color:var(--muted);cursor:pointer;font-size:13px;}
-.prof-top{background:var(--g);padding:30px 16px 48px;text-align:center;position:relative;overflow:hidden;}
-.av-lg{width:72px;height:72px;border-radius:50%;background:var(--y);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:24px;font-weight:800;color:#7a5c00;border:3px solid #fff;}
-.prof-nm{font-size:18px;font-weight:700;color:#fff;}
-.prof-si{font-size:11px;color:rgba(255,255,255,0.7);margin-top:4px;}
-.prof-body{padding:14px;}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;}
-.stat{text-align:center;background:var(--bg2);border-radius:10px;padding:13px;}
-.stat-n{font-size:20px;font-weight:800;color:var(--text);}
-.stat-l{font-size:9px;color:var(--muted);margin-top:2px;}
-.pmenu{display:flex;flex-direction:column;gap:8px;}
-.pmi{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;background:var(--bg2);border-radius:10px;cursor:pointer;}
-.pmi-l{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text);font-weight:500;}
-.pmi-ic{font-size:16px;}
-.logout{width:100%;padding:13px;background:none;border:1.5px solid var(--red);color:var(--red);border-radius:12px;font-size:14px;cursor:pointer;margin-top:8px;font-weight:600;}
-.gbanner{background:var(--y3);border:1.5px solid var(--y);border-radius:10px;padding:10px 14px;margin:10px 14px 0;display:flex;align-items:center;gap:10px;}
-.gb-txt{font-size:11px;color:#7a5c00;flex:1;line-height:1.5;}
-.gb-btn{background:var(--g);color:#fff;border:none;border-radius:8px;padding:6px 11px;font-size:10px;cursor:pointer;white-space:nowrap;font-weight:700;}
-.mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:100;align-items:flex-end;justify-content:center;}
-.mbg.on{display:flex;}
-.mbox{background:var(--bg);border-radius:20px 20px 0 0;width:100%;max-width:430px;padding:20px 18px 40px;max-height:88vh;overflow-y:auto;}
-.mhandle{width:38px;height:4px;background:var(--bd);border-radius:2px;margin:0 auto 18px;}
-.mt{font-size:16px;font-weight:700;margin-bottom:16px;color:var(--text);}
-.mcancel{width:100%;padding:12px;background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;margin-top:6px;}
-.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;}
-.toast.show{opacity:1;}
-.admin-link{display:block;text-align:center;padding:10px;font-size:11px;color:var(--muted);cursor:pointer;text-decoration:none;}
-.share-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px;color:#fff;margin-bottom:10px;}
-</style>
-</head>
-<body>
-<div class="app" id="app">
-<div class="toast" id="toast"></div>
+#!/usr/bin/env python3
+"""
+MBOLO — Patch commentaires + admin
+Lance : python3 ~/Downloads/patch_comments.py
+"""
+import os, re
 
-<!-- SPLASH -->
-<div class="screen on" id="s-splash">
-  <div class="splash">
-    <div class="flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div>
-    <div class="logo-big">MBOLO</div>
-    <div class="logo-sub">Guide de Libreville</div>
-    <div class="splash-dots"><div class="sdot y"></div><div class="sdot"></div><div class="sdot y"></div><div class="sdot"></div><div class="sdot y"></div></div>
-    <div style="width:100%">
-      <button class="btn-y" onclick="go('s-register')">Créer un compte</button>
-      <button class="btn-wh" onclick="go('s-login')">Se connecter</button>
-      <button class="btn-ghost" onclick="goGuest()">Parcourir sans compte →</button>
-    </div>
-    <div class="splash-foot">🇬🇦 Fait avec fierté pour Libreville</div>
-    <a class="admin-link" onclick="goAdmin()">⚙️ Accès administrateur</a>
-  </div>
-</div>
+DOWNLOADS = os.path.expanduser("~/Downloads")
+HTML_IN  = os.path.join(DOWNLOADS, "index.html")
+HTML_OUT = os.path.join(DOWNLOADS, "index_comments.html")
 
-<!-- LOGIN -->
-<div class="screen" id="s-login">
-  <div class="stripe"><div></div><div></div><div></div></div>
-  <div class="auth-top">
-    <button class="auth-back" onclick="go('s-splash')">← Retour</button>
-    <div class="auth-h">Connexion</div>
-    <div class="auth-s">Bon retour sur MBOLO 🇬🇦</div>
-  </div>
-  <div class="auth-body">
-    <div class="fg"><label>Email</label><input type="email" placeholder="votre@email.com" id="li-email"/></div>
-    <div class="fg"><label>Mot de passe</label><input type="password" placeholder="••••••••" id="li-pwd"/></div>
-    <button class="btn-main" onclick="doLogin()">Se connecter</button>
-    <div class="divider">ou</div>
-    <div class="alink">Pas de compte ? <span onclick="go('s-register')">Créer un compte</span></div>
-    <div class="alink" style="margin-top:8px"><span onclick="goGuest()">Continuer sans compte →</span></div>
-  </div>
-</div>
+GRN="\033[92m"; BLD="\033[1m"; RST="\033[0m"
 
-<!-- REGISTER -->
-<div class="screen" id="s-register">
-  <div class="stripe"><div></div><div></div><div></div></div>
-  <div class="auth-top">
-    <button class="auth-back" onclick="go('s-splash')">← Retour</button>
-    <div class="auth-h">Créer un compte</div>
-    <div class="auth-s">Rejoignez la communauté MBOLO</div>
-  </div>
-  <div class="auth-body">
-    <div class="fg"><label>Prénom & Nom</label><input type="text" placeholder="ex: Amina Ngoubili" id="rg-name"/></div>
-    <div class="fg"><label>Email</label><input type="email" placeholder="votre@email.com" id="rg-email"/></div>
-    <div class="fg"><label>Téléphone (optionnel)</label><input type="tel" placeholder="+241 06 ..."/></div>
-    <div class="fg"><label>Mot de passe</label><input type="password" placeholder="Min. 8 caractères" id="rg-pwd"/></div>
-    <div class="fg"><label>Confirmer le mot de passe</label><input type="password" placeholder="••••••••"/></div>
-    <button class="btn-main yellow" onclick="doRegister()">Créer mon compte</button>
-    <div class="alink" style="margin-top:12px">Déjà membre ? <span onclick="go('s-login')">Se connecter</span></div>
-    <div class="alink" style="margin-top:8px"><span onclick="goGuest()">Continuer sans compte →</span></div>
-  </div>
-</div>
+with open(HTML_IN, encoding="utf-8") as f:
+    html = f.read()
 
-<!-- MAIN -->
-<div class="screen" id="s-main">
-  <div class="scroll" id="mainScroll"></div>
-  <div class="tabbar">
-    <button class="tab on" id="tab-home" onclick="switchTab('home')"><span class="ti">🏠</span><span class="tl">Accueil</span></button>
-    <button class="tab" id="tab-bar" onclick="switchTab('bar')"><span class="ti">🍹</span><span class="tl">Bar</span></button>
-    <button class="tab" id="tab-actu" onclick="switchTab('actu')"><span class="ti">📰</span><span class="tl">Actualités</span></button>
-    <button class="tab" id="tab-add" onclick="switchTab('add')"><span class="ti">➕</span><span class="tl">Ajouter</span></button>
-    <button class="tab" id="tab-prof" onclick="switchTab('prof')"><span class="ti">👤</span><span class="tl">Profil</span></button>
-  </div>
-</div>
-
-<!-- DETAIL -->
-<div class="screen" id="s-detail">
-  <div class="det-top"><button class="det-back" onclick="goBack()">← Retour</button></div>
-  <div class="det-sc">
-    <div id="d-cover"></div>
-    <div class="det-nm" id="d-nm"></div>
-    <div class="det-ct" id="d-ct"></div>
-    <div class="det-st" id="d-st"></div>
-    <div class="det-rc" id="d-rc"></div>
-    <div class="infor"><span>📍</span><span id="d-ad"></span></div>
-    <div class="infor"><span>🕐</span><span id="d-hr"></span></div>
-    <div class="infor"><span>📞</span><span id="d-ph"></span></div>
-    <div class="act-row">
-      <button class="act-b yellow" onclick="openReview()">★ Avis</button>
-      <button class="act-b" onclick="sharePlace()">↗ Partager</button>
-      <button class="act-b green" onclick="navPlace()">🗺 Y aller</button>
-    </div>
-    <div style="padding:0 14px;font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px">Photos</div>
-    <div class="phg" id="d-photos"></div>
-    <div style="padding:0 14px;font-size:13px;font-weight:700;color:var(--text);margin:13px 0 0">Avis clients</div>
-    <div id="d-reviews"></div>
-    <div style="height:24px"></div>
-  </div>
-</div>
-
-<!-- REVIEW MODAL -->
+# ── 1. Nouveau modal avis avec disclaimer ─────────────────────────────────────
+old_review_modal = """<!-- REVIEW MODAL -->
 <div class="mbg" id="reviewModal">
   <div class="mbox">
     <div class="mhandle"></div>
@@ -286,284 +33,71 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <button class="btn-main" onclick="submitReview()">Publier mon avis</button>
     <button class="mcancel" onclick="closeModal('reviewModal')">Annuler</button>
   </div>
-</div>
+</div>"""
 
-<!-- SHARE MODAL -->
-<div class="mbg" id="shareModal">
+new_review_modal = """<!-- REVIEW MODAL -->
+<div class="mbg" id="reviewModal">
   <div class="mbox">
     <div class="mhandle"></div>
-    <div class="mt" id="share-title">Partager</div>
-    <a id="share-wa" href="#" target="_blank" class="share-btn" style="background:#25D366">📱 Partager sur WhatsApp</a>
-    <a id="share-fb" href="#" target="_blank" class="share-btn" style="background:#1877F2">📘 Partager sur Facebook</a>
-    <button onclick="copyShareLink()" class="act-b" style="width:100%;margin-bottom:10px">🔗 Copier le lien</button>
-    <button class="mcancel" onclick="closeModal('shareModal')">Annuler</button>
-  </div>
-</div>
-
-<!-- ADMIN MODAL -->
-<div class="mbg" id="adminModal">
-  <div class="mbox">
-    <div class="mhandle"></div>
-    <div class="mt">⚙️ Accès Administrateur</div>
-    <div class="fg"><label>Code admin</label><input type="password" placeholder="Entrez le code admin" id="admin-code"/></div>
-    <div style="font-size:11px;color:var(--muted);margin-bottom:14px">Code par défaut : <strong>mbolo2025</strong></div>
-    <button class="btn-main" onclick="doAdminLogin()">Accéder au tableau de bord</button>
-    <button class="mcancel" onclick="closeModal('adminModal')">Annuler</button>
-  </div>
-</div>
-
-<script>
-const SITE_URL='https://barttoni52-cloud.github.io/mbolo/';
-const ADMIN_CODE='mbolo2025';
-let isGuest=false,currentUser=null,currentPlaceId=null,revStar=0,addStar=0;
-let userPlaces=0,userReviews=0,currentCat='Tous',prevTab='home';
-
-const CATS=[
-  {l:'Tous',i:'🗺️'},{l:'Restaurant',i:'🍽️'},{l:'Bar',i:'🍹'},
-  {l:'Hôtel',i:'🏨'},{l:'Shopping',i:'🛍️'},{l:'Santé',i:'🏥'},{l:'Loisirs',i:'🌊'}
-];
-
-const PLACES=[
-  {id:1,em:'🏨',name:'Radisson Blu Okoumé Palace',cat:'Hôtel',quartier:'Bord de mer',addr:"Boulevard de Nice, face à l&apos;océan — à 2 km de l&apos;aéroport",phone:'+241 74 37 88 88',hours:'24h/24',rating:0,reviews:0,open:true,status:'approved',placeId:'ChIJTWOdc549fxARCja4Xt39BM',photos:['h01_1.jpg','h01_2.jpg','h01_3.jpg'],avis:[]},
-  {id:2,em:'🏨',name:'Park Inn by Radisson',cat:'Hôtel',quartier:'Quartier Louis',addr:'Descente J. Ebori, non loin de la montée de Louis',phone:'',hours:'24h/24',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['h02_1.jpg','h02_2.jpg','h02_3.jpg'],avis:[]},
-  {id:3,em:'🏨',name:'ONOMO Hotel Libreville',cat:'Hôtel',quartier:'La Sablière',addr:"Route d&apos;Angondjé, Quartier des Ambassades",phone:'',hours:'24h/24',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['h03_1.jpg','h03_2.jpg','h03_3.jpg'],avis:[]},
-  {id:4,em:'🏨',name:'Hôtel Le Cristal',cat:'Hôtel',quartier:'Centre-ville',addr:'Boulevard Triomphal, non loin de la Chambre de Commerce',phone:'',hours:'24h/24',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['h04_1.jpg','h04_2.jpg','h04_3.jpg'],avis:[]},
-  {id:5,em:'🏨',name:'Hôtel LEET Dorian',cat:'Hôtel',quartier:'Quartier Louis',addr:'Quartier Louis, non loin de la montée de Louis',phone:'',hours:'24h/24',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['h05_1.jpg','h05_2.jpg','h05_3.jpg'],avis:[]},
-  {id:6,em:'🏨',name:'Résidence Océane',cat:'Hôtel',quartier:'Quartier Louis',addr:'Quartier Louis, en bord de mer',phone:'',hours:'24h/24',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:7,em:'🏨',name:'Hôtel Hibiscus',cat:'Hôtel',quartier:'Centre-ville',addr:'Boulevard Triomphal, centre-ville',phone:'',hours:'24h/24',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['h07_1.jpg','h07_2.jpg','h07_3.jpg'],avis:[]},
-  {id:8,em:'🏨',name:'Résidence Hôtelière du Phare',cat:'Hôtel',quartier:'La Sablière',addr:'Rond-point Les Jardins de Jade',phone:'',hours:'24h/24',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:9,em:'🏨',name:'Roma Restaurant & Hotel',cat:'Hôtel',quartier:'Centre-ville',addr:'Centre-ville de Libreville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:10,em:'🏨',name:'Nomad Suites Residence',cat:'Hôtel',quartier:'Centre-ville',addr:'Centre-ville — appartements hôteliers',phone:'',hours:'24h/24',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:11,em:'🍽️',name:'Le Lokua',cat:'Restaurant',quartier:'Glass',addr:'Quartier Glass — escaliers, porte discrète',phone:'',hours:'Déj. & dîner — fermé lundi',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r01_1.jpg','r01_2.jpg','r01_3.jpg'],avis:[]},
-  {id:12,em:'🍽️',name:'Le Phare du Large',cat:'Restaurant',quartier:'Batterie IV',addr:'Batterie IV — L101, en bord de mer',phone:'+241 77 24 24 19',hours:'Lun-Ven 12h-23h30 / Sam 17h-23h30',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r02_1.jpg','r02_2.jpg','r02_3.jpg'],avis:[]},
-  {id:13,em:'🍽️',name:'La Piazza',cat:'Restaurant',quartier:'Glass',addr:'Quartier Glass — Village des Myénés',phone:'',hours:'Déj. & dîner',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r03_1.jpg','r03_2.jpg','r03_3.jpg'],avis:[]},
-  {id:14,em:'🍽️',name:'BANTU Restaurant',cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville de Libreville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r04_1.jpg','r04_2.jpg','r04_3.jpg'],avis:[]},
-  {id:15,em:'🍽️',name:'Beach Club',cat:'Restaurant',quartier:'Bord de mer',addr:'En bord de mer, accès plage',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r05_1.jpg','r05_2.jpg','r05_3.jpg'],avis:[]},
-  {id:16,em:'🍽️',name:'La Voile Rouge',cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r06_1.jpg','r06_2.jpg','r06_3.jpg'],avis:[]},
-  {id:17,em:'🍽️',name:"Restaurant LYNN'S",cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville de Libreville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:18,em:'🍽️',name:'Lamaia Lounge Bar & Restaurant',cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:19,em:'🍽️',name:'Restaurant Mystic Bantu',cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:20,em:'🍽️',name:'Le Palais Gourmet',cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville de Libreville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r10_1.jpg','r10_2.jpg','r10_3.jpg'],avis:[]},
-  {id:21,em:'🍽️',name:'Restaurant Le Mississipi',cat:'Restaurant',quartier:'Petit Paris',addr:'Quartier Petit Paris — centre-ville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r12_1.jpg','r12_2.jpg','r12_3.jpg'],avis:[]},
-  {id:22,em:'🍽️',name:"L'Ella",cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r13_1.jpg','r13_2.jpg','r13_3.jpg'],avis:[]},
-  {id:23,em:'🍽️',name:"L'Émir",cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r14_1.jpg','r14_2.jpg','r14_3.jpg'],avis:[]},
-  {id:24,em:'🍽️',name:'Exotica Restaurant',cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r15_1.jpg','r15_2.jpg','r15_3.jpg'],avis:[]},
-  {id:25,em:'🍽️',name:'Le Topaz',cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:26,em:'🍽️',name:'Le QG',cat:'Restaurant',quartier:'Glass',addr:'Quartier Glass — entrée côté mer',phone:'',hours:'Déj. & dîner',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r16_1.jpg','r16_2.jpg','r16_3.jpg'],avis:[]},
-  {id:27,em:'🍽️',name:'Wapety',cat:'Restaurant',quartier:'Montée Louis',addr:'Montée Louis — non loin du marché de Louis',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r17_1.jpg','r17_2.jpg','r17_3.jpg'],avis:[]},
-  {id:28,em:'🍽️',name:'Restaurant U Piscadore',cat:'Restaurant',quartier:'Glass',addr:'Quartier Glass',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:29,em:'🍽️',name:'Le Bateau Ivre',cat:'Restaurant',quartier:'Bord de mer',addr:'9, bord de mer — centre-ville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r19_1.jpg','r19_2.jpg','r19_3.jpg'],avis:[]},
-  {id:30,em:'🍽️',name:'Idiora Restaurant-Bar',cat:'Restaurant',quartier:'Centre-ville',addr:'Complexe Majestic, Libreville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r20_1.jpg','r20_2.jpg','r20_3.jpg'],avis:[]},
-  {id:31,em:'🍽️',name:'Okoumé Restaurant Lounge',cat:'Restaurant',quartier:'Quartier Louis',addr:'Quartier Louis — en bord de mer',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r21_1.jpg','r21_2.jpg','r21_3.jpg'],avis:[]},
-  {id:32,em:'🍽️',name:"L'Assiette d'Or",cat:'Restaurant',quartier:'Quartier Louis',addr:'Quartier Louis — ruelle de Gabon Pain',phone:'',hours:'Déj. & dîner',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r22_1.jpg','r22_2.jpg','r22_3.jpg'],avis:[]},
-  {id:33,em:'🍽️',name:'Euphoria Libreville',cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:34,em:'🍽️',name:'Amaya Restaurant',cat:'Restaurant',quartier:'Bord de mer',addr:'Hôtel Radisson Blu, Boulevard de Nice',phone:'',hours:'Mar-Dim 17h-22h',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r24_1.jpg','r24_2.jpg','r24_3.jpg'],avis:[]},
-  {id:35,em:'🍽️',name:'Olatano',cat:'Restaurant',quartier:'Bord de mer',addr:'Radisson Blu & Park Inn, Boulevard de Nice',phone:'',hours:'Tous les jours',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:36,em:'🍽️',name:'La Palette Restaurant',cat:'Restaurant',quartier:'Quartier Louis',addr:'Park Inn by Radisson, Descente J. Ebori',phone:'',hours:'Matin & midi',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:37,em:'🍽️',name:'Le Baobab',cat:'Restaurant',quartier:'Quartier Louis',addr:'Entre le marché de Louis et le feu rouge Gros-Bouquet',phone:'+241 73 89 93',hours:'Déj. & dîner',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r27_1.jpg','r27_2.jpg','r27_3.jpg'],avis:[]},
-  {id:38,em:'🍽️',name:'Chez Marcelline',cat:'Restaurant',quartier:'Nombakélé',addr:'Nombakélé — grande terrasse',phone:'+241 74 20 49',hours:'Déj. & dîner',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r28_1.jpg'],avis:[]},
-  {id:39,em:'🍽️',name:'Chez Marie-qui-faü-chaud',cat:'Restaurant',quartier:'Glass',addr:'Quartier Glass — face à la Maison de la Presse',phone:'',hours:'Déj. & dîner',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:40,em:'🍽️',name:'Restaurant Sénégalais',cat:'Restaurant',quartier:'Nombakélé',addr:'Nombakélé — en face de Gaboprix',phone:'',hours:'Déj. & dîner',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:41,em:'🍽️',name:'Corisco Chica chez Katia',cat:'Restaurant',quartier:'Nombakélé',addr:'Direction Akébé, après la station face au stade',phone:'',hours:'Déj. & dîner',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:42,em:'🍽️',name:'Papa Union',cat:'Restaurant',quartier:'Montée de Louis',addr:'Montée de Louis — décor en bambou',phone:'+241 73 86 80',hours:'Tous les jours',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r32_1.jpg','r32_2.jpg','r32_3.jpg'],avis:[]},
-  {id:43,em:'🍽️',name:'Illico Restaurant',cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville — face au Campagnard',phone:'',hours:'Lun-Sam déj.',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r33_1.jpg','r33_2.jpg','r33_3.jpg'],avis:[]},
-  {id:44,em:'🍽️',name:'Le New Palmas',cat:'Restaurant',quartier:'Montagne Sainte',addr:'Montagne Sainte — rue Alsace-Lorraine',phone:'',hours:'Déj. & dîner',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:45,em:'🍽️',name:'Le Bon Coin de Louis chez Ali',cat:'Restaurant',quartier:'Quartier Louis',addr:'Entre le marché de Louis et le feu rouge Gros-Bouquet',phone:'+241 73 13 74',hours:'Déj. & dîner',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:46,em:'🍽️',name:'Nouveau Petit Chalut',cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville de Libreville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r36_1.jpg','r36_2.jpg','r36_3.jpg'],avis:[]},
-  {id:47,em:'🍽️',name:'Le Bar à Bouillon Ogasso',cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:48,em:'🍽️',name:'Sky Life',cat:'Restaurant',quartier:'Pont de Guégué',addr:'Pont de Guégué — vue sur la rivière',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['r38_1.jpg'],avis:[]},
-  {id:49,em:'🍽️',name:'River Lodge',cat:'Restaurant',quartier:'Pointe Denis',addr:'Pointe Denis — face à Libreville, côté Atlantique',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:50,em:'🍽️',name:'Restaurant La Polinette',cat:'Restaurant',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:51,em:'🍺',name:'Le No Stress',cat:'Bar',quartier:'Bord de mer',addr:'Centre-ville, bord de mer',phone:'+241 76 56 01 66',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['b01_1.jpg','b01_2.jpg','b01_3.jpg'],avis:[]},
-  {id:52,em:'🍺',name:'Le Bijou Beach',cat:'Bar',quartier:'Bas de Guégué',addr:'Bas de Guégué — en bord de mer',phone:'+241 62 17 97 97',hours:'Soir & week-end',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['b02_1.jpg','b02_2.jpg','b02_3.jpg'],avis:[]},
-  {id:53,em:'🍺',name:'Waïybar',cat:'Bar',quartier:'Montée de Louis',addr:'Montée de Louis',phone:'+241 74 50 91 50',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['b03_1.jpg','b03_2.jpg','b03_3.jpg'],avis:[]},
-  {id:54,em:'🍺',name:'The Spot',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['b04_1.jpg','b04_2.jpg','b04_3.jpg'],avis:[]},
-  {id:55,em:'🍺',name:'Hype Bar Lounge',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['b05_1.jpg','b05_2.jpg','b05_3.jpg'],avis:[]},
-  {id:56,em:'🍺',name:'Yoka Sports Bar',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'Jour & soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['b06_1.jpg','b06_2.jpg','b06_3.jpg'],avis:[]},
-  {id:57,em:'🍺',name:'The Lantern',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:58,em:'🍺',name:'Blu Bar',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:59,em:'🍺',name:'The Black Moon',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville — lounge stylé',phone:'',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:60,em:'🍺',name:'Hama Bar',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:61,em:'🍺',name:"Le Kyel's Bar & Food",cat:'Bar',quartier:'Derrière Prison',addr:"Derrière Soveman, en face de l&apos;Église du Gabon",phone:'',hours:'Jour & soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['b11_1.jpg','b11_2.jpg','b11_3.jpg'],avis:[]},
-  {id:62,em:'🍺',name:'Murmure Lounge',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['b12_1.jpg','b12_2.jpg','b12_3.jpg'],avis:[]},
-  {id:63,em:'🍺',name:'Lollipop Bar',cat:'Bar',quartier:'Centre-ville',addr:"Boulevard de l'Indépendance",phone:'+241 04 17 96 29',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:64,em:'🍺',name:'Bar Guinness',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville — bar populaire',phone:'',hours:'Jour & soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:65,em:'🍺',name:'Le Baril Authentic Bar',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'Jour & soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:66,em:'🍺',name:'Le Yoss',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:67,em:'🍺',name:'Best Vibes',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville — lounge festif',phone:'',hours:'Soir & week-end',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:68,em:'🍺',name:'Bar Lounge PN',cat:'Bar',quartier:'Centre-ville',addr:'Centre-ville',phone:'',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:69,em:'🍺',name:'Wai Bar',cat:'Bar',quartier:'Bord de mer',addr:'Radisson Blu Okoumé Palace, Boulevard de Nice',phone:'',hours:'Tous les jours',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:['b19_1.jpg','b19_2.jpg','b19_3.jpg'],avis:[]},
-  {id:70,em:'🍺',name:'Bar du Rond-point Avorbam',cat:'Bar',quartier:'Avorbam',addr:'Rond-point Avorbam',phone:'+241 76 59 40 43',hours:'Jour & soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:71,em:'🍺',name:'Le Bar de Glass',cat:'Bar',quartier:'Glass',addr:'Glass — ruelle CKDO, face église',phone:'+241 65 10 31 31',hours:'Lun-Sam 9h-22h',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:72,em:'🍺',name:'La Montée Quaben',cat:'Bar',quartier:'Montée Quaben',addr:'Montée Quaben',phone:'+241 65 85 50 75',hours:'Soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:73,em:'🍺',name:'Bar Cité des Ailes',cat:'Bar',quartier:'Cité des Ailes',addr:'Rond-point de la Cité des Ailes',phone:'+241 65 70 64 55',hours:'Jour & soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:74,em:'🍺',name:'Bar Owendo',cat:'Bar',quartier:'Owendo',addr:"Owendo — en direction du port d&apos;Owendo",phone:'+241 77 22 22 16',hours:'Jour & soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:75,em:'🍺',name:'Calypso',cat:'Bar',quartier:'Boulevard Joseph Deemin',addr:'Boulevard Joseph Deemin — Descente de Chez Jeannot',phone:'',hours:'Jour & soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-  {id:76,em:'🍺',name:'Batterie IV Bar',cat:'Bar',quartier:'Batterie IV',addr:'Batterie IV — non loin du Phare du Large',phone:'+241 62 60 00 05',hours:'Jour & soir',rating:0,reviews:0,open:true,status:'approved',placeId:'',photos:[],avis:[]},
-];
-
-const ACTUS=[
-  {id:1,img:'🎵',bg:'#E1F5EE',tag:'Événement',title:'MBOLO — Le guide de Libreville est lancé !',txt:"Bars, restaurants, hôtels : retrouvez tous les bons plans de Libreville sur MBOLO. Notez, partagez et découvrez les meilleures adresses de la capitale.",date:'25 avril 2026'},
-  {id:2,img:'🇬🇦',bg:'#fff8d6',tag:'Communauté',title:"Rejoignez MBOLO",txt:"Créez votre compte pour noter les établissements. Votre avis compte !",date:'25 avril 2026'},
-  {id:3,img:'🍽️',bg:'#e8f0fb',tag:'Quartier',title:"Les établissements de Glass",txt:"Quartier Glass : Le Lokua, La Piazza, Le QG et Le Bar de Glass vous attendent.",date:'25 avril 2026'},
-  {id:4,img:'🏨',bg:'#FAECE7',tag:'Hôtels',title:"Meilleurs hôtels de Libreville",txt:"Du Radisson Blu au Park Inn, découvrez les hébergements de qualité de Libreville.",date:'25 avril 2026'},
-];
-
-let places=[...PLACES];
-let actus=[...ACTUS];
-
-function stH(n){if(!n||n===0)return '☆☆☆☆☆';return '★'.repeat(Math.round(n))+'☆'.repeat(5-Math.round(n));}
-function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
-function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');}
-function goBack(){go('s-main');}
-function goGuest(){isGuest=true;currentUser={name:'Visiteur',guest:true};go('s-main');switchTab('home');}
-function goAdmin(){document.getElementById('admin-code').value='';document.getElementById('adminModal').classList.add('on');}
-function doAdminLogin(){const code=document.getElementById('admin-code').value;if(code===ADMIN_CODE){closeModal('adminModal');window.location.href='mbolo-admin.html';}else{alert('Code incorrect.');}}
-function doLogin(){const e=document.getElementById('li-email').value.trim();if(!e){alert('Email requis.');return;}currentUser={name:e.split('@')[0]||'Utilisateur',email:e,guest:false};isGuest=false;go('s-main');switchTab('home');}
-function doRegister(){const n=document.getElementById('rg-name').value.trim();const e=document.getElementById('rg-email').value.trim();if(!n||!e){alert('Nom et email requis.');return;}currentUser={name:n,email:e,guest:false};isGuest=false;go('s-main');switchTab('home');toast('Bienvenue sur MBOLO, '+n+' ! 🇬🇦');}
-function closeModal(id){document.getElementById(id).classList.remove('on');}
-
-function switchTab(t){
-  prevTab=t;
-  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
-  const el=document.getElementById('tab-'+t);if(el)el.classList.add('on');
-  const map={home:renderHome,bar:renderBar,actu:renderActu,add:renderAdd,prof:renderProf};
-  if(map[t])map[t]();
-}
-
-function renderHome(){
-  const un=currentUser?currentUser.name:'Visiteur';
-  const initials=un.substring(0,2).toUpperCase();
-  document.getElementById('mainScroll').innerHTML=`
-    ${isGuest?'<div class="gbanner"><span style="font-size:18px">🇬🇦</span><div class="gb-txt">Naviguez en visiteur. Créez un compte pour publier.</div><button class="gb-btn" onclick="go(\'s-register\')">Rejoindre</button></div>':''}
-    <div class="hdr">
-      <div class="hdr-row">
-        <div class="hdr-logo">MBOLO</div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <div class="hdr-flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div>
-        </div>
-      </div>
-      <div class="hdr-loc">📍 Libreville, Gabon</div>
-      <div class="uchip"><div class="av-sm">${initials}</div><span>${un}</span></div>
-      <div class="sbox">
-        <span style="font-size:15px;color:#bbb">🔍</span>
-        <input type="text" placeholder="Restaurant, bar, hôtel..." id="searchInput" oninput="renderPlaces()"/>
+    <div class="mt">Laisser un avis</div>
+    <div style="background:#fff3cd;border:1px solid #ffc107;border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:11px;color:#856404;line-height:1.5;">
+      ⚠️ <strong>Règles de la communauté MBOLO</strong><br>
+      Il est formellement interdit de proférer des injures, des menaces ou tout propos irrespectueux dans les commentaires. Tout avis inapproprié sera supprimé par l'administrateur.
+    </div>
+    <div class="fg"><label>Note *</label>
+      <div class="sp-w" id="revStars">
+        <span class="sp" onclick="setStar(1)">★</span><span class="sp" onclick="setStar(2)">★</span>
+        <span class="sp" onclick="setStar(3)">★</span><span class="sp" onclick="setStar(4)">★</span>
+        <span class="sp" onclick="setStar(5)">★</span>
       </div>
     </div>
-    <div class="cats" id="catStrip"></div>
-    <div class="sh"><span class="sh-t">Actualités Libreville</span><button class="see-all" onclick="switchTab('actu')">Tout voir</button></div>
-    <div class="nstrip">
-      ${actus.slice(0,4).map(a=>`<div class="nc" onclick="switchTab('actu')"><div class="nc-img" style="background:${a.bg}">${a.img}</div><div class="nc-b"><div class="nc-tag">${a.tag}</div><div class="nc-t">${a.title}</div></div></div>`).join('')}
+    <div class="fg"><label>Votre commentaire *</label>
+      <textarea id="revTxt" rows="5" placeholder="Décrivez votre expérience : ambiance, service, qualité, prix... Votre avis aide la communauté !"></textarea>
+      <div id="rev-char" style="font-size:10px;color:#999;text-align:right;margin-top:3px">0 / 500 caractères</div>
     </div>
-    <div class="sh"><span class="sh-t">Établissements (${places.filter(p=>p.status==='approved').length})</span></div>
-    <div class="plist" id="placeList"></div>
-    <div style="height:88px"></div>`;
-  renderCats();renderPlaces();
-}
+    <div class="fg"><label>Votre prénom (affiché publiquement)</label>
+      <input type="text" id="revNom" placeholder="Ex: Amina, Jean-Paul..."/>
+    </div>
+    <button class="btn-main" onclick="submitReview()">Publier mon avis</button>
+    <button class="mcancel" onclick="closeModal('reviewModal')">Annuler</button>
+  </div>
+</div>"""
 
-function renderCats(){
-  const s=document.getElementById('catStrip');if(!s)return;
-  s.innerHTML=CATS.map(c=>`<div class="cat${c.l===currentCat?' on':''}" onclick="filterCat('${c.l}')"><span class="cat-ic">${c.i}</span>${c.l}</div>`).join('');
-}
-function filterCat(cat){currentCat=cat;renderCats();renderPlaces();}
+html = html.replace(old_review_modal, new_review_modal)
 
-function getThumb(p){
-  if(p.photos&&p.photos.length){return `<img src="${p.photos[0]}" style="width:76px;height:76px;object-fit:cover;" onerror="this.parentElement.innerHTML='${p.em}'">`;}
-  return p.em;
-}
+# ── 2. CSS pour les avis ──────────────────────────────────────────────────────
+css_add = """
+.rv-del{background:none;border:none;color:#E24B4A;font-size:11px;cursor:pointer;padding:2px 6px;border-radius:6px;float:right;}
+.rv-del:hover{background:#ffebee;}
+.rv-nom{font-size:11px;color:#888;margin-bottom:2px;}
+.rv-date{font-size:10px;color:#bbb;margin-top:4px;}
+.rv-reported{opacity:0.5;font-style:italic;}
+"""
+html = html.replace("</style>", css_add + "</style>", 1)
 
-function renderPlaces(){
-  const q=(document.getElementById('searchInput')||{}).value||'';
-  const list=document.getElementById('placeList');if(!list)return;
-  const filtered=places.filter(p=>{
-    if(p.status==='suspended')return false;
-    const mc=currentCat==='Tous'||p.cat===currentCat;
-    const mq=!q||p.name.toLowerCase().includes(q.toLowerCase())||p.addr.toLowerCase().includes(q.toLowerCase())||p.cat.toLowerCase().includes(q.toLowerCase())||(p.quartier||'').toLowerCase().includes(q.toLowerCase());
-    return mc&&mq;
-  });
-  list.innerHTML=filtered.length?filtered.map(p=>`
-    <div class="pc" onclick="openPlace(${p.id})">
-      <div class="pc-th">${getThumb(p)}</div>
-      <div class="pc-inf">
-        <div class="pc-nm">${p.name}</div>
-        <div class="pc-ct">${p.cat} · ${p.quartier||''}</div>
-        <div class="pc-mt">
-          ${p.rating>0?`<span class="stars">${stH(p.rating)}</span><span class="sct">${p.rating} (${p.reviews})</span>`:'<span class="sct">Pas encore noté</span>'}
-          ${p.open?'<span class="badge open">Ouvert</span>':''}
-        </div>
-        <div class="pc-addr">📍 ${p.addr}</div>
-      </div>
-    </div>`).join(''):`<div style="text-align:center;padding:28px;color:var(--muted);font-size:13px">Aucun résultat trouvé</div>`;
-}
+# ── 3. Nouvelles variables JS ─────────────────────────────────────────────────
+old_vars = "let isGuest=false,currentUser=null,currentPlaceId=null,revStar=0,addStar=0;"
+new_vars = "let isGuest=false,currentUser=null,currentPlaceId=null,revStar=0,addStar=0,isAdmin=false;"
+html = html.replace(old_vars, new_vars)
 
-function openPlace(id){
-  const p=places.find(x=>x.id===id);if(!p)return;
-  currentPlaceId=id;
-  // Cover photo
-  const cover=document.getElementById('d-cover');
-  if(p.photos&&p.photos.length){
-    cover.innerHTML=`<img class="det-cover" src="${p.photos[0]}" onerror="this.parentElement.innerHTML='<div class=det-cover-em>${p.em}</div>'">`;
-  }else{
-    cover.innerHTML=`<div class="det-cover-em">${p.em}</div>`;
-  }
-  document.getElementById('d-nm').textContent=p.name;
-  document.getElementById('d-ct').textContent=p.cat+' · '+p.quartier;
-  document.getElementById('d-st').textContent=p.rating>0?stH(p.rating)+' '+p.rating:'Pas encore noté';
-  document.getElementById('d-rc').textContent=p.reviews+' avis';
-  document.getElementById('d-ad').textContent=p.addr;
-  document.getElementById('d-hr').textContent=p.hours||'—';
-  document.getElementById('d-ph').textContent=p.phone||'—';
-  // Photos grid
-  const phEl=document.getElementById('d-photos');
-  if(p.photos&&p.photos.length){
-    phEl.innerHTML=p.photos.map(url=>`<div class="phi"><img src="${url}" onerror="this.parentElement.innerHTML='<div class=phi-em>📷</div>'"></div>`).join('');
-  }else{
-    phEl.innerHTML='<div style="grid-column:1/-1;padding:16px;text-align:center;color:#999;font-size:12px">📷 Photos bientôt disponibles</div>';
-  }
-  // Reviews
-  const rev=p.avis||[];
-  document.getElementById('d-reviews').innerHTML=rev.length
-    ?rev.map(a=>`<div class="rv"><div class="rv-u">${a.user}</div><div class="rv-s">${stH(a.stars)}</div><div class="rv-t">${a.txt}</div></div>`).join('')
-    :'<div style="padding:14px;font-size:12px;color:var(--muted)">Aucun avis pour l\'instant. Soyez le premier !</div>';
-  go('s-detail');
-}
+# ── 4. Admin login → set isAdmin ──────────────────────────────────────────────
+old_admin = "function doAdminLogin(){const code=document.getElementById('admin-code').value;if(code===ADMIN_CODE){closeModal('adminModal');window.location.href='mbolo-admin.html';}else{alert('Code incorrect.');}}"
+new_admin = """function doAdminLogin(){
+  const code=document.getElementById('admin-code').value;
+  if(code===ADMIN_CODE){
+    closeModal('adminModal');
+    isAdmin=true;
+    if(currentUser)currentUser.admin=true;
+    toast('✅ Mode administrateur activé');
+    // Refresh current view
+    if(currentPlaceId)openPlace(currentPlaceId);
+    else switchTab(prevTab||'home');
+  }else{alert('Code incorrect.');}
+}"""
+html = html.replace(old_admin, new_admin)
 
-function sharePlace(){
-  const p=places.find(x=>x.id===currentPlaceId);if(!p)return;
-  const url=SITE_URL+'?p='+p.id;
-  const txt=p.name+' — '+p.cat+' à Libreville\n'+p.addr+'\n\nDécouvert sur MBOLO : '+url;
-  if(navigator.share){
-    navigator.share({title:p.name,text:p.cat+' à Libreville',url:url}).catch(()=>{});
-    return;
-  }
-  document.getElementById('share-title').textContent='Partager — '+p.name;
-  document.getElementById('share-wa').href='https://wa.me/?text='+encodeURIComponent(txt);
-  document.getElementById('share-fb').href='https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(url);
-  document.getElementById('shareModal').classList.add('on');
-}
-
-function copyShareLink(){
-  const p=places.find(x=>x.id===currentPlaceId);if(!p)return;
-  const url=SITE_URL+'?p='+p.id;
-  navigator.clipboard.writeText(url).then(()=>{toast('🔗 Lien copié !');closeModal('shareModal');}).catch(()=>{toast('Lien : '+url);});
-}
-
-function navPlace(){
-  const p=places.find(x=>x.id===currentPlaceId);if(!p)return;
-  const url=p.placeId
-    ?'https://www.google.com/maps/place/?q=place_id:'+p.placeId
-    :'https://www.google.com/maps/search/'+encodeURIComponent(p.name+' Libreville Gabon');
-  window.open(url,'_blank');
-}
-
-function openReview(){
-  if(isGuest){if(confirm('Créez un compte pour publier un avis.'))go('s-register');return;}
-  revStar=0;document.getElementById('revTxt').value='';
-  document.querySelectorAll('#revStars .sp').forEach(s=>s.classList.remove('on'));
-  document.getElementById('reviewModal').classList.add('on');
-}
-function setStar(n){revStar=n;document.querySelectorAll('#revStars .sp').forEach((s,i)=>s.classList.toggle('on',i<n));}
-function submitReview(){
+# ── 5. Nouveau submitReview avec nom + date ───────────────────────────────────
+old_submit = """function submitReview(){
   const txt=document.getElementById('revTxt').value.trim();
   if(!txt||!revStar){alert('Note et commentaire requis.');return;}
   const p=places.find(x=>x.id===currentPlaceId);if(!p)return;
@@ -573,121 +107,104 @@ function submitReview(){
   p.rating=Math.round((p.rating*(p.reviews-1)+revStar)/p.reviews*10)/10;
   userReviews++;closeModal('reviewModal');openPlace(currentPlaceId);
   toast('✅ Votre avis a été publié !');
-}
+}"""
 
-function renderBar(){
-  const bars=places.filter(p=>p.cat==='Bar'&&p.status!=='suspended');
-  document.getElementById('mainScroll').innerHTML=`
-    <div class="bar-hero">
-      <div class="bar-t">Bars & Boissons 🍹</div>
-      <div class="bar-s">Tous les bars de Libreville</div>
-      <div class="bar-bdg">${bars.length} bars référencés</div>
-    </div>
-    <div class="sh"><span class="sh-t">Bars populaires</span></div>
-    <div class="plist">
-      ${bars.map(p=>`<div class="pc" onclick="openPlace(${p.id})">
-        <div class="pc-th" style="background:#e8f0fb">${getThumb(p)}</div>
-        <div class="pc-inf">
-          <div class="pc-nm">${p.name}</div>
-          <div class="pc-ct">${p.addr}</div>
-          <div class="pc-mt">${p.rating>0?`<span class="stars">${stH(p.rating)}</span><span class="sct">${p.rating}</span>`:'<span class="sct">Pas encore noté</span>'}${p.open?'<span class="badge open">Ouvert</span>':''}</div>
-          <div class="pc-addr">🕐 ${p.hours}</div>
-        </div></div>`).join('')}
-    </div><div style="height:88px"></div>`;
-}
+new_submit = """function submitReview(){
+  const txt=document.getElementById('revTxt').value.trim();
+  const nomEl=document.getElementById('revNom');
+  const nom=nomEl?nomEl.value.trim():'';
+  if(!txt||!revStar){alert('Note et commentaire requis.');return;}
+  if(txt.length>500){alert('Commentaire trop long (max 500 caractères).');return;}
+  const p=places.find(x=>x.id===currentPlaceId);if(!p)return;
+  if(!p.avis)p.avis=[];
+  const now=new Date();
+  const dateStr=now.toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'});
+  const avisNom=nom||(currentUser&&!currentUser.guest?currentUser.name:'Anonyme');
+  const avisId='av_'+Date.now();
+  p.avis.unshift({id:avisId,user:avisNom,stars:revStar,txt,date:dateStr});
+  p.reviews++;
+  p.rating=Math.round((p.rating*(p.reviews-1)+revStar)/p.reviews*10)/10;
+  userReviews++;
+  revStar=0;
+  closeModal('reviewModal');
+  openPlace(currentPlaceId);
+  toast('✅ Votre avis a été publié !');
+}"""
+html = html.replace(old_submit, new_submit)
 
-function renderActu(){
-  document.getElementById('mainScroll').innerHTML=`
-    <div class="hdr" style="padding-bottom:18px">
-      <div class="hdr-row"><div class="hdr-logo">Actualités 📰</div>
-      <div class="hdr-flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div></div>
-      <div class="hdr-loc">📍 Libreville, Gabon</div>
-    </div>
-    <div style="padding:12px 14px 0">
-      ${actus.map(a=>`<div class="ac-card">
-        <div class="ac-img" style="background:${a.bg}">${a.img}</div>
-        <div class="ac-body"><div class="ac-tag">${a.tag}</div><div class="ac-title">${a.title}</div><div class="ac-txt">${a.txt}</div><div class="ac-date">📅 ${a.date}</div></div>
-      </div>`).join('')}
-    </div><div style="height:88px"></div>`;
-}
-
-function renderAdd(){
-  if(isGuest){
-    document.getElementById('mainScroll').innerHTML=`
-      <div style="text-align:center;padding:70px 24px">
-        <div style="font-size:48px;margin-bottom:16px">🔒</div>
-        <div style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:8px">Connexion requise</div>
-        <div style="font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.6">Créez un compte gratuit pour ajouter des établissements.</div>
-        <button class="btn-main" style="max-width:270px;margin:0 auto;display:block" onclick="go('s-register')">Créer un compte gratuit</button>
-        <div class="alink" style="margin-top:12px"><span onclick="go('s-login')">J'ai déjà un compte</span></div>
-      </div><div style="height:88px"></div>`;
-    return;
+# ── 6. Ajouter compteur caractères ───────────────────────────────────────────
+char_counter_js = """
+// Compteur caractères commentaire
+document.addEventListener('input',function(e){
+  if(e.target.id==='revTxt'){
+    const len=e.target.value.length;
+    const el=document.getElementById('rev-char');
+    if(el){el.textContent=len+' / 500 caractères';el.style.color=len>450?'#E24B4A':'#999';}
   }
-  document.getElementById('mainScroll').innerHTML=`
-    <div class="add-top"><div class="add-t">Ajouter un lieu</div><div class="add-s">Partagez une adresse avec la communauté</div></div>
-    <div class="stripe"><div></div><div></div><div></div></div>
-    <div class="add-body">
-      <div style="background:#fff8d6;border:1px solid #fcd116;border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:#7a5c00">
-        ℹ️ Votre établissement sera soumis à validation avant d'apparaître.
-      </div>
-      <div class="fg"><label>Nom *</label><input type="text" id="newName" placeholder="Ex: Restaurant Le Perroquet"/></div>
-      <div class="fg"><label>Catégorie *</label>
-        <select id="newCat"><option>Restaurant</option><option>Bar</option><option>Hôtel</option><option>Shopping</option><option>Santé</option><option>Loisirs</option><option>Autre</option></select>
-      </div>
-      <div class="fg"><label>Quartier *</label><input type="text" id="newQrt" placeholder="Ex: Plateau, Louis, Akanda..."/></div>
-      <div class="fg"><label>Adresse *</label><input type="text" id="newAddr" placeholder="Ex: Face au marché Mont-Bouët"/></div>
-      <div class="fg"><label>Téléphone</label><input type="tel" id="newPhone" placeholder="+241 06 ..."/></div>
-      <div class="fg"><label>Horaires</label><input type="text" id="newHours" placeholder="Ex: Lun-Sam 08h-22h"/></div>
-      <div class="fg"><label>Description</label><textarea rows="3" id="newDesc" placeholder="Décrivez le lieu..."></textarea></div>
-      <button class="btn-main yellow" onclick="submitPlace()">Soumettre pour validation</button>
-    </div><div style="height:88px"></div>`;
-}
+});
+"""
 
-function submitPlace(){
-  const name=(document.getElementById('newName')||{}).value||'';
-  const addr=(document.getElementById('newAddr')||{}).value||'';
-  const qrt=(document.getElementById('newQrt')||{}).value||'';
-  const cat=(document.getElementById('newCat')||{}).value||'Restaurant';
-  if(!name.trim()||!addr.trim()||!qrt.trim()){alert('Nom, quartier et adresse sont requis.');return;}
-  const icons={Restaurant:'🍽️',Bar:'🍹',Hôtel:'🏨',Shopping:'🛍️',Santé:'🏥',Loisirs:'🌊',Autre:'📍'};
-  places.unshift({id:Date.now(),em:icons[cat]||'📍',name:name.trim(),cat,quartier:qrt.trim(),addr:addr.trim(),
-    phone:(document.getElementById('newPhone')||{}).value||'-',
-    hours:(document.getElementById('newHours')||{}).value||'-',
-    rating:0,reviews:0,open:true,status:'pending',photos:[],avis:[]});
-  userPlaces++;toast('✅ Soumis ! En attente de validation.');switchTab('home');
+# ── 7. Nouvelle fonction deleteAvis ──────────────────────────────────────────
+delete_avis_js = """
+function deleteAvis(placeId, avisId){
+  if(!isAdmin){toast('Accès refusé.');return;}
+  if(!confirm('Supprimer cet avis ?'))return;
+  const p=places.find(x=>x.id===placeId);
+  if(!p||!p.avis)return;
+  const idx=p.avis.findIndex(a=>a.id===avisId);
+  if(idx===-1)return;
+  const stars=p.avis[idx].stars;
+  p.avis.splice(idx,1);
+  p.reviews=Math.max(0,p.reviews-1);
+  if(p.reviews>0){
+    p.rating=Math.round(p.avis.reduce((s,a)=>s+a.stars,0)/p.avis.length*10)/10;
+  }else{
+    p.rating=0;
+  }
+  openPlace(placeId);
+  toast('🗑️ Avis supprimé.');
 }
+"""
 
-function renderProf(){
-  const un=currentUser?currentUser.name:'Visiteur';
-  const initials=un.substring(0,2).toUpperCase();
-  document.getElementById('mainScroll').innerHTML=`
-    <div class="prof-top">
-      <div class="av-lg">${initials}</div>
-      <div class="prof-nm">${un}</div>
-      <div class="prof-si">${isGuest?'Mode visiteur':'Membre MBOLO 🇬🇦'}</div>
-    </div>
-    <div class="stripe"><div></div><div></div><div></div></div>
-    <div class="prof-body">
-      <div class="stats">
-        <div class="stat"><div class="stat-n">${userPlaces}</div><div class="stat-l">Ajoutés</div></div>
-        <div class="stat"><div class="stat-n">${userReviews}</div><div class="stat-l">Avis</div></div>
-        <div class="stat"><div class="stat-n">🇬🇦</div><div class="stat-l">Libreville</div></div>
-      </div>
-      ${isGuest?`
-        <div style="background:var(--y3);border:1.5px solid var(--y);border-radius:12px;padding:16px;text-align:center;margin-bottom:16px">
-          <div style="font-size:14px;font-weight:700;color:#7a5c00;margin-bottom:6px">Rejoignez MBOLO 🇬🇦</div>
-          <button class="btn-main" style="max-width:200px;margin:0 auto;display:block" onclick="go('s-register')">Créer un compte</button>
-        </div>
-        <div style="text-align:center"><a onclick="goAdmin()" style="font-size:12px;color:var(--g);cursor:pointer">⚙️ Accès administrateur</a></div>`:`
-        <div class="pmenu">
-          <div class="pmi"><div class="pmi-l"><span class="pmi-ic">🗺️</span>Mes avis publiés</div><span style="color:var(--muted)">›</span></div>
-          <div class="pmi"><div class="pmi-l"><span class="pmi-ic">📍</span>Mes lieux ajoutés</div><span style="color:var(--muted)">›</span></div>
-          <div class="pmi" onclick="goAdmin()"><div class="pmi-l"><span class="pmi-ic">⚙️</span>Administration MBOLO</div><span style="color:var(--muted)">›</span></div>
-          <button class="logout" onclick="logout()">Se déconnecter</button>
-        </div>`}
-    </div><div style="height:88px"></div>`;
-}
-function logout(){if(!confirm('Se déconnecter ?'))return;isGuest=false;currentUser=null;go('s-splash');}
-</script>
-</body>
-</html>
+# ── 8. Mise à jour affichage avis dans openPlace ──────────────────────────────
+old_reviews_display = """  const rev=p.avis||[];
+  document.getElementById('d-reviews').innerHTML=rev.length
+    ?rev.map(a=>`<div class="rv"><div class="rv-u">${a.user}</div><div class="rv-s">${stH(a.stars)}</div><div class="rv-t">${a.txt}</div></div>`).join('')
+    :'<div style="padding:14px;font-size:12px;color:var(--muted)">Aucun avis pour l\'instant. Soyez le premier !</div>';
+  go('s-detail');"""
+
+new_reviews_display = """  const rev=p.avis||[];
+  document.getElementById('d-reviews').innerHTML=rev.length
+    ?rev.map(a=>`<div class="rv">
+        ${isAdmin?`<button class="rv-del" onclick="deleteAvis(${p.id},'${a.id||''}')">🗑️ Supprimer</button>`:''}
+        <div class="rv-u">${a.user||'Anonyme'}</div>
+        <div class="rv-s">${stH(a.stars)}</div>
+        <div class="rv-t">${a.txt}</div>
+        ${a.date?`<div class="rv-date">📅 ${a.date}</div>`:''}
+      </div>`).join('')
+    :'<div style="padding:14px;font-size:12px;color:var(--muted)">Aucun avis pour l\\'instant. Soyez le premier !</div>';
+  go('s-detail');"""
+
+html = html.replace(old_reviews_display, new_reviews_display)
+
+# ── 9. Injecter les nouvelles fonctions avant </script> ───────────────────────
+html = html.replace("</script>", char_counter_js + delete_avis_js + "</script>", 1)
+
+with open(HTML_OUT, "w", encoding="utf-8") as f:
+    f.write(html)
+
+print(f"{GRN}{BLD}✅ MBOLO patché avec succès !{RST}")
+print(f"Fichier : {HTML_OUT}")
+print(f"""
+Nouveautés :
+  💬 Espace commentaire enrichi (500 car. max)
+  ⚠️  Message règles de la communauté
+  📅 Date de publication des avis
+  👤 Prénom personnalisable
+  🗑️  Suppression des avis (admin uniquement)
+  
+Pour activer le mode admin dans l'app :
+  → Cliquez sur '⚙️ Accès administrateur'
+  → Code : mbolo2025
+  → Un bouton 🗑️ apparaît sur chaque avis
+""")
