@@ -6,14 +6,12 @@
 <title>MBOLO — Administration</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f0f2f5;color:#1a1a1a;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f0f2f5;color:#1a1a1a;}
 :root{--g:#009e60;--y:#fcd116;--b:#3a75c4;--red:#E24B4A;--bd:#e0e0e0;--bg:#fff;--bg2:#f5f5f5;--muted:#666;}
-
-/* LOGIN */
 .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#009e60,#007a4a);}
 .login-card{background:#fff;border-radius:20px;padding:40px 32px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,0.2);}
 .login-logo{text-align:center;margin-bottom:24px;}
-.login-logo .logo{font-size:32px;font-weight:800;color:#009e60;letter-spacing:-1px;}
+.login-logo .logo{font-size:32px;font-weight:800;color:#009e60;}
 .login-logo .sub{font-size:12px;color:#666;margin-top:4px;}
 .login-flag{display:flex;width:36px;height:24px;border-radius:4px;overflow:hidden;margin:0 auto 12px;}
 .login-flag div{flex:1;}
@@ -23,44 +21,34 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .fg input:focus{border-color:#009e60;}
 .pwd-wrap{position:relative;}
 .pwd-wrap input{padding-right:44px;}
-.pwd-eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;color:#999;}
+.pwd-eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;}
 .btn-login{width:100%;padding:14px;background:#009e60;color:#fff;font-size:15px;font-weight:700;border:none;border-radius:12px;cursor:pointer;margin-top:8px;}
-.btn-login:hover{background:#007a4a;}
 .login-err{color:#E24B4A;font-size:13px;text-align:center;margin-top:10px;display:none;}
 .login-back{text-align:center;margin-top:16px;font-size:13px;color:#666;}
 .login-back a{color:#009e60;text-decoration:none;font-weight:600;}
-
-/* APP */
 #adminApp{display:none;}
-.sidebar{position:fixed;top:0;left:0;width:240px;height:100vh;background:#1a1a2e;overflow-y:auto;z-index:100;}
+.sidebar{position:fixed;top:0;left:0;width:240px;height:100vh;background:#1a1a2e;overflow-y:auto;z-index:100;display:flex;flex-direction:column;}
 .sb-header{padding:20px 16px;border-bottom:1px solid rgba(255,255,255,0.1);}
-.sb-logo{font-size:20px;font-weight:800;color:#fff;letter-spacing:-0.5px;}
+.sb-logo{font-size:20px;font-weight:800;color:#fff;}
 .sb-logo span{color:#fcd116;}
 .sb-sub{font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px;}
-.sb-nav{padding:12px 0;}
-.sb-item{display:flex;align-items:center;gap:10px;padding:11px 20px;color:rgba(255,255,255,0.7);cursor:pointer;transition:all .15s;font-size:13px;font-weight:500;border-left:3px solid transparent;}
+.sb-back{display:flex;align-items:center;gap:6px;margin-top:12px;background:rgba(252,209,22,0.15);border:1px solid rgba(252,209,22,0.3);border-radius:8px;padding:7px 12px;text-decoration:none;color:#fcd116;font-size:12px;font-weight:600;}
+.sb-nav{padding:12px 0;flex:1;}
+.sb-item{display:flex;align-items:center;gap:10px;padding:11px 20px;color:rgba(255,255,255,0.7);cursor:pointer;font-size:13px;font-weight:500;border-left:3px solid transparent;transition:all .15s;}
 .sb-item:hover{background:rgba(255,255,255,0.05);color:#fff;}
 .sb-item.on{background:rgba(0,158,96,0.2);color:#009e60;border-left-color:#009e60;}
-.sb-ic{font-size:16px;width:20px;}
 .sb-badge{margin-left:auto;background:#E24B4A;color:#fff;font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700;}
-.sb-footer{padding:16px;border-top:1px solid rgba(255,255,255,0.1);margin-top:auto;}
+.sb-footer{padding:16px;border-top:1px solid rgba(255,255,255,0.1);}
 .btn-logout{width:100%;padding:10px;background:rgba(226,75,74,0.15);color:#E24B4A;border:1px solid rgba(226,75,74,0.3);border-radius:8px;font-size:13px;cursor:pointer;font-weight:600;}
-
 .main{margin-left:240px;padding:24px;min-height:100vh;}
 .page{display:none;}
 .page.on{display:block;}
 .page-title{font-size:22px;font-weight:700;margin-bottom:4px;}
 .page-sub{font-size:13px;color:#666;margin-bottom:24px;}
-
-/* STATS */
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;}
 .stat-card{background:#fff;border-radius:14px;padding:20px;border:1px solid #e0e0e0;}
 .stat-val{font-size:32px;font-weight:800;margin-bottom:4px;}
 .stat-label{font-size:12px;color:#666;font-weight:500;}
-.stat-trend{font-size:11px;margin-top:6px;}
-.stat-trend.up{color:#009e60;}
-
-/* TABLE */
 .table-card{background:#fff;border-radius:14px;border:1px solid #e0e0e0;overflow:hidden;margin-bottom:20px;}
 .table-header{padding:16px 20px;border-bottom:1px solid #e0e0e0;display:flex;justify-content:space-between;align-items:center;}
 .table-title{font-size:14px;font-weight:700;}
@@ -73,511 +61,286 @@ tr:hover td{background:#fafafa;}
 .badge{display:inline-block;font-size:10px;padding:3px 9px;border-radius:20px;font-weight:700;}
 .badge-pending{background:#fff3cd;color:#856404;}
 .badge-approved{background:#d1fae5;color:#065f46;}
-.badge-rejected{background:#fee2e2;color:#991b1b;}
 .badge-hotel{background:#dbeafe;color:#1e40af;}
 .badge-resto{background:#dcfce7;color:#166534;}
 .badge-bar{background:#fce7f3;color:#9d174d;}
-.btn-sm{padding:5px 12px;border-radius:7px;font-size:11px;font-weight:700;border:none;cursor:pointer;transition:.15s;}
+.btn-sm{padding:5px 12px;border-radius:7px;font-size:11px;font-weight:700;border:none;cursor:pointer;}
 .btn-approve{background:#009e60;color:#fff;}
-.btn-approve:hover{background:#007a4a;}
 .btn-reject{background:#fee2e2;color:#E24B4A;}
-.btn-reject:hover{background:#fecaca;}
 .btn-delete{background:#fee2e2;color:#E24B4A;}
-.btn-delete:hover{background:#fecaca;}
 .btn-primary{background:#009e60;color:#fff;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:700;border:none;cursor:pointer;}
-
-/* SEARCH */
-.search-bar{display:flex;gap:10px;margin-bottom:16px;}
-.search-bar input{flex:1;padding:9px 14px;border:1.5px solid #e0e0e0;border-radius:9px;font-size:13px;outline:none;}
-.search-bar input:focus{border-color:#009e60;}
-.filter-select{padding:9px 12px;border:1.5px solid #e0e0e0;border-radius:9px;font-size:13px;outline:none;background:#fff;}
-
-/* EMPTY */
 .empty{text-align:center;padding:40px;color:#999;}
 .empty .icon{font-size:36px;margin-bottom:12px;}
-
-/* NOTIF */
 .notif{position:fixed;bottom:24px;right:24px;background:#1a1a1a;color:#fff;padding:12px 20px;border-radius:12px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;}
 .notif.show{opacity:1;}
-
-/* SETTINGS */
-.settings-card{background:#fff;border-radius:14px;border:1px solid #e0e0e0;padding:24px;margin-bottom:16px;}
-.settings-title{font-size:14px;font-weight:700;margin-bottom:16px;color:#1a1a1a;}
-.setting-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #f0f0f0;}
-.setting-row:last-child{border-bottom:none;}
-.setting-label{font-size:13px;color:#1a1a1a;}
-.setting-desc{font-size:11px;color:#999;margin-top:2px;}
-.toggle{width:44px;height:24px;background:#e0e0e0;border-radius:12px;position:relative;cursor:pointer;transition:.2s;}
-.toggle.on{background:#009e60;}
-.toggle::after{content:'';width:20px;height:20px;background:#fff;border-radius:50%;position:absolute;top:2px;left:2px;transition:.2s;}
-.toggle.on::after{left:22px;}
-.pwd-change input{width:100%;padding:10px 14px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:13px;outline:none;margin-bottom:8px;}
-
-@media(max-width:768px){
-  .sidebar{width:100%;height:auto;position:relative;}
-  .main{margin-left:0;}
-  .stats-grid{grid-template-columns:repeat(2,1fr);}
-}
+.loading-overlay{position:fixed;inset:0;background:rgba(255,255,255,0.8);display:flex;align-items:center;justify-content:center;z-index:500;display:none;}
+.spinner{width:32px;height:32px;border:3px solid #e0e0e0;border-top-color:#009e60;border-radius:50%;animation:spin 0.8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
 <div id="loginPage" class="login-wrap">
   <div class="login-card">
     <div class="login-logo">
       <div class="login-flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div>
-      <div class="logo">MBO<span style="color:#fcd116">LO</span></div>
-      <div class="sub">⚙️ Interface Administrateur</div>
+      <div class="logo">MBOLO</div>
+      <div class="sub">&#9881;&#65039; Interface Administrateur</div>
     </div>
     <div class="fg">
-      <label>Identifiant</label>
-      <input type="text" id="loginUser" placeholder="admin" value="admin"/>
-    </div>
-    <div class="fg">
-      <label>Mot de passe</label>
+      <label>Mot de passe admin</label>
       <div class="pwd-wrap">
-        <input type="password" id="loginPwd" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/>
-        <button class="pwd-eye" onclick="togglePwd()" id="eyeBtn">👁</button>
+        <input type="password" id="loginPwd" placeholder="••••••••" onkeydown="if(event.key==='Enter')doAdminLogin()"/>
+        <button class="pwd-eye" onclick="togglePwd()" id="eyeBtn">&#128065;</button>
       </div>
     </div>
-    <button class="btn-login" onclick="doLogin()">Accéder au tableau de bord</button>
-    <div class="login-err" id="loginErr">Identifiants incorrects. Réessayez.</div>
-    <div class="login-back"><a href="index.html">← Retour à MBOLO</a></div>
+    <button class="btn-login" onclick="doAdminLogin()">Acceder au tableau de bord</button>
+    <div class="login-err" id="loginErr">Code incorrect. Reessayez.</div>
+    <div class="login-back"><a href="index.html">&#8592; Retour a MBOLO</a></div>
   </div>
 </div>
 
-<!-- ADMIN APP -->
 <div id="adminApp">
   <div class="notif" id="notif"></div>
+  <div class="loading-overlay" id="loadingOverlay"><div class="spinner"></div></div>
 
-  <!-- SIDEBAR -->
   <div class="sidebar">
     <div class="sb-header">
       <div class="sb-logo">MBO<span>LO</span></div>
       <div class="sb-sub">Administration</div>
-      <a href="index.html" style="display:flex;align-items:center;gap:6px;margin-top:12px;background:rgba(252,209,22,0.15);border:1px solid rgba(252,209,22,0.3);border-radius:8px;padding:7px 12px;text-decoration:none;color:#fcd116;font-size:12px;font-weight:600;">
-        ← Retour à MBOLO
-      </a>
+      <a href="index.html" class="sb-back">&#8592; Retour a MBOLO</a>
     </div>
     <div class="sb-nav">
-      <div class="sb-item on" onclick="showPage('dashboard')"><span class="sb-ic">📊</span>Tableau de bord</div>
-      <div class="sb-item" onclick="showPage('pending')" id="sb-pending"><span class="sb-ic">📋</span>Demandes<span class="sb-badge" id="badge-pending">0</span></div>
-      <div class="sb-item" onclick="showPage('places')"><span class="sb-ic">📍</span>Établissements</div>
-      <div class="sb-item" onclick="showPage('reviews')"><span class="sb-ic">💬</span>Avis & Commentaires</div>
-      <div class="sb-item" onclick="showPage('members')"><span class="sb-ic">👥</span>Membres</div>
-      <div class="sb-item" onclick="showPage('settings')"><span class="sb-ic">⚙️</span>Paramètres</div>
+      <div class="sb-item on" onclick="showPage('dashboard')">&#128202; Tableau de bord</div>
+      <div class="sb-item" onclick="showPage('pending')" id="sb-pending">&#128203; Demandes <span class="sb-badge" id="badge-pending">0</span></div>
+      <div class="sb-item" onclick="showPage('places')">&#128205; Etablissements</div>
+      <div class="sb-item" onclick="showPage('reviews')">&#128172; Avis</div>
+      <div class="sb-item" onclick="showPage('members')">&#128101; Membres</div>
     </div>
     <div class="sb-footer">
-      <button class="btn-logout" onclick="logout()">🚪 Se déconnecter</button>
+      <button class="btn-logout" onclick="adminLogout()">&#128682; Se deconnecter</button>
     </div>
   </div>
 
-  <!-- MAIN -->
   <div class="main">
-
-    <!-- DASHBOARD -->
     <div class="page on" id="page-dashboard">
       <div class="page-title">Tableau de bord</div>
       <div class="page-sub" id="dash-date"></div>
       <div class="stats-grid">
-        <div class="stat-card"><div class="stat-val" style="color:#009e60" id="s-total">0</div><div class="stat-label">Établissements</div><div class="stat-trend up">🏨🍽️🍺</div></div>
-        <div class="stat-card"><div class="stat-val" style="color:#3a75c4" id="s-members">0</div><div class="stat-label">Membres inscrits</div></div>
-        <div class="stat-card"><div class="stat-val" style="color:#fcd116" id="s-pending">0</div><div class="stat-label">Demandes en attente</div></div>
-        <div class="stat-card"><div class="stat-val" style="color:#E24B4A" id="s-reviews">0</div><div class="stat-label">Avis publiés</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:#009e60" id="s-total">—</div><div class="stat-label">Etablissements</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:#3a75c4" id="s-members">—</div><div class="stat-label">Membres</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:#fcd116" id="s-pending">—</div><div class="stat-label">En attente</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:#E24B4A" id="s-reviews">—</div><div class="stat-label">Avis totaux</div></div>
       </div>
       <div class="table-card">
-        <div class="table-header"><div class="table-title">Dernières demandes</div><button class="btn-primary" onclick="showPage('pending')">Voir tout</button></div>
-        <div id="dash-pending-list"></div>
-      </div>
-      <div class="table-card">
-        <div class="table-header"><div class="table-title">Derniers avis</div><button class="btn-primary" onclick="showPage('reviews')">Voir tout</button></div>
-        <div id="dash-reviews-list"></div>
+        <div class="table-header"><div class="table-title">Dernieres demandes</div><button class="btn-primary" onclick="showPage('pending')">Voir tout</button></div>
+        <div id="dash-pending"></div>
       </div>
     </div>
 
-    <!-- DEMANDES -->
     <div class="page" id="page-pending">
       <div class="page-title">Demandes en attente</div>
-      <div class="page-sub">Validez ou refusez les établissements soumis par les utilisateurs</div>
+      <div class="page-sub">Validez ou refusez les etablissements soumis</div>
       <div id="pending-list"></div>
     </div>
 
-    <!-- ETABLISSEMENTS -->
     <div class="page" id="page-places">
-      <div class="page-title">Établissements</div>
-      <div class="page-sub">Tous les établissements approuvés</div>
-      <div class="search-bar">
-        <input type="text" id="places-search" placeholder="🔍 Rechercher..." oninput="renderPlaces()"/>
-        <select class="filter-select" id="places-cat" onchange="renderPlaces()">
-          <option value="">Toutes catégories</option>
-          <option value="Restaurant">Restaurants</option>
-          <option value="Bar">Bars</option>
-          <option value="Hôtel">Hôtels</option>
-        </select>
-      </div>
+      <div class="page-title">Etablissements</div>
+      <div class="page-sub">Tous les etablissements approuves</div>
       <div class="table-card">
-        <div class="table-header">
-          <div class="table-title">Liste des établissements</div>
-          <div class="table-count" id="places-count">0 établissements</div>
-        </div>
+        <div class="table-header"><div class="table-title">Liste</div><div class="table-count" id="places-count">0</div></div>
         <div id="places-table"></div>
       </div>
     </div>
 
-    <!-- AVIS -->
     <div class="page" id="page-reviews">
-      <div class="page-title">Avis & Commentaires</div>
-      <div class="page-sub">Modérez les commentaires des utilisateurs</div>
+      <div class="page-title">Avis et Commentaires</div>
+      <div class="page-sub">Moderez les commentaires des utilisateurs</div>
       <div id="reviews-list"></div>
     </div>
 
-    <!-- MEMBRES -->
     <div class="page" id="page-members">
       <div class="page-title">Membres</div>
       <div class="page-sub">Utilisateurs inscrits sur MBOLO</div>
       <div class="table-card">
-        <div class="table-header"><div class="table-title">Liste des membres</div><div class="table-count" id="members-count">0 membres</div></div>
+        <div class="table-header"><div class="table-title">Liste des membres</div><div class="table-count" id="members-count">0</div></div>
         <div id="members-table"></div>
       </div>
     </div>
+  </div>
+</div>
 
-    <!-- PARAMÈTRES -->
-    <div class="page" id="page-settings">
-      <div class="page-title">Paramètres</div>
-      <div class="page-sub">Configuration de l'administration MBOLO</div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, getDocs, doc, updateDoc, deleteDoc, query, orderBy, getCountFromServer } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-      <div class="settings-card">
-        <div class="settings-title">🔐 Changer le mot de passe admin</div>
-        <div class="pwd-change">
-          <input type="password" id="old-pwd" placeholder="Mot de passe actuel"/>
-          <input type="password" id="new-pwd" placeholder="Nouveau mot de passe (min. 6 caractères)"/>
-          <input type="password" id="new-pwd2" placeholder="Confirmer le nouveau mot de passe"/>
-          <button class="btn-primary" onclick="changePwd()">Modifier le mot de passe</button>
-        </div>
-      </div>
 
-      <div class="settings-card">
-        <div class="settings-title">⚙️ Paramètres de l'application</div>
-        <div class="setting-row">
-          <div><div class="setting-label">Modération des avis</div><div class="setting-desc">Activer la validation manuelle des avis avant publication</div></div>
-          <div class="toggle" id="toggle-moderation" onclick="toggleSetting('moderation')"></div>
-        </div>
-        <div class="setting-row">
-          <div><div class="setting-label">Nouveaux établissements</div><div class="setting-desc">Autoriser les utilisateurs à soumettre des établissements</div></div>
-          <div class="toggle on" id="toggle-submissions" onclick="toggleSetting('submissions')"></div>
-        </div>
-        <div class="setting-row">
-          <div><div class="setting-label">Mode maintenance</div><div class="setting-desc">Désactiver temporairement l'accès au site</div></div>
-          <div class="toggle" id="toggle-maintenance" onclick="toggleSetting('maintenance')"></div>
-        </div>
-      </div>
+const firebaseConfig = {
+  apiKey: "AIzaSyBLG3d6gNyEbcRHv4-vU01tUDp-c1kzvxo",
+  authDomain: "mbolo-libreville.firebaseapp.com",
+  projectId: "mbolo-libreville",
+  storageBucket: "mbolo-libreville.firebasestorage.app",
+  messagingSenderId: "1079636501599",
+  appId: "1:1079636501599:web:8b8ed3fa9ce4a1f875a7ea"
+};
 
-      <div class="settings-card">
-        <div class="settings-title">📊 Informations système</div>
-        <div class="setting-row"><div class="setting-label">Version MBOLO</div><div style="font-size:13px;font-weight:700;color:#009e60">v1.0.0</div></div>
-        <div class="setting-row"><div class="setting-label">Dernière mise à jour</div><div style="font-size:13px;color:#666">26 avril 2026</div></div>
-        <div class="setting-row"><div class="setting-label">Hébergement</div><div style="font-size:13px;color:#666">GitHub Pages</div></div>
-      </div>
-      <div class="settings-card">
-        <div class="settings-title">🧹 Maintenance des données</div>
-        <div class="setting-row">
-          <div><div class="setting-label">Réinitialiser les données de démo</div><div class="setting-desc">Supprime les anciennes données de cache et force le rechargement des 76 établissements réels</div></div>
-          <button class="btn-sm btn-approve" onclick="resetDemoData()">Réinitialiser</button>
-        </div>
-        <div class="setting-row">
-          <div><div class="setting-label">Vider tout le cache local</div><div class="setting-desc">Supprime toutes les données stockées localement (avis, membres, établissements)</div></div>
-          <button class="btn-sm btn-reject" onclick="clearAllData()">Vider le cache</button>
-        </div>
-      </div>
-    </div>
 
-  </div><!-- /main -->
-</div><!-- /adminApp -->
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-<script>
-// ── AUTH ──────────────────────────────────────────────────────────────────────
-// Hash simple (non cryptographique, pour usage local)
-function simpleHash(str){
-  var hash=0;
-  for(var i=0;i<str.length;i++){hash=((hash<<5)-hash)+str.charCodeAt(i);hash|=0;}
-  return hash.toString(16);
-}
+function simpleHash(str){var h=0;for(var i=0;i<str.length;i++){h=((h<<5)-h)+str.charCodeAt(i);h|=0;}return h.toString(16);}
+var STORED_HASH = localStorage.getItem("mbolo_admin_hash") || simpleHash("mbolo2025");
 
-var STORED_HASH = localStorage.getItem('mbolo_admin_hash') || simpleHash('mbolo2025');
-var STORED_USER = localStorage.getItem('mbolo_admin_user') || 'admin';
+function togglePwd(){var i=document.getElementById("loginPwd");var b=document.getElementById("eyeBtn");if(i.type==="password"){i.type="text";b.textContent="&#128584;";}else{i.type="password";b.textContent="&#128065;";}}
+window.togglePwd=togglePwd;
 
-function togglePwd(){
-  var inp=document.getElementById('loginPwd');
-  var btn=document.getElementById('eyeBtn');
-  if(inp.type==='password'){inp.type='text';btn.textContent='🙈';}
-  else{inp.type='password';btn.textContent='👁';}
-}
-
-function doLogin(){
-  var user=document.getElementById('loginUser').value.trim();
-  var pwd=document.getElementById('loginPwd').value;
-  var err=document.getElementById('loginErr');
-  if(simpleHash(pwd)===STORED_HASH && user===STORED_USER){
-    document.getElementById('loginPage').style.display='none';
-    document.getElementById('adminApp').style.display='block';
-    err.style.display='none';
+function doAdminLogin(){
+  var pwd=document.getElementById("loginPwd").value;
+  var err=document.getElementById("loginErr");
+  if(simpleHash(pwd)===STORED_HASH){
+    document.getElementById("loginPage").style.display="none";
+    document.getElementById("adminApp").style.display="block";
+    err.style.display="none";
     initAdmin();
-  }else{
-    err.style.display='block';
-    document.getElementById('loginPwd').value='';
-  }
+  }else{err.style.display="block";document.getElementById("loginPwd").value="";}
 }
+window.doAdminLogin=doAdminLogin;
 
-function logout(){
-  if(!confirm('Se déconnecter ?'))return;
-  document.getElementById('adminApp').style.display='none';
-  document.getElementById('loginPage').style.display='flex';
-  document.getElementById('loginPwd').value='';
-}
+function adminLogout(){if(!confirm("Se deconnecter ?"))return;document.getElementById("adminApp").style.display="none";document.getElementById("loginPage").style.display="flex";document.getElementById("loginPwd").value="";}
+window.adminLogout=adminLogout;
 
-function changePwd(){
-  var old=document.getElementById('old-pwd').value;
-  var n1=document.getElementById('new-pwd').value;
-  var n2=document.getElementById('new-pwd2').value;
-  if(simpleHash(old)!==STORED_HASH){notif('Mot de passe actuel incorrect.');return;}
-  if(n1.length<6){notif('Le nouveau mot de passe doit faire au moins 6 caractères.');return;}
-  if(n1!==n2){notif('Les mots de passe ne correspondent pas.');return;}
-  STORED_HASH=simpleHash(n1);
-  localStorage.setItem('mbolo_admin_hash',STORED_HASH);
-  document.getElementById('old-pwd').value='';
-  document.getElementById('new-pwd').value='';
-  document.getElementById('new-pwd2').value='';
-  notif('✅ Mot de passe modifié avec succès !');
-}
+function notif(msg){var el=document.getElementById("notif");el.textContent=msg;el.classList.add("show");setTimeout(function(){el.classList.remove("show");},3000);}
+function loading(show){document.getElementById("loadingOverlay").style.display=show?"flex":"none";}
 
-// ── DATA ──────────────────────────────────────────────────────────────────────
-function getPlaces(){
-  try{return JSON.parse(localStorage.getItem('mbolo_places')||'[]');}catch(e){return [];}
-}
-function savePlaces(p){localStorage.setItem('mbolo_places',JSON.stringify(p));}
-function getMembers(){
-  try{return JSON.parse(localStorage.getItem('mbolo_members')||'[]');}catch(e){return [];}
-}
-
-function initAdmin(){
-  var now=new Date();
-  document.getElementById('dash-date').textContent='Bienvenue — '+now.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-  renderDashboard();
-}
-
-// ── NAVIGATION ────────────────────────────────────────────────────────────────
 function showPage(name){
-  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('on');});
-  document.querySelectorAll('.sb-item').forEach(function(i){i.classList.remove('on');});
-  document.getElementById('page-'+name).classList.add('on');
+  document.querySelectorAll(".page").forEach(function(p){p.classList.remove("on");});
+  document.querySelectorAll(".sb-item").forEach(function(i){i.classList.remove("on");});
+  document.getElementById("page-"+name).classList.add("on");
+  var items=document.querySelectorAll(".sb-item");
+  var map={dashboard:0,pending:1,places:2,reviews:3,members:4};
+  if(map[name]!==undefined)items[map[name]].classList.add("on");
   var renders={dashboard:renderDashboard,pending:renderPending,places:renderPlaces,reviews:renderReviews,members:renderMembers};
   if(renders[name])renders[name]();
-  // Highlight sidebar
-  var items=document.querySelectorAll('.sb-item');
-  var map={dashboard:0,pending:1,places:2,reviews:3,members:4,settings:5};
-  if(map[name]!==undefined)items[map[name]].classList.add('on');
+}
+window.showPage=showPage;
+
+async function initAdmin(){
+  var now=new Date();
+  document.getElementById("dash-date").textContent="Bienvenue — "+now.toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+  await renderDashboard();
 }
 
-function notif(msg){
-  var el=document.getElementById('notif');
-  el.textContent=msg;el.classList.add('show');
-  setTimeout(function(){el.classList.remove('show');},3000);
+async function renderDashboard(){
+  loading(true);
+  try{
+    var placesSnap=await getDocs(collection(db,"places"));
+    var places=[];placesSnap.forEach(function(d){places.push({...d.data(),fbId:d.id});});
+    var membersSnap=await getDocs(collection(db,"membres"));
+    var pending=places.filter(function(p){return p.status==="pending";});
+    var approved=places.filter(function(p){return p.status==="approved";});
+
+    // Count all reviews
+    var totalReviews=0;
+    for(var i=0;i<places.length;i++){totalReviews+=(places[i].reviews||0);}
+
+    document.getElementById("s-total").textContent=approved.length;
+    document.getElementById("s-members").textContent=membersSnap.size;
+    document.getElementById("s-pending").textContent=pending.length;
+    document.getElementById("s-reviews").textContent=totalReviews;
+    document.getElementById("badge-pending").textContent=pending.length;
+
+    var dp=document.getElementById("dash-pending");
+    if(!pending.length){dp.innerHTML='<div class="empty"><div class="icon">&#9989;</div>Aucune demande en attente</div>';}
+    else{dp.innerHTML='<table><thead><tr><th>Etablissement</th><th>Categorie</th><th>Quartier</th><th>Actions</th></tr></thead><tbody>'+pending.slice(0,5).map(function(p){return '<tr><td><strong>'+p.name+'</strong></td><td>'+p.cat+'</td><td>'+p.quartier+'</td><td><button class="btn-sm btn-approve" onclick="approvePlace(''+p.fbId+'',''+p.name+'')">&#9989; Valider</button> <button class="btn-sm btn-reject" onclick="rejectPlace(''+p.fbId+'',''+p.name+'')">&#10060; Refuser</button></td></tr>';}).join("")+'</tbody></table>';}
+  }catch(e){notif("Erreur : "+e.message);}
+  loading(false);
 }
 
-// ── DASHBOARD ─────────────────────────────────────────────────────────────────
-function renderDashboard(){
-  var places=getPlaces();
-  var members=getMembers();
-  var pending=places.filter(function(p){return p.status==='pending';});
-  var approved=places.filter(function(p){return p.status==='approved';});
-  var allAvis=[];
-  places.forEach(function(p){if(p.avis)allAvis=allAvis.concat(p.avis);});
-
-  document.getElementById('s-total').textContent=approved.length;
-  document.getElementById('s-members').textContent=members.length;
-  document.getElementById('s-pending').textContent=pending.length;
-  document.getElementById('s-reviews').textContent=allAvis.length;
-  document.getElementById('badge-pending').textContent=pending.length;
-
-  // Dash pending
-  var dp=document.getElementById('dash-pending-list');
-  if(!pending.length){
-    dp.innerHTML='<div class="empty"><div class="icon">✅</div>Aucune demande en attente</div>';
-  }else{
-    dp.innerHTML='<table><thead><tr><th>Établissement</th><th>Catégorie</th><th>Quartier</th><th>Actions</th></tr></thead><tbody>'+
-    pending.slice(0,5).map(function(p){
-      return '<tr><td><strong>'+p.name+'</strong></td><td>'+catBadge(p.cat)+'</td><td>'+p.quartier+'</td><td><button class="btn-sm btn-approve" onclick="approvePlace('+p.id+')">✅ Valider</button> <button class="btn-sm btn-reject" onclick="rejectPlace('+p.id+')">❌ Refuser</button></td></tr>';
-    }).join('')+'</tbody></table>';
-  }
-
-  // Dash reviews
-  var dr=document.getElementById('dash-reviews-list');
-  if(!allAvis.length){
-    dr.innerHTML='<div class="empty"><div class="icon">💬</div>Aucun avis pour le moment</div>';
-  }else{
-    dr.innerHTML='<table><thead><tr><th>Auteur</th><th>Note</th><th>Commentaire</th><th>Action</th></tr></thead><tbody>'+
-    allAvis.slice(-5).reverse().map(function(a){
-      return '<tr><td><strong>'+a.user+'</strong></td><td>'+'★'.repeat(a.stars)+'</td><td>'+a.txt.substring(0,60)+(a.txt.length>60?'...':'')+'</td><td><button class="btn-sm btn-delete" onclick="deleteAvisById(\''+a.id+'\')">🗑️</button></td></tr>';
-    }).join('')+'</tbody></table>';
-  }
-}
-
-// ── PENDING ───────────────────────────────────────────────────────────────────
-function renderPending(){
-  var places=getPlaces();
-  var pending=places.filter(function(p){return p.status==='pending';});
-  var el=document.getElementById('pending-list');
-  if(!pending.length){
-    el.innerHTML='<div class="empty"><div class="icon">🎉</div><div>Aucune demande en attente — tout est traité !</div></div>';
-    return;
-  }
+async function renderPending(){
+  loading(true);
+  var snap=await getDocs(collection(db,"places"));
+  var pending=[];snap.forEach(function(d){var data=d.data();if(data.status==="pending")pending.push({...data,fbId:d.id});});
+  var el=document.getElementById("pending-list");
+  if(!pending.length){el.innerHTML='<div class="empty"><div class="icon">&#127881;</div>Aucune demande en attente !</div>';loading(false);return;}
   el.innerHTML=pending.map(function(p){
-    return '<div class="table-card" style="margin-bottom:16px"><div class="table-header"><div><div class="table-title">'+p.name+'</div><div style="font-size:12px;color:#666;margin-top:2px">'+p.cat+' · '+p.quartier+'</div></div><span class="badge badge-pending">En attente</span></div>'+
-    '<table><tbody>'+
-    '<tr><td style="width:140px;color:#666;font-size:12px">📍 Adresse</td><td>'+p.addr+'</td></tr>'+
-    '<tr><td style="color:#666;font-size:12px">📞 Téléphone</td><td>'+(p.phone||'Non renseigné')+'</td></tr>'+
-    '<tr><td style="color:#666;font-size:12px">🕐 Horaires</td><td>'+(p.hours||'Non renseignés')+'</td></tr>'+
-    (p.submittedBy?'<tr><td style="color:#666;font-size:12px">👤 Soumis par</td><td>'+p.submittedBy+(p.submittedAt?' — '+p.submittedAt:'')+'</td></tr>':'')+'</tbody></table>'+
-    '<div style="padding:16px;display:flex;gap:10px"><button class="btn-primary" onclick="approvePlace('+p.id+')">✅ Valider l\'établissement</button><button class="btn-sm btn-reject" style="padding:8px 16px" onclick="rejectPlace('+p.id+')">❌ Refuser</button></div></div>';
-  }).join('');
+    return '<div class="table-card" style="margin-bottom:16px"><div class="table-header"><div><div class="table-title">'+p.name+'</div><div style="font-size:12px;color:#666;margin-top:2px">'+p.cat+' &middot; '+p.quartier+'</div></div><span class="badge badge-pending">En attente</span></div>'+
+    '<table><tbody><tr><td style="width:140px;color:#666;font-size:12px">&#128205; Adresse</td><td>'+p.addr+'</td></tr>'+
+    '<tr><td style="color:#666;font-size:12px">&#128222; Tel</td><td>'+(p.phone||"Non renseigne")+'</td></tr>'+
+    '<tr><td style="color:#666;font-size:12px">&#128336; Horaires</td><td>'+(p.hours||"Non renseignes")+'</td></tr>'+
+    (p.submittedBy?'<tr><td style="color:#666;font-size:12px">&#128100; Soumis par</td><td>'+p.submittedBy+'</td></tr>':"")+'</tbody></table>'+
+    '<div style="padding:16px;display:flex;gap:10px"><button class="btn-primary" onclick="approvePlace(''+p.fbId+'',''+p.name+'')">&#9989; Valider</button><button class="btn-sm btn-reject" style="padding:8px 16px" onclick="rejectPlace(''+p.fbId+'',''+p.name+'')">&#10060; Refuser</button></div></div>';
+  }).join("");
+  loading(false);
 }
-
-function approvePlace(id){
-  var places=getPlaces();
-  var p=places.find(function(x){return x.id===id;});
-  if(!p)return;
-  p.status='approved';
-  savePlaces(places);
-  notif('✅ '+p.name+' approuvé !');
+window.approvePlace=async function(fbId,name){
+  await updateDoc(doc(db,"places",fbId),{status:"approved"});
+  notif("&#9989; "+name+" approuve !");
   renderPending();renderDashboard();
-  document.getElementById('badge-pending').textContent=places.filter(function(x){return x.status==='pending';}).length;
-}
-
-function rejectPlace(id){
-  if(!confirm('Refuser cet établissement ?'))return;
-  var places=getPlaces();
-  var idx=places.findIndex(function(x){return x.id===id;});
-  if(idx===-1)return;
-  var name=places[idx].name;
-  places.splice(idx,1);
-  savePlaces(places);
-  notif('Établissement refusé et supprimé.');
+};
+window.rejectPlace=async function(fbId,name){
+  if(!confirm("Refuser et supprimer "+name+" ?"))return;
+  await deleteDoc(doc(db,"places",fbId));
+  notif(name+" refuse et supprime.");
   renderPending();renderDashboard();
-}
+};
 
-// ── PLACES ────────────────────────────────────────────────────────────────────
-function catBadge(cat){
-  var cls=cat==='Restaurant'?'badge-resto':cat==='Bar'?'badge-bar':'badge-hotel';
-  return '<span class="badge '+cls+'">'+cat+'</span>';
+async function renderPlaces(){
+  loading(true);
+  var snap=await getDocs(collection(db,"places"));
+  var places=[];snap.forEach(function(d){var data=d.data();if(data.status==="approved")places.push({...data,fbId:d.id});});
+  document.getElementById("places-count").textContent=places.length+" etablissements";
+  var el=document.getElementById("places-table");
+  if(!places.length){el.innerHTML='<div class="empty"><div class="icon">&#128205;</div>Aucun etablissement</div>';loading(false);return;}
+  el.innerHTML='<table><thead><tr><th>Nom</th><th>Cat.</th><th>Quartier</th><th>Avis</th><th>Note</th><th>Actions</th></tr></thead><tbody>'+
+  places.map(function(p){return '<tr><td><strong>'+p.name+'</strong></td><td>'+p.cat+'</td><td>'+p.quartier+'</td><td style="text-align:center">'+(p.reviews||0)+'</td><td style="color:#F59E0B">'+(p.rating>0?p.rating+"/5":"—")+'</td><td><button class="btn-sm btn-reject" onclick="suspendPlace(''+p.fbId+'',''+p.name+'')">&#128683; Suspendre</button></td></tr>';}).join("")+'</tbody></table>';
+  loading(false);
 }
+window.suspendPlace=async function(fbId,name){
+  if(!confirm("Suspendre "+name+" ?"))return;
+  await updateDoc(doc(db,"places",fbId),{status:"suspended"});
+  notif(name+" suspendu.");renderPlaces();
+};
 
-function renderPlaces(){
-  var places=getPlaces().filter(function(p){return p.status==='approved';});
-  var q=(document.getElementById('places-search')||{}).value||'';
-  var cat=(document.getElementById('places-cat')||{}).value||'';
-  if(q)places=places.filter(function(p){return p.name.toLowerCase().includes(q.toLowerCase())||p.quartier.toLowerCase().includes(q.toLowerCase());});
-  if(cat)places=places.filter(function(p){return p.cat===cat;});
-  var el=document.getElementById('places-table');
-  var count=document.getElementById('places-count');
-  if(count)count.textContent=places.length+' établissement'+(places.length>1?'s':'');
-  if(!places.length){el.innerHTML='<div class="empty"><div class="icon">📍</div>Aucun résultat</div>';return;}
-  el.innerHTML='<table><thead><tr><th>Nom</th><th>Catégorie</th><th>Quartier</th><th>Adresse</th><th>Avis</th><th>Note</th><th>Actions</th></tr></thead><tbody>'+
-  places.map(function(p){
-    return '<tr><td><strong>'+p.em+' '+p.name+'</strong></td><td>'+catBadge(p.cat)+'</td><td>'+p.quartier+'</td><td style="font-size:12px;color:#666;max-width:160px">'+p.addr+'</td><td style="text-align:center">'+(p.avis?p.avis.length:0)+'</td><td style="color:#F59E0B">'+(p.rating>0?p.rating+'/5':'—')+'</td><td><button class="btn-sm btn-reject" onclick="suspendPlace('+p.id+')">🚫 Suspendre</button></td></tr>';
-  }).join('')+'</tbody></table>';
-}
-
-function suspendPlace(id){
-  if(!confirm('Suspendre cet établissement ?'))return;
-  var places=getPlaces();
-  var p=places.find(function(x){return x.id===id;});
-  if(!p)return;
-  p.status='suspended';
-  savePlaces(places);
-  notif('Établissement suspendu.');
-  renderPlaces();
-}
-
-// ── REVIEWS ───────────────────────────────────────────────────────────────────
-function renderReviews(){
-  var places=getPlaces();
-  var el=document.getElementById('reviews-list');
+async function renderReviews(){
+  loading(true);
+  var snap=await getDocs(collection(db,"places"));
+  var places=[];snap.forEach(function(d){places.push({...d.data(),fbId:d.id});});
   var allAvis=[];
-  places.forEach(function(p){
-    if(p.avis&&p.avis.length){
-      p.avis.forEach(function(a){allAvis.push({avis:a,place:p});});
-    }
-  });
-  if(!allAvis.length){
-    el.innerHTML='<div class="empty"><div class="icon">💬</div>Aucun avis pour le moment</div>';return;
+  for(var i=0;i<places.length;i++){
+    var avisSnap=await getDocs(collection(db,"places",places[i].fbId,"avis"));
+    avisSnap.forEach(function(d){allAvis.push({...d.data(),id:d.id,placeId:places[i].fbId,placeName:places[i].name});});
   }
+  var el=document.getElementById("reviews-list");
+  if(!allAvis.length){el.innerHTML='<div class="empty"><div class="icon">&#128172;</div>Aucun avis</div>';loading(false);return;}
   el.innerHTML='<div class="table-card"><div class="table-header"><div class="table-title">Tous les avis</div><div class="table-count">'+allAvis.length+' avis</div></div>'+
-  '<table><thead><tr><th>Établissement</th><th>Auteur</th><th>Note</th><th>Commentaire</th><th>Date</th><th>Action</th></tr></thead><tbody>'+
-  allAvis.map(function(item){
-    return '<tr><td><strong>'+item.place.name+'</strong></td><td>'+item.avis.user+'</td><td style="color:#F59E0B">'+'★'.repeat(item.avis.stars)+'</td><td style="max-width:200px;font-size:12px">'+item.avis.txt+'</td><td style="font-size:11px;color:#999">'+(item.avis.date||'—')+'</td><td><button class="btn-sm btn-delete" onclick="deleteAvisById(\''+item.avis.id+'\')">🗑️ Supprimer</button></td></tr>';
-  }).join('')+'</tbody></table></div>';
+  '<table><thead><tr><th>Etablissement</th><th>Auteur</th><th>Note</th><th>Commentaire</th><th>Date</th><th>Action</th></tr></thead><tbody>'+
+  allAvis.map(function(a){return '<tr><td><strong>'+a.placeName+'</strong></td><td>'+a.user+'</td><td style="color:#F59E0B">'+"&#9733;".repeat(a.stars)+'</td><td style="max-width:200px;font-size:12px">'+a.txt.substring(0,60)+(a.txt.length>60?"...":"")+'</td><td style="font-size:11px;color:#999">'+(a.dateStr||"—")+'</td><td><button class="btn-sm btn-delete" onclick="deleteAvis(''+a.placeId+'',''+a.id+'')">&#128465; Suppr.</button></td></tr>';}).join("")+'</tbody></table></div>';
+  loading(false);
 }
+window.deleteAvis=async function(placeId,avisId){
+  if(!confirm("Supprimer cet avis ?"))return;
+  await deleteDoc(doc(db,"places",placeId,"avis",avisId));
+  var snap=await getDocs(collection(db,"places",placeId,"avis"));
+  var total=0,count=0;snap.forEach(function(d){total+=d.data().stars;count++;});
+  await updateDoc(doc(db,"places",placeId),{rating:count>0?Math.round(total/count*10)/10:0,reviews:count});
+  notif("Avis supprime.");renderReviews();
+};
 
-function deleteAvisById(avisId){
-  if(!confirm('Supprimer cet avis ?'))return;
-  var places=getPlaces();
-  places.forEach(function(p){
-    if(p.avis){
-      var idx=p.avis.findIndex(function(a){return a.id===avisId;});
-      if(idx!==-1){
-        p.avis.splice(idx,1);
-        p.reviews=Math.max(0,p.reviews-1);
-        if(p.avis.length>0){p.rating=Math.round(p.avis.reduce(function(s,a){return s+a.stars;},0)/p.avis.length*10)/10;}
-        else{p.rating=0;}
-      }
-    }
-  });
-  savePlaces(places);
-  notif('Avis supprimé.');
-  renderReviews();renderDashboard();
-}
-
-// ── MEMBERS ───────────────────────────────────────────────────────────────────
-function renderMembers(){
-  var members=getMembers();
-  var el=document.getElementById('members-table');
-  var count=document.getElementById('members-count');
-  if(count)count.textContent=members.length+' membre'+(members.length>1?'s':'');
-  if(!members.length){
-    el.innerHTML='<div class="empty"><div class="icon">👥</div>Aucun membre inscrit pour le moment</div>';return;
-  }
+async function renderMembers(){
+  loading(true);
+  var snap=await getDocs(collection(db,"membres"));
+  var members=[];snap.forEach(function(d){members.push(d.data());});
+  document.getElementById("members-count").textContent=members.length+" membres";
+  var el=document.getElementById("members-table");
+  if(!members.length){el.innerHTML='<div class="empty"><div class="icon">&#128101;</div>Aucun membre inscrit</div>';loading(false);return;}
   el.innerHTML='<table><thead><tr><th>Nom</th><th>Email</th><th>Date inscription</th></tr></thead><tbody>'+
-  members.map(function(m){
-    return '<tr><td><strong>'+m.nom+'</strong></td><td>'+m.email+'</td><td style="color:#666">'+(m.date||'—')+'</td></tr>';
-  }).join('')+'</tbody></table>';
+  members.map(function(m){return '<tr><td><strong>'+m.nom+'</strong></td><td>'+m.email+'</td><td style="color:#666">'+(m.date?.toDate?m.date.toDate().toLocaleDateString("fr-FR"):"—")+'</td></tr>';}).join("")+'</tbody></table>';
+  loading(false);
 }
 
-// ── SETTINGS ──────────────────────────────────────────────────────────────────
-function toggleSetting(name){
-  var el=document.getElementById('toggle-'+name);
-  el.classList.toggle('on');
-  notif('Paramètre mis à jour.');
-}
-
-// Init
-document.addEventListener('DOMContentLoaded', function(){
-  document.getElementById('loginPwd').focus();
+document.addEventListener("DOMContentLoaded",function(){
+  document.getElementById("loginPwd").focus();
 });
-
-function resetDemoData(){
-  if(!confirm('Réinitialiser les données de démo ? Les avis et membres seront conservés.'))return;
-  localStorage.removeItem('mbolo_places');
-  localStorage.removeItem('_mv');
-  notif('✅ Cache réinitialisé ! Rechargez MBOLO pour voir les 76 établissements réels.');
-}
-function clearAllData(){
-  if(!confirm('⚠️ ATTENTION : Cela supprimera TOUS les avis, membres et établissements. Continuer ?'))return;
-  localStorage.clear();
-  notif('Cache vidé. Rechargez la page.');
-  setTimeout(function(){location.reload();},2000);
-}
-
 </script>
 </body>
 </html>
