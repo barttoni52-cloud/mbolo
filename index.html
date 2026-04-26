@@ -442,7 +442,7 @@ async function renderHome(){
   var un = currentUser ? currentUser.name : "Visiteur";
   var initials = un.substring(0,2).toUpperCase();
   document.getElementById("mainScroll").innerHTML =
-    (isGuest ? '<div class="gbanner"><span style="font-size:18px">&#127468;&#127462;</span><div class="gb-txt">Naviguez en visiteur. Creez un compte pour publier.</div><button class="gb-btn" onclick="go('s-register')">Rejoindre</button></div>' : "") +
+    (isGuest ? '<div class="gbanner"><span style="font-size:18px">&#127468;&#127462;</span><div class="gb-txt">Naviguez en visiteur. Creez un compte pour publier.</div><button class="gb-btn" onclick="go(\'s-register\')">Rejoindre</button></div>' : "") +
     '<div class="hdr"><div class="hdr-row"><div class="hdr-logo">MBOLO</div><div class="hdr-flag"><div style="background:#009e60"></div><div style="background:#fcd116"></div><div style="background:#3a75c4"></div></div></div>' +
     '<div class="hdr-loc">&#128205; Libreville, Gabon</div>' +
     '<div class="uchip"><div class="av-sm">'+initials+'</div><span>'+un+'</span></div>' +
@@ -543,7 +543,7 @@ async function loadReviews(placeId){
     var avis = [];
     snap.forEach(function(d){avis.push({...d.data(),id:d.id});});
     if(!avis.length){
-      el.innerHTML = '<div style="padding:14px;font-size:12px;color:var(--muted)">Aucun avis pour le moment. Soyez le premier !</div>';
+      el.innerHTML = '<div style="padding:14px;font-size:12px;color:var(--muted)">Aucun avis pour le moment. Soyez le premier</div>';
     }else{
       el.innerHTML = avis.map(function(a){
         return '<div class="rv"><div class="rv-header"><div class="rv-u">'+(a.user||"Anonyme")+'</div></div>' +
@@ -665,7 +665,7 @@ function renderAdd(){
     '<div class="add-top"><div class="add-t">Ajouter un lieu</div><div class="add-s">Partagez une adresse avec la communaute</div></div>' +
     '<div class="stripe"><div></div><div></div><div></div></div>' +
     '<div class="add-body">' +
-    '<div style="background:#fff8d6;border:1px solid #fcd116;border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:#7a5c00">&#8505;&#65039; Votre etablissement sera soumis a validation avant d'apparaitre.</div>' +
+    '<div style="background:#fff8d6;border:1px solid #fcd116;border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:#7a5c00">&#8505;&#65039; Votre etablissement sera soumis a validation avant apparition.</div>' +
     '<div class="fg"><label>Nom *</label><input type="text" id="newName" placeholder="Ex: Restaurant Le Perroquet"/></div>' +
     '<div class="fg"><label>Categorie *</label><select id="newCat"><option>Restaurant</option><option>Bar</option><option>Hotel</option><option>Shopping</option><option>Sante</option><option>Loisirs</option><option>Autre</option></select></div>' +
     '<div class="fg"><label>Quartier *</label><input type="text" id="newQrt" placeholder="Ex: Plateau, Louis, Akanda..."/></div>' +
