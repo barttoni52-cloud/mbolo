@@ -281,7 +281,20 @@ async function renderDashboard(){
 
     var dp=document.getElementById("dash-pending");
     if(!pending.length){dp.innerHTML='<div class="empty"><div class="icon">&#9989;</div>Aucune demande en attente</div>';}
-    else{dp.innerHTML='<table><thead><tr><th>Etablissement</th><th>Categorie</th><th>Quartier</th><th>Actions</th></tr></thead><tbody>'+pending.slice(0,5).map(function(p){var safeName=p.name.replace(/'/g,'');return '<tr><td><strong>'+p.name+'</strong></td><td>'+p.cat+'</td><td>'+p.quartier+'</td><td><button class="btn-sm btn-approve" onclick="approvePlace(\''+p.fbId+'\',\''+safeName+'\')" >&#9989; Valider</button> <button class="btn-sm btn-reject" onclick="rejectPlace(\''+p.fbId+'\',\''+safeName+'\')" >&#10060; Refuser</button></td></tr>';}).join('')+'</tbody></table>';}
+    else{
+      var rows=pending.slice(0,5).map(function(p){
+        var tr=document.createElement('tr');
+        tr.innerHTML='<td><strong>'+p.name+'</strong></td><td>'+p.cat+'</td><td>'+p.quartier+'</td><td></td>';
+        var td=tr.cells[3];
+        var btnA=document.createElement('button');btnA.className='btn-sm btn-approve';btnA.textContent='✅ Valider';
+        btnA.onclick=function(){approvePlace(p.fbId,p.name);};
+        var btnR=document.createElement('button');btnR.className='btn-sm btn-reject';btnR.textContent='❌ Refuser';btnR.style.marginLeft='4px';
+        btnR.onclick=function(){rejectPlace(p.fbId,p.name);};
+        td.appendChild(btnA);td.appendChild(btnR);
+        return tr.outerHTML;
+      }).join('');
+      dp.innerHTML='<table><thead><tr><th>Etablissement</th><th>Categorie</th><th>Quartier</th><th>Actions</th></tr></thead><tbody>'+rows+'</tbody></table>';
+    }
   }catch(e){notif("Erreur : "+e.message);}
   loading(false);
 }
@@ -292,6 +305,7 @@ async function renderPending(){
   var pending=[];snap.forEach(function(d){var data=d.data();if(data.status==="pending")pending.push({...data,fbId:d.id});});
   var el=document.getElementById("pending-list");
   if(!pending.length){el.innerHTML='<div class="empty"><div class="icon">&#127881;</div>Aucune demande en attente !</div>';loading(false);return;}
+  var pendingPlaces=pending;
   el.innerHTML=pending.map(function(p){
     return '<div class="table-card" style="margin-bottom:16px"><div class="table-header"><div><div class="table-title">'+p.name+'</div><div style="font-size:12px;color:#666;margin-top:2px">'+p.cat+' &middot; '+p.quartier+'</div></div><span class="badge badge-pending">En attente</span></div>'+
     '<table><tbody><tr><td style="width:140px;color:#666;font-size:12px">&#128205; Adresse</td><td>'+p.addr+'</td></tr>'+
